@@ -1,9 +1,0 @@
-Products = new Mongo.Collection('products');
-
-Variants = new Mongo.Collection('variants');
-
-Mockups = new Mongo.Collection('mockups');
-
-Artworks = new Mongo.Collection('artworks');
-
-ProductsCategories = new Mongo.Collection('productsCategories');
