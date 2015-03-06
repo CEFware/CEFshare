@@ -138,5 +138,12 @@ s eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em
 t, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum
                             rutrum orci, sagittis tempus lacus enim ac dui. n turpis pulvinar facilisis. Ut felis.</p>",
   "user": "user",
-  "users": "users"
+  "users": "users",
+    "loginButton" : "Sign in / up",
+    "welcome text": "Welcome to our marketplace!",
+    "marketplace description": "Go over our product/rent items/services and get what fits you best!",
+    "Add your listing now!": "Add your listing now!", 
+    "It is free": "It is free",
+    "promo big text":"List your goods, services or rent items in minutes",
+    "promo small text":"get full control on your sales"
 }

@@ -24,22 +24,31 @@
                     <li><a href="/#prices">{{t "Prices"}}</a></li>
                     <li><a href="/#contact">{{t "Contact"}}</a></li>
                 </ul>
-		{{#if showButton}}
-		<div class="hidden-sm hidden-lg text-center" id="basket-overview">
-		  <a href="/step-one/" class="btn btn-primary navbar-btn">{{t "Get started"}}</a>
-		</div>
-		{{/if}}
-
+		{{> loginButtonMenu}}
             </div>
             <!--/.nav-collapse -->
-	    {{#if showButton}}
-            <div class="navbar-collapse collapse right" id="basket-overview">
-              <a href="/step-one/" class="btn btn-primary navbar-btn">{{t "Get started"}}</a>
-            </div>
-	    {{/if}}
+	    {{> loginButtonTop}}
  
         </div>
 
 
     </div>
+</template>
+
+<template name="loginButtonMenu">
+  {{#if currentUser}}
+  {{else}}
+  <div class="hidden-sm hidden-lg text-center" id="basket-overview">
+    <a href="/step-one/" class="btn btn-primary navbar-btn">{{t "loginButton"}}</a>
+  </div>
+  {{/if}}
+</template>
+
+<template name="loginButtonTop">
+  {{#if currentUser}}
+  {{else}}
+  <div class="navbar-collapse collapse right" id="basket-overview">
+    <a href="/step-one/" class="btn btn-primary navbar-btn">{{t "loginButton"}}</a>
+  </div>
+  {{/if}}
 </template>
