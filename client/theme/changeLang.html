@@ -1,0 +1,7 @@
+<template name="changeLang">
+  <select id="languages" class="form-control input-sm">
+    {{#each languages}}
+      <option value={{code}} {{selected}}> {{name}} </option>
+    {{/each}}
+  </select>
+</template>

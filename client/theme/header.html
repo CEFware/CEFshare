@@ -1,0 +1,85 @@
+<template name="header">
+    <div class="navbar navbar-default navbar-fixed-top yamm" role="navigation" id="navbar">
+        <div class="container">
+            <div class="navbar-header">
+
+                <a class="navbar-brand home" href="/">
+                    <img src="/img/logo.png" alt={{t "logo"}} class="hidden-xs hidden-sm">
+                    <img src="/img/logo-small.png" alt={{t "logo"}} class="visible-xs visible-sm"><span class="sr-only">{{t "go to homepage"}}</span>
+                </a>
+                <div class="navbar-buttons">
+                    <button type="button" class="navbar-toggle btn-primary" data-toggle="collapse" data-target="#navigation">
+                        <span class="sr-only">{{t "Toggle navigation"}}</span>
+                        <i class="fa fa-align-justify"></i>
+                    </button>
+                </div>
+            </div>
+            <!--/.navbar-header -->
+
+            <div class="navbar-collapse collapse" id="navigation">
+
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="/#how-it-works">{{t "How it works"}}</a></li>
+                    <li><a href="/#success-stories">{{t "Success stories"}}</a></li>
+                    <li><a href="/#prices">{{t "Prices"}}</a></li>
+                    <li><a href="/#contact">{{t "Contact"}}</a></li>
+                </ul>
+		{{> loginButtonMenu}}
+            </div>
+            <!--/.nav-collapse -->
+	    {{> loginButtonTop}}
+ 
+        </div>
+    </div>
+    {{#if isInRole 'unverified'}}
+    <div class="main">
+      <div class="col-lg-12">
+        {{> errorMsg}}
+      </div>
+    </div>
+    {{/if}}
+</template>
+
+<template name="errorMsg">
+  <div class="alert alert-danger alert-dismissible" role="alert" style="padding-right:35px">
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <strong>{{t "Warning!"}}</strong> {{t "Your e-mail is not verified - the use of our site is limited."}} <a href="#" class="alert-link sendVerEmail">{{t "Click here"}} </a> {{t "to resend the verification link for"}} {{userEmail}}.
+  </div>
+</template>
+
+<template name="loginButtonMenu">
+  <div class="hidden-sm hidden-lg text-center" id="basket-overview">
+  {{#if currentUser}}
+  <!-- formatting for drop down menu on mobile -->
+  <a href="/user/{{usernameById currentUser}}" class="btn btn-primary navbar-btn">
+  {{> avatar user=currentUser shape="rounded" size="small"}} {{userEmail}}
+  </a>
+  <a href="/sign-out/" class="btn btn-primary navbar-btn"><span class="glyphicon glyphicon-log-out"></span></a>
+  {{else}}
+    <a href="/sign-in/" class="btn btn-primary navbar-btn">{{t "loginButton"}}</a>
+  {{/if}}
+  </div>
+</template>
+
+<template name="loginButtonTop">
+  <div class="navbar-collapse collapse right" id="basket-overview">
+  {{#if currentUser}}
+  <!-- formatting for only user related drop down menu on big screen -->
+  <div class="form-inline">
+    <div class="form-group">
+      {{> avatar user=currentUser shape="rounded" size="small"}}
+    </div>
+    <div class="form-group">
+      <a href="/user/{{usernameById currentUser._id}}" class="btn btn-primary navbar-btn">
+	{{userEmail}}
+      </a>
+    </div>
+    <div class="form-group">
+      <a href="/sign-out/" class="btn btn-primary navbar-btn"><span class="glyphicon glyphicon-log-out"></span></a>
+    </div>
+  </div>
+  {{else}}
+    <a href="/sign-in/" class="btn btn-primary navbar-btn">{{t "loginButton"}}</a>
+  {{/if}}
+  </div>
+</template>

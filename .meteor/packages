@@ -18,3 +18,17 @@ aldeed:autoform-select2
 zimme:select2-bootstrap3-css
 naxio:flash
 tap:i18n
+accounts-base
+accounts-facebook
+accounts-google
+accounts-password
+accounts-twitter
+accounts-ui
+alanning:roles
+bengott:avatar
+jeremy:geocomplete
+joshowens:accounts-entry
+service-configuration
+splendido:accounts-meld
+splendido:accounts-meld-client-bootstrap
+useraccounts:bootstrap

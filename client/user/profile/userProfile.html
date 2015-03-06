@@ -1,0 +1,140 @@
+<template name="userProfile">
+  <div id="content">
+    <div class="container">
+      <div class="col-lg-12">
+	<h1>{{t "Profile"}} 
+	  {{#if isOwner}}
+
+	  {{#if editingProfile}}
+	  <a href="" class="btn btn-default cancelEditProfile">&#10006; {{t "EDIT"}}</a>
+	  {{else}}
+	  <a href="" class="btn btn-default editProfile">{{t "EDIT"}}</a>
+	  {{/if}}
+
+
+	  {{/if}}</h1>
+	<div class="col-lg-8">
+
+	  {{#if editingProfile}}
+	  {{> editUserProfile}}
+	  {{else}}
+	  <div class="col-lg-6"><b>{{t "Username"}}</b></div><div class="col-lg-6">{{user.username}}</div><br>
+	  {{#if notEmpty user.profile.firstName}}<div class="col-lg-6"><b>{{t "Full name"}}</b></div><div class="col-lg-6">{{user.profile.firstName}} {{user.profile.lastName}}</div><br>{{/if}}
+	  {{#if notEmpty user.profile.gender}}<div class="col-lg-6"><b>{{t "Gender"}}</b></div><div class="col-lg-6">{{user.profile.gender}}</div><br>{{/if}}
+	  {{#if notEmpty user.profile.bio}}<div class="col-lg-6"><b>{{t "Description"}}</b></div><div class="col-lg-6">{{user.profile.bio}}</div><br>{{/if}}
+	  {{#if notEmpty user.formatted_address}}<div class="col-lg-6"><b>{{t "Location"}}</b></div><div class="col-lg-6">{{user.formatted_address}}</div><br>{{/if}}
+	  <div class="col-lg-6"><b>{{t "E-mail"}}</b></div><div class="col-lg-6">{{userEmail}}</div><br>
+	  {{/if}}
+
+
+
+	  <h2>{{t "User wishlist"}}</h2>
+to be added soon
+	  <h2>{{t "User listings"}}</h2>
+to be added soon
+	</div>
+	<div class="col-lg-4">
+	  <div class="row">
+	    <div class="col-md-3">
+	      {{> avatar user=user size="large" shape="rounded"}}
+	    </div>
+	    <div class="col-md-9">
+	      {{> locationMap}}
+	    </div>
+	  </div>
+	  <br>
+	  {{#if isOwner}}
+ 
+          {{#if isInRole 'verified'}}
+          {{#each oauthService}}
+          {{> atSocial}}
+          {{/each}}
+          <center>
+            <br>
+            <small>
+              {{t "We'll never post anything on Facebook, Twitter or Google+ without your permission."}}
+            </small>
+          </center>
+          {{else}}
+          {{t "Verify your e-mail to attach Facebook, Twitter or Google+ to your profile."}}
+          {{/if}}
+ 
+	  {{else}}
+Links to FB, Twitter & G+ profiles
+	  {{/if}}
+	  <br>
+	  {{#if currentUser}} 
+
+	  <!-- and not profile owner -->
+	  {{#if isOwner}}
+	  {{else}}
+
+	  <!-- follow & unfollow -->
+	  {{#if following}}
+	  <a href="#" class="btn btn-lg btn-default unFollowUser">{{t "UNFOLLOW"}}</a> 
+	  {{else}}
+	  <a href="#" class="btn btn-lg btn-default followUser">{{t "FOLLOW"}}</a> 
+	  {{/if}}
+
+	  <!-- show the message window & send / cansel button -->
+	  {{#if isInRole 'verified'}}
+
+	  {{#if contactUser}}
+	  <a href="#" class="btn btn-lg btn-default cancelContact">&#10006; {{t "CONTACT"}}</a> 
+	  {{else}}
+	  <a href="#" class="btn btn-lg btn-default contactUser">{{t "CONTACT"}}</a> 
+	  {{/if}}
+
+          <div>
+            {{flash 'contactForm'}}
+          </div>
+	  {{#if contactUser}}
+          {{#autoForm schema=contactFormSchema id="contactForm" type="method" meteormethod="sendEmail"}}
+          <fieldset>
+	    {{> afFieldInput type="hidden" name="email" value=userProfileEmail}}
+            {{> afQuickField name="message" rows=5}}
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">{{t "Submit"}}</button>
+              <button type="reset" class="btn btn-default">{{t "Reset"}}</button>
+            </div>
+          </fieldset>
+          {{/autoForm}}
+	  {{/if}}
+
+	  {{else}}
+	  {{t "You need to verify your e-mail to contact this user."}}
+	  {{/if}}
+
+	  {{/if}}
+	  {{/if}}
+	  <h2>{{t "Followers"}}</h2>
+	  {{#if followersList}}
+
+	  {{#each followersList}}
+          <a href="/user/{{usernameById this}}">{{> avatar userId=this shape="rounded"}}</a>
+	  {{/each}}
+
+	  {{else}}
+	  {{t "Nobody follows yet."}}
+	  {{/if}}
+	  <h2>{{t "Following"}}</h2>
+	  {{#if followingList}}
+
+	  {{#each followingList}}
+          <a href="/user/{{this.username}}">{{> avatar userId=this._id shape="rounded"}}</a>
+	  {{/each}}
+
+	  {{else}}
+	  {{t "Not following anybody yet."}}
+	  {{/if}}
+	</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="locationMap">
+  <div style="width:280px;height:140px;">
+      {{> googleMap name="exampleMap" options=exampleMapOptions}}
+  </div>
+</template>
