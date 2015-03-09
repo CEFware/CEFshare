@@ -32,3 +32,7 @@ service-configuration
 splendido:accounts-meld
 splendido:accounts-meld-client-bootstrap
 useraccounts:bootstrap
+ajduke:bootstrap-tokenfield
+autoform-file
+cfs:standard-packages
+cfs:filesystem

@@ -1,0 +1,30 @@
+<template name="allListings">
+   <div class="row">
+    {{#each listings}}
+    {{#if listingIsPublic}}
+    <a href="{{pathFor 'specificListin' uri=uri}}">
+      <div class="col-md-3">
+        <img src="{{listingImg}}">
+        <h2>{{title}}</h2>
+        <p>{{tags}}</p>
+      </div>
+    </a>
+    {{else}}
+    <a href="{{pathFor 'specificListin' uri=uri}}">
+      <div class="col-md-3">
+        <img src="{{listingImg}}" style="opacity:0.5;filter:alpha(opacity=50)">
+        <h2>{{title}}</h2>
+        <p>{{tags}}</p>
+      </div>
+    </a>
+    {{/if}}
+    {{/each}}
+    <a href="{{pathFor 'specificListingEdit' uri='new'}}">
+      <div class="col-md-3">
+        <img src="/img/addNew.jpg">
+	<br><br>
+        <h2>Add new artwork</h2>
+      </div>
+    </a>
+  </div>
+</template>

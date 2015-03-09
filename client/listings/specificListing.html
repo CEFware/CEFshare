@@ -1,0 +1,77 @@
+<template name="SpecificArtwork">
+  <div id="artworkSingle" class="main">
+    <div class="row">
+      <div class="col-md-4 artImg">
+	<h1>{{artwork.title}} 
+	  {{#if isArtworkOwner}}<a href="{{pathFor 'specificArtworkEdit' name=artwork.canonicalTitle}}"><span class="glyphicon glyphicon-pencil"></span></a>
+	  {{else}}
+	  {{#if isInRole 'admin'}}<a href="{{pathFor 'specificArtworkEdit' name=artwork.canonicalTitle}}"><span class="glyphicon glyphicon-pencil"></span></a>{{/if}}
+	  {{/if}}
+	</h1>
+	<div class="artThumb"><img src= {{artworkImg}}>
+	</div>
+	<div class="artworkDesc">
+	  <p>{{artwork.description}}</p>
+	  <p>Author: <a href="/user/{{usernameById artwork.author}}">{{> avatar userId=artwork.author size="medium" shape="rounded"}}</a></p>
+ 
+	  <p>Tags :
+            {{#each artwork.tags}}
+            <paper-button class="category"><a href="/tags/{{this}}">{{this}}</a></paper-button>
+	    
+            {{/each}}
+	  </p>
+	  <p>
+            {{#if isFavorited}}
+            <core-icon class="unfavoriteIt switchFavorite" icon="favorite" aria-label="favorite" role="img"></core-icon>
+            {{else}}
+            <core-icon class="favoriteIt switchFavorite" icon="favorite" aria-label="favorite" role="img"></core-icon>
+            {{/if}}
+	  </p>
+          <paper-button class="category seeRel">See related artworks</paper-button>
+	  
+	</div>
+	
+      </div>
+      <div class="col-md-8 artProducts">
+	<div class="row">
+          <h2>Products available with this artwork</h2>
+          {{#each products}}
+          <div class="col-md-3">
+            <a class="postWrap" href="{{pathFor 'ArtworkSpecificProd' name=artwork.canonicalTitle id=id}}">
+              <img class="availableProduct" style="background-image:url('{{image}}')"/>
+            </a>
+          </div>
+	  {{/each}}
+	  
+	</div>
+	
+	<div class="row relatedArts">
+	  <h3>Go back to products</h3>
+	  <br>
+	  <h4>Artworks by this author</h4>
+	  {{#each artworksByAuthor artwork.author}}
+	  <a href="{{pathFor 'SpecificArtwork' name=canonicalTitle}}">
+	    <div class="col-md-3 viewArtwork">
+              <img style="background-image:url('{{artworkImgById image}}')">
+              <h2>{{title}}</h2>
+              <p>{{tags}}</p>
+	    </div>
+	  </a>
+	  {{/each}}
+	  <br>
+	  <h4>Artworks with the same tags</h4>
+	  {{#each artworksByTags artwork.tags}}
+	  <a href="{{pathFor 'SpecificArtwork' name=canonicalTitle}}">
+	    <div class="col-md-3 viewArtwork">
+              <img style="background-image:url('{{artworkImgById image}}')">
+              <h2>{{title}}</h2>
+              <p>{{tags}}</p>
+	    </div>
+	  </a>
+	  {{/each}}
+	</div>
+      </div>
+    </div>
+    
+  </div>
+</template>

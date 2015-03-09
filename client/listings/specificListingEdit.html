@@ -1,0 +1,76 @@
+<template name="specificArtworkEdit">
+  <div id="artworkSingle" class="main">
+    <div class="row">
+      <div class="col-md-4 artImg productListing">
+	{{#if newArtwork}}
+
+	{{#autoForm schema=artworkSchema id="specificArtworkCreate" type="method" meteormethod="createNewArtwork"}}
+	<div>{{flash 'artworkSaved'}}</div>
+	<fieldset>
+	  {{> afQuickField name='image'}}
+	  {{> afQuickField name='title'}}
+	  {{> afQuickField name='description' rows=3}}
+	  <div class="form-group{{#if afFieldIsInvalid name='tags'}} has-error{{/if}}">
+	    <label class="control-label">Tags</label><br>
+	    {{> afFieldInput name='tags' type='text' id='tokenfield'}}
+	    {{#if afFieldIsInvalid name='products'}}
+	    <span class="help-block">{{afFieldMessage name='products'}}</span>
+	    {{/if}}
+	  </div>
+	  <div class="form-group{{#if afFieldIsInvalid name='products'}} has-error{{/if}}">
+	    <label class="control-label">Products</label> (<a href="" class="deleteAllProductsFromArtwork">clear list</a>)<br>
+	    {{#each currentArtworkProducts}}
+	    <span class="label label-info">{{this}} <a href="" class="deleteProductFromArtwork" data-product-id="{{this}}">&#10006;</a></span>&nbsp;
+	    {{/each}}
+	    {{#if afFieldIsInvalid name='products'}}
+	    <span class="help-block">{{afFieldMessage name='products'}}</span>
+	    {{/if}}
+	  </div>
+	  {{> afQuickField name='isPublic'}}
+          {{> afFieldInput type="hidden" name="products" value=currentArtworkProducts}}
+	</fieldset>
+	<button type="submit" class="btn btn-primary">Save</button>
+<!--	<button type="reset" class="btn btn-default">Reset</button> -->
+	<button class="btn btn-danger cancelEditArtwork">Stop editing & don't save</button>
+	{{/autoForm}}
+
+	{{else}}
+
+	{{#autoForm collection="ArtworksPages" id="specificArtworkEdit" type="update" doc=currentArtwork}}
+	<div>{{flash 'artworkSaved'}}</div>
+	<fieldset>
+	  {{> afQuickField name='image'}}
+	  {{> afQuickField name='title'}}
+	  {{> afQuickField name='description' rows=3}}
+	  {{> afQuickField name='tags' type='text' id='tokenfield'}}
+	  <div class="form-group">
+	    <label class="control-label">Artwork url</label>
+	    <input type="text" class="form-control" readonly value="http://moon.ly/artworks/{{currentArtwork.canonicalTitle}}">
+	  </div>
+	  <div class="form-group{{#if afFieldIsInvalid name='products'}} has-error{{/if}}">
+	    <label class="control-label">Products</label> (<a href="" class="deleteAllProductsFromArtwork">clear list</a>)<br>
+	    {{#each currentArtworkProducts}}
+	    <span class="label label-info">{{this}} <a href="" class="deleteProductFromArtwork" data-product-id="{{this}}">&#10006;</a></span>&nbsp;
+	    {{/each}}
+	    {{#if afFieldIsInvalid name='products'}}
+	    <span class="help-block">{{afFieldMessage name='products'}}</span>
+	    {{/if}}
+	  </div>
+	  {{> afQuickField name='isPublic'}}
+          {{> afFieldInput type="hidden" name="products" value=currentArtworkProducts}}
+ 
+	</fieldset>
+	<button type="submit" class="btn btn-primary">Save</button>
+<!--	<button type="reset" class="btn btn-default">Reset</button> -->
+	<button class="btn btn-danger cancelEditArtwork">Stop editing & don't save</button>
+	{{/autoForm}}
+
+	{{/if}}
+      </div>
+      <div class="col-md-8 artProducts">
+	{{> productManager}}
+      </div>
+    </div>
+    
+  </div>
+</template>
