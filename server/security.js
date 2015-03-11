@@ -1,7 +1,9 @@
 //checks if user is a current document owner
 Security.defineMethod("ifOwner",{
     deny: function (type, arg, userId, doc, fieldNames){
-        if (doc._id && (doc._id===userId))
+        if (doc.user_id && (doc.user_id===userId))
+            return false;
+         if (doc._id && (doc._id===userId))
             return false;
         if (doc.author && (doc.author===userId))
             return false;
@@ -50,3 +52,11 @@ Images.deny({
     }
 });
 
+//Wishlist - user may do anything with own items
+Wishlist.permit(['insert','update','remove']).ifLoggedIn().ifOwner().apply();
+
+//Users - admin do anything, and user do anything with his profile, anybody may update followers -
+Users = Meteor.users;
+Security.permit(['insert','update','remove']).collections([Users]).ifLoggedIn().ifHasRole('admin').apply();
+Security.permit(['insert','update','remove']).collections([Users]).ifLoggedIn().ifOwner().apply();
+Security.permit(['update']).collections([Users]).ifLoggedIn().onlyProps(['followers']).apply();

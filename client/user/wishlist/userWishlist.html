@@ -1,0 +1,18 @@
+<template name="userWishlist">
+  <table>
+    {{#each listings}}
+    <tr>
+      <td><a href="{{pathFor 'specificListing' uri=uri}}" target="_blank">{{title}}</a></td>
+      {{#if isOwner}}
+      <td>
+        {{#if isFavorited _id}}
+        <span class="glyphicon glyphicon-heart unfavoriteIt switchFavorite"></span>
+        {{else}}
+        <span class="glyphicon glyphicon-heart-empty favoriteIt switchFavorite"></span>
+        {{/if}}
+      </td>
+      {{/if}}
+    </tr>
+    {{/each}}
+  </table>
+</template>

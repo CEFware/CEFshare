@@ -28,8 +28,8 @@ Template.specificListing.helpers({
     },
     isFavorited: function () {
 	var listing = specificListingByURI(Router.current().params.uri).fetch().first();
-//	if (listing)
-//	    return isListingFavorited(listing._id);
+	if (listing)
+	    return isListingFavorited(listing._id);
 	return false;
     },
     isListingOwner: function () {
@@ -49,7 +49,7 @@ Template.specificListing.events({
 
 Template.specificListing.rendered = function () {
     Tracker.autorun (function (){
-//	Meteor.subscribe('wishlist');
+	Meteor.subscribe('wishlist');
 	var listing = specificListingByURI(Router.current().params.uri).fetch().first();
 	if (listing) {
 	    Meteor.subscribe('userById',listing.author);
