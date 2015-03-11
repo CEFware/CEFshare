@@ -1,13 +1,13 @@
-Template.SpecificArtwork.helpers({
-    artworkImg: function (){
-	var artwork = specificArtworkWithCanonicalTitle(Router.current().params.name).fetch().first();
-	if (artwork) {
-	    var imgs=Images.findOne({_id:artwork.image});
+Template.specificListing.helpers({
+    listingImg: function (){
+	var listing = specificListingByURI(Router.current().params.uri).fetch().first();
+	if (listing) {
+	    var imgs=Images.findOne({_id:listing.image});
 	    if (imgs)
 		return imgs.url();
 	};
     },
-    artworkImgById: function (image){
+    listingImgById: function (image){
 	if (image) {
 	    var imgs=Images.findOne({_id:image});
 	    if (imgs)
@@ -15,66 +15,51 @@ Template.SpecificArtwork.helpers({
 	};
     },
 
-    artworksByAuthor: function (author){
-	return publicArtworksByAuthor(author);
+    listingsByAuthor: function (author){
+	return publicListingsByAuthor(author);
     },
 
-    artworksByTags: function (tags){
-	return allArtworksByTags(tags);
+    listingsByTags: function (tags){
+	return allListingsByTags(tags);
     },
 
-    artwork: function () {
-	return specificArtworkWithCanonicalTitle(Router.current().params.name).fetch().first();
-    },
-    products: function () {
-	return productsFromArtworksWithCanonicalTitle(Router.current().params.name);
+    listing: function () {
+	return specificListingByURI(Router.current().params.uri).fetch().first();
     },
     isFavorited: function () {
-	var artwork = specificArtworkWithCanonicalTitle(Router.current().params.name).fetch().first();
-	if (artwork)
-	    return isArtworkFavorited(artwork._id);
+	var listing = specificListingByURI(Router.current().params.uri).fetch().first();
+//	if (listing)
+//	    return isListingFavorited(listing._id);
 	return false;
     },
-    isArtworkOwner: function () {
-	var artwork = specificArtworkWithCanonicalTitle(Router.current().params.name).fetch().first();
-	if (artwork && (artwork.author===Meteor.userId()))
+    isListingOwner: function () {
+	var listing = specificListingByURI(Router.current().params.uri).fetch().first();
+	if (listing && (listing.author===Meteor.userId()))
 	    return true;
 	return false;
     }
 });
 
-Template.SpecificArtwork.events({
+Template.specificListing.events({
   'click .switchFavorite': function () {
-    var artwork = specificArtworkWithCanonicalTitle(Router.current().params.name).fetch().first();
-
-    return switchFavoriteArtworkState(artwork._id);
+    var listing = specificListingByURI(Router.current().params.uri).fetch().first();
+    return switchFavoriteListingState(listing._id);
   }
 });
 
-Template.SpecificArtwork.rendered = function () {
-    
-    $('.seeRel').on('click', function() {
-	$('.relatedArts').velocity({translateX: "-100%"},{easing: 'swing' , duration: 1000});  
-    });
-
-    $('h3').on('click', function() {
-	$('.relatedArts').velocity({translateX: "100%"},{easing: 'swing' , duration: 1000});
-    });
-
+Template.specificListing.rendered = function () {
     Tracker.autorun (function (){
-
-	Meteor.subscribe('wishlist');
-	var artwork = specificArtworkWithCanonicalTitle(Router.current().params.name).fetch().first();
-	if (artwork) {
-	    Meteor.subscribe('userById',artwork.author);
-	    Meteor.subscribe('getPublicArtworksByAuthor',artwork.author);
-	    Meteor.subscribe('getArtworksByTags',artwork.tags);
+//	Meteor.subscribe('wishlist');
+	var listing = specificListingByURI(Router.current().params.uri).fetch().first();
+	if (listing) {
+	    Meteor.subscribe('userById',listing.author);
+	    Meteor.subscribe('getPublicListingsByAuthor',listing.author);
+	    Meteor.subscribe('getListingsByTags',listing.tags);
 	    var imgA=[];
-	    allArtworks().forEach(function(el){
+	    allListings().forEach(function(el){
 		imgA.push(el.image);
 	    });
 	    Meteor.subscribe('images',imgA);
 	};
     });
-    
 };

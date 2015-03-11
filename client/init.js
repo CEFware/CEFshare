@@ -25,16 +25,19 @@ Meteor.startup(function() {
             "development":
             {
                 "marketplaceName": "DEVELOPMENT",
+                "url":"http://localhost:3000/",
                 "color":"green"
             },
             "staging":
             {
                 "marketplaceName": "STAGING",
+                "url":"http://45.56.101.68/",
                 "color":"green"
             },
             "production":
             {
                 "marketplaceName": "PRODUCTION",
+                "url":"http://45.56.101.68/",
                 "color":"green"
             }
         }

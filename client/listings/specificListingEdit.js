@@ -1,7 +1,7 @@
-AutoForm.addHooks(['specificArtworkEdit'],{
+AutoForm.addHooks(['specificListingEdit'],{
     docToForm: function(doc) {
 	if (_.isArray(doc.tags)) {
-            doc.tags = doc.tags.join(", ");
+            doc.tags = doc.tags.join(",");
 	};
 	return doc;
     },
@@ -14,80 +14,62 @@ AutoForm.addHooks(['specificArtworkEdit'],{
     onSuccess: function (o,r,t) {
 	if (t.data.doc)
 	    t.$('#tokenfield').tokenfield({tags:t.data.doc.tags});
-	    Flash.success('artworkSaved',"Saved successfuly!",2000);
+	    Flash.success('listingSaved',TAPi18n.__("Saved successfuly!"),2000);
     },    
     onError: function () {}
 });
 
-AutoForm.addHooks(['specificArtworkCreate'],{
+AutoForm.addHooks(['specificListingCreate'],{
     after: {
-	"createNewArtwork": function (e,r,t) {
-	    Router.go('specificArtworkEdit', {name:r})
+	"createNewListing": function (e,r,t) {
+	    Router.go('specificListingEdit', {uri:r})
 	}
     }
 });
 
-Template.specificArtworkEdit.helpers({
-    currentArtwork: function () {
-	return specificArtworkWithCanonicalTitle(Router.current().params.name).fetch().first();
+Template.specificListingEdit.helpers({
+    currentListing: function () {
+	return specificListingByURI(Router.current().params.uri).fetch().first();
     },
-    currentArtworkProducts: function () {
-	var ses=Session.get('productsAddedToArtwork');
-	if (!ses)
-	    ses=[];
-	return ses;
-    },
-    newArtwork: function (){
-	if (Router.current().params.name==='new')
+    newListing: function (){
+	if (Router.current().params.uri==='new')
 	    return true;
 	return false;
     },
-    artworkSchema: function () {
-	return Schema.ArtworksPage;
+    listingSchema: function () {
+	return Listing;
+    },
+    appUrl: function () {
+	return Meteor.settings.public.url;
     }
 });
 
-Template.specificArtworkEdit.events({
-    'click .deleteProductFromArtwork':function (event,template){
-        var ses=Session.get('productsAddedToArtwork');
-        var pId=template.$(event.target).data('product-id');
-        if (pId && ses){
-            ses=_.without(ses,pId);
-            Session.set('productsAddedToArtwork',ses);
-        };
-    },
-
-    'click .deleteAllProductsFromArtwork':function (event,template){
+Template.specificListingEdit.events({
+    'click .cancelEditListing': function (event,template) {
 	event.preventDefault();
-	Session.set('productsAddedToArtwork',null)
-    },
-
-    'click .cancelEditArtwork': function (event,template) {
-	event.preventDefault();
-	Router.go('SpecificArtwork',{name:Router.current().params.name});
+	var uri=Router.current().params.uri;
+	if (uri==='new') {
+	    Router.go('home');
+	} else {
+	    Router.go('specificListing',{uri:uri});
+	};
     }
 
 });
 
-Template.specificArtworkEdit.rendered = function () {
+Template.specificListingEdit.rendered = function () {
     var obj=null;
-    if (Router.current().params.name!=='new') {
-	obj=specificArtworkWithCanonicalTitle(Router.current().params.name).fetch().first();
+    if (Router.current().params.uri!=='new') {
+	obj=specificListingByURI(Router.current().params.uri).fetch().first();
 	$('#tokenfield').tokenfield({
 	    tokens: obj.tags
 	});
-        Session.set('productsAddedToArtwork',obj.products);
     } else {
 	$('#tokenfield').tokenfield();
-        Session.set('productsAddedToArtwork',obj);
     };
     if (obj) {
-	Meteor.subscribe('Images',obj.image);
+	Meteor.subscribe('images',[obj.image]);
     } else {
-	Meteor.subscribe('Images');
+	Meteor.subscribe('images');
     };
-    //product manager
-    Meteor.subscribe('getAllCategories');
-    Meteor.subscribe('getAllProducts');
-    Meteor.subscribe('getAllMockups');
 };

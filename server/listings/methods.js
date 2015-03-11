@@ -1,7 +1,6 @@
 Meteor.methods({
 
     createNewListing: function (doc) {
-
 	var convertToSlug = function(Text) {
 	    return Text
 		.toLowerCase()

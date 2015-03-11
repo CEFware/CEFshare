@@ -15,3 +15,9 @@ Template.errorMsg.events({
         Meteor.call('sendVerEmail', function (error,result){});
     }
 });
+
+UI.registerHelper('showNewListingButton',function () {
+    if (Router.current().lookupTemplate()!=='SpecificListingEdit')
+	return true;
+    return false;
+});

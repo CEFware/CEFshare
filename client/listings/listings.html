@@ -2,7 +2,7 @@
    <div class="row">
     {{#each listings}}
     {{#if listingIsPublic}}
-    <a href="{{pathFor 'specificListin' uri=uri}}">
+    <a href="{{pathFor 'specificListing' uri=uri}}">
       <div class="col-md-3">
         <img src="{{listingImg}}">
         <h2>{{title}}</h2>
@@ -10,7 +10,7 @@
       </div>
     </a>
     {{else}}
-    <a href="{{pathFor 'specificListin' uri=uri}}">
+    <a href="{{pathFor 'specificListing' uri=uri}}">
       <div class="col-md-3">
         <img src="{{listingImg}}" style="opacity:0.5;filter:alpha(opacity=50)">
         <h2>{{title}}</h2>

@@ -1,9 +1,9 @@
 var getUserId=function () {
-    var uri=Router.current().params.uri;
+    var uri=Router.current().params.username;
     if (uri) {
-	var obj=Listings.findOne({uri:uri});
+	var obj=Meteor.users.findOne({username:uri});
 	if (obj)
-	    return obj.author;
+	    return obj._id;
     };
     return false;
 };
@@ -41,7 +41,7 @@ Template.allListings.rendered= function (){
     Tracker.autorun(function(){
 	//subscribe only to those listings we may show
 	//on listings - for homepage - over router by default
-	if (Router.current().lookupTemplate()==="UserProfile")
+	if (Router.current().lookupTemplate()==="UserProfile") {
 	    if (Meteor.user() && (Meteor.userId()===getUserId())) {
 		//on profile for owner - all by author 
 		Meteor.subscribe('getListingsByAuthor',Meteor.userId());
@@ -50,6 +50,9 @@ Template.allListings.rendered= function (){
 		if (getUserId())
  		    Meteor.subscribe('getPublicListingsByAuthor',getUserId());
 	    };
+	} else {
+ 	    Meteor.subscribe('allListingsOnHomepage');
+	};
 	//add id's to get only needed images - by adding an array with needed images id's
 	var imgA=[];
 	allListings().forEach(function(el){

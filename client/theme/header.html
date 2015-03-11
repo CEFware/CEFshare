@@ -48,9 +48,12 @@
 </template>
 
 <template name="loginButtonMenu">
-  <div class="hidden-sm hidden-lg text-center" id="basket-overview">
-  {{#if currentUser}}
   <!-- formatting for drop down menu on mobile -->
+  <div class="hidden-sm hidden-lg text-center" id="basket-overview">
+
+<!-- add new listing button -->
+
+  {{#if currentUser}}
   <a href="/user/{{usernameById currentUser}}" class="btn btn-primary navbar-btn">
   {{> avatar user=currentUser shape="rounded" size="small"}} {{userEmail}}
   </a>
@@ -62,25 +65,27 @@
 </template>
 
 <template name="loginButtonTop">
-  <div class="navbar-collapse collapse right" id="basket-overview">
-  <a href="/listing/new/edit" class="btn btn-primary navbar-btn">{{t "New listing"}}</a>
-  {{#if currentUser}}
   <!-- formatting for only user related drop down menu on big screen -->
-  <div class="form-inline">
-    <div class="form-group">
-      {{> avatar user=currentUser shape="rounded" size="small"}}
+  <div class="navbar-collapse collapse right" id="basket-overview">
+    {{#if showNewListingButton}}
+    <a href="{{pathFor 'specificListingEdit' uri='new'}}" class="btn btn-primary navbar-btn">{{t "New listing"}}</a>
+    {{/if}}
+    {{#if currentUser}}
+    <div class="form-inline">
+      <div class="form-group">
+	{{> avatar user=currentUser shape="rounded" size="small"}}
+      </div>
+      <div class="form-group">
+	<a href="/user/{{usernameById currentUser._id}}" class="btn btn-primary navbar-btn">
+	  {{userEmail}}
+	</a>
+      </div>
+      <div class="form-group">
+	<a href="/sign-out/" class="btn btn-primary navbar-btn"><span class="glyphicon glyphicon-log-out"></span></a>
+      </div>
     </div>
-    <div class="form-group">
-      <a href="/user/{{usernameById currentUser._id}}" class="btn btn-primary navbar-btn">
-	{{userEmail}}
-      </a>
-    </div>
-    <div class="form-group">
-      <a href="/sign-out/" class="btn btn-primary navbar-btn"><span class="glyphicon glyphicon-log-out"></span></a>
-    </div>
-  </div>
-  {{else}}
+    {{else}}
     <a href="/sign-in/" class="btn btn-primary navbar-btn">{{t "loginButton"}}</a>
-  {{/if}}
+    {{/if}}
   </div>
 </template>
