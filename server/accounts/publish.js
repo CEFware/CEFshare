@@ -30,7 +30,7 @@ Meteor.publish('userByUsername', function (username) {
     
 	//clean profile so there where no restricted information
 	res = Meteor.users.find({_id:{$in: idArray}},{fields:{username:1, followers:1,
-							      'services.twitter.profile_image_url':1,
+							      'services.twitter.profile_image_url_https':1,
 							      'services.facebook.id':1,
 							      'services.google.picture':1,
 							      'profile.firstName':1,
@@ -56,7 +56,7 @@ Meteor.publish('userById', function (id) {
     
 	//clean profile so there where no restricted information
 	res = Meteor.users.find({_id:{$in: idArray}},{fields:{username:1, followers:1,
-							      'services.twitter.profile_image_url':1,
+							      'services.twitter.profile_image_url_https':1,
 							      'services.facebook.id':1,
 							      'services.google.picture':1,
 							      'profile.firstName':1,
