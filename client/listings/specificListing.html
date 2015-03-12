@@ -21,8 +21,7 @@
         </div>
       </div>
 
-      <!-- left column -->
-      <div class="col-md-9">
+      <div class="col-md-12">
 
         <div class="row" id="productMain">
           <div class="col-sm-6">
@@ -31,11 +30,12 @@
             </div>
 	    <div class="text">
 	      <br>
+	      <div class="col-sm-3">
+		{{t "Author"}}:
+	      </div>
+	      <div class="col-sm-9">
 	      <a href="/user/{{usernameById listing.author}}">
 		<div class="form-inline">
-		  <div class="form-group">
-		    {{t "Author"}}:
-		  </div>
 		  <div class="form-group">
 		    {{> avatar userId=listing.author size="small" shape="rounded"}} 
 		  </div>
@@ -44,12 +44,15 @@
 		  </div>
 		</div>
 	      </a>
-	      <p>
+	      </div>
+	      <div class="col-sm-3">
 		{{t "Tags"}}:
+	      </div>
+	      <div class="col-sm-9">
 		{{#each listing.tags}}
 		<span class="label label-default">{{this}}</span>
 		{{/each}}
-	      </p>
+	      </div>
 	    </div>
             {{#if ribbonSale}}
             <div class="ribbon sale">
@@ -158,56 +161,57 @@
                     <div class="row">
                         <div class="col-md-3 col-sm-6">
                             <div class="box">
-                                <h3>You may also like these products</h3>
+                                <h3>{{t "Listings by this author"}}</h3>
                             </div>
                         </div>
+
+			{{#each listingsByAuthor listing.author}}
 
                         <div class="col-md-3 col-sm-6">
                             <div class="product">
                                 <div class="image">
-                                    <a href="#">
-                                        <img src="img/product2.jpg" alt="" class="img-responsive image1">
+                                    <a href="{{pathFor 'specificListing' uri=uri}}">
+                                        <img src="{{listingImgById image}}" alt="" class="img-responsive image1">
                                     </a>
                                 </div>
                                 <div class="text">
-                                    <h3>Fur coat</h3>
-                                    <p class="price">$143</p>
-
+                                    <h3>{{title}}</h3>
+                                    <p class="price">{{price}}</p>
                                 </div>
                             </div>
                             <!-- /.product -->
                         </div>
 
-                        <div class="col-md-3 col-sm-6">
-                            <div class="product">
-                                <div class="image">
-                                    <a href="#">
-                                        <img src="img/product3.jpg" alt="" class="img-responsive image1">
-                                    </a>
-                                </div>
-                                <div class="text">
-                                    <h3>Fur coat</h3>
-                                    <p class="price">$143</p>
-                                </div>
-                            </div>
-                            <!-- /.product -->
-                        </div>
-
-                        <div class="col-md-3 col-sm-6">
-                            <div class="product">
-                                <div class="image">
-                                    <a href="#">
-                                        <img src="img/product1.jpg" alt="" class="img-responsive image1">
-                                    </a>
-                                </div>
-                                <div class="text">
-                                    <h3>Fur coat</h3>
-                                    <p class="price">$143</p>
-                                </div>
-                            </div>
-                            <!-- /.product -->
-                        </div>
+			{{/each}}
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="box">
+                                <h3>{{t "Similar listings"}}</h3>
+                            </div>
+                        </div>
+
+			{{#each listingsByTags listing.tags}}
+
+                        <div class="col-md-3 col-sm-6">
+                            <div class="product">
+                                <div class="image">
+                                    <a href="{{pathFor 'specificListing' uri=uri}}">
+                                        <img src="{{listingImgById image}}" alt="" class="img-responsive image1">
+                                    </a>
+                                </div>
+                                <div class="text">
+                                    <h3>{{title}}</h3>
+                                    <p class="price">{{price}}</p>
+                                </div>
+                            </div>
+                            <!-- /.product -->
+                        </div>
+
+			{{/each}}
+                    </div>
+
 
                     <div class="row">
                         <div class="col-md-3 col-sm-6">
@@ -267,207 +271,7 @@
                     </div>
 
                 </div>
-                <!-- /.col-md-9 -->
 
-
-                <!-- *** LEFT COLUMN END *** -->
-
-                <!-- *** RIGHT COLUMN ***
-                  _________________________________________________________ -->
-
-                <div class="col-sm-3">
-
-                    <!-- *** MENUS AND FILTERS ***
- _________________________________________________________ -->
-                    <div class="panel panel-default sidebar-menu">
-
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Categories</h3>
-                        </div>
-
-                        <div class="panel-body">
-                            <ul class="nav nav-pills nav-stacked category-menu">
-                                <li>
-                                    <a href="category.html">Men <span class="badge pull-right">42</span></a>
-                                    <ul>
-                                        <li><a href="category.html">T-shirts</a>
-                                        </li>
-                                        <li><a href="category.html">Shirts</a>
-                                        </li>
-                                        <li><a href="category.html">Pants</a>
-                                        </li>
-                                        <li><a href="category.html">Accessories</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="active">
-                                    <a href="category.html">Ladies  <span class="badge pull-right">123</span></a>
-                                    <ul>
-                                        <li><a href="category.html">T-shirts</a>
-                                        </li>
-                                        <li><a href="category.html">Skirts</a>
-                                        </li>
-                                        <li><a href="category.html">Pants</a>
-                                        </li>
-                                        <li><a href="category.html">Accessories</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                 <li>
-                                    <a href="category.html">Kids  <span class="badge pull-right">11</span></a>
-                                    <ul>
-                                        <li><a href="category.html">T-shirts</a>
-                                        </li>
-                                        <li><a href="category.html">Skirts</a>
-                                        </li>
-                                        <li><a href="category.html">Pants</a>
-                                        </li>
-                                        <li><a href="category.html">Accessories</a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                            </ul>
-
-                        </div>
-                    </div>
-
-                    <div class="panel panel-default sidebar-menu">
-
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Brands <a class="btn btn-xs btn-danger pull-right" href="#"><i class="fa fa-times-circle"></i> <span class="hidden-sm">Clear</span></a></h3>
-                        </div>
-
-                        <div class="panel-body">
-
-                            <form>
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox">Armani (10)
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox">Versace (12)
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox">Carlo Bruni (15)
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox">Jack Honey (14)
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
-
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="panel panel-default sidebar-menu">
-
-                        <div class="panel-heading">
-                            <h3 class="panel-title clearfix">Colours<a class="btn btn-xs btn-danger pull-right" href="#"><i class="fa fa-times-circle"></i> <span class="hidden-sm">Clear</span></a></h3>
-                        </div>
-
-                        <div class="panel-body">
-
-                            <form>
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> <span class="colour white"></span> White (14)
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> <span class="colour blue"></span> Blue (10)
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> <span class="colour green"></span> Green (20)
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> <span class="colour yellow"></span> Yellow (13)
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> <span class="colour red"></span> Red (10)
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
-
-                            </form>
-
-                        </div>
-                    </div>
-
-                    <!-- *** MENUS AND FILTERS END *** -->
-
-                    <div class="banner">
-                        <a href="category.html">
-                            <img src="img/banner.jpg" alt="sales 2014" class="img-responsive">
-                        </a>
-                    </div>
-                    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <div class="col-md-12">
-        <h4>{{t "Listings by this author"}}</h4>
-        {{#each listingsByAuthor listing.author}}
-        <a href="{{pathFor 'specificListing' uri=uri}}">
-          <div class="col-md-3">
-            <img src="{{listingImgById image}}">
-            <h2>{{title}}</h2>
-            <p>{{tags}}</p>
-            </div>
-        </a>
-        {{/each}}
-      </div>
-      <div class="col-md-12">
-        <h4>{{t "Listings with the same tags"}}</h4>
-        {{#each listingsByTags listing.tags}}
-        <a href="{{pathFor 'specificListing' uri=uri}}">
-          <div class="col-md-3">
-            <img src="{{listingImgById image}}">
-              <h2>{{title}}</h2>
-            <p>{{tags}}</p>
-          </div>
-        </a>
-        {{/each}}
-      </div>
-      
     </div>
   </div>
     
