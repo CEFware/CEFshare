@@ -31,11 +31,11 @@
             </div>
 	    <div class="text">
 	      <br>
+	      <div class="col-sm-4">
+		{{t "Author"}}:
+	      </div>
 	      <a href="/user/{{usernameById listing.author}}">
 		<div class="form-inline">
-		  <div class="form-group">
-		    {{t "Author"}}:
-		  </div>
 		  <div class="form-group">
 		    {{> avatar userId=listing.author size="small" shape="rounded"}} 
 		  </div>

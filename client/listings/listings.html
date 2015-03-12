@@ -2,29 +2,81 @@
    <div class="row">
     {{#each listings}}
     {{#if listingIsPublic}}
-    <a href="{{pathFor 'specificListing' uri=uri}}">
-      <div class="col-md-3">
-        <img src="{{listingImg}}">
-        <h2>{{title}}</h2>
-        <p>{{tags}}</p>
+
+    <div class="col-md-3 col-sm-4">
+      <div class="product">
+        <div class="image">
+          <a href="{{pathFor 'specificListing' uri=uri}}" target="_blank">
+            <img src="{{listingImg}}" alt="" class="img-responsive image1">
+          </a>
+        </div>
+        <!-- /.image -->
+        <div class="text">
+          <h3><a href="{{pathFor 'specificListing' uri=uri}}" target="_blank">{{title}}</a></h3>
+          <p class="price">{{price}}</p>
+        </div>
+        <!-- /.text -->
+	{{#if ribbonSale}}
+        <div class="ribbon sale">
+          <div class="theribbon">{{t "NEW"}}</div>
+          <div class="ribbon-background"></div>
+        </div>
+	{{/if}}
+	{{#if ribbonNew}}
+        <div class="ribbon new">
+          <div class="theribbon">{{t "Popular"}}</div>
+          <div class="ribbon-background"></div>
+        </div>
+	{{/if}}
+        <!-- /.ribbon -->
       </div>
-    </a>
+      <!-- /.product -->
+    </div>
     {{else}}
-    <a href="{{pathFor 'specificListing' uri=uri}}">
-      <div class="col-md-3">
-        <img src="{{listingImg}}" style="opacity:0.5;filter:alpha(opacity=50)">
-        <h2>{{title}}</h2>
-        <p>{{tags}}</p>
+    <div class="col-md-3 col-sm-4">
+      <div class="product">
+        <div class="image">
+          <a href="{{pathFor 'specificListing' uri=uri}}" target="_blank">
+             <img src="{{listingImg}}" alt="" class="img-responsive image1" style="opacity:0.5;filter:alpha(opacity=50)">
+          </a>
+        </div>
+        <!-- /.image -->
+        <div class="text">
+          <h3><a href="{{pathFor 'specificListing' uri=uri}}" target="_blank">{{title}}</a></h3>
+          <p class="price">{{price}}</p>
+        </div>
+        <!-- /.text -->
+	{{#if ribbonSale}}
+        <div class="ribbon sale">
+          <div class="theribbon">{{t "NEW"}}</div>
+          <div class="ribbon-background"></div>
+        </div>
+	{{/if}}
+	{{#if ribbonNew}}
+        <div class="ribbon new">
+          <div class="theribbon">{{t "Popular"}}</div>
+          <div class="ribbon-background"></div>
+        </div>
+	{{/if}}
+        <!-- /.ribbon -->
       </div>
-    </a>
+      <!-- /.product -->
+    </div>
+
     {{/if}}
     {{/each}}
-    <a href="{{pathFor 'specificListingEdit' uri='new'}}">
-      <div class="col-md-3">
-        <img src="/img/addNew.jpg">
-	<br><br>
-        <h2>{{t "Add new listing"}}</h2>
+    <div class="col-md-3 col-sm-4">
+      <div class="product">
+        <div class="image">
+          <a href="{{pathFor 'specificListingEdit' uri='new'}}">
+            <img src="/img/addNew.jpg" alt="" class="img-responsive image1">
+          </a>
+        </div>
+        <!-- /.image -->
+        <div class="text">
+        </div>
       </div>
-    </a>
+      <!-- /.product -->
+    </div>
   </div>
 </template>

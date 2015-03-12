@@ -41,9 +41,10 @@ Template.specificListing.helpers({
 });
 
 Template.specificListing.events({
-  'click .switchFavorite': function () {
-    var listing = specificListingByURI(Router.current().params.uri).fetch().first();
-    return switchFavoriteListingState(listing._id);
+  'click .switchFavorite': function (e,t) {
+      e.preventDefault();
+      var listing = specificListingByURI(Router.current().params.uri).fetch().first();
+      return switchFavoriteListingState(listing._id);
   }
 });
 
