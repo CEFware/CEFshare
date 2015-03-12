@@ -88,6 +88,7 @@ mobile-status-bar@1.0.2
 momentjs:moment@2.8.4
 mongo@1.0.11
 mongo-livedata@1.0.7
+mpowaga:autoform-summernote@0.3.1
 mrt:underscore-string-latest@2.3.3
 natestrauser:select2@3.5.1
 naxio:flash@0.2.3
@@ -116,6 +117,7 @@ splendido:accounts-meld@1.2.0
 splendido:accounts-meld-client-bootstrap@1.0.4
 srp@1.0.2
 stylus@1.0.6
+summernote:standalone@0.6.0_1
 tap:i18n@1.4.1
 templating@1.0.11
 tracker@1.0.5

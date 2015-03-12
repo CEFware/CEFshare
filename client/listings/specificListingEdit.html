@@ -25,7 +25,9 @@
 	    <fieldset>
 	      {{> afQuickField name='image'}}
 	      {{> afQuickField name='title'}}
-	      {{> afQuickField name='description' rows=3}}
+	      {{> afQuickField name='description'}}
+	      {{> afQuickField name='details' rows=5}}
+	      {{> afQuickField name='price'}}
 	      <div class="form-group{{#if afFieldIsInvalid name='tags'}} has-error{{/if}}">
 		<label class="control-label">{{t "Tags"}}</label><br>
 		{{> afFieldInput name='tags' type='text' id='tokenfield'}}
@@ -33,6 +35,8 @@
 		<span class="help-block">{{afFieldMessage name='tags'}}</span>
 		{{/if}}
 	      </div>
+	      {{> afQuickField name='isRibbonSale'}}
+	      {{> afQuickField name='isRibbonNew'}}
 	      {{> afQuickField name='isPublic'}}
 	      {{> afQuickField name='active'}}
 	    </fieldset>
@@ -48,12 +52,16 @@
 	    <fieldset>
 	      {{> afQuickField name='image'}}
 	      {{> afQuickField name='title'}}
-	      {{> afQuickField name='description' rows=3}}
+	      {{> afQuickField name='description'}}
+	      {{> afQuickField name='details' rows=3}}
+	      {{> afQuickField name='price'}}
 	      {{> afQuickField name='tags' type='text' id='tokenfield'}}
 	      <div class="form-group">
 		<label class="control-label">{{t "Listing url"}}</label>
 		<input type="text" class="form-control" readonly value="{{appUrl}}listing/{{currentListing.uri}}">
 	      </div>
+	      {{> afQuickField name='isRibbonSale'}}
+	      {{> afQuickField name='isRibbonNew'}}
 	      {{> afQuickField name='isPublic'}}
 	      {{> afQuickField name='active'}}
 	      

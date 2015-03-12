@@ -54,15 +54,15 @@
 		{{/each}}
 	      </div>
 	    </div>
-            {{#if ribbonSale}}
+            {{#if listing.isRibbonSale}}
             <div class="ribbon sale">
               <div class="theribbon">{{t "NEW"}}</div>
               <div class="ribbon-background"></div>
             </div>
             {{/if}}
-            {{#if ribbonNew}}
+            {{#if listing.isRibbonNew}}
             <div class="ribbon new">
-              <div class="theribbon">{{t "Popular"}}</div>
+              <div class="theribbon">{{t "TRENDY"}}</div>
               <div class="ribbon-background"></div>
             </div>
             {{/if}}
@@ -129,23 +129,8 @@
 
 
                     <div class="box" id="details">
-                            <h4>Product details</h4>
-                            <p>White lace top, woven, has a round neck, short sleeves, has knitted lining attached</p>
-                            <h4>Material & care</h4>
-                            <ul>
-                                <li>Polyester</li>
-                                <li>Machine wash</li>
-                            </ul>
-                            <h4>Size & Fit</h4>
-                            <ul>
-                                <li>Regular fit</li>
-                                <li>The model (height 5'8" and chest 33") is wearing a size S</li>
-                            </ul>
-
-                            <blockquote>
-                                <p><em>Define style this season with Armani's new range of trendy tops, crafted with intricate details. Create a chic statement look by teaming this lace number with skinny jeans and pumps.</em>
-                                </p>
-                            </blockquote>
+                            <h4>{{t "Listing details"}}</h4>
+			    {{{listing.details}}}
                     </div>
 
                     <div class="box social" id="product-social">
