@@ -25,7 +25,7 @@
         </div>
       </div>
 
-      <div class="col-md-12">
+      <div class="col-md-9">
 
         <div class="row" id="productMain">
           <div class="col-sm-6">
@@ -246,7 +246,6 @@
               <div class="text">
                 <h3>Fur coat</h3>
                 <p class="price">$143</p>
-		
               </div>
             </div>
             <!-- /.product -->
@@ -254,6 +253,39 @@
 	  
         </div>
 	
+      </div>
+
+      <div class="col-md-3">
+
+	{{#if isListingsByTags listing.tags}}
+          <div class="col-md-12 col-sm-12">
+            <div class="box">
+              <h3>{{t "Recommended listings"}}</h3>
+            </div>
+          </div>
+	  
+	  {{#each listingsByTags listing.tags}}
+	  
+          <div class="col-md-12 col-sm-12">
+            <div class="product">
+              <div class="image">
+                <a href="{{pathFor 'specificListing' uri=uri}}">
+                  <img src="{{listingImgById image.[0]}}" alt="" class="img-responsive image1">
+                </a>
+              </div>
+              <div class="text">
+                <h3>{{title}}</h3>
+                <p class="price">{{price}}</p>
+              </div>
+            </div>
+            <!-- /.product -->
+          </div>
+	  
+	  {{/each}}
+
+	{{/if}}
+
+
       </div>
 
     </div>
