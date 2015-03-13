@@ -24,6 +24,12 @@ Meteor.methods({
 	Listings.insert(doc);
 	
 	return doc.uri;
-    } 
+    },
+
+    deleteListing: function (id) {
+	var imgs=Listings.findOne({_id:id}).image;
+	Listings.remove({_id:id});
+	Images.remove({_id:{$in:imgs}});
+    }
 
 });

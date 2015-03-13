@@ -27,9 +27,9 @@ Template.allListings.helpers({
     listingImg: function (){
         var listing = this;
         if (listing) {
-            var imgs=Images.findOne({_id:listing.image});
+            var imgs=Images.findOne({_id:listing.image[0]});
             if (imgs)
-                return imgs.url();
+                return imgs.url({store:'thumbs'});
         };
     },
     listingIsPublic: function () {
@@ -56,7 +56,7 @@ Template.allListings.rendered= function (){
 	//add id's to get only needed images - by adding an array with needed images id's
 	var imgA=[];
 	allListings().forEach(function(el){
-            imgA.push(el.image);
+            imgA=_.union(imgA, el.image);
 	});
 	Meteor.subscribe('images',imgA);
     });

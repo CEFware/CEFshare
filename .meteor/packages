@@ -10,7 +10,6 @@ ongoworks:security
 iron:router
 twbs:bootstrap
 fortawesome:fontawesome
-digilord:countries
 natestrauser:select2
 aldeed:collection2
 aldeed:autoform
@@ -37,3 +36,4 @@ autoform-file
 cfs:standard-packages
 cfs:filesystem
 mpowaga:autoform-summernote
+cfs:graphicsmagick

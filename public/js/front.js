@@ -180,14 +180,6 @@ function utils() {
 function productDetailGallery(confDetailSwitch) {
     $('#productMain .thumb:first').addClass('active');
     timer = setInterval(autoSwitch, confDetailSwitch);
-    $("#productMain .thumb").click(function (e) {
-
-	switchImage($(this));
-	clearInterval(timer);
-	timer = setInterval(autoSwitch, confDetailSwitch);
-	e.preventDefault();
-    }
-    );
     $('#productMain #mainImage').hover(function () {
 	clearInterval(timer);
     }, function () {
@@ -202,7 +194,6 @@ function productDetailGallery(confDetailSwitch) {
     }
 
     function switchImage(thumb) {
-
 	$('#productMain .thumb').removeClass('active');
 	var bigUrl = thumb.attr('href');
 	thumb.addClass('active');

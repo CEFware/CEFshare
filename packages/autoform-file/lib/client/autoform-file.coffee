@@ -115,7 +115,7 @@ Template.afFileUpload.helpers
 			if file.length == 17
 				if collection.findOne({_id:file})
 					filename = collection.findOne({_id:file}).name()
-					src = collection.findOne({_id:file}).url()
+					src = collection.findOne({_id:file}).url({store:'thumbs'})
 				else
 					# No subscription
 					filename = Session.get 'fileUploadSelected[' + name + ']'

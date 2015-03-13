@@ -29,6 +29,7 @@ cfs:collection-filters@0.2.4
 cfs:data-man@0.0.6
 cfs:file@0.1.16
 cfs:filesystem@0.1.2
+cfs:graphicsmagick@0.0.18
 cfs:http-methods@0.0.27
 cfs:http-publish@0.0.13
 cfs:power-queue@0.9.11
@@ -44,7 +45,6 @@ coffeescript@1.0.5
 dburles:google-maps@1.0.8
 ddp@1.0.14
 deps@1.0.6
-digilord:countries@1.0.1
 ejson@1.0.5
 email@1.0.5
 facebook@1.1.3
