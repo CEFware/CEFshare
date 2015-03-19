@@ -11,7 +11,6 @@ Template.specificListing.helpers({
     listingImgs: function () {
 	var listing = specificListingByURI(Router.current().params.uri).fetch().first();
 	if (listing) {
-//	    listing.image=_.rest(listing.image);
 	    var imgs=Images.find({_id:{$in:listing.image}});
 	    if (imgs)
 		return imgs;
@@ -27,17 +26,18 @@ Template.specificListing.helpers({
     },
 
     isListingsByAuthor: function (author){
-	if (publicListingsByAuthor(author,specificListingByURI(Router.current().params.uri).fetch().first()._id,3).fetch().length>0)
+	if ((specificListingByURI(Router.current().params.uri).fetch().first()) && (publicListingsByAuthor(author,specificListingByURI(Router.current().params.uri).fetch().first()._id,3).fetch().length>0))
 	    return true;
 	return false;
     },
 
     listingsByAuthor: function (author){
-	return publicListingsByAuthor(author,specificListingByURI(Router.current().params.uri).fetch().first()._id,3);
+	if (specificListingByURI(Router.current().params.uri).fetch().first())
+	    return publicListingsByAuthor(author,specificListingByURI(Router.current().params.uri).fetch().first()._id,3);
     },
 
     isListingsByTags: function (tags){
-	if (allListingsByTags(tags,specificListingByURI(Router.current().params.uri).fetch().first()._id,3).fetch().length>0)
+	if ((specificListingByURI(Router.current().params.uri).fetch().first()) && (allListingsByTags(tags,specificListingByURI(Router.current().params.uri).fetch().first()._id,3).fetch().length>0))
 	    return true;
 	return false;
     },
@@ -66,8 +66,10 @@ Template.specificListing.helpers({
 Template.specificListing.events({
     'click .switchFavorite': function (e,t) {
 	e.preventDefault();
-	var listing = specificListingByURI(Router.current().params.uri).fetch().first();
-	return switchFavoriteListingState(listing._id);
+	if (Meteor.user()) {
+	    var listing = specificListingByURI(Router.current().params.uri).fetch().first();
+	    return switchFavoriteListingState(listing._id);
+	};
     },
 
     'click #productMain .thumb': function (e,t) {
@@ -81,8 +83,10 @@ Template.specificListing.events({
     'click .deleteListing': function (e,t){
 	e.preventDefault();
 	//delete listing & images
-	Meteor.call('deleteListing',specificListingByURI(Router.current().params.uri).fetch().first()._id);
-	Router.go('home');
+	Meteor.call('deleteListing',specificListingByURI(Router.current().params.uri).fetch().first()._id, function (e,r) {
+	    if (!e)
+		Router.go('home');
+	});
     }
 });
 

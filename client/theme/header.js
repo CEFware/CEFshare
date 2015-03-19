@@ -12,6 +12,7 @@ UI.registerHelper ('userEmail', function () {
 
 Template.errorMsg.events({
     'click .sendVerEmail': function (event, template) {
+	event.preventDefault();
         Meteor.call('sendVerEmail', function (error,result){});
     }
 });
@@ -20,4 +21,12 @@ UI.registerHelper('showNewListingButton',function () {
     if (Router.current().lookupTemplate()!=='SpecificListingEdit')
 	return true;
     return false;
+});
+
+Template.header.helpers({
+    loginError: function () {
+        if (Accounts._loginButtonsSession.get("errorMessage"))
+            return true;
+        return false;
+    }
 });

@@ -23,9 +23,11 @@ Template.userProfile.helpers({
     },
 
     editingProfile: function (){
-	var ses=Session.get('editingProfile');
-	if (ses)
-	    return ses;
+	if (Meteor.user()) {
+	    var ses=Session.get('editingProfile');
+	    if (ses)
+		return ses;
+	};
 	return false;
     },
 

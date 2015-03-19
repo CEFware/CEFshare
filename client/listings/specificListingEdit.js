@@ -21,7 +21,7 @@ AutoForm.addHooks(['specificListingEdit'],{
 
 AutoForm.addHooks(['specificListingCreate'],{
     after: {
-	"createNewListing": function (e,r,t) {
+	"method": function (e,r,t) {
 	    Router.go('specificListingEdit', {uri:r})
 	}
     }

@@ -60,7 +60,17 @@
           {{/if}}
  
 	  {{else}}
-Links to FB, Twitter & G+ profiles
+
+          {{#if user.services.twitter.id}}
+          <a href="https://twitter.com/intent/user?user_id={{user.services.twitter.id}}" class="btn btn-info" ><i class="fa fa-twitter"></i></a>
+          {{/if}}
+          {{#if user.services.facebook.id}}
+          <a href="http://www.facebook.com/profile.php?id={{user.services.facebook.id}}" class="btn btn-primary" ><i class="fa fa-facebook"></i></a>
+          {{/if}}
+          {{#if user.services.google.id}}
+          <a href="http://plus.google.com/{{user.services.google.id}}/posts" class="btn btn-danger" ><i class="fa fa-google-plus"></i></a>
+          {{/if}}
+
 	  {{/if}}
 	  <br>
 	  {{#if currentUser}} 

@@ -11,15 +11,19 @@ Package.onUse(function(api) {
 
   api.use(
     [
-    'coffeescript',
     'underscore',
     'templating',
     'less',
-    'aldeed:autoform@4.2.2'
+    'aldeed:autoform',
+	'cfs:ui'
     ],
     'client');
 
+    api.imply([
+	'cfs:ui'
+    ]);
+
   api.add_files('lib/client/autoform-file.html', 'client');
   api.add_files('lib/client/autoform-file.less', 'client');
-  api.add_files('lib/client/autoform-file.coffee', 'client');
+  api.add_files('lib/client/autoform-file.js', 'client');
 });

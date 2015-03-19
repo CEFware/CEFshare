@@ -37,12 +37,32 @@
       </div>
     </div>
     {{/if}}
+
+    {{#if loginError}}
+    <div class="main">
+      <div class="col-lg-12">
+        {{> errorLogin}}
+      </div>
+    </div>
+    {{/if}}
 </template>
 
 <template name="errorMsg">
   <div class="alert alert-danger alert-dismissible" role="alert" style="padding-right:35px">
     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-    <strong>{{t "Warning!"}}</strong> {{t "Your e-mail is not verified - the use of our site is limited."}} <a href="#" class="alert-link sendVerEmail">{{t "Click here"}} </a> {{t "to resend the verification link for"}} {{userEmail}}.
+    <strong>{{t "Warning!"}}</strong> 
+    {{#if userEmail}}
+    {{t "Your e-mail is not verified - the use of our site is limited."}} <a href="#" class="alert-link sendVerEmail">{{t "Click here"}}</a> {{t "to resend the verification link for"}} {{userEmail}}.
+    {{else}}
+    {{t "Your account is in pending mode. Please, enter your e-mail in"}} <a href="#" class="alert-link editProfile">{{t "PROFILE"}}</a> {{t "to confirm your account."}}
+    {{/if}}
+  </div>
+</template>
+
+<template name="errorLogin">
+  <div class="alert alert-danger alert-dismissible" role="alert" style="padding-right:35px" id="loginError">
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <strong>{{t "Warning!"}}</strong> {{t "Email, from the social network account you are using, already exists in our system. Please, try to log in with e-mail/password or other social network account."}}
   </div>
 </template>
 
@@ -90,3 +110,4 @@
     {{/if}}
   </div>
 </template>
+
