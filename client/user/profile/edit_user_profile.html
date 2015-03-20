@@ -26,6 +26,9 @@
 	<div>
           <button type="submit" class="btn btn-primary">{{t "Save"}}</button>
           <button type="reset" class="btn btn-default">{{t "Reset"}}</button>
+	  {{#if currentUser.services.password}}
+          <button class="btn btn-danger dropPassword">{{t "Drop password"}}</button>
+	  {{/if}}
 	</div>
       </fieldset>
       {{/autoForm}}

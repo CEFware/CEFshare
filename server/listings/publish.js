@@ -10,6 +10,8 @@ Meteor.publish('getListingsByAuthor', allListingsByAuthor);
 
 Meteor.publish('getListingsByTags', allListingsByTags);
 
+Meteor.publish('getListingsByURI', allListingsByURI);
+
 Meteor.publish('getPublicListingsByAuthor', publicListingsByAuthor);
 
 Meteor.publish('allListings', allListings);

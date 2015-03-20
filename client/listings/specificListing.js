@@ -46,6 +46,21 @@ Template.specificListing.helpers({
 	return allListingsByTags(tags,specificListingByURI(Router.current().params.uri).fetch().first()._id,3);
     },
 
+    isRecentListings: function () {
+	var uriArr=Cookie.get('recentListings');
+	if (uriArr)
+            uriArr = uriArr.split(",");
+	if ((uriArr.length>0) && (specificListingByURI(Router.current().params.uri).fetch().first()) && (allListingsByURI(uriArr,specificListingByURI(Router.current().params.uri).fetch().first()._id,3).fetch().length>0))
+	    return true;
+	return false;
+    },
+
+    recentListings: function () {
+	var uriArr=Cookie.get('recentListings');
+        uriArr = uriArr.split(",");
+	return allListingsByURI(uriArr,specificListingByURI(Router.current().params.uri).fetch().first()._id,3);
+    },
+
     listing: function () {
 	return specificListingByURI(Router.current().params.uri).fetch().first();
     },
@@ -99,6 +114,11 @@ Template.specificListing.rendered = function () {
 	    Meteor.subscribe('userById',listing.author);
 	    Meteor.subscribe('getPublicListingsByAuthor',listing.author);
 	    Meteor.subscribe('getListingsByTags',listing.tags);
+	    var uriArr=Cookie.get('recentListings');
+	    if (uriArr)
+		uriArr = uriArr.split(",");
+	    if (uriArr.length>0)
+		Meteor.subscribe('getListingsByURI',uriArr);
 	    var imgA=[];
 	    allListings().forEach(function(el){
 		imgA=_.union(imgA, el.image);

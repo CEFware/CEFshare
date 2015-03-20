@@ -1,6 +1,11 @@
 Meteor.publish(null, function () {
     if (!Roles.userIsInRole(this.userId,'admin')) {
-	return Meteor.users.find({_id:this.userId},{fields:{roles:1, services:1, emails:1, profile:1, username:1, followers:1, lat:1, lng:1, formatted_address:1}});
+	return Meteor.users.find({_id:this.userId},{fields:{roles:1, services:1, 
+							    emails:1, profile:1, 
+							    username:1, followers:1, 
+							    lat:1, lng:1, 
+							    formatted_address:1, createdAt:1
+							   }});
     };
 });
 

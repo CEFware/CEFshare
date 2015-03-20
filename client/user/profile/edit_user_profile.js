@@ -25,6 +25,8 @@ AutoForm.addHooks(['EditUserProfilePage'],{
     onSuccess: function (){
         Flash.success('profileSaved',TAPi18n.__("Saved successfuly!"),2000);
 	Session.set('editingProfile',null);
+        if (Router.current().lookupTemplate()==="UserProfileEdit")
+	    Router.go('userProfile',{username:Router.current().params.username});
     },
     onError: function (o,e,t) {
         Flash.danger('profileSaved',TAPi18n.__("Something is wrong! Error: ")+e.reason,3000);
@@ -35,6 +37,16 @@ Template.editUserProfile.events({
     'click #find': function () {
         event.preventDefault();
         $("#geocomplete").trigger('geocode');
+    },
+    'click .dropPassword': function (event, template) {
+        event.preventDefault();
+        Meteor.call('dropPassword', function (error, result){
+            if (! error) {
+		Flash.success('profileSaved',TAPi18n.__("Secret link to set up you new password was sent to your e-mail recently!"),2000);
+            } else {
+		Flash.danger('profileSaved',TAPi18n.__("Error happened while sending drop password to your e-mail!"),2000);
+            };
+        });
     }
 });
 

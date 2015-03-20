@@ -104,7 +104,7 @@ Accounts.onCreateUser(function(options, user) {
 
 });
 
-Accounts.onLogin(function(options,user) {
+Accounts.onLogin(function(options) {
     //change role to "verified" if e-mail is verified
     if (options.user.emails && options.user.emails[0].verified) {
 	Roles.addUsersToRoles(options.user._id,['verified'], Roles.GLOBAL_GROUP);
@@ -113,3 +113,4 @@ Accounts.onLogin(function(options,user) {
 	if (!Roles.userIsInRole(options.user, 'verified')) Roles.addUsersToRoles(options.user._id,['unverified'], Roles.GLOBAL_GROUP);
     };
 });
+

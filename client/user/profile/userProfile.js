@@ -24,7 +24,11 @@ Template.userProfile.helpers({
 
     editingProfile: function (){
 	if (Meteor.user()) {
-	    var ses=Session.get('editingProfile');
+            if (Router.current().lookupTemplate()==="UserProfileEdit") {
+                Session.set('editingProfile',true);
+                return true;
+            };
+ 	    var ses=Session.get('editingProfile');
 	    if (ses)
 		return ses;
 	};
@@ -94,10 +98,13 @@ Template.userProfile.events({
 
     'click .editProfile': function () {
 	Session.set('editingProfile',true);
-    },
+     },
 
-    'click .cancelEditProfile':function () {
+    'click .cancelEditProfile':function (e) {
+	e.preventDefault();
 	Session.set('editingProfile',null);
+        if (Router.current().lookupTemplate()==="UserProfileEdit")
+	    Router.go('userProfile',{username:Router.current().params.username});
     }
 });
 

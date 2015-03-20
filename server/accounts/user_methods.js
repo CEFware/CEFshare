@@ -1,6 +1,6 @@
 Meteor.methods({
     editUserProfile: function (doc) {
-	if ((Meteor.userId() === doc._id) || Roles.userIsInRole(Meteor.userId(),'admin')) {
+	if (Meteor.userId()) {
 	    check(doc, User.User)
 
 	    if (Meteor.user().emails[0].address===doc.emails[0].address) {
@@ -36,7 +36,7 @@ Meteor.methods({
 	};
 	
 	} else {
-	    throw new Meteor.Error("security-check-fail", "You must be a profile owner or admin to edit this profile.");
+	    throw new Meteor.Error("security-check-fail", "You must be a user to edit profile.");
 	};
     },
     
