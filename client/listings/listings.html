@@ -1,9 +1,9 @@
 <template name="allListings">
-   <div class="row">
+   <div class="col-md-12">
     {{#each listings}}
     {{#if listingIsPublic}}
 
-    <div class="col-md-3 col-sm-4">
+    <div class="col-md-{{#if bigImg}}4{{else}}3{{/if}} col-sm-4">
       <div class="product">
         <div class="image">
           <a href="{{pathFor 'specificListing' uri=uri}}">
@@ -33,7 +33,7 @@
       <!-- /.product -->
     </div>
     {{else}}
-    <div class="col-md-3 col-sm-4">
+    <div class="col-md-{{#if bigImg}}4{{else}}3{{/if}} col-sm-4">
       <div class="product">
         <div class="image">
           <a href="{{pathFor 'specificListing' uri=uri}}">
@@ -65,7 +65,8 @@
 
     {{/if}}
     {{/each}}
-    <div class="col-md-3 col-sm-4">
+    {{#if showAddNewListing}} 
+    <div class="col-md-{{#if bigImg}}4{{else}}3{{/if}} col-sm-4">
       <div class="product">
         <div class="image">
           <a href="{{pathFor 'specificListingEdit' uri='new'}}">
@@ -80,5 +81,6 @@
       </div>
       <!-- /.product -->
     </div>
+    {{/if}}
   </div>
 </template>

@@ -20,8 +20,30 @@ Template.allListings.helpers({
 		return null;
 	    };
 	    break;
+	case "Storefront":
+	    if (Meteor.user() && (Meteor.userId()===getUserId())) {
+		return allListingsByAuthor(Meteor.userId());
+	    } else {
+		if (getUserId()) 
+		    return publicListingsByAuthor(getUserId());
+		return null;
+	    };
+	    break;
 	default:
 	    return allListingsOnHomepage();
+	};
+    },
+
+    bigImg: function () {
+	switch (Router.current().lookupTemplate()) {
+	case "UserProfile":
+	    return true;
+	    break;
+	case "Storefront":
+	    return true;
+	    break;
+	default:
+	    return false;
 	};
     },
     listingImg: function (){
@@ -34,6 +56,11 @@ Template.allListings.helpers({
     },
     listingIsPublic: function () {
 	return this.isPublic; 
+    },
+    showAddNewListing: function () {
+	if (Router.current().lookupTemplate()==="home")
+	    return true;
+	return false;
     }
 });
 

@@ -1,4 +1,4 @@
-<template name="userProfile">
+<template name="storefront">
   <div id="content" class="clearfix">
     <div class="container">
       <div class="col-lg-12">
@@ -18,13 +18,7 @@
 		{{/if}}
 
 		{{#if isOwner}}
-
-		{{#if editingProfile}}
-		<a href="" class="btn btn-default cancelEditProfile">&#10006; {{t "EDIT"}}</a>
-		{{else}}
-		<a href="" class="btn btn-default editProfile">{{t "EDIT"}}</a>
-		{{/if}}
-
+		<a href="{{pathFor 'userProfileEdit' username=user.username}}" class="btn btn-default">{{t "EDIT"}}</a>
 		{{/if}}
 	      </h1>
 	      {{#if notEmpty user.profile.bio}}<p class="lead">{{user.profile.bio}}</p>{{/if}}
@@ -37,14 +31,8 @@
 
         <div class="col-md-8 clearfix" id="customer-account">
 
-	  <h2 class="text-center">{{t "Created listings"}}</h2>
           <div class="box clearfix">
 	    {{> allListings}}
-	  </div>
-
-	  <h2 class="text-center">{{t "Wishlist"}}</h2>
-          <div class="box clearfix">
-	    {{> userWishlist}}
 	  </div>
 
 	</div>
@@ -149,24 +137,7 @@
 	  {{/if}}
 
 	  <br>
-	  {{#if isOwner}}
- 
-          {{#if isInRole 'verified'}}
-          {{#each oauthService}}
-          {{> atSocial}}
-          {{/each}}
-          <center>
-            <br>
-            <small>
-              {{t "We'll never post anything on Facebook, Twitter or Google+ without your permission."}}
-            </small>
-          </center>
-          {{else}}
-          {{t "Verify your e-mail to attach Facebook, Twitter or Google+ to your profile."}}
-          {{/if}}
- 
-	  {{/if}}
-	  <br>
+
 	  <h2>{{t "Followers"}}</h2>
 	  {{#if followersList}}
 
@@ -177,27 +148,12 @@
 	  {{else}}
 	  {{t "Nobody follows yet."}}
 	  {{/if}}
-	  <h2>{{t "Following"}}</h2>
-	  {{#if followingList}}
-
-	  {{#each followingList}}
-          <a href="/user/{{this.username}}">{{> avatar userId=this._id shape="rounded"}}</a>
-	  {{/each}}
-
-	  {{else}}
-	  {{t "Not following anybody yet."}}
-	  {{/if}}
 
 	  <br>
 	  <br>
+
 	</div>
       </div>
     </div>
-  </div>
-</template>
-
-<template name="locationMap">
-  <div style="width:310px;height:140px;">
-      {{> googleMap name="exampleMap" options=exampleMapOptions}}
   </div>
 </template>

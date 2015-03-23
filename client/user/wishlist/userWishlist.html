@@ -1,18 +1,69 @@
 <template name="userWishlist">
-  <table>
+  <div class="col-md-12">
     {{#each listings}}
-    <tr>
-      <td><a href="{{pathFor 'specificListing' uri=uri}}" target="_blank">{{title}}</a></td>
-      {{#if isOwner}}
-      <td>
-        {{#if isFavorited _id}}
-        <span class="glyphicon glyphicon-heart unfavoriteIt switchFavorite"></span>
-        {{else}}
-        <span class="glyphicon glyphicon-heart-empty favoriteIt switchFavorite"></span>
+    {{#if listingIsPublic}}
+
+    <div class="col-md-3 col-sm-4">
+      <div class="product">
+        <div class="image">
+          <a href="{{pathFor 'specificListing' uri=uri}}">
+            <img src="{{listingImg}}" alt="" class="img-responsive image1">
+          </a>
+        </div>
+        <!-- /.image -->
+        <div class="text">
+          <h3><a href="{{pathFor 'specificListing' uri=uri}}">{{title}}</a></h3>
+          <p class="price">{{price}}</p>
+        </div>
+        <!-- /.text -->
+        {{#if isRibbonSale}}
+        <div class="ribbon sale">
+          <div class="theribbon">{{t "NEW"}}</div>
+          <div class="ribbon-background"></div>
+        </div>
         {{/if}}
-      </td>
-      {{/if}}
-    </tr>
-    {{/each}}
-  </table>
-</template>
+        {{#if isRibbonNew}}
+        <div class="ribbon new">
+          <div class="theribbon">{{t "TRENDY"}}</div>
+          <div class="ribbon-background"></div>
+        </div>
+        {{/if}}
+        <!-- /.ribbon -->
+      </div>
+      <!-- /.product -->
+    </div>
+    {{else}}
+     <div class="col-md-3 col-sm-4">
+      <div class="product">
+        <div class="image">
+          <a href="{{pathFor 'specificListing' uri=uri}}">
+             <img src="{{listingImg}}" alt="" class="img-responsive image1" style="opacity:0.5;filter:alpha(opacity=50)">
+          </a>
+        </div>
+        <!-- /.image -->
+        <div class="text">
+          <h3><a href="{{pathFor 'specificListing' uri=uri}}">{{title}}</a></h3>
+          <p class="price">{{price}}</p>
+        </div>
+        <!-- /.text -->
+        {{#if isRibbonSale}}
+        <div class="ribbon sale">
+          <div class="theribbon">{{t "NEW"}}</div>
+          <div class="ribbon-background"></div>
+        </div>
+        {{/if}}
+        {{#if isRibbonNew}}
+        <div class="ribbon new">
+          <div class="theribbon">{{t "TRENDY"}}</div>
+          <div class="ribbon-background"></div>
+        </div>
+        {{/if}}
+        <!-- /.ribbon -->
+      </div>
+      <!-- /.product -->
+     </div>
+
+     {{/if}}
+     {{/each}}
+  </div>
+ </template>

@@ -43,7 +43,7 @@ Template.userProfile.helpers({
     },
 
     contactFormSchema: function() {
-	return contactSchema;
+	return Schema.contact;
     },
 
     userProfileEmail: function () {
