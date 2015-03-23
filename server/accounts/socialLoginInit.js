@@ -9,7 +9,7 @@ ServiceConfiguration.configurations.remove({
 });
 
 //Localhost settings - to be commented on server
-/**/
+/**//*
 ServiceConfiguration.configurations.insert({
 	service: 'facebook',
 	appId: "284489131716704",
@@ -28,7 +28,7 @@ ServiceConfiguration.configurations.insert({
 /**/
 
 //staging settings - to be commented on localhost
-/**//*
+/**/
 ServiceConfiguration.configurations.insert({
 	service: 'twitter',
 	consumerKey: "ojyyVrU0G11mhMgMDPuPoeWyG",
