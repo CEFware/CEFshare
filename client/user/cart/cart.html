@@ -34,11 +34,11 @@
 		  {{#each cartItems}}
                   <tr>
                     <td>
-                      <a href="#">
-                        <img src="" alt="{{productName}}">
+                      <a href="{{pathFor 'specificListing' uri=product.uri}}">
+                        <img src="{{listingImgById product.image.[0]}}" alt="{{productName}}">
                       </a>
                     </td>
-                    <td><a href="#">{{productName}}</a>
+                    <td><a href="{{pathFor 'specificListing' uri=product.uri}}">{{productName}}</a>
                     </td>
                     <td>
                       <input type="number" value="{{qty}}" class="form-control">

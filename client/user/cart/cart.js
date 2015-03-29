@@ -24,7 +24,7 @@ Template.cart.helpers({
 	} else {
 	    shopCart.shipping = 10;
 	};
-	shopCart.total = shopCart.subtotal + shopCart.tax;
+	shopCart.total = shopCart.subtotal + shopCart.tax + shopCart.shipping;
 	return shopCart;
     },
     currency: function(num){
@@ -53,7 +53,6 @@ Template.cart.helpers({
                 return imgs.url({store:'thumbs'});
         };
     }
-
 
 })
 

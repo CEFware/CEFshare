@@ -4,36 +4,43 @@
             {
                 "marketplaceName": "DEVELOPMENT",
                 "url":"http://localhost:3000/",
-                "color":"green"
+                "color":"green",
+		"stripe_pk":"pk_test_45lWtHXp3aQGRzPBnGkKlqrY"
             },
             "staging":
             {
                 "marketplaceName": "STAGING",
                 "url":"http://45.56.101.68/",
-                "color":"green"
+                "color":"green",
+		"stripe_pk":"pk_test_45lWtHXp3aQGRzPBnGkKlqrY"
             },
             "production":
             {
                 "marketplaceName": "PRODUCTION",
                 "url":"http://45.56.101.68/",
-                "color":"green"
+                "color":"green",
+		"stripe_pk":"pk_test_45lWtHXp3aQGRzPBnGkKlqrY"
             }
         },
         "private": {
             "development":
             {
                 "path":"/home/shkomg/marketplaces/",
-                "supportEmail":"meteor.test.mailbox@mail.com"
+                "supportEmail":"meteor.test.mailbox@mail.com",
+		"stripe_sk":"sk_test_NmpFcddBWjXdX45V5sN65oGq"
             },
             "staging":
             {
                 "path":"/root/marketplaces/",
-                "supportEmail":"meteor.test.mailbox@mail.com"
+                "supportEmail":"meteor.test.mailbox@mail.com",
+		"stripe_sk":"sk_test_NmpFcddBWjXdX45V5sN65oGq"
             },
             "production":
             {
                 "path":"/home/shkomg/marketplaces/",
-                "supportEmail":"meteor.test.mailbox@mail.com"
-            }
+                "supportEmail":"meteor.test.mailbox@mail.com",
+		"stripe_sk":"sk_test_NmpFcddBWjXdX45V5sN65oGq"
+            },
+	    "stripe_sk":"sk_test_NmpFcddBWjXdX45V5sN65oGq"
         }
 }
