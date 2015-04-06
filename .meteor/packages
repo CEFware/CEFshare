@@ -38,5 +38,5 @@ cfs:graphicsmagick
 cfs:ui
 autoform-file
 mrt:cookies
-summernote
 cart
+mpowaga:autoform-summernote
