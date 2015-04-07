@@ -1,4 +1,9 @@
 Template.cart.helpers({
+    notEmpty : function (obj) {
+        if (obj)
+            return true;
+        return false;
+    },
     cartItems: function(){
         var shopCart = [];
         var cartItems = Cart.Items.find({});
@@ -24,7 +29,7 @@ Template.cart.helpers({
 	} else {
 	    shopCart.shipping = 10;
 	};
-	shopCart.total = shopCart.subtotal + shopCart.tax + shopCart.shipping;
+	shopCart.total = (shopCart.subtotal + shopCart.shipping) * 1.06;
 	return shopCart;
     },
     currency: function(num){

@@ -14,11 +14,6 @@ Template.errorMsg.events({
     'click .sendVerEmail': function (event, template) {
 	event.preventDefault();
         Meteor.call('sendVerEmail', function (error,result){});
-    },
-    'click .editProfile': function (event, template) {
-	event.preventDefault();
-	Session.set('editingProfile',true);
-	Router.go('userProfile',{username:Meteor.user().username});
     }
 });
 

@@ -22,7 +22,7 @@
 		{{#if editingProfile}}
 		<a href="" class="btn btn-default cancelEditProfile">&#10006; {{t "EDIT"}}</a>
 		{{else}}
-		<a href="" class="btn btn-default editProfile">{{t "EDIT"}}</a>
+		<a href="{{pathFor 'userProfileEdit' username=currentUser.username}}" class="btn btn-default editProfile">{{t "EDIT"}}</a>
 		{{/if}}
 
 		{{/if}}
@@ -148,25 +148,6 @@
 	  {{/if}}
 	  {{/if}}
 
-	  <br>
-	  {{#if isOwner}}
- 
-          {{#if isInRole 'verified'}}
-          {{#each oauthService}}
-          {{> atSocial}}
-          {{/each}}
-          <center>
-            <br>
-            <small>
-              {{t "We'll never post anything on Facebook, Twitter or Google+ without your permission."}}
-            </small>
-          </center>
-          {{else}}
-          {{t "Verify your e-mail to attach Facebook, Twitter or Google+ to your profile."}}
-          {{/if}}
- 
-	  {{/if}}
-	  <br>
 	  <h2>{{t "Followers"}}</h2>
 	  {{#if followersList}}
 

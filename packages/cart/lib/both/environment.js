@@ -14,22 +14,22 @@ Cart.Items.allow({
   },
   fetch: ['userId','deviceId']
 });
-
-//var myWrapAsync = function (fn, context) {
-//  var wrapped = Meteor.wrapAsync(fn, context);
-//  return function (/* arguments */) {
-//    try {
-//      return wrapped.apply(context, _.toArray(arguments));
-//    } catch (err) {
-//      var newErr = new Meteor.Error(err.message);
-//      for (var key in err) {
-//        newErr[key] = err[key];
-//      }
-//      throw newErr;
-//    }
-//  };
-//};
-
+/*
+var myWrapAsync = function (fn, context) {
+  var wrapped = Meteor.wrapAsync(fn, context);
+  return function () {
+    try {
+      return wrapped.apply(context, _.toArray(arguments));
+    } catch (err) {
+      var newErr = new Meteor.Error(err.message);
+      for (var key in err) {
+        newErr[key] = err[key];
+      }
+      throw newErr;
+    }
+  };
+};
+*/
 
 if(Meteor.isServer){
     if(Meteor.settings && Meteor.settings.stripe_sk){
@@ -60,11 +60,23 @@ Meteor.methods({
 	    items.forEach(function(item){
 		total += Number(item.price)*Number(item.qty);
 	    });
-	    total=total*1.06;
+	    
+	    //shipping
+	    var shippingFee=10;
+	    total=total+shippingFee;
+
+	    var tax=total*0.06; 
+	    total=total+tax;
+
+	    var shipping = Meteor.user().profile.shipping;
+	    if (Meteor.user().profile.firstName)
+		shipping.firstName=Meteor.user().profile.firstName;
+	    if (Meteor.user().profile.lastName)
+		shipping.lastName=Meteor.user().profile.lastName;
 	    var result = wrappedStripeChargeCreate({
 		card: token.id,
 		currency: "USD",
-		metadata: {orderId:Orders.insert({items:items.fetch(), owner:Meteor.userId(), currency: "USD", amount:Math.floor(total*100)})},
+		metadata: {orderId:Orders.insert({items:items.fetch(), owner:Meteor.userId(), currency: "USD", amount:Math.floor(total*100), shipping: shipping, shippingFee: shippingFee, tax: tax})},
 		amount:Math.floor(total*100)
 	    });
 	}

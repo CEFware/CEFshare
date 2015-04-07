@@ -30,6 +30,11 @@ Security.permit(['insert','update','remove']).collections([Users]).ifLoggedIn().
 Security.permit(['insert','update','remove']).collections([Users]).ifLoggedIn().ifOwner().apply();
 Security.permit(['update']).collections([Users]).ifLoggedIn().onlyProps(['followers']).apply();
 
+//Orders - user may insert, owner & admin may update, admin may delete
+Orders.permit(['insert']).ifLoggedIn().apply();
+Orders.permit(['update']).ifLoggedIn().ifOwner().apply();
+Orders.permit(['insert','update','remove']).ifLoggedIn().ifHasRole('admin').apply();
+
 //Images - only verified user may insert, admin & owner remove, only owner - update
 //SAMPLE CURRENTLY
 Images.allow({

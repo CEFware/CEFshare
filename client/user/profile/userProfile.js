@@ -11,10 +11,6 @@ Template.userProfile.helpers({
 	return false;
     },
 
-    oauthService: function() {
-	return AccountsTemplates.oauthServices();
-    },
-
     contactUser: function (){
 	var ses=Session.get('contactUser');
 	if (ses)
@@ -94,18 +90,8 @@ Template.userProfile.events({
 
     'click .cancelContact':function () {
 	Session.set('contactUser',null);
-    }, 
+    } 
 
-    'click .editProfile': function () {
-	Session.set('editingProfile',true);
-     },
-
-    'click .cancelEditProfile':function (e) {
-	e.preventDefault();
-	Session.set('editingProfile',null);
-        if (Router.current().lookupTemplate()==="UserProfileEdit")
-	    Router.go('userProfile',{username:Router.current().params.username});
-    }
 });
 
 Template.registerHelper('isOwner', function () {

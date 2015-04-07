@@ -54,7 +54,7 @@
     {{#if userEmail}}
     {{t "Your e-mail is not verified - the use of our site is limited."}} <a href="#" class="alert-link sendVerEmail">{{t "Click here"}}</a> {{t "to resend the verification link for"}} {{userEmail}}.
     {{else}}
-    {{t "Your account is in pending mode. Please, enter your e-mail in"}} <a href="#" class="alert-link editProfile">{{t "PROFILE"}}</a> {{t "to confirm your account."}}
+    {{t "Your account is in pending mode. Please, enter your e-mail in"}} <a href="{{pathFor 'userProfileEdit' username=currentUser.username}}" class="alert-link">{{t "PROFILE"}}</a> {{t "to confirm your account."}}
     {{/if}}
   </div>
 </template>

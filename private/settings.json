@@ -20,7 +20,9 @@
                 "url":"http://45.56.101.68/",
                 "color":"green",
 		"stripe_pk":"pk_test_45lWtHXp3aQGRzPBnGkKlqrY"
-            }
+            },
+            "color":"green",
+	    "stripe_pk":"pk_test_45lWtHXp3aQGRzPBnGkKlqrY"
         },
         "private": {
             "development":
@@ -40,7 +42,7 @@
                 "path":"/home/shkomg/marketplaces/",
                 "supportEmail":"meteor.test.mailbox@mail.com",
 		"stripe_sk":"sk_test_NmpFcddBWjXdX45V5sN65oGq"
-            },
-	    "stripe_sk":"sk_test_NmpFcddBWjXdX45V5sN65oGq"
-        }
+            }
+        },
+    "stripe_sk":"sk_test_NmpFcddBWjXdX45V5sN65oGq"
 }

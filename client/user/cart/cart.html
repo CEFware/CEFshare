@@ -65,7 +65,7 @@
 	    
             <div class="box-footer">
               <div class="pull-left">
-                <a href="category.html" class="btn btn-default"><i class="fa fa-chevron-left"></i> {{t "Continue shopping"}}</a>
+                <a href="{{pathFor 'home'}}" class="btn btn-default"><i class="fa fa-chevron-left"></i> {{t "Continue shopping"}}</a>
               </div>
               <div class="pull-right">
 		{{#if cartItems.empty}} {{else}}
@@ -110,41 +110,87 @@
       </div>
       <!-- /.col-md-9 -->
 
-                <div class="col-md-3">
-                    <div class="box" id="order-summary">
-                        <div class="box-header">
-                            <h3>{{t "Order summary"}}</h3>
-                        </div>
-
-                        <div class="table-responsive">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td>{{t "Order subtotal"}}</td>
-                                        <th>{{currency cartItems.subtotal}}</th>
-                                    </tr>
-                                    <tr>
-                                        <td>{{t "Shipping and handling"}}</td>
-                                        <th>{{currency cartItems.shipping}}</th>
-                                    </tr>
-                                    <tr>
-                                         <td>{{t "Tax"}}</td>
-                                        <th>{{currency cartItems.tax}}</th>
-                                    </tr>
-                                    <tr class="total">
-                                        <td>{{t "Total"}}</td>
-                                        <th>{{currency cartItems.total}}</th>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-
-                </div>
-                <!-- /.col-md-3 -->
-
-
+      <div class="col-md-3">
+        <div class="box" id="order-summary">
+          <div class="box-header">
+            <h3>{{t "Order summary"}}</h3>
+          </div>
+	  
+          <div class="table-responsive">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>{{t "Order subtotal"}}</td>
+                  <th>{{currency cartItems.subtotal}}</th>
+                </tr>
+                <tr>
+                  <td>{{t "Shipping and handling"}}</td>
+                  <th>{{currency cartItems.shipping}}</th>
+                </tr>
+                <tr>
+                  <td>{{t "Tax"}}</td>
+                  <th>{{currency cartItems.tax}}</th>
+                </tr>
+                <tr class="total">
+                  <td>{{t "Total"}}</td>
+                  <th>{{currency cartItems.total}}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+	  
+        </div>
+        <div class="box" id="order-summary">
+          <div class="box-header">
+            <h3>{{t "Ships to"}}</h3>
+          </div>
+	  
+          <div class="table-responsive">
+            <table class="table">
+              <tbody>
+		{{#if notEmpty currentUser.profile.firstName}}
+                <tr>
+                  <th>{{currentUser.profile.firstName}} {{currentUser.profile.lastName}}</th>
+                </tr>
+		{{/if}}
+		{{#if notEmpty currentUser.profile.shipping.firstLine}}
+                <tr>
+                  <th>{{currentUser.profile.shipping.firstLine}}</th>
+                </tr>
+		{{/if}}
+		{{#if notEmpty currentUser.profile.shipping.secondLine}}
+                <tr>
+                  <th>{{currentUser.profile.shipping.secondLine}}</th>
+                </tr>
+		{{/if}}
+		{{#if notEmpty currentUser.profile.shipping.city}}
+                <tr>
+                  <th>{{currentUser.profile.shipping.city}}</th>
+                </tr>
+		{{/if}}
+		{{#if notEmpty currentUser.profile.shipping.zip}}
+                <tr>
+                  <th>{{currentUser.profile.shipping.zip}}</th>
+                </tr>
+		{{/if}}
+		{{#if notEmpty currentUser.profile.shipping.state}}
+                <tr>
+                  <th>{{currentUser.profile.shipping.state}}</th>
+                </tr>
+		{{/if}}
+		{{#if notEmpty currentUser.profile.shipping.country}}
+                <tr>
+                  <th>{{currentUser.profile.shipping.country}}</th>
+                </tr>
+		{{/if}}
+              </tbody>
+            </table>
+          </div>
+	  
+        </div>
+	
+      </div>
+      <!-- /.col-md-3 -->
 
     </div>
   </div>

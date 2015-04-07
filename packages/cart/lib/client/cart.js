@@ -37,20 +37,29 @@ Tracker.autorun(function(){
 Session.setDefault('Cart-itemCount', 0);
 Session.setDefault('Cart-itemTotal', 0);
 Tracker.autorun(function(){
-	var query = {};
-	if(Meteor.userId())
-		query.userId = Meteor.userId();
-	else
-		query.deviceId = Session.get('Cart-deviceId');
-	
-	var total = 0;
-	var items = Cart.Items.find(query, {fields: {price: 1, qty:1}});
-	items.forEach(function(item){
-		total += Number(item.price)*Number(item.qty);
-	});
+    var query = {};
+    if(Meteor.userId())
+	query.userId = Meteor.userId();
+    else
+	query.deviceId = Session.get('Cart-deviceId');
+    
+    var total = 0;
+    var items = Cart.Items.find(query, {fields: {price: 1, qty:1}});
+    items.forEach(function(item){
+	total += Number(item.price)*Number(item.qty);
+    });
+    
+    if (total>0) {
 
-	Session.set('Cart-itemTotal', Math.floor(total*100)/100);
-	Session.set('Cart-itemCount', items.count());
+	//shipping
+	total=total+10;
+
+	//tax
+	total=total*1.06;
+    };
+
+    Session.set('Cart-itemTotal', Math.floor(total*100)/100);
+    Session.set('Cart-itemCount', items.count());
 });
 
 Template.CartAddItemButton.events({
