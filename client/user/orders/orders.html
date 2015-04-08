@@ -1,4 +1,4 @@
-<template name="userOrders">
+<template name="userOrdersTemplate">
 all orders<br>
   {{#each orders}}
   <a href="{{pathFor 'userOrder' username=currentUser.username id=id}}"><img src="{{listingImgById items.[0].product.image.[0]}}" width="100px"> {{itemsCount}} items -- Total: {{amountCurrency}}</a>

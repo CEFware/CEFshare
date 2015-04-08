@@ -78,6 +78,11 @@
               {{#if user.services.google.id}}
               <a href="http://plus.google.com/{{user.services.google.id}}/posts" class="btn btn-danger" target="_blank"><i class="fa fa-google-plus"></i></a>
               {{/if}}
+	      <br style="font-size:x-small">
+	      <br style="font-size:x-small">
+	      <a href="{{pathFor 'userOrders' username=currentUser.username}}" style="text-transform:uppercase;font-family: Montserrat, Helvetica, Arial, sans-serif;color=rgb(106,174,122);font-size:x-small;">{{t "Orders"}}</a>
+	      &nbsp;|&nbsp;
+	      <a href="{{pathFor 'userOrders' username=currentUser.username}}" style="text-transform:uppercase;font-family: Montserrat, Helvetica, Arial, sans-serif;color=rgb(106,174,122)font-size:x-small;">{{t "Transactions"}}</a>
 	    </div>
 	  </div>
 

@@ -61,7 +61,11 @@ Template.allListings.helpers({
 	if (Router.current().lookupTemplate()==="home")
 	    return true;
 	return false;
-    }
+    },
+
+    currency: function (price) {
+	return '$'+Number(price.toFixed(2));
+    }  
 });
 
 Template.allListings.rendered= function (){

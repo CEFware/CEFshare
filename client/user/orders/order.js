@@ -1,4 +1,4 @@
-Template.userOrder.helpers({
+Template.userOrderTemplate.helpers({
     items: function () {
 	return Orders.findOne().items;
     },
@@ -30,7 +30,7 @@ Template.userOrder.helpers({
 
 });
 
-Template.userOrder.rendered = function () {
+Template.userOrderTemplate.rendered = function () {
     Tracker.autorun (function (){
         var listing = Orders.findOne().items;
         if (listing) {

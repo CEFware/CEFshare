@@ -1,4 +1,4 @@
-Template.userOrders.helpers({
+Template.userOrdersTemplate.helpers({
     orders: function () {
 	return Orders.find();
     },
@@ -18,7 +18,7 @@ Template.userOrders.helpers({
     }
 });
 
-Template.userOrders.rendered = function () {
+Template.userOrdersTemplate.rendered = function () {
     Tracker.autorun (function (){
         var listing = Orders.find();
         if (listing) {
