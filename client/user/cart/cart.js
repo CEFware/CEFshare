@@ -8,6 +8,8 @@ Template.cart.helpers({
         var shopCart = [];
         var cartItems = Cart.Items.find({});
         var total = 0;
+        var shippingFee = 0;
+        var tax = 0;
 
 	//here we need to work with variants name & retail_price as in productTemplate.js
 	if (cartItems.fetch().length>0) {
@@ -17,19 +19,17 @@ Template.cart.helpers({
 		cartitem.productName = cartitem.product.title;
 		cartitem.price = (Number(cartitem.product.price) * cartitem.qty);
 		total += cartitem.price;
+		shippingFee += cartitem.product.shippingFee*cartitem.qty;
+		tax += (cartitem.price+(cartitem.product.shippingFee*cartitem.qty))*(cartitem.product.tax/100); 
 		shopCart.push(cartitem);
 	    });
 	} else {
 	    shopCart.empty=true;
 	};
-	shopCart.subtotal = total;
-	shopCart.tax = shopCart.subtotal * .06;
-	if (shopCart.empty) {
-	    shopCart.shipping = 0;
-	} else {
-	    shopCart.shipping = 10;
-	};
-	shopCart.total = (shopCart.subtotal + shopCart.shipping) * 1.06;
+	shopCart.subtotal = Number(total.toFixed(2));
+	shopCart.tax = Number(tax.toFixed(2));
+	shopCart.shipping = Number(shippingFee.toFixed(2));
+	shopCart.total = Number((shopCart.subtotal + shopCart.shipping + shopCart.tax).toFixed(2));
 	return shopCart;
     },
     currency: function(num){
@@ -67,15 +67,15 @@ Template.cart.events({
         if(confirm(TAPi18n.__("Are You Sure?")))
             Cart.Items.remove({_id:this._id});
      },
-
-    'click .add': function (){
-	Cart.Items.update({_id:this._id},{$set:{qty:(Number(this.qty)+1)}});
-    },
-
-    'click .sub': function (){
-	//don't let go below 1
-	if (Number(this.qty)>1)
-	    Cart.Items.update({_id:this._id},{$set:{qty:(Number(this.qty)-1)}});
+    'change .qty': function (e,t) {
+	var val=$(e.currentTarget).val();
+	if (val>0) {
+	    Cart.Items.update({_id:this._id},{$set:{qty:Number(val)}});
+	} else {
+	    $(e.currentTarget).val(1);
+	    if (this.qty!=1)
+		Cart.Items.update({_id:this._id},{$set:{qty:1}});
+	};
     }
 });
 

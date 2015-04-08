@@ -1,7 +1,7 @@
 AutoForm.addHooks(['specificListingEdit'],{
     docToForm: function(doc) {
 	if (_.isArray(doc.tags)) {
-            doc.tags = doc.tags.join(",");
+            doc.tags = doc.tags.join(", ");
 	};
 	return doc;
     },
@@ -11,9 +11,9 @@ AutoForm.addHooks(['specificListingEdit'],{
 	}
 	return doc;
     },
-    onSuccess: function (o,r,t) {
-	if (t.data.doc)
-	    t.$('#tokenfield').tokenfield({tags:t.data.doc.tags});
+    onSuccess: function () {
+	if (this.template.data.doc)
+	    this.template.$('#tokenfield').tokenfield({tags:this.template.data.doc.tags});
 	    Flash.success('listingSaved',TAPi18n.__("Saved successfuly!"),2000);
     },    
     onError: function () {}

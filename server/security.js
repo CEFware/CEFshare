@@ -7,6 +7,8 @@ Security.defineMethod("ifOwner",{
             return false;
         if (doc.author && (doc.author===userId))
             return false;
+        if (doc.owner && (doc.owner===userId))
+            return false;
         return true;
     }
 });

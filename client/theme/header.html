@@ -86,7 +86,6 @@
 <template name="loginButtonTop">
   <!-- formatting for only user related drop down menu on big screen -->
   <div class="navbar-collapse collapse right" id="basket-overview">
-    {{#if currentUser}}
     <div class="form-inline">
       <div class="form-group">
 	{{#if showNewListingButton}}
@@ -98,6 +97,7 @@
           <i class="fa fa-shopping-cart"></i> {{> CartSummary}}
         </a>
       </div>
+      {{#if currentUser}}
       <div class="form-group">
 	{{> avatar user=currentUser shape="rounded" size="small"}}
       </div>
@@ -109,10 +109,12 @@
       <div class="form-group">
 	<a href="/sign-out/" class="btn btn-primary navbar-btn"><span class="glyphicon glyphicon-log-out"></span></a>
       </div>
+      {{else}}
+      <div class="form-group">
+	<a href="/sign-in/" class="btn btn-primary navbar-btn">{{t "loginButton"}}</a>
+      </div>
+      {{/if}}
     </div>
-    {{else}}
-    <a href="/sign-in/" class="btn btn-primary navbar-btn">{{t "loginButton"}}</a>
-    {{/if}}
   </div>
 </template>
 

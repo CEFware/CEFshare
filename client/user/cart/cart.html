@@ -26,8 +26,9 @@
                   <tr>
                     <th colspan="2">{{t "Product"}}</th>
                     <th>{{t "Quantity"}}</th>
-                    <th>{{t "Unit price"}}</th>
-                    <th colspan="2">{{t "Total"}}</th>
+                    <th class="text-center">{{t "Unit price"}}</th>
+                    <th class="text-center">{{t "Total"}}</th>
+                    <th>&nbsp;</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -41,11 +42,11 @@
                     <td><a href="{{pathFor 'specificListing' uri=product.uri}}">{{productName}}</a>
                     </td>
                     <td>
-                      <input type="number" value="{{qty}}" class="form-control">
+                      <input type="number" value="{{qty}}" class="form-control qty" style="width:60px">
                     </td>
-                    <td>{{currency product.price}}</td>
-                    <td>{{currency price}}</td>
-                    <td><a href="#" class="link removeFromCart"><i class="fa fa-trash-o"></i></a>
+                    <td class="text-center">{{currency product.price}}</td>
+                    <td class="text-center">{{currency price}}</td>
+                    <td class="text-center"><a href="#" class="link removeFromCart"><i class="fa fa-trash-o"></i></a>
                     </td>
                   </tr>
 		  {{else}}
@@ -55,7 +56,7 @@
                 <tfoot>
                   <tr>
                     <th colspan="5">{{t "Total"}}</th>
-                    <th colspan="2">{{currency cartItems.subtotal}}</th>
+                    <th colspan="2" class="text-right">{{currency cartItems.subtotal}}</th>
                   </tr>
                 </tfoot>
               </table>
@@ -121,19 +122,19 @@
               <tbody>
                 <tr>
                   <td>{{t "Order subtotal"}}</td>
-                  <th>{{currency cartItems.subtotal}}</th>
+                  <th class="text-right">{{currency cartItems.subtotal}}</th>
                 </tr>
                 <tr>
                   <td>{{t "Shipping and handling"}}</td>
-                  <th>{{currency cartItems.shipping}}</th>
+                  <th class="text-right">{{currency cartItems.shipping}}</th>
                 </tr>
                 <tr>
                   <td>{{t "Tax"}}</td>
-                  <th>{{currency cartItems.tax}}</th>
+                  <th class="text-right">{{currency cartItems.tax}}</th>
                 </tr>
                 <tr class="total">
                   <td>{{t "Total"}}</td>
-                  <th>{{currency cartItems.total}}</th>
+                  <th class="text-right">{{currency cartItems.total}}</th>
                 </tr>
               </tbody>
             </table>

@@ -57,18 +57,29 @@ Meteor.methods({
 	
 	if(Meteor.isServer){
 	    var total = 0;
+	    var shippingFee=0;
+	    var tax=total*0.06; 
 	    items.forEach(function(item){
 		total += Number(item.price)*Number(item.qty);
+		shippingFee += item.product.shippingFee*item.qty;
+		tax += (item.price + item.product.shippingFee)*item.qty*(item.product.tax/100);
 	    });
-	    
+
 	    //shipping
-	    var shippingFee=10;
+	    shippingFee=Number(shippingFee.toFixed(2));
 	    total=total+shippingFee;
 
-	    var tax=total*0.06; 
+	    //tax
+	    tax=Number(tax.toFixed(2));
 	    total=total+tax;
 
-	    var shipping = Meteor.user().profile.shipping;
+	    total=Number(total.toFixed(2));
+	    
+	    if (Meteor.user().profile.shipping) {
+		var shipping = Meteor.user().profile.shipping;
+	    } else {
+		var shipping = {};
+	    };
 	    if (Meteor.user().profile.firstName)
 		shipping.firstName=Meteor.user().profile.firstName;
 	    if (Meteor.user().profile.lastName)

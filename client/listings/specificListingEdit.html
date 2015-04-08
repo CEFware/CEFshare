@@ -29,7 +29,15 @@
 	      {{> afQuickField name='title'}}
 	      {{> afQuickField name='description'}}
 	      {{> afQuickField name='details' rows=5}}
-	      {{> afQuickField name='price'}}
+	      <div class="col-md-4">
+		{{> afQuickField name='price'}}
+	      </div>
+	      <div class="col-md-4">
+		{{> afQuickField name='shippingFee'}}
+	      </div>
+	      <div class="col-md-4">
+		{{> afQuickField name='tax'}}
+	      </div>
 	      <div class="form-group{{#if afFieldIsInvalid name='tags'}} has-error{{/if}}">
 		<label class="control-label">{{t "Tags"}}</label><br>
 		{{> afFieldInput name='tags' type='text' id='tokenfield'}}
@@ -56,7 +64,15 @@
 	      {{> afQuickField name='title'}}
 	      {{> afQuickField name='description'}}
 	      {{> afQuickField name='details' rows=3}}
-	      {{> afQuickField name='price'}}
+	      <div class="col-md-4">
+		{{> afQuickField name='price'}}
+	      </div>
+	      <div class="col-md-4">
+		{{> afQuickField name='shippingFee'}}
+	      </div>
+	      <div class="col-md-4">
+		{{> afQuickField name='tax'}}
+	      </div>
 	      {{> afQuickField name='tags' type='text' id='tokenfield'}}
 	      <div class="form-group">
 		<label class="control-label">{{t "Listing url"}}</label>

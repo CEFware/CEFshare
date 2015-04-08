@@ -1,0 +1,13 @@
+<template name="userOrder">
+Specific order
+<br>
+  {{#each items}}
+  <img src="{{listingImgById product.image.[0]}}" width="100px"> {{product.name}} -- {{product.retail_price}} -- qty {{qty}} -- SUM: $ {{sum product.retail_price qty}}
+  <br>
+  {{/each}}
+  Total (with 6% tax): $ {{amountCurrency}}
+<br>
+{{#with stripeCharge}}
+{{id}}
+{{/with}}
+</template>

@@ -44,19 +44,22 @@ Tracker.autorun(function(){
 	query.deviceId = Session.get('Cart-deviceId');
     
     var total = 0;
-    var items = Cart.Items.find(query, {fields: {price: 1, qty:1}});
+    var shippingFee = 0;
+    var tax = 0;
+    var items = Cart.Items.find(query, {fields: {price: 1, qty:1, 'product.shippingFee': 1, 'product.tax': 1}});
     items.forEach(function(item){
-	total += Number(item.price)*Number(item.qty);
+	total += item.price*item.qty;
+	shippingFee += item.product.shippingFee*item.qty;
+	tax += (item.price + item.product.shippingFee)*item.qty*(item.product.tax/100);
     });
     
-    if (total>0) {
+    //shipping
+    total=total+Number(shippingFee.toFixed(2));;
 
-	//shipping
-	total=total+10;
+    //tax
+    total=total+Number(tax.toFixed(2));
 
-	//tax
-	total=total*1.06;
-    };
+    total=Number(total.toFixed(2));
 
     Session.set('Cart-itemTotal', Math.floor(total*100)/100);
     Session.set('Cart-itemCount', items.count());
