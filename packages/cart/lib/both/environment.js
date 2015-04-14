@@ -84,10 +84,11 @@ Meteor.methods({
 		shipping.firstName=Meteor.user().profile.firstName;
 	    if (Meteor.user().profile.lastName)
 		shipping.lastName=Meteor.user().profile.lastName;
+
 	    var result = wrappedStripeChargeCreate({
 		card: token.id,
 		currency: "USD",
-		metadata: {orderId:Orders.insert({items:items.fetch(), owner:Meteor.userId(), currency: "USD", amount:Math.floor(total*100), shipping: shipping, shippingFee: shippingFee, tax: tax})},
+		metadata: {orderId:Orders.insert({items:items.fetch(), owner:Meteor.userId(), currency: "USD", amount:Math.floor(total*100), shipping: shipping, shippingFee: shippingFee, tax: tax, status: "placed"})},
 		amount:Math.floor(total*100)
 	    });
 	}

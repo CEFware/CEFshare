@@ -3,5 +3,5 @@ allUserOrders = function () {
 }
 
 orderById = function (id) {
-    return Orders.find({idStripe:id});
+    return Orders.find({idStripe:id}, {fields:});
 }

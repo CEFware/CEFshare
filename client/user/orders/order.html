@@ -1,13 +1,97 @@
 <template name="userOrderTemplate">
-Specific order
-<br>
-  {{#each items}}
-  <img src="{{listingImgById product.image.[0]}}" width="100px"> {{product.name}} -- {{product.retail_price}} -- qty {{qty}} -- SUM: $ {{sum product.retail_price qty}}
-  <br>
-  {{/each}}
-  Total (with 6% tax): $ {{amountCurrency}}
-<br>
-{{#with stripeCharge}}
-{{id}}
-{{/with}}
+  <div id="content" class="clearfix">
+    <div class="container">
+      <div class="col-lg-12">
+
+        <div class="box text-center">
+          <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+              <h1>{{t "Order"}} #1735</h1>
+              <p class="lead">{{t "Order"}} #1735 {{t "was placed on"}} <b>22/06/2013</b> {{t "and is currently"}} <b>Being prepared</b>.</p>
+              <p class="text-muted">{{t "If you have any questions, please feel free to"}} <a href="{{pathFor 'home'}}#contact">{{t "contact us"}}</a>, {{t "our customer service center is working for you 24/7"}}.</p>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-12 clearfix" id="customer-orders">
+        <div class="box">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th colspan="2">Product</th>
+                  <th>Quantity</th>
+                  <th>Unit price</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+		{{#each items}}
+                <tr>
+                  <td>
+                    <a href="#">
+                      <img src="{{listingImgById product.image.[0]}}" alt="{{product.title}}" width="50px">
+                    </a>
+                  </td>
+                  <td><a href="{{pathFor 'specificListing' uri=product.uri}}">{{product.title}}</a></td>
+                  <td>{{qty}}</td>
+                  <td>{{currency price}}</td>
+                  <td>{{currency itemTotal}}</td>
+                </tr>
+		{{/each}}
+              </tbody>
+	      {{#with order}}
+	      <tfoot>
+                <tr>
+                  <th colspan="4" class="text-right">Order subtotal</th>
+                  <th>{{currency orderSubtotal}}</th>
+                </tr>
+                <tr>
+                  <th colspan="4" class="text-right">Shipping and handling</th>
+                  <th>{{currency shippingFee}}</th>
+                </tr>
+                <tr>
+                  <th colspan="4" class="text-right">Tax</th>
+                  <th>{{currency tax}}</th>
+                </tr>
+                <tr>
+                  <th colspan="4" class="text-right">Total</th>
+                  <th>{{currency orderTotal}}</th>
+                </tr>
+              </tfoot>
+	      {{/with}}
+ 	    </table>
+	  </div>
+
+          <div class="row addresses">
+            <div class="col-sm-6">
+              <h2 class="text-right">{{t "Payment data"}}</h2>
+	      {{#with stripeCharge}}
+              <p class="text-right">{{source.name}}
+		<br>{{source.brand}} XXXX-XXXX-XXXX-{{source.last4}}
+	      </p>
+	      {{/with}}
+            </div>
+            <div class="col-sm-6">
+              <h2 class="text-right">{{t "Shipping address"}}</h2>
+	      {{#with order}}
+              <p class="text-right">{{shipping.firstName}} {{shipping.lastName}}
+                <br>{{shipping.firstLine}}
+                <br>{{shipping.secondLine}}
+                <br>{{shipping.city}}
+                <br>{{shipping.zip}}
+                <br>{{shipping.state}}
+                <br>{{shipping.country}}
+	      </p>
+	      {{/with}}
+            </div>
+          </div>
+	</div>
+      </div>
+    </div>
+  </div>
+
 </template>

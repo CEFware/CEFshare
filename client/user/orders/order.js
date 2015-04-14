@@ -2,8 +2,12 @@ Template.userOrderTemplate.helpers({
     items: function () {
 	return Orders.findOne().items;
     },
-    sum: function (p,q) {
-	return Number(p)*Number(q);
+    currency : function (amount) {
+	if (amount)
+            return '$'+Number(amount).toFixed(2);
+    },
+    itemTotal: function () {
+	return (this.price*this.qty).toFixed(2);
     },
     stripeCharge: function () {
 	Meteor.call('stripeChargeRetrieve', Router.current().params.id, function (e,r) {
@@ -15,30 +19,38 @@ Template.userOrderTemplate.helpers({
 	}); 
 	return Session.get('stripeCharge');
     },
-    amountCurrency : function () {
-	res=Orders.findOne();
-	return (res.amount/100)+' '+res.currency;
-    },
     listingImgById: function (image){
         if (image) {
             var imgs=Images.findOne({_id:image});
             if (imgs)
                 return imgs.url({store:'thumbs'});
         };
+    },
+    order: function () {
+	return Orders.findOne();
+    },
+    orderSubtotal: function (){
+	var res=0;
+	for (var i=0; i<this.items.length; i++) {
+	    res+=this.items[i].price*this.items[i].qty;
+	};
+	return res;
+    },
+    orderTotal: function (){
+	return this.amount/100;
     }
-
 
 });
 
 Template.userOrderTemplate.rendered = function () {
     Tracker.autorun (function (){
-        var listing = Orders.findOne().items;
-        if (listing) {
-            var imgA=[];
-            listing.forEach(function(el){
+        var listing = Orders.findOne();
+        if (listing && listing.items) {
+	    var imgA=[];
+	    listing.items.forEach(function(el){
                 imgA=_.union(imgA, el.product.image[0]);
-            });
-            Meteor.subscribe('images',imgA);
+	    });
+	    Meteor.subscribe('images',imgA);
         };
     });
 };

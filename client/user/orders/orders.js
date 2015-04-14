@@ -2,9 +2,8 @@ Template.userOrdersTemplate.helpers({
     orders: function () {
 	return Orders.find();
     },
-    amountCurrency : function () {
-        res=Orders.findOne({_id:this._id});
-        return (res.amount/100)+' '+res.currency;
+    currency : function (amount) {
+        return '$'+(amount/100);
     },
     itemsCount: function () {
 	return Orders.findOne({_id:this._id}).items.length;
@@ -15,7 +14,11 @@ Template.userOrdersTemplate.helpers({
             if (imgs)
                 return imgs.url({store:'thumbs'});
         };
-    }
+    },
+    orderDate: function () {
+	var res=new Date(this.addedOn);
+	return res.toISOString().slice(0,10);
+    } 
 });
 
 Template.userOrdersTemplate.rendered = function () {

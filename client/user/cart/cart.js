@@ -26,14 +26,14 @@ Template.cart.helpers({
 	} else {
 	    shopCart.empty=true;
 	};
-	shopCart.subtotal = Number(total.toFixed(2));
-	shopCart.tax = Number(tax.toFixed(2));
-	shopCart.shipping = Number(shippingFee.toFixed(2));
-	shopCart.total = Number((shopCart.subtotal + shopCart.shipping + shopCart.tax).toFixed(2));
+	shopCart.subtotal = Number(total).toFixed(2);
+	shopCart.tax = Number(tax).toFixed(2);
+	shopCart.shipping = Number(shippingFee).toFixed(2);
+	shopCart.total = (Number(shopCart.subtotal) + Number(shopCart.shipping) + Number(shopCart.tax)).toFixed(2);
 	return shopCart;
     },
     currency: function(num){
-	return '$' + num.toFixed(2);
+	return '$' + Number(num).toFixed(2);
     },
 
     isRecentListings: function () {

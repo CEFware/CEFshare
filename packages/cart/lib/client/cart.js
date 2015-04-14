@@ -130,7 +130,7 @@ Template.CartPayNow.rendered = function(){
 		    var order={};
 		    order.id=result.id;
 		    //we need to save all the carges id's to keep track the client orders
-		    Orders.update({_id:result.metadata.orderId}, {$set:{id:result.id}});
+		    Orders.update({_id:result.metadata.orderId}, {$set:{idStripe:result.id,status:"paid"}});
 		    alert("Payment Complete");
 		    Router.go('userOrder',{username:Meteor.user().username,id:result.id});
 		}
