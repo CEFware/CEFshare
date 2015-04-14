@@ -1,6 +1,12 @@
 <template name="home">
   <div id="slider" class="owl-carousel owl-theme">
-     {{> slider}}
+    {{#each sliderItems}}
+    <div class="item">
+	<a href="{{pathFor 'specificListing' uri=uri}}">
+        <img src="{{listingImg}}" alt="{{title}}" class="img-responsive">
+      </a>
+    </div>
+    {{/each}}
   </div>
 <!--    <div id="all"> -->
 
@@ -79,14 +85,3 @@
         </div>
         <!-- /#content -->
 </template>
-
-<template name="slider">
-    {{#each sliderItems}}
-    <div class="item">
-	<a href="{{pathFor 'specificListing' uri=uri}}">
-        <img src="{{listingImg}}" alt="{{title}}" class="img-responsive">
-      </a>
-    </div>
-    {{/each}}
-</template>
-

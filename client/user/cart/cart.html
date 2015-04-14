@@ -158,7 +158,7 @@
                 <tr>
                   <th>{{currentUser.profile.shipping.firstLine}}</th>
                 </tr>
-		{{/if}}
+
 		{{#if notEmpty currentUser.profile.shipping.secondLine}}
                 <tr>
                   <th>{{currentUser.profile.shipping.secondLine}}</th>
@@ -183,6 +183,10 @@
                 <tr>
                   <th>{{currentUser.profile.shipping.country}}</th>
                 </tr>
+		{{/if}}
+
+		{{else}} 
+		{{t "Please, state your shipping address in "}}<a href="{{pathFor 'userProfileEdit' username=currentUser.username}}">{{t "PROFILE"}}</a>
 		{{/if}}
               </tbody>
             </table>
