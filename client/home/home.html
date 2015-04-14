@@ -1,51 +1,7 @@
 <template name="home">
-     <!-- *** SLIDER ***
-	_________________________________________________________ -->
-
-    <div id="slider" class="owl-carousel owl-theme">
-
-        <div class="item">
-            <a href="#">
-                <img src="/img/slide1.jpg" alt="" class="img-responsive">
-            </a>
-        </div>
-
-        <div class="item">
-            <a href="#">
-                <img src="/img/slide2.jpg" alt="" class="img-responsive">
-            </a>
-        </div>
-
-        <div class="item">
-            <a href="#">
-                <img src="/img/slide3.jpg" alt="" class="img-responsive">
-            </a>
-        </div>
-
-        <div class="item">
-            <a href="#">
-                <img src="/img/slide4.jpg" alt="" class="img-responsive">
-            </a>
-        </div>
-
-        <div class="item">
-            <a href="#">
-                <img src="/img/slide5.jpg" alt="" class="img-responsive">
-            </a>
-        </div>
-
-        <div class="item">
-            <a href="#">
-                <img src="/img/slide6.jpg" alt="" class="img-responsive">
-            </a>
-        </div>
-
-
-    </div>
-    <!-- /#slider -->
-
-    <!-- *** SLIDER END *** -->
-
+  <div id="slider" class="owl-carousel owl-theme">
+     {{> slider}}
+  </div>
 <!--    <div id="all"> -->
 
         <!-- *** CONTENT ***   -->
@@ -123,3 +79,14 @@
         </div>
         <!-- /#content -->
 </template>
+
+<template name="slider">
+    {{#each sliderItems}}
+    <div class="item">
+	<a href="{{pathFor 'specificListing' uri=uri}}">
+        <img src="{{listingImg}}" alt="{{title}}" class="img-responsive">
+      </a>
+    </div>
+    {{/each}}
+</template>
+

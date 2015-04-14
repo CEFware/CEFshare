@@ -64,7 +64,7 @@ Template.allListings.helpers({
     },
 
     currency: function (price) {
-	return '$'+Number(price.toFixed(2));
+	return accounting.formatMoney(price);
     }  
 });
 

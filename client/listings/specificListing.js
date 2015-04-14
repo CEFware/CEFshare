@@ -75,6 +75,10 @@ Template.specificListing.helpers({
 	if (listing && (listing.author===Meteor.userId()))
 	    return true;
 	return false;
+    },
+
+    currency: function (amount) {
+	return accounting.formatMoney(amount);
     }
 });
 

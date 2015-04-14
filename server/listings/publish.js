@@ -4,6 +4,8 @@ Meteor.publish('specificListingByURI', specificListingByURI);
 
 Meteor.publish('allListingsOnHomepage', allListingsOnHomepage);
 
+Meteor.publish('allListingsActive', allListingsActive);
+
 Meteor.publish('getListingsBy_IdArray', allListingsBy_IdArray);
 
 Meteor.publish('getListingsByAuthor', allListingsByAuthor);
