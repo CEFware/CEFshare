@@ -19,9 +19,9 @@
             <div class="navbar-collapse collapse" id="navigation">
 
                 <ul class="nav navbar-nav navbar-left">
-                    <li><a href="/about">{{t "About"}}</a></li>
-                    <li><a href="/how-it-works">{{t "How it works"}}</a></li>
-                    <li><a href="/#contact">{{t "Contact"}}</a></li>
+                    <li><a href="{{pathFor 'about'}}">{{t "About"}}</a></li>
+                    <li><a href="{{pathFor 'how-it-works'}}">{{t "How it works"}}</a></li>
+                    <li><a href="{{pathFor 'contact'}}">{{t "Contact"}}</a></li>
                 </ul>
 		{{> loginButtonMenu}}
             </div>

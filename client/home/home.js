@@ -9,15 +9,13 @@ Template.home.helpers({
             if (imgs)
                 return imgs.url({store:'slider'});
         };
-    },
-  contactFormSchema: function() {
-    return Schema.contact;
-  }
+    }
 });
 
-AutoForm.addHooks(['contactForm'],{
-    onSuccess: function (){
-	Flash.success(1,TAPi18n.__("Thank you!"),2000);
+Template.home.events({
+    'click .search-btn': function (e,t) {
+	e.preventDefault();
+	Session.set('homeSearch', $('#search-box').val().trim());
     }
 });
 
