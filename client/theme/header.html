@@ -106,6 +106,13 @@
 	  {{usernameById currentUser._id}}
 	</a>
       </div>
+      {{#if isInRole 'admin'}}
+      <div class="form-group">
+	<a href="{{pathFor 'admin'}}" class="btn btn-primary navbar-btn">
+	  <i class="fa fa-cogs"></i>
+	</a>
+      </div>
+      {{/if}}
       <div class="form-group">
 	<a href="/sign-out/" class="btn btn-primary navbar-btn"><span class="glyphicon glyphicon-log-out"></span></a>
       </div>

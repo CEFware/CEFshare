@@ -1,0 +1,52 @@
+<template name="admin">
+    <div id="content">
+      <div class="container">
+	
+        <div class="col-md-12">
+          <div class="box text-center">
+            <div class="row">
+              <div class="col-sm-10 col-sm-offset-1">
+                <h1>{{t "Marketplace admin"}} - {{t "Getting started guide"}}</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- *** LEFT COLUMN ***
+             _________________________________________________________ -->
+
+        <div class="col-sm-3">
+          <!-- *** PAGES MENU *** -->
+
+	  {{> adminMenu}}
+
+          <!-- *** PAGES MENU END *** -->
+        </div>        <!-- /.col-md-3 -->
+
+        <!-- *** LEFT COLUMN END *** -->
+	
+        <!-- *** RIGHT COLUMN ***
+             _________________________________________________________ -->
+
+        <div class="col-md-9 clearfix">
+
+          <div class="box" id="text-page">
+	    {{{t "Steps needed for marketplace to start working:"}}}<br>
+	    1. {{{t "Verify e-mail"}}}<br>
+	    2. {{{t "Add stripe keys"}}}<br>
+	    3. {{{t "Add social media (FB, Twitter & G+) keys"}}}<br>
+          </div>
+
+
+        </div>
+        <!-- /.col-md-9 -->
+	
+
+        <!-- *** RIGHT COLUMN END *** -->
+      </div>
+      <!-- /.container -->
+    </div>
+    <!-- /#content -->
+
+</template>
+

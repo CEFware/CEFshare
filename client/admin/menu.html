@@ -1,0 +1,91 @@
+<template name="adminMenu">
+  <div class="panel panel-default sidebar-menu">
+
+    <div class="panel-heading">
+      <h3 class="panel-title">{{t "General"}}</h3>
+    </div>
+
+    <div class="panel-body">
+      <ul class="nav nav-pills nav-stacked">
+	<li>
+          <a href="{{pathFor 'admin'}}"><u>{{t "Getting started guide"}}</u></a>
+	</li>
+	<li>
+          <a href="{{pathFor 'adminSupport'}}"><u>{{t "Support"}}</u></a>
+	</li>
+      </ul>
+    </div>
+
+  </div>
+
+          <div class="panel panel-default sidebar-menu">
+
+            <div class="panel-heading">
+              <h3 class="panel-title">{{t "Users & transactions"}}</h3>
+            </div>
+
+            <div class="panel-body">
+              <ul class="nav nav-pills nav-stacked">
+                <li>
+                  <a href="{{pathFor 'adminUsers'}}"><u>{{t "Manage users"}}</u></a>
+                </li>
+                <li>
+                  <a href="{{pathFor 'adminMaillist'}}"><u>{{t "Send email to users"}}</u></a>
+                </li>
+                <li>
+                  <a href="{{pathFor 'adminInvite'}}"><u>{{t "Invite new users"}}</u></a>
+                </li>
+                <li>
+                  <a href="{{pathFor 'adminTransactions'}}"><u>{{t "View transactions"}}</u></a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+          <div class="panel panel-default sidebar-menu">
+
+            <div class="panel-heading">
+              <h3 class="panel-title">{{t "Configuration"}}</h3>
+            </div>
+
+            <div class="panel-body">
+              <ul class="nav nav-pills nav-stacked">
+                <li>
+                  <a href="{{pathFor 'adminBasics'}}"><u>{{t "Basic details"}}</u></a>
+                </li>
+                <li>
+                  <a href="{{pathFor 'adminDesign'}}"><u>{{t "Design"}}</u></a>
+                </li>
+                <li>
+                  <a href="{{pathFor 'adminLinks'}}"><u>{{t "Menu links"}}</u></a>
+                </li>
+                <li>
+                  <a href="{{pathFor 'adminListingCategories'}}"><u>{{t "Listing categories"}}</u></a>
+                </li>
+                <li>
+                  <a href="{{pathFor 'adminListingFieldsFilters'}}"><u>{{t "Listing fields & filters"}}</u></a>
+                </li>
+                <li>
+                  <a href="{{pathFor 'adminPayments'}}"><u>{{t "Payments"}}</u></a>
+                </li>
+                <li>
+                  <a href="{{pathFor 'adminSocial'}}"><u>{{t "Social media"}}</u></a>
+                </li>
+                <li>
+                  <a href="{{pathFor 'adminAnalytics'}}"><u>{{t "Analytics"}}</u></a>
+                </li>
+                <li>
+                  <a href="{{pathFor 'adminInstructions'}}"><u>{{t "Instructions texts"}}</u></a>
+                </li>
+                <li>
+                  <a href="{{pathFor 'adminEmails'}}"><u>{{t "Emails"}}</u></a>
+                </li>
+                <li>
+                  <a href="{{pathFor 'adminSettings'}}"><u>{{t "Settings"}}</u></a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+</template>
