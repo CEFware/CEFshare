@@ -30,9 +30,44 @@
 
         <div class="col-md-9 clearfix">
 
-          <div class="box" id="text-page">{{{t "about text from the DB & edited through ADMIN"}}}
-          </div>
+          <div class="box" id="text-page">
 
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>{{t "Name"}} ({{t "Username"}})</th>
+                    <th>{{t "Email"}}</th>
+                    <th>{{t "Joined"}}</th>
+                    <th>{{t "Admin"}}</th>
+                    <th>{{t "Action"}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+		  {{#each listUsers}}
+		  <tr>
+		    <td>{{profile.name}} ({{username}})</td>
+		    <td>{{emails.[0].address}} {{#if emails.[0].verified}}<span class="glyphicon glyphicon-ok" style="color:2B542C;" title={{t "E-mail is verified"}}></span>{{else}}<span class="glyphicon glyphicon-warning-sign" style="color:#8A6D3B;" title={{t "E-mail isn't verified"}}></span>{{/if}}</td>
+		    <td>{{registeredDate}}</td>
+		    <td>
+		      {{#if hasAdminRole}}
+		      <input type="checkbox" name="makeAdmin" id="{{_id}}" checked>
+		      {{else}}
+		      <input type="checkbox" name="makeAdmin" id="{{_id}}">
+		      {{/if}}
+		    </td>
+		    <td><a href="#" class="btn btn-danger">BAN</a></td>
+		  </tr>
+		  {{else}}
+		  <tr>
+                    <td colspan="5"><h4 class="text-center">Nothing here yet.</h4></td>
+  		  </tr>
+		  {{/each}}
+                </tbody>
+              </table>
+            </div>
+
+          </div>
 
         </div>
         <!-- /.col-md-9 -->

@@ -30,8 +30,21 @@
 
         <div class="col-md-9 clearfix">
 
-          <div class="box" id="text-page">{{{t "about text from the DB & edited through ADMIN"}}}
-          </div>
+          {{#autoForm schema=inviteSchemaObj id="sendBroadcastInvite" type="method" meteormethod="sendBroadcastInvite"}}
+          <fieldset>
+            <div>
+              {{flash '1'}}
+            </div>
+	    
+            {{> afQuickField name="emails" rows=5 placeholder="friend1@email.com, friend2@email.com ..."}}
+            {{> afQuickField name="message" rows=5 placeholder="I joined this amazing marketplace. You should too!"}}
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">{{t "Invite"}}</button>
+              <button type="reset" class="btn btn-default">{{t "Reset"}}</button>
+            </div>
+          </fieldset>
+          {{/autoForm}}
 
 
         </div>

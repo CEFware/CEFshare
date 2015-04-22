@@ -30,8 +30,40 @@
 
         <div class="col-md-9 clearfix">
 
-          <div class="box" id="text-page">{{{t "about text from the DB & edited through ADMIN"}}}
-          </div>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>{{t "Order"}}</th>
+                    <th>{{t "Country"}}</th>
+                    <th>{{t "Sum"}}</th>
+                    <th>{{t "Profit"}}</th>
+                    <th>{{t "Status"}}</th>
+                    <th>{{t "Started"}}</th>
+                    <th>{{t "Merchant"}}</th>
+                    <th>{{t "Buyer"}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each listAllOrders}}
+                  <tr>
+                    <td></td>
+                    <td>{{shipping.country}}</td>
+                    <td>{{amount}}</td>
+                    <td></td>
+                    <td><span class="label label-primary">{{status}}</span></td>
+                    <td>{{addedOn}}</td>
+                    <td></td>
+                    <td>{{owner}}</td>
+                  </tr>
+                  {{else}}
+                  <tr>
+                    <td colspan="7"><h4 class="text-center">Nothing here yet.</h4></td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
 
 
         </div>

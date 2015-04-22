@@ -9,6 +9,12 @@ Meteor.publish(null, function () {
     };
 });
 
+Meteor.publish('adminUsersList', function () {
+    if (Roles.userIsInRole(this.userId,'admin')) {
+	return Meteor.users.find({})
+    };
+});
+
 Meteor.publish('userByUsername', function (username) {
     var idArray=[];
     var res;
