@@ -36,6 +36,7 @@
               <table class="table">
                 <thead>
                   <tr>
+                    <th>{{t "Pic"}}</th>
                     <th>{{t "Name"}} ({{t "Username"}})</th>
                     <th>{{t "Email"}}</th>
                     <th>{{t "Joined"}}</th>
@@ -46,17 +47,20 @@
                 <tbody>
 		  {{#each listUsers}}
 		  <tr>
-		    <td>{{profile.name}} ({{username}})</td>
+		    <td>
+		      {{> avatar user=this size="small" shape="rounded"}}
+		    </td>
+		    <td><a href="{{pathFor 'userProfile' username=username}}">{{profile.name}} ({{username}})</a></td>
 		    <td>{{emails.[0].address}} {{#if emails.[0].verified}}<span class="glyphicon glyphicon-ok" style="color:2B542C;" title={{t "E-mail is verified"}}></span>{{else}}<span class="glyphicon glyphicon-warning-sign" style="color:#8A6D3B;" title={{t "E-mail isn't verified"}}></span>{{/if}}</td>
 		    <td>{{registeredDate}}</td>
 		    <td>
 		      {{#if hasAdminRole}}
-		      <input type="checkbox" name="makeAdmin" id="{{_id}}" checked>
+		      <input type="checkbox" class="makeAdmin" checked>
 		      {{else}}
-		      <input type="checkbox" name="makeAdmin" id="{{_id}}">
+		      <input type="checkbox" class="makeAdmin">
 		      {{/if}}
 		    </td>
-		    <td><a href="#" class="btn btn-danger">BAN</a></td>
+		    <td>{{#if isBanned}}<a href="#" class="btn btn-primary ban">UNBAN</a>{{else}}<a href="#" class="btn btn-danger ban">BAN</a>{{/if}}</td>
 		  </tr>
 		  {{else}}
 		  <tr>

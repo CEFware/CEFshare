@@ -65,5 +65,27 @@ Meteor.methods({
 	} else {
 	    throw new Meteor.Error("security-check-fail", "You must be a user to contact another user");
 	};
+    },
+
+    ban: function (userObj) {
+	this.unblock();
+	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+            if (Roles.userIsInRole(userObj,'banned')) {
+		Roles.removeUsersFromRoles(userObj,'banned',Roles.GLOBAL_GROUP);
+            } else {
+		Roles.addUsersToRoles(userObj,'banned',Roles.GLOBAL_GROUP);
+            };
+	};
+    },
+
+    makeAdmin: function (userObj) {
+	this.unblock();
+	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+            if (Roles.userIsInRole(userObj,'admin')) {
+		Roles.removeUsersFromRoles(userObj,'admin',Roles.GLOBAL_GROUP);
+            } else {
+		Roles.addUsersToRoles(userObj,'admin',Roles.GLOBAL_GROUP);
+            };
+	};
     }
 });
