@@ -23,10 +23,11 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th colspan="2">Product</th>
-                  <th>Quantity</th>
-                  <th>Unit price</th>
-                  <th>Total</th>
+                  <th colspan="2">{{t "Product"}}</th>
+                  <th>{{t "Merchant"}}</th>
+                  <th>{{t "Quantity"}}</th>
+                  <th>{{t "Unit price"}}</th>
+                  <th>{{t "Total"}}</th>
                 </tr>
               </thead>
               <tbody>
@@ -38,6 +39,7 @@
                     </a>
                   </td>
                   <td><a href="{{pathFor 'specificListing' uri=product.uri}}">{{product.title}}</a></td>
+                  <td><a href="{{pathFor 'userProfile' username=product.authorUsername}}">{{product.authorUsername}}</a></td>
                   <td>{{qty}}</td>
                   <td>{{currency price}}</td>
                   <td>{{currency itemTotal}}</td>

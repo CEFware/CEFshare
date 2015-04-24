@@ -1,6 +1,6 @@
 Template.userOrderTemplate.helpers({
     items: function () {
-	return Orders.findOne().items;
+	return Orders.findOne({idStripe:Router.current().params.id}).items;
     },
     currency : function (amount) {
 	if (amount)
@@ -47,7 +47,7 @@ Template.userOrderTemplate.helpers({
 
 Template.userOrderTemplate.rendered = function () {
     Tracker.autorun (function (){
-        var listing = Orders.findOne();
+        var listing = Orders.findOne({idStripe:Router.current().params.id});
         if (listing && listing.items) {
 	    var imgA=[];
 	    listing.items.forEach(function(el){
