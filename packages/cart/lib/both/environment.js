@@ -88,7 +88,7 @@ Meteor.methods({
 	    var result = wrappedStripeChargeCreate({
 		card: token.id,
 		currency: "USD",
-		metadata: {orderId:Orders.insert({items:items.fetch(), owner:Meteor.userId(), currency: "USD", amount:Math.floor(total*100), shipping: shipping, shippingFee: shippingFee, tax: tax, status: "placed"})},
+		metadata: {orderId:Orders.insert({items:items.fetch(), currency: "USD", amount:Math.floor(total*100), shipping: shipping, shippingFee: shippingFee, tax: tax, status: "placed"})},
 		amount:Math.floor(total*100)
 	    });
 	}

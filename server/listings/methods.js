@@ -11,7 +11,6 @@ Meteor.methods({
 		;
 	    };
 
-	    doc.author=Meteor.userId();
 	    doc.createdAt=new Date;
 
 	    check(doc, Listing);

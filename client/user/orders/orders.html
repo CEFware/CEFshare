@@ -23,6 +23,7 @@
             <table class="table table-hover">
               <thead>
                 <tr>
+                  <th>{{t "#"}}</th>
                   <th>{{t "Order"}}</th>
                   <th>{{t "Date"}}</th>
                   <th>{{t "Items"}}</th>
@@ -34,11 +35,12 @@
               <tbody>
 		{{#each orders}}
                 <tr>
-                  <th>
+		  <td>{{orderNum}}</td>
+                  <td>
 		    <a href="{{pathFor 'userOrder' username=currentUser.username id=idStripe}}">
-		      <img src="{{listingImgById items.[0].product.image.[0]}}" width="100px"> 
+		      <img src="{{listingImgById items.[0].product.image.[0]}}" width="100px" class="img-rounded"> 
 		    </a>
-		  </th>
+		  </td>
                   <td>{{orderDate}}</td>
 		  <td>{{itemsCount}}</td>
                   <td>{{currency amount}}</td>

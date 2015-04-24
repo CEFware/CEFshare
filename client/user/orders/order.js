@@ -38,8 +38,11 @@ Template.userOrderTemplate.helpers({
     },
     orderTotal: function (){
 	return this.amount/100;
+    },
+    orderDate: function () {
+        var res=new Date(this.addedOn);
+        return res.toISOString().slice(0,10);
     }
-
 });
 
 Template.userOrderTemplate.rendered = function () {

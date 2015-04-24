@@ -34,7 +34,8 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th>{{t "Order"}}</th>
+                    <th>{{t "#"}}</th>
+                    <th>{{t "Order pic"}}</th>
                     <th>{{t "Country"}}</th>
                     <th>{{t "Sum"}}</th>
                     <th>{{t "Profit"}}</th>
@@ -47,18 +48,33 @@
                 <tbody>
                   {{#each listAllOrders}}
                   <tr>
-                    <td></td>
+                    <td>{{orderNum}}</td>
+                    <td>
+                      <a href="{{pathFor 'userOrder' username=ownerUsername id=idStripe}}">
+			<img src="{{listingImgById items.[0].product.image.[0]}}" width="100px" class="img-rounded">
+                      </a>
+		    </td>
                     <td>{{shipping.country}}</td>
-                    <td>{{amount}}</td>
-                    <td></td>
+                    <td>{{currency amount}}</td>
+                    <td>
+		      marketplace owner % from the deal
+		    </td>
                     <td><span class="label label-primary">{{status}}</span></td>
-                    <td>{{addedOn}}</td>
-                    <td></td>
-                    <td>{{owner}}</td>
+                    <td>{{orderDate}}</td>
+                    <td>
+		      {{#each merchants}}
+		      <a href="{{pathFor 'userProfile' username=this}}">
+			{{this}}
+		      </a>
+		      <br>
+		      {{/each}}
+		    </td>
+                    <td><a href="{{pathFor 'userProfile' username=ownerUsername}}">{{ownerUsername}}</a></td>
+ 
                   </tr>
                   {{else}}
                   <tr>
-                    <td colspan="7"><h4 class="text-center">Nothing here yet.</h4></td>
+                    <td colspan="8"><h4 class="text-center">Nothing here yet.</h4></td>
                   </tr>
                   {{/each}}
                 </tbody>
