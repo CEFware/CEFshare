@@ -11,7 +11,7 @@ Package.on_use(function (api) {
 	Npm.depends({ "stripe": "2.8.0" });
 
 	api.use([
-	    'tracker@1.0.3',
+	    'tracker',
 	    'templating',
 	    'session',
 	    'amplify'
@@ -19,7 +19,7 @@ Package.on_use(function (api) {
 	  , 'client');
 
 	api.use([
-		'iron:router@1.0.0', 'mongo', 'underscore', 'accounts-base', 'random'
+		'iron:router', 'mongo', 'underscore', 'accounts-base', 'random'
 		], ['server','client']);
 
 	
