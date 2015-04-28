@@ -82,5 +82,14 @@ Meteor.methods({
 		Main.insert(query);
 	    };
 	};
+    },
+    saveAdminListingCategories: function (doc) {
+	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+	    check(doc, categoriesSchema);
+	    doc.fields=['title', 'description', 'details', 'image', 'price', 'shippingFee', 'tax', 'tags'];
+	    var query=doc;
+	    Categories.insert(query);
+	};
     }
+    
 });
