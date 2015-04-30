@@ -1,123 +1,62 @@
-var ListingDefault = {
-    title: {
-        type: String,
-        label: function () {return TAPi18n.__('Title')}
-    },
-    description: {
-        type: String,
-        label: function () {return TAPi18n.__('Description')}
-    },
-    details: {
-        type: String,
-        label: function () {return TAPi18n.__('Details')},
-        autoform: {
-            afFieldInput: {
-                type: 'summernote',
-                class: 'editor',
-                height:300,
-                toolbar: [
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                    ['font', ['strikethrough']],
-                    ['para', ['ul', 'ol']],
-                    ['insert', ['hr']],
-                    ['misc', ['fullscreen', 'codeview','undo','redo']],
-                ]
-            }
-        }
-    },
-    tags: {
-        type: [String],
-        label: function () {return TAPi18n.__('Tags')}
-    },
-    image: {
-        type: [String],
-        label: function () {return TAPi18n.__('Listing image')}
-    },
-/*    "image.$":{
-        autoform: {
-            afFieldInput: {
-                type:'fileUpload',
-                collection: 'Images'
-            }
-        }
-    },
-  */  price: {
-        type: Number,
-        decimal: true,
-        label: function () {return TAPi18n.__('Price')},
-    },
-    tax: {
-        type: Number,
-        decimal: true,
-        defaultValue: 0,
-        label: function () {return TAPi18n.__('Tax in % (0 - no tax)')},
-    },
-    shippingFee: {
-        type: Number,
-        defaultValue: 0,
-        decimal: true,
-        label: function () {return TAPi18n.__('Shipping (0 - no shipping)')},
-    },
-    uri: {
-        type: String,
-        optional:true
-    },
-    isRibbonSale: {
-        type: Boolean,
-        label: function () {return TAPi18n.__('Show ribbon NEW?')}
-    },
-    isRibbonNew: {
-        type: Boolean,
-        label: function () {return TAPi18n.__('Show ribbon TRENDY?')}
-    },
-    isPublic: {
-        type: Boolean,
-        defaultValue: true,
-        label: function () {return TAPi18n.__('Is this listing public ?')}
-    },
-    active: {
-        type: Boolean,
-        label: function () {return TAPi18n.__('Show in slider on homepage?')}
-    },
-    author: {
-        type: String,
-        optional:true,
-        autoValue: function() {
-            if (this.isInsert) {
-                return Meteor.userId();
-            } else {
-                this.value;
-            };
-        }
-    },
-     authorUsername: {
-        type: String,
-        optional:true,
-        autoValue: function() {
-            if (this.isInsert) {
-                return Meteor.user().username;
-            } else {
-                this.value;
-            };
-        }
-    },
-    createdAt: {
-        type: Date,
-        autoValue: function() {
-            if (this.isInsert) {
-                return new Date;
-            } else if (this.isUpsert) {
-                return {$setOnInsert: new Date};
-            } else {
-                this.unset();
-            }
-        }
-    }
-
-};
- 
-
 Meteor.startup(function(){
+    var defaultFields = [
+	{
+	    name: 'title',
+	    title: 'Title',
+	    type: 'title'
+	},
+	{
+	    name: 'description',
+	    title: 'Description',
+	    type: 'description'
+	},
+	{
+	    name: 'details',
+	    title: 'Details',
+	    type: 'details'
+	},
+/*	{
+	    name: 'tags',
+	    title: 'Tags',
+	    type: 'tags'
+	},
+*/	{
+	    name: 'price',
+	    title: 'Price',
+	    type: 'price'
+	},
+	{
+	    name: 'tax',
+	    title: 'Tax in % (0 - no tax)',
+	    type: 'tax'
+	},
+	{
+	    name: 'shippingFee',
+	    title: 'Shipping (0 - no shipping)',
+	    type: 'shippingFee'
+	},
+	{
+	    name: 'isRibbonSale',
+	    title: 'Show ribbon NEW?',
+	    type: 'isRibbonSale'
+	},
+	{
+	    name: 'isRibbonNew',
+	    title: 'Show ribbon TRENDY?',
+	    type: 'isRibbonNew'
+	},
+	{
+	    name: 'isPublic',
+	    title: 'Is this listing public?',
+	    type: 'isPublic'
+	},
+	{
+	    name: 'active',
+	    title: 'Show in slider on homepage?',
+	    type: 'active'
+	}
+    ];
+    
     var environment=Meteor.call ('getEnv');
     var settings = {
         "public": {
@@ -190,7 +129,7 @@ Meteor.startup(function(){
 		googleClientId: "",
 		googleSecret: ""
 	    },
-	    listingFields: ListingDefault
+	    listingFields: defaultFields
 	};
 	Main.insert(query);
     };
