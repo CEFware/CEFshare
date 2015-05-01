@@ -41,6 +41,27 @@ Template.specificListingEdit.helpers({
     },
     appUrl: function () {
 	return Meteor.settings.public.url;
+    },
+    listingTypeGet: function () {
+	var res=Session.get('listingType');
+	if (res)
+	    return res;
+	return Main.findOne().listingFields[0].listingType;
+    },
+    listingTypes: function () {
+	return Main.findOne().listingFields;
+    },
+    ifSelected: function () {
+	var curType=Session.get('listingType');
+	if (curType) {
+	    if (this.listingType===curType)
+		return 'selected';
+	    return '';
+	} else {
+	    if (this.listingType===Main.findOne().listingFields[0].listingType)
+		return 'selected';
+	    return '';
+	};
     }
 });
 
@@ -53,6 +74,10 @@ Template.specificListingEdit.events({
 	} else {
 	    Router.go('specificListing',{uri:uri});
 	};
+    },
+    'change #listingType': function (e,t) {
+	event.preventDefault();
+        Session.set('listingType',e.currentTarget.value);
     }
 
 });

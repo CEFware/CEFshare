@@ -15,12 +15,12 @@ Meteor.startup(function(){
 	    title: 'Details',
 	    type: 'details'
 	},
-/*	{
+	{
 	    name: 'tags',
 	    title: 'Tags',
 	    type: 'tags'
 	},
-*/	{
+	{
 	    name: 'price',
 	    title: 'Price',
 	    type: 'price'
@@ -129,7 +129,9 @@ Meteor.startup(function(){
 		googleClientId: "",
 		googleSecret: ""
 	    },
-	    listingFields: defaultFields
+	    listingFields: [{listingType: 'Product', listingFields:defaultFields},
+			    {listingType: 'Service', listingFields:defaultFields},
+			    {listingType: 'Rent', listingFields:defaultFields}]
 	};
 	Main.insert(query);
     };

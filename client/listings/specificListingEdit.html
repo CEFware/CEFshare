@@ -24,6 +24,13 @@
 	    
 	    {{#autoForm schema=listingSchema id="specificListingCreate" type="method" meteormethod="createNewListing"}}
 	    <div>{{flash 'listingSaved'}}</div>
+	    <label class="control-label">{{t "Select listing type"}}:</label><br>
+	    <select id="listingType" class="form-control input-sm">
+	      {{#each listingTypes}}
+	      <option value={{listingType}} {{ifSelected}}> {{listingType}} </option>
+	      {{/each}}
+	    </select>
+	    <br>
 	    <fieldset>
 	      {{> afQuickField name='image'}}
 	      {{> afQuickField name='title'}}
@@ -49,7 +56,9 @@
 	      {{> afQuickField name='isRibbonNew'}}
 	      {{> afQuickField name='isPublic'}}
 	      {{> afQuickField name='active'}}
-	    </fieldset>
+	      
+              {{> afFieldInput type="hidden" name="listingType" value=listingTypeGet}}
+ 	    </fieldset>
 	    <button type="submit" class="btn btn-primary">{{t "Save"}}</button>
 <!--	    <button type="reset" class="btn btn-default">{{t "Reset"}}</button> -->
 	    <button class="btn btn-danger cancelEditListing">{{t "Cancel & don't save"}}</button>
