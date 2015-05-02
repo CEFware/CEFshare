@@ -111,7 +111,8 @@ Template.CartPayNow.events({
 	if (Meteor.user()) { 
 	    StripeCheckoutHandler.open({
 		description: Session.get('Cart-itemCount') + ' items ($' + Session.get("Cart-itemTotal") + ')',
-		amount: Math.floor(Session.get("Cart-itemTotal") * 100)
+		amount: Math.floor(Session.get("Cart-itemTotal") * 100),
+		bitcoin:true
 	    });
 	} else {
 	    Router.go('entrySignIn');
