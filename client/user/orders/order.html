@@ -73,9 +73,15 @@
             <div class="col-sm-6">
               <h2 class="text-right">{{t "Payment data"}}</h2>
 	      {{#with stripeCharge}}
+	      {{#if card}}
               <p class="text-right">{{source.name}}
-		<br>{{source.brand}} XXXX-XXXX-XXXX-{{source.last4}}
+		<br><b>{{source.brand}}</b>: XXXX-XXXX-XXXX-{{source.last4}}
 	      </p>
+	      {{else}}
+              <p class="text-right">{{source.email}}
+		<br><b>BTC address</b>: {{source.inbound_address}}
+	      </p>
+	      {{/if}}
 	      {{/with}}
             </div>
             <div class="col-sm-6">
