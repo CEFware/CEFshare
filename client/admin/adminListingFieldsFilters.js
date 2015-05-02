@@ -11,6 +11,9 @@ Template.adminListingFieldsFilters.helpers({
         var res=Categories.find({parent:this.name}).fetch();
         if (res.length>0)
             return res;
+    },
+    listingTypes: function () {
+	return Main.findOne().listingFields;
     }
 });
 

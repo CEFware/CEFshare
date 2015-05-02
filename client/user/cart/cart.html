@@ -151,37 +151,35 @@
               <tbody>
 		{{#if notEmpty currentUser.profile.firstName}}
                 <tr>
-                  <th>{{currentUser.profile.firstName}} {{currentUser.profile.lastName}}</th>
+                  <th style="border-top-color:#FFF">{{currentUser.profile.firstName}} {{currentUser.profile.lastName}}</th>
                 </tr>
 		{{/if}}
 		{{#if notEmpty currentUser.profile.shipping.firstLine}}
                 <tr>
-                  <th>{{currentUser.profile.shipping.firstLine}}</th>
+                  <th style="border-top-color:#FFF">{{currentUser.profile.shipping.firstLine}}</th>
                 </tr>
 
 		{{#if notEmpty currentUser.profile.shipping.secondLine}}
                 <tr>
-                  <th>{{currentUser.profile.shipping.secondLine}}</th>
+                  <th style="border-top-color:#FFF">{{currentUser.profile.shipping.secondLine}}</th>
                 </tr>
 		{{/if}}
-		{{#if notEmpty currentUser.profile.shipping.city}}
                 <tr>
-                  <th>{{currentUser.profile.shipping.city}}</th>
+                  <th style="border-top-color:#FFF">
+		    {{#if notEmpty currentUser.profile.shipping.city}}
+		    {{currentUser.profile.shipping.city}}&nbsp;
+		    {{/if}}
+		    {{#if notEmpty currentUser.profile.shipping.state}}
+                    {{currentUser.profile.shipping.state}}&nbsp;
+		    {{/if}}
+		    {{#if notEmpty currentUser.profile.shipping.zip}}
+                    {{currentUser.profile.shipping.zip}}&nbsp;
+		    {{/if}}
+		  </th>
                 </tr>
-		{{/if}}
-		{{#if notEmpty currentUser.profile.shipping.zip}}
-                <tr>
-                  <th>{{currentUser.profile.shipping.zip}}</th>
-                </tr>
-		{{/if}}
-		{{#if notEmpty currentUser.profile.shipping.state}}
-                <tr>
-                  <th>{{currentUser.profile.shipping.state}}</th>
-                </tr>
-		{{/if}}
 		{{#if notEmpty currentUser.profile.shipping.country}}
                 <tr>
-                  <th>{{currentUser.profile.shipping.country}}</th>
+                  <th style="border-top-color:#FFF">{{currentUser.profile.shipping.country}}</th>
                 </tr>
 		{{/if}}
 

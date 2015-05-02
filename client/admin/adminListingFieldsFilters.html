@@ -29,13 +29,27 @@
              _________________________________________________________ -->
 
         <div class="col-md-9 clearfix">
-
+	  <h3>{{t "Current listing types"}}</h3>
           <div class="box" id="text-page">
 
 	    1. {{{t "edit default fields, can't delete"}}}<br>
 	    2. {{{t "select addtitional field from the dropdown list"}}}<br>
 	    3. {{{t "special for with needed fields to edit each additional field"}}}<br>
 	    4. {{{t "pay attention to the field changing listing type: appointment"}}}<br>
+
+	    {{#each listingTypes}}
+	    <div class="row">
+            <div class="col-md-10">
+              <b>{{listingType}}</b>
+            </div>
+            <div class="col-md-2">
+              edit/delete(if no listing of that type)
+            </div>
+            </div>
+ 
+	    {{else}}
+	    No listing types yet.
+	    {{/each}}
 
           </div>
 
