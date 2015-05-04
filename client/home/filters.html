@@ -1,0 +1,29 @@
+<template name="filters">
+  <div class="box" id="order-summary">
+    <div class="box-header">
+      <h3>{{t "FILTERS"}}</h3>
+    </div>
+    {{#if currentSelected 'noCategory'}}
+    <b>> </b><span style="text-transform:uppercase" class="noCategory"><b>{{t "ALL CATEGORIES"}}</b></span><br>
+    {{else}}
+    <span style="text-transform:uppercase" class="noCategory">{{t "ALL CATEGORIES"}}</span><br>
+    {{/if}}
+    {{#each parentCategories}}
+    {{#if currentSelected name}}
+    <b>> </b><span style="text-transform:uppercase" class="categoryName"><b>{{name}}</b></span><br>
+    {{#each childrenCategories}}
+
+    {{#if currentSubSelected name}}
+    <b>> </b>&nbsp;&nbsp;&nbsp;<span style="text-transform:uppercase" class="subcategoryName"><b>{{name}}</b></span><br>
+    {{else}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="text-transform:uppercase" class="subcategoryName">{{name}}</span><br>
+    {{/if}}
+
+    {{/each}}
+    {{else}}
+    <span style="text-transform:uppercase" class="categoryName">{{name}}</span><br>
+    {{/if}}
+    {{/each}}
+    
+  </div>
+</template>

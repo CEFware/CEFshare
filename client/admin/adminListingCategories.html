@@ -30,45 +30,49 @@
 
         <div class="col-md-9 clearfix">
 	  <h3>{{t "Listing categories & subcategories"}}</h3>
-	  {{#each categoriesParents}}
-	  <div class="col-md-12">
-	    <div class="col-md-10">
-	      <b>{{name}}</b>
-	    </div>
-	    <div class="col-md-2">
-	      edit/delete
-	    </div>
-	    {{#each categoriesChildren}}
-	    <div class="col-md-offset-1 col-md-9">
-	      {{name}}
-	    </div>
-	    <div class="col-md-2">
-	      edit/delete
+          <div class="box" id="text-page">
+	    {{#each categoriesParents}}
+	    <div class="row">
+	      <div class="col-md-10">
+		<b>{{name}}</b>
+	      </div>
+	      <div class="col-md-2">
+		<a href="#"><i class="fa fa-pencil"></i></a>&nbsp;
+		<a href="#" class="adminListingCategoryDelete"><i class="fa fa-trash"></i></a>
+	      </div>
+	      {{#each categoriesChildren}}
+	      <div class="col-md-offset-1 col-md-9">
+		{{name}}
+	      </div>
+	      <div class="col-md-2">
+		<a href="#"><i class="fa fa-pencil"></i></a>&nbsp;
+		<a href="#" class="adminListingSubCategoryDelete"><i class="fa fa-trash"></i></a>
+ 	      </div>
+	      {{/each}}
 	    </div>
 	    {{/each}}
 	  </div>
-	  {{/each}}
+	  <h3>{{t "Add new category"}}</h3>
+          <div class="box" id="text-page">
+	    <div class="row">
+              {{#autoForm schema=categoriesSchemaObj id="adminListingCategories" type="method" meteormethod="saveAdminListingCategories"}}
+              <fieldset>
+		<div>
+		  {{flash '1'}}
+		</div>
+		{{> afQuickField name="name"}}
+		{{> afQuickField name="parent"}}
 
-	  <div class="col-md-12">
-	    <h3>{{t "Add new category"}}</h3>
-            {{#autoForm schema=categoriesSchemaObj id="adminListingCategories" type="method" meteormethod="saveAdminListingCategories"}}
-            <fieldset>
-              <div>
-		{{flash '1'}}
-              </div>
-              {{> afQuickField name="name"}}
-              {{> afQuickField name="parent"}}
-
-              <div class="text-center">
-		<button type="submit" class="btn btn-primary">{{t "Save"}}</button>
-		<button type="reset" class="btn btn-default">{{t "Reset"}}</button>
-              </div>
-            </fieldset>
-            {{/autoForm}}
+		<div class="text-center">
+		  <button type="submit" class="btn btn-primary">{{t "Save"}}</button>
+		  <button type="reset" class="btn btn-default">{{t "Reset"}}</button>
+		</div>
+              </fieldset>
+              {{/autoForm}}
+            </div>
           </div>
         </div>
         <!-- /.col-md-9 -->
-	
 
         <!-- *** RIGHT COLUMN END *** -->
       </div>

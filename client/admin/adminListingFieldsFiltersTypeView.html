@@ -1,0 +1,67 @@
+<template name="adminListingFieldsFiltersTypeView">
+    <div id="content">
+      <div class="container">
+	
+        <div class="col-md-12">
+          <div class="box text-center">
+            <div class="row">
+              <div class="col-sm-10 col-sm-offset-1">
+                <h1>{{t "Marketplace admin"}} - {{t "Listing fields & filters"}}</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- *** LEFT COLUMN ***
+             _________________________________________________________ -->
+
+        <div class="col-sm-3">
+          <!-- *** PAGES MENU *** -->
+
+	  {{> adminMenu}}
+
+          <!-- *** PAGES MENU END *** -->
+        </div>        <!-- /.col-md-3 -->
+
+        <!-- *** LEFT COLUMN END *** -->
+	
+        <!-- *** RIGHT COLUMN ***
+             _________________________________________________________ -->
+
+        <div class="col-md-9 clearfix">
+	    1. {{{t "edit default fields, can't delete"}}}<br>
+	    2. {{{t "select addtitional field from the dropdown list"}}}<br>
+	    3. {{{t "special form with needed fields to edit each additional field"}}}<br>
+	    4. {{{t "pay attention to the field changing listing type: appointment"}}}<br>
+
+<br><br>
+
+	  <h3><u>{{currentType}}</u> {{t "listing type fields"}}</h3>
+          <div class="box" id="text-page">
+	    {{#each listingFields}}
+	    <div class="row">
+              <div class="col-md-10">
+		<b>{{title}}</b>
+              </div>
+              <div class="col-md-2">
+		<a href="#"><i class="fa fa-pencil"></i></a>&nbsp;
+		<a href="#" class="adminListingFieldsFiltersFieldDelete"><i class="fa fa-trash"></i></a>
+              </div>
+            </div>
+ 	    {{else}}
+	    <h4 class="text-center">{{t "No listing fields yet."}}</h4>
+	    {{/each}}
+          </div>
+ 
+        </div>
+        <!-- /.col-md-9 -->
+	
+
+        <!-- *** RIGHT COLUMN END *** -->
+      </div>
+      <!-- /.container -->
+    </div>
+    <!-- /#content -->
+
+</template>
+

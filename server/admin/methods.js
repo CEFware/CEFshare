@@ -90,6 +90,15 @@ Meteor.methods({
 	    var query=doc;
 	    Categories.insert(query);
 	};
+    },
+    saveAdminListingTypes: function (doc) {
+	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+	    doc.listingFields=defaultFields;
+	    check(doc, typeListingField);
+	    var query=doc;
+	    var cur=Main.findOne();
+	    Main.update({_id:cur._id}, {$addToSet:{listingFields:query}});
+	};
     }
     
 });

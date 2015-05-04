@@ -62,6 +62,40 @@ Template.specificListingEdit.helpers({
 		return 'selected';
 	    return '';
 	};
+    },
+    ifCategorySelected: function () {
+	var curCat=Session.get('listingCategory');
+	if (curCat) {
+	    if (this.name===curCat[0])
+		return 'selected';
+	    return '';
+	};
+    },
+    ifSubCategorySelected: function () {
+	var curCat=Session.get('listingCategory');
+	if (curCat) {
+	    if (this.name===curCat[1])
+		return 'selected';
+	    return '';
+	};
+    },
+    ifCategorySelectedHasSub: function () {
+	var curCat=Session.get('listingCategory');
+	if (curCat) {
+	    var children=Categories.find({parent:curCat[0]})
+	    if (children.count()>0)
+		return true;
+	    return false;
+	};
+    },
+    listingParentCategories: function () {
+	return Categories.find({parent:{$exists:false}});
+    },
+    listingChildrenCategories: function () {
+	var curCat=Session.get('listingCategory');
+	if (curCat) {
+	    return Categories.find({parent:curCat[0]});
+	}
     }
 });
 
@@ -78,17 +112,51 @@ Template.specificListingEdit.events({
     'change #listingType': function (e,t) {
 	event.preventDefault();
         Session.set('listingType',e.currentTarget.value);
+    },
+    'change #listingCategory': function (e,t) {
+	event.preventDefault();
+	var curCat=Session.get('listingCategory');
+	var curL=specificListingByURI(Router.current().params.uri).fetch().first();
+	if (curCat) {
+	    curCat[0]=e.currentTarget.value;
+	    if (curL) {
+		Meteor.call('setListingCategory',curL._id,curCat);
+	    };
+            Session.set('listingCategory',curCat);
+	} else {
+            Session.set('listingCategory',[e.currentTarget.value]);
+	};
+    },
+    'change #listingSubCategory': function (e,t) {
+	event.preventDefault();
+	var curCat=Session.get('listingCategory');
+	curCat[1]=e.currentTarget.value;
+        Session.set('listingCategory',curCat);
     }
 
 });
 
 Template.specificListingEdit.rendered = function () {
+    Meteor.subscribe('categories');
+    
     var obj=null;
     if (Router.current().params.uri!=='new') {
 	obj=specificListingByURI(Router.current().params.uri).fetch().first();
 	$('#tokenfield').tokenfield({
 	    tokens: obj.tags
 	});
+	//set current listing categories
+/*	Tracker.autorun(function (c) {
+	    var cur=Categories.findOne()
+	    var child=null;
+	    if (cur) {
+		child=Categories.findOne({parent:cur.name});
+		if (child)
+		    Session.set('listingCategory',[cur.name,child.name]);
+		Session.set('listingCategory',[cur.name]);
+	    };
+	});
+*/
     } else {
 	$('#tokenfield').tokenfield();
     };

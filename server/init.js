@@ -1,5 +1,4 @@
-Meteor.startup(function(){
-    var defaultFields = [
+    defaultFields = [
 	{
 	    name: 'title',
 	    title: 'Title',
@@ -56,6 +55,8 @@ Meteor.startup(function(){
 	    type: 'active'
 	}
     ];
+
+Meteor.startup(function(){
     
     var environment=Meteor.call ('getEnv');
     var settings = {

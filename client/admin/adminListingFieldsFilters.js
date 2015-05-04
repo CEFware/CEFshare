@@ -1,23 +1,15 @@
 Template.adminListingFieldsFilters.helpers({
-    categoriesSchemaObj: function() {
-        return categoriesSchema;
-    },
-    categoriesParents: function() {
-        var res=Categories.find({parent:{$exists:false}}).fetch();
-        if (res.length>0)
-            return res;
-    },
-    categoriesChildren: function() {
-        var res=Categories.find({parent:this.name}).fetch();
-        if (res.length>0)
-            return res;
-    },
     listingTypes: function () {
-	return Main.findOne().listingFields;
+	var res =Main.findOne();
+	if (res)
+	    return res.listingFields;
+    },
+    typesSchemaObj: function () {
+	return typeListingField;
     }
 });
 
-AutoForm.addHooks(['adminListingCategories'],{
+AutoForm.addHooks(['adminListingTypes'],{
     onSuccess: function (){
         Flash.success(1,TAPi18n.__("Thank you!"),2000);
     }

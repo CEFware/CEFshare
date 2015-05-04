@@ -24,6 +24,8 @@
 	    
 	    {{#autoForm schema=listingSchema id="specificListingCreate" type="method" meteormethod="createNewListing"}}
 	    <div>{{flash 'listingSaved'}}</div>
+
+	    <!-- listing type & listing category START-->
 	    <label class="control-label">{{t "Select listing type"}}:</label><br>
 	    <select id="listingType" class="form-control input-sm">
 	      {{#each listingTypes}}
@@ -31,6 +33,39 @@
 	      {{/each}}
 	    </select>
 	    <br>
+	    {{#if ifCategorySelectedHasSub}}
+	    <div class="row">	    
+	      <div class="col-md-6">
+		<label class="control-label">{{t "Select listing category"}}:</label><br>
+		<select id="listingCategory" class="form-control input-sm">
+		  <option value="" {{ifCategorySelected}}> {{t "Not selected"}} </option>
+		  {{#each listingParentCategories}}
+		  <option value={{name}} {{ifCategorySelected}}> {{name}} </option>
+		  {{/each}}
+		</select>
+	      </div>
+	      <div class="col-md-6">
+		<label class="control-label">{{t "Select listing subcategory"}}:</label><br>
+		<select id="listingSubCategory" class="form-control input-sm">
+		  <option value="" {{ifSubCategorySelected}}> {{t "Not selected"}} </option>
+		  {{#each listingChildrenCategories}}
+		  <option value={{name}} {{ifSubCategorySelected}}> {{name}} </option>
+		  {{/each}}
+		</select>
+	      </div>
+	    </div>
+	    {{else}}
+	    <label class="control-label">{{t "Select listing category"}}:</label><br>
+	    <select id="listingCategory" class="form-control input-sm">
+	      <option value="" {{ifCategorySelected}}> {{t "Not selected"}} </option>
+	      {{#each listingParentCategories}}
+	      <option value={{name}} {{ifCategorySelected}}> {{name}} </option>
+	      {{/each}}
+	    </select>
+	    {{/if}}
+	    <br>
+	    <!-- listing type & listing category END -->
+
 	    <fieldset>
 	      {{> afQuickField name='image'}}
 	      {{> afQuickField name='title'}}
@@ -68,6 +103,48 @@
 	    
 	    {{#autoForm collection="Listings" id="specificListingEdit" type="update" doc=currentListing}}
 	    <div>{{flash 'listingSaved'}}</div>
+
+	    <!-- listing type & listing category START-->
+	    <label class="control-label">{{t "Select listing type"}}:</label><br>
+	    <select id="listingType" class="form-control input-sm">
+	      {{#each listingTypes}}
+	      <option value={{listingType}} {{ifSelected}}> {{listingType}} </option>
+	      {{/each}}
+	    </select>
+	    <br>
+	    {{#if ifCategorySelectedHasSub}}
+	    <div class="row">	    
+	      <div class="col-md-6">
+		<label class="control-label">{{t "Select listing category"}}:</label><br>
+		<select id="listingCategory" class="form-control input-sm">
+		  <option value="" {{ifCategorySelected}}> {{t "Not selected"}} </option>
+		  {{#each listingParentCategories}}
+		  <option value={{name}} {{ifCategorySelected}}> {{name}} </option>
+		  {{/each}}
+		</select>
+	      </div>
+	      <div class="col-md-6">
+		<label class="control-label">{{t "Select listing subcategory"}}:</label><br>
+		<select id="listingSubCategory" class="form-control input-sm">
+		  <option value="" {{ifSubCategorySelected}}> {{t "Not selected"}} </option>
+		  {{#each listingChildrenCategories}}
+		  <option value={{name}} {{ifSubCategorySelected}}> {{name}} </option>
+		  {{/each}}
+		</select>
+	      </div>
+	    </div>
+	    {{else}}
+	    <label class="control-label">{{t "Select listing category"}}:</label><br>
+	    <select id="listingCategory" class="form-control input-sm">
+	      <option value="" {{ifCategorySelected}}> {{t "Not selected"}} </option>
+	      {{#each listingParentCategories}}
+	      <option value={{name}} {{ifCategorySelected}}> {{name}} </option>
+	      {{/each}}
+	    </select>
+	    {{/if}}
+	    <br>
+	    <!-- listing type & listing category END -->
+
 	    <fieldset>
 	      {{> afQuickField name='image'}}
 	      {{> afQuickField name='title'}}
