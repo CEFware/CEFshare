@@ -119,18 +119,22 @@ Template.specificListingEdit.events({
 	var curL=specificListingByURI(Router.current().params.uri).fetch().first();
 	if (curCat) {
 	    curCat[0]=e.currentTarget.value;
-	    if (curL) {
-		Meteor.call('setListingCategory',curL._id,curCat);
-	    };
-            Session.set('listingCategory',curCat);
 	} else {
-            Session.set('listingCategory',[e.currentTarget.value]);
+	    curCat=[e.currentTarget.value];
 	};
+	if (curL) {
+	    Meteor.call('setListingCategory',curL._id,curCat);
+	};
+        Session.set('listingCategory',curCat);
     },
     'change #listingSubCategory': function (e,t) {
 	event.preventDefault();
 	var curCat=Session.get('listingCategory');
+	var curL=specificListingByURI(Router.current().params.uri).fetch().first();
 	curCat[1]=e.currentTarget.value;
+	if (curL) {
+	    Meteor.call('setListingCategory',curL._id,curCat);
+	};
         Session.set('listingCategory',curCat);
     }
 
