@@ -31,8 +31,9 @@ Template.filters.events({
 	var cur=Session.get('filters');
 	if (cur) {
 	    cur.category=null;
+	    cur.subcategory=null;
 	} else {
-	    cur={category:null}
+	    cur={category:null,subcategory:null}
 	};
 	Session.set('filters',cur);
     },

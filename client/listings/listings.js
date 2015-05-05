@@ -30,7 +30,7 @@ Template.allListings.helpers({
 	    };
 	    break;
 	default:
-	    return allListingsOnHomepage(Session.get('homeSearch'));
+	    return allListingsOnHomepage(Session.get('homeSearch'),Session.get('filters'));
 	};
     },
 
@@ -82,7 +82,7 @@ Template.allListings.rendered= function (){
  		    Meteor.subscribe('getPublicListingsByAuthor',getUserId());
 	    };
 	} else {
- 	    Meteor.subscribe('allListingsOnHomepage',Session.get('homeSearch'));
+ 	    Meteor.subscribe('allListingsOnHomepage',Session.get('homeSearch'),Session.get('filters'));
 	};
 	//add id's to get only needed images - by adding an array with needed images id's
 	var imgA=[];
