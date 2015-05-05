@@ -33,20 +33,54 @@
           <div class="box" id="text-page">
 	    {{#each categoriesParents}}
 	    <div class="row">
-	      <div class="col-md-10">
+	      <div class="col-md-9">
+		{{#if editingCategory _id}}
+		{{> editCategoryName}}
+		{{else}}
 		<b>{{name}}</b>
+		{{/if}}
 	      </div>
-	      <div class="col-md-2">
+	      <div class="col-md-1 text-center">
+		<span class="label label-default">{{countArr this.listings}}</span>&nbsp;
+	      </div>
+	      <div class="col-md-1 text-center">
+		{{#if editingCategory _id}}
+		<i class="fa fa-pencil"></i>&nbsp;
+		{{else}}
 		<a href="#"><i class="fa fa-pencil"></i></a>&nbsp;
+		{{/if}}
+	      </div>
+	      <div class="col-md-1 text-center">
+		{{#if letDelete this}}
 		<a href="#" class="adminListingCategoryDelete"><i class="fa fa-trash"></i></a>
+		{{else}}
+		<i class="fa fa-trash"></i>
+		{{/if}}
 	      </div>
 	      {{#each categoriesChildren}}
-	      <div class="col-md-offset-1 col-md-9">
+	      <div class="col-md-offset-1 col-md-8">
+		{{#if editingCategory _id}}
+		{{> editCategoryName}}
+		{{else}}
 		{{name}}
+		{{/if}}
 	      </div>
-	      <div class="col-md-2">
+	      <div class="col-md-1 text-center">
+		<span class="label label-default">{{countArr this.listings}}</span>&nbsp;
+	      </div>
+	      <div class="col-md-1 text-center">
+		{{#if editingCategory _id}}
+		<i class="fa fa-pencil"></i>&nbsp;
+		{{else}}
 		<a href="#"><i class="fa fa-pencil"></i></a>&nbsp;
-		<a href="#" class="adminListingSubCategoryDelete"><i class="fa fa-trash"></i></a>
+		{{/if}}
+	      </div>
+	      <div class="col-md-1 text-center">
+		{{#if letDelete this}}
+		<a href="#" class="adminListingCategoryDelete"><i class="fa fa-trash"></i></a>
+		{{else}}
+		<i class="fa fa-trash"></i>
+		{{/if}}
  	      </div>
 	      {{/each}}
 	    </div>
@@ -82,3 +116,14 @@
 
 </template>
 
+<template name = "editCategoryName">
+  <form>
+    <div class="input-group input-group-sm">
+      <input type="text" class="form-control newCatName" value="{{name}}" id="{{_id}}">
+      <span class="input-group-btn">
+	<button class="btn btn-primary saveEdit" type="submit">{{t "SAVE"}}</button>
+	<button class="btn btn-danger stopEdit"><span class="glyphicon glyphicon-remove"></span></button>
+      </span>
+    </div>
+  </form>
+</template>
