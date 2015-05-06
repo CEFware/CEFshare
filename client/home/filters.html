@@ -3,6 +3,11 @@
     <div class="box-header">
       <h3>{{t "FILTERS"}}</h3>
     </div>
+    {{#if search}}
+    <h3>{{t "Search"}}</h3>
+    <h3><span class="label label-default"> {{search}} <a href="#" style="color:#FFF" class="cancelSearch"><span class="glyphicon glyphicon-remove"></span></a></span></h3>
+    {{/if}}
+    <h3>{{t "Categories"}}</h3>
     {{#if currentSelected 'noCategory'}}
     <a href="#"><b>> </b><span style="text-transform:uppercase" class="noCategory"><b>{{t "ALL CATEGORIES"}}</b></span></a><br>
     {{else}}

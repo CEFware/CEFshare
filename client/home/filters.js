@@ -1,9 +1,9 @@
 Template.filters.helpers({
     parentCategories: function () {
-	return Categories.find({parent:{$exists:false}});
+	return Categories.find({parent:{$exists:false}},{sort:{name:1}});
     },
     childrenCategories: function () {
-	return Categories.find({parent:this.name});
+	return Categories.find({parent:this.name},{sort:{name:1}});
     },
     currentSelected: function (name) {
 	var cur = Session.get('filters');
@@ -22,6 +22,9 @@ Template.filters.helpers({
 		return true;
 	};
 	return false;
+    },
+    search: function () {
+	return Session.get('homeSearch');
     }
 });
 
@@ -57,7 +60,16 @@ Template.filters.events({
 	    cur={subcategory:$(e.currentTarget).text()};
 	};
 	Session.set('filters',cur);
+    },
+    'click .cancelSearch': function (e,t) {
+	e.preventDefault();
+	$('#search-box').val("");
+	Session.set('homeSearch',null);
     }
+
+
+
+
 });
 
 Template.filters.rendered = function() {

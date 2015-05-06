@@ -22,6 +22,11 @@ AutoForm.addHooks(['specificListingEdit'],{
 AutoForm.addHooks(['specificListingCreate'],{
     after: {
 	"method": function (e,r,t) {
+	    var curCat=Session.get('listingCategory');
+	    var curL=specificListingByURI(r).fetch().first();
+	    if (curL) {
+		Meteor.call('setListingCategory',curL._id,curCat);
+	    };
 	    Router.go('specificListingEdit', {uri:r})
 	}
     }
@@ -149,18 +154,20 @@ Template.specificListingEdit.rendered = function () {
 	$('#tokenfield').tokenfield({
 	    tokens: obj.tags
 	});
+	//set current listing type
+	Session.set('listingType',obj.listingType);
 	//set current listing categories
-/*	Tracker.autorun(function (c) {
-	    var cur=Categories.findOne()
-	    var child=null;
-	    if (cur) {
-		child=Categories.findOne({parent:cur.name});
-		if (child)
-		    Session.set('listingCategory',[cur.name,child.name]);
-		Session.set('listingCategory',[cur.name]);
-	    };
+	Tracker.autorun(function () {
+	    var curCat=[];
+	    var res=Categories.findOne({listings:obj._id,parent:{$exists:false}});
+	    if (res)
+		curCat[0]=res.name;
+	    var res2=Categories.findOne({listings:obj._id,parent:curCat[0]});
+	    if (res2)
+		curCat[1]=res2.name;
+	    if (curCat)
+		Session.set('listingCategory',curCat);
 	});
-*/
     } else {
 	$('#tokenfield').tokenfield();
     };

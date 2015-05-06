@@ -15,11 +15,6 @@
 	    type: 'details'
 	},
 	{
-	    name: 'tags',
-	    title: 'Tags',
-	    type: 'tags'
-	},
-	{
 	    name: 'price',
 	    title: 'Price',
 	    type: 'price'

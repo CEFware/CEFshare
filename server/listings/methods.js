@@ -12,10 +12,9 @@ Meteor.methods({
 	    };
 
 	    doc.createdAt=new Date;
-
+	    doc.uri=convertToSlug(doc.title);
 	    check(doc, Listing);
 
-	    doc.uri=convertToSlug(doc.title);
 	    var c=1;
 	    while (specificListingByURI(doc.uri).fetch().length>0) {
 		doc.uri=convertToSlug(doc.title)+c;
