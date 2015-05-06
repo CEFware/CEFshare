@@ -14,18 +14,18 @@ Template.adminListingCategories.helpers({
     },
     countArr: function (arr) {
 	if (arr)
-	    return arr.length();
+	    return arr.length;
 	return 0;
     },
     letDelete: function (catObj) {
 	if (catObj.parent) {
 	    //children category
-	    if (catObj.listings && (catObj.listings.length()>0))
+	    if (catObj.listings && (catObj.listings.length>0))
 		    return false;
 	    return true;
 	} else {
 	    //parent category
-	    if (catObj.listings && (catObj.listings.length()>0)) {
+	    if (catObj.listings && (catObj.listings.length>0)) {
 		    return false;
 	    } else {
 		//check if no sub categories

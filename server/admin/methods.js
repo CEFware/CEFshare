@@ -86,7 +86,7 @@ Meteor.methods({
     saveAdminListingCategories: function (doc) {
 	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
 	    check(doc, categoriesSchema);
-	    doc.fields=['title', 'description', 'details', 'image', 'price', 'shippingFee', 'tax', 'tags'];
+//	    doc.fields=['title', 'description', 'details', 'image', 'price', 'shippingFee', 'tax', 'tags'];
 	    var query=doc;
 	    Categories.insert(query);
 	};
@@ -98,6 +98,15 @@ Meteor.methods({
 	    var query=doc;
 	    var cur=Main.findOne();
 	    Main.update({_id:cur._id}, {$addToSet:{listingFields:query}});
+	};
+    },
+    deleteListingType: function (name) {
+	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+	    //check if no listings of that type
+            if (!(Listings.find({listingType:name}).count()>0)) {
+		var cur=Main.findOne();
+		Main.update({_id:cur._id}, {$pull:{listingFields:{listingType:name}}});
+	    };
 	};
     }
     

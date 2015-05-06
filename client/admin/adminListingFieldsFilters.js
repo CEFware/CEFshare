@@ -6,6 +6,17 @@ Template.adminListingFieldsFilters.helpers({
     },
     typesSchemaObj: function () {
 	return typeListingField;
+    },
+    letDelete : function (obj) {
+	var res=TypesCount.findOne({listingType:obj.listingType});
+	if (res && (res.amount>0))
+	    return false;
+	return true;
+    },
+    countListings : function (name) {
+	var res=TypesCount.findOne({listingType:name});
+	if (res)
+	    return res.amount;
     }
 });
 
@@ -17,5 +28,13 @@ AutoForm.addHooks(['adminListingTypes'],{
 
 Template.adminListingFieldsFilters.rendered = function () {
     Meteor.subscribe('appSettings');
+    Meteor.subscribe('typesCount');
 };
+
+Template.adminListingFieldsFilters.events({
+    'click .fa-trash': function (e,t) {
+	e.preventDefault();
+	Meteor.call('deleteListingType',this.listingType);
+    }
+});
 

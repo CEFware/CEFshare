@@ -34,12 +34,21 @@
 
 	    {{#each listingTypes}}
 	    <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-9">
               <b>{{listingType}}</b>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1 text-center">
+	      <span class="label label-default">{{countListings listingType}}</span>
+            </div>
+            <div class="col-md-1 text-center">
               <a href="{{pathFor 'adminListingFieldsFiltersTypeView' listingType=listingType}}"><i class="fa fa-pencil"></i></a>&nbsp;
-              <a href="#" class="adminListingFieldsFiltersTypeDelete"><i class="fa fa-trash"></i></a>
+            </div>
+            <div class="col-md-1 text-center">
+              {{#if letDelete this}}
+              <a href="#"><i class="fa fa-trash"></i></a>
+	      {{else}}
+              <i class="fa fa-trash"></i>
+	      {{/if}}
             </div>
             </div>
  
