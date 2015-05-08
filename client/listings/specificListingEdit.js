@@ -27,7 +27,8 @@ AutoForm.addHooks(['specificListingCreate'],{
 	    if (curL) {
 		Meteor.call('setListingCategory',curL._id,curCat);
 	    };
-	    Router.go('specificListingEdit', {uri:r})
+	    if (!e)
+		Router.go('specificListingEdit', {uri:r})
 	}
     }
 });
@@ -86,12 +87,12 @@ Template.specificListingEdit.helpers({
     },
     ifCategorySelectedHasSub: function () {
 	var curCat=Session.get('listingCategory');
-	if (curCat) {
+	if (curCat && curCat.length>0) {
 	    var children=Categories.find({parent:curCat[0]})
 	    if (children.count()>0)
 		return true;
-	    return false;
 	};
+	return false;
     },
     listingParentCategories: function () {
 	return Categories.find({parent:{$exists:false}});

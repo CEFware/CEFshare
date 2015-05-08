@@ -20,6 +20,11 @@
 	    type: 'price'
 	},
 	{
+	    name: 'tags',
+	    title: 'Tags',
+	    type: 'tags'
+	},
+	{
 	    name: 'tax',
 	    title: 'Tax in % (0 - no tax)',
 	    type: 'tax'

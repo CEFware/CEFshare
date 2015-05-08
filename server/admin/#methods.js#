@@ -113,10 +113,14 @@ Meteor.methods({
 	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
 	    check(doc, oneListingField);
 	    var typeName=doc.name;
+	    var cur=Main.findOne();
+	    var arr=[];
+	    cur.listingFields.forEach(function (el){
+		if (el.listingType===typeName) 
+		    arr=el.listingFields;
+	    });
 	    doc.name='uniqName';
 	    var query=doc;
-	    var cur=Main.findOne();
-
 	    Main.update({_id:cur._id, "listingFields.listingType":typeName}, {$addToSet:{"listingFields.$.listingFields":query}});
 	};
     }

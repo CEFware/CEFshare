@@ -38,13 +38,28 @@
 
 	  <h3><u>{{currentType}}</u> {{t "listing type fields"}}</h3>
           <div class="box" id="text-page">
+	    {{#each listingFieldsDefault}}
+	    <div class="row">
+              <div class="col-md-10">
+		<b>{{title}}</b>
+              </div>
+              <div class="col-md-1 text-center">
+		<a href="#"><i class="fa fa-pencil"></i></a>&nbsp;
+              </div>
+              <div class="col-md-1 text-center">
+		<i class="fa fa-trash"></i>
+              </div>
+            </div>
+ 	    {{/each}}
 	    {{#each listingFields}}
 	    <div class="row">
               <div class="col-md-10">
 		<b>{{title}}</b>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-1 text-center">
 		<a href="#"><i class="fa fa-pencil"></i></a>&nbsp;
+              </div>
+              <div class="col-md-1 text-center">
 		<a href="#" class="adminListingFieldsFiltersFieldDelete"><i class="fa fa-trash"></i></a>
               </div>
             </div>
@@ -52,6 +67,28 @@
 	    <h4 class="text-center">{{t "No listing fields yet."}}</h4>
 	    {{/each}}
           </div>
+
+          <h3>{{t "Add new field"}}</h3>
+          <div class="box" id="text-page">
+            <div class="row">
+              {{#autoForm schema=oneListingFieldObj id="adminListingTypeNewField" type="method" meteormethod="saveAdminListingTypeNewField"}}
+              <fieldset>
+                <div>
+                  {{flash '1'}}
+                </div>
+                {{> afQuickField name="type"}}
+                {{> afQuickField name="title" placeholder=getTitle}}
+                {{> afFieldInput type="hidden" name="name" value=currentType}}
+
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">{{t "Save"}}</button>
+                  <button type="reset" class="btn btn-default">{{t "Reset"}}</button>
+                </div>
+              </fieldset>
+              {{/autoForm}}
+            </div>
+          </div>
+ 
  
         </div>
         <!-- /.col-md-9 -->
