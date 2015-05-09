@@ -17,6 +17,11 @@ Template.adminListingFieldsFilters.helpers({
 	var res=TypesCount.findOne({listingType:name});
 	if (res)
 	    return res.amount;
+    },
+    editingTypeName: function (type) {
+        if (Session.get('editingTypeName')===type)
+            return true;
+        return false;
     }
 });
 
@@ -35,6 +40,29 @@ Template.adminListingFieldsFilters.events({
     'click .fa-trash': function (e,t) {
 	e.preventDefault();
 	Meteor.call('deleteListingType',this.listingType);
+    },
+    'click .fa-pencil': function (e,t) {
+        e.preventDefault();
+        Session.set('editingTypeName',this.listingType);
     }
 });
 
+Template.editTypeName.events({
+    'click .stopEdit': function (e,t) {
+        e.preventDefault();
+        Session.set('editingTypeName',null);
+    },
+    'click .saveEdit': function (e,t) {
+        e.preventDefault();
+        var newName=t.$('.newTypeName').val();
+        if (newName.length>0)
+            Meteor.call('updateListingType',this.listingType,newName,function (e) {
+                if (!e)
+		    Session.set('editingTypeName',null);
+            });
+    }
+});
+
+Template.editTypeName.rendered = function () {
+    $('.newTypeName').focus();
+};

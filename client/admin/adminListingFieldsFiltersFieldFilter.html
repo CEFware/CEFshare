@@ -1,4 +1,4 @@
-<template name="adminListingFieldsFiltersTypeView">
+<template name="adminListingFieldsFiltersFieldFilter">
     <div id="content">
       <div class="container">
 	
@@ -29,9 +29,7 @@
              _________________________________________________________ -->
 
         <div class="col-md-9 clearfix">
-	    1. {{{t "edit default fields"}}}<br>
-	    3. {{{t "special form with needed fields to edit each additional field"}}}<br>
-	    4. {{{t "pay attention to the field changing listing type: appointment"}}}<br>
+set up the filter for current field
 
 <br><br>
 
@@ -54,7 +52,7 @@
 		<i class="fa fa-pencil"></i>
               </div>
               <div class="col-md-1 text-center">
-		<a href="{{pathFor 'adminListingFieldsFiltersFieldFilter' listingType=currentType field=name}}"><i class="fa fa-filter"></i></a>
+		<a href="#"><i class="fa fa-filter"></i></a>
               </div>
               <div class="col-md-2 text-center">
 		<i class="fa fa-trash"></i>
@@ -65,7 +63,7 @@
 	    <div class="row">
               <div class="col-md-8">
                 {{#if editingField name}}
-                {{> editFieldName}}
+
                 {{else}}
 
 		{{#if active}}
@@ -84,7 +82,7 @@
 		{{/if}}
               </div>
               <div class="col-md-1 text-center">
-		<a href="{{pathFor 'adminListingFieldsFiltersFieldFilter' listingType=currentType field=name}}"><i class="fa fa-filter"></i></a>
+		<a href="#"><i class="fa fa-filter"></i></a>
               </div>
               <div class="col-md-2 text-center">
 		{{#if active}}
@@ -137,19 +135,4 @@
     </div>
     <!-- /#content -->
 
-</template>
-
-<template name = "editFieldName">
-  <form>
-    <div class="input-group input-group-sm">
-      <input type="text" class="form-control newFieldName" value="{{title}}" id="{{name}}">
-      <div class="input-group-addon">
-	<input class="fieldOptional" type="checkbox" {{ifOptional}}> {{t "Optional"}}
-      </div>
-      <span class="input-group-btn">
-        <button class="btn btn-primary saveEdit" type="submit">{{t "SAVE"}}</button>
-        <button class="btn btn-danger stopEdit"><span class="glyphicon glyphicon-remove"></span></button>
-      </span>
-    </div>
-  </form>
 </template>

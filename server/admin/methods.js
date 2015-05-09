@@ -113,13 +113,76 @@ Meteor.methods({
 	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
 	    check(doc, oneListingField);
 	    var typeName=doc.name;
-	    doc.name='uniqName';
-	    var query=doc;
 	    var cur=Main.findOne();
-
+	    var arr=[];
+	    //get all current listings fields names in one array of uniq values
+	    cur.listingFields.forEach(function (el){
+		    el.listingFields.forEach(function (el2) {
+			arr.push(el2.name);
+		    });
+	    });
+	    arr=_.uniq(arr);
+	    //do increase new name addition until it becomes uniq in that array
+	    doc.name=doc.type;
+            var c=1;
+            while (arr.indexOf(doc.name)>-1) {
+                doc.name=doc.name+c;
+                c++;
+            };
+	    
+	    var query=doc;
 	    Main.update({_id:cur._id, "listingFields.listingType":typeName}, {$addToSet:{"listingFields.$.listingFields":query}});
 	};
-    }
+    },
+    deleteListingField: function (field,lType) {
+	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+	    var query={}
+	    query[field.name]={$exists:true};
+	    if ((Listings.find(query).count()===0) && (field.active)) {
+		//if no listings with that field & it's active - delete
+		Main.update({"listingFields.listingType":lType}, {$pull:{"listingFields.$.listingFields":field}});
+	    } else {
+		var updatedFields=[];
+		Main.findOne().listingFields.forEach(function (el){
+		    if (el.listingType===lType)
+			el.listingFields.forEach(function (el2) {
+			    if (el2.name===field.name) {
+				if (field.active) {
+				    el2.active=false;
+				} else {
+				    el2.active=true;
+				};
+			    };
+			    updatedFields.push(el2);
+			});
+		});
+		Main.update({"listingFields.listingType":lType}, {$set:{"listingFields.$.listingFields":updatedFields}});
+	    };
+	};
+    },
+    updateListingField: function (field,lType) {
+	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+	    var updatedFields=[];
+	    Main.findOne().listingFields.forEach(function (el){
+		if (el.listingType===lType)
+		    el.listingFields.forEach(function (el2) {
+			if (el2.name===field.name) {
+			    updatedFields.push(field);
+			} else {
+			    updatedFields.push(el2);
+			};
+		    });
+	    });
+	    Main.update({"listingFields.listingType":lType}, {$set:{"listingFields.$.listingFields":updatedFields}});
+	};
+    },
+    updateListingType: function (lType,newName) {
+	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+	    //update all the listings of that type
+	    Listings.update({listingType:lType},{$set:{listingType:newName}},{multi:true})
+	    //update Listing TYpe name
+	    Main.update({'listingFields.listingType':lType},{$set:{'listingFields.$.listingType':newName}});
+	};
+    },
 
-    
 });

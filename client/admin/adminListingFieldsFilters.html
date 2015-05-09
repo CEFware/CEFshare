@@ -35,13 +35,22 @@
 	    {{#each listingTypes}}
 	    <div class="row">
             <div class="col-md-9">
+              {{#if editingTypeName listingType}}
+              {{> editTypeName}}
+              {{else}}
               <b>{{listingType}}</b>
+              <a href="#"><i class="fa fa-pencil editTypeName"></i></a>
+	      {{/if}}
             </div>
             <div class="col-md-1 text-center">
 	      <span class="label label-default">{{countListings listingType}}</span>
             </div>
             <div class="col-md-1 text-center">
-              <a href="{{pathFor 'adminListingFieldsFiltersTypeView' listingType=listingType}}"><i class="fa fa-pencil"></i></a>&nbsp;
+              <a href="{{pathFor 'adminListingFieldsFiltersTypeView' listingType=listingType}}">
+                <span style="text-transform:uppercase;font-family: Montserrat, Helvetica, Arial, sans-serif;color=rgb(106,174,122)">
+		  {{t "FIELDS"}}
+		</span>
+	      </a>
             </div>
             <div class="col-md-1 text-center">
               {{#if letDelete this}}
@@ -89,3 +98,14 @@
 
 </template>
 
+<template name = "editTypeName">
+  <form>
+    <div class="input-group input-group-sm">
+      <input type="text" class="form-control newTypeName" value="{{listingType}}">
+      <span class="input-group-btn">
+        <button class="btn btn-primary saveEdit" type="submit">{{t "SAVE"}}</button>
+        <button class="btn btn-danger stopEdit"><span class="glyphicon glyphicon-remove"></span></button>
+      </span>
+    </div>
+  </form>
+</template>

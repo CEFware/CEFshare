@@ -2,57 +2,79 @@
 	{
 	    name: 'title',
 	    title: 'Title',
-	    type: 'title'
+	    type: 'title',
+	    optional: false,
+	    active: true
 	},
 	{
 	    name: 'description',
 	    title: 'Description',
-	    type: 'description'
+	    type: 'description',
+	    optional: false,
+	    active: true
 	},
 	{
 	    name: 'details',
 	    title: 'Details',
-	    type: 'details'
+	    type: 'details',
+	    optional: false,
+	    active: true
 	},
 	{
 	    name: 'price',
 	    title: 'Price',
-	    type: 'price'
+	    type: 'price',
+	    optional: false,
+	    active: true
 	},
 	{
 	    name: 'tags',
 	    title: 'Tags',
-	    type: 'tags'
+	    type: 'tags',
+	    optional: false,
+	    active: true
 	},
 	{
 	    name: 'tax',
 	    title: 'Tax in % (0 - no tax)',
-	    type: 'tax'
+	    type: 'tax',
+	    optional: false,
+	    active: true
 	},
 	{
 	    name: 'shippingFee',
 	    title: 'Shipping (0 - no shipping)',
-	    type: 'shippingFee'
+	    type: 'shippingFee',
+	    optional: false,
+	    active: true
 	},
 	{
 	    name: 'isRibbonSale',
 	    title: 'Show ribbon NEW?',
-	    type: 'isRibbonSale'
+	    type: 'isRibbonSale',
+	    optional: false,
+	    active: true
 	},
 	{
 	    name: 'isRibbonNew',
 	    title: 'Show ribbon TRENDY?',
-	    type: 'isRibbonNew'
+	    type: 'isRibbonNew',
+	    optional: false,
+	    active: true
 	},
 	{
 	    name: 'isPublic',
 	    title: 'Is this listing public?',
-	    type: 'isPublic'
+	    type: 'isPublic',
+	    optional: false,
+	    active: true
 	},
 	{
 	    name: 'active',
 	    title: 'Show in slider on homepage?',
-	    type: 'active'
+	    type: 'active',
+	    optional: false,
+	    active: true
 	}
     ];
 

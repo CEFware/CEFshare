@@ -1,4 +1,4 @@
-Template.adminListingFieldsFiltersTypeView.helpers({
+Template.adminListingFieldsFiltersFieldFilter.helpers({
     listingFields: function () {
 	var res=Main.findOne();
 	if (res) {
@@ -64,11 +64,11 @@ Template.adminListingFieldsFiltersTypeView.helpers({
     }
 });
 
-Template.adminListingFieldsFiltersTypeView.rendered = function () {
+Template.adminListingFieldsFiltersFieldFilter.rendered = function () {
     Meteor.subscribe('appSettings');
 };
 
-Template.adminListingFieldsFiltersTypeView.events({
+Template.adminListingFieldsFiltersFieldFilter.events({
     'change [name=type]': function () {
 	var res=$("[name=type]").val();
 	if (res) {
@@ -94,36 +94,6 @@ Template.adminListingFieldsFiltersTypeView.events({
         Session.set('editingField',this.name);
     }
 });
-
-
-Template.editFieldName.events({
-    'click .stopEdit': function (e,t) {
-        e.preventDefault();
-        Session.set('editingField',null);
-    },
-    'click .saveEdit': function (e,t) {
-        e.preventDefault();
-	this.title=t.$('#'+this.name).val();
-	this.optional=t.$('.fieldOptional').is(':checked');
-	if (this.title.length>0)
-            Meteor.call('updateListingField',this,Router.current().params.listingType,function (e) {
-		if (!e)
-                    Session.set('editingField',null);
-            });
-    }
-});
-
-Template.editFieldName.rendered = function () {
-    $('.newFieldName').focus();
-};
-
-Template.editFieldName.helpers({
-    ifOptional: function () {
-	if (this.optional)
-	    return 'checked';
-    }
-});
-
 
 AutoForm.addHooks(['adminListingTypeNewField'],{
     onSuccess: function (){

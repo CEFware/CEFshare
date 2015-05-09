@@ -71,10 +71,11 @@ Template.editCategoryName.events({
     'click .saveEdit': function (e,t) {
 	e.preventDefault();
 	var newName=t.$('#'+this._id).val();
-	Meteor.call('updateCategory',this._id,newName,function (e) {
-	    if (!e) 
-		Session.set('editingCategory',this._id);
-	});
+	if (newName.length>0)
+	    Meteor.call('updateCategory',this._id,newName,function (e) {
+		if (!e) 
+		    Session.set('editingCategory',null);
+	    });
     }
 });
 
