@@ -79,7 +79,7 @@
     ];
 
 Meteor.startup(function(){
-    
+
     var environment=Meteor.call ('getEnv');
     var settings = {
         "public": {
@@ -141,8 +141,22 @@ Meteor.startup(function(){
     Accounts.emailTemplates.siteName = Meteor.settings.public.marketplaceName;
     Accounts.emailTemplates.from = Meteor.settings.public.marketplaceName+" Support <"+Meteor.settings.private.supportEmail+">";
 
-    //setup default data to main collection
-    if (Main.find().count()===0) {
+    if ((Meteor.users.find().count() === 0) && (Main.find().count()===0)) {
+	//This code will be executed only if it's the first start of a application installation
+	//(or database was dropped, with meteor reset)
+	console.log('Welcome to your fresh Marketplace. This is the first startup of this application');
+	console.log('We are preparing your application for first run... Please wait several minutes :-) !')
+
+	//Create the user admin with password login
+	var admin = Accounts.createUser({
+            email: 'admin@admin.com',
+            password: 'aaaaaa1',
+            username: 'admin',
+	});
+
+	Roles.addUsersToRoles(admin, ['admin','verified'], Roles.GLOBAL_GROUP);
+
+	//setup default data to main collection
 	var query={
 	    socialAccounts: {
 		fbAppId: "",
@@ -158,7 +172,7 @@ Meteor.startup(function(){
 	};
 	Main.insert(query);
     };
-
+    
 });
 
 Meteor.methods({
