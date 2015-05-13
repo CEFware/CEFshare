@@ -22,6 +22,11 @@ Template.adminListingFieldsFilters.helpers({
         if (Session.get('editingTypeName')===type)
             return true;
         return false;
+    },
+    letEditTypeName: function () {
+	if (Main.findOne({'defaultListingFields.listingType':this.listingType}))
+            return false;
+        return true;
     }
 });
 

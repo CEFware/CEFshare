@@ -61,7 +61,12 @@ Template.adminListingFieldsFiltersTypeView.helpers({
         if (Session.get('editingField')===name)
             return true;
         return false;
-    }
+    },
+    letEditField: function () {
+        if (Main.findOne({'defaultListingFields.listingFields.title':this.title}))
+            return false;
+        return true;
+     }
 });
 
 Template.adminListingFieldsFiltersTypeView.rendered = function () {

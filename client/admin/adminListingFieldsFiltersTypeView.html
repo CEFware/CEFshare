@@ -29,12 +29,6 @@
              _________________________________________________________ -->
 
         <div class="col-md-9 clearfix">
-	    1. {{{t "edit default fields"}}}<br>
-	    3. {{{t "special form with needed fields to edit each additional field"}}}<br>
-	    4. {{{t "pay attention to the field changing listing type: appointment"}}}<br>
-
-<br><br>
-
 	  <h3><u>{{currentType}}</u> {{t "listing type fields"}}</h3>
           <div class="box" id="text-page">
             <div class="col-md-12 text-right">
@@ -80,7 +74,13 @@
                 {{#if editingField name}}
 		<i class="fa fa-pencil"></i>
 		{{else}}
+
+		{{#if letEditField}}
 		<a href="#"><i class="fa fa-pencil editField"></i></a>
+		{{else}}
+		<i class="fa fa-pencil"></i>
+		{{/if}}
+
 		{{/if}}
               </div>
               <div class="col-md-1 text-center">
@@ -115,7 +115,8 @@
                 {{> afQuickField name="optional"}}
                 {{> afQuickField name="title" placeholder=getTitle}}
                 {{> afFieldInput type="hidden" name="name" value=currentType}}
-                {{> afFieldInput type="hidden" name="active" value=true}}
+                {{> afFieldInput type="hidden" name="active" value="true"}}
+                {{> afFieldInput type="hidden" name="authorFilable" value="false"}}
 
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">{{t "Save"}}</button>

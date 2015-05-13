@@ -39,7 +39,11 @@
               {{> editTypeName}}
               {{else}}
               <b>{{listingType}}</b>
+
+	      {{#if letEditTypeName}}
               <a href="#"><i class="fa fa-pencil editTypeName"></i></a>
+	      {{/if}}
+
 	      {{/if}}
             </div>
             <div class="col-md-1 text-center">

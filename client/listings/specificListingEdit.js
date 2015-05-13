@@ -102,6 +102,28 @@ Template.specificListingEdit.helpers({
 	if (curCat) {
 	    return Categories.find({parent:curCat[0]});
 	}
+    },
+    customFields: function () {
+	//return only custom fields
+	var curType=Session.get('listingType');
+	var custF=[];
+	var defF=[];
+	if (curType) {
+	    Main.findOne().listingFields.forEach(function (el) {
+		if (el.listingType===curType)
+		    custF=el.listingFields;
+	    });
+	    if (!Main.findOne({'defaultListingFields.listingType':curType}))
+		curType='DEFAULT';
+	    Main.findOne().defaultListingFields.forEach(function (el) {
+		if (el.listingType===curType)
+		    defF=el.listingFields;
+	    });
+
+	    var resF=_.filter(custF,function (obj) {return !_.findWhere(defF, obj)});
+
+	    return _.filter(resF,function (obj) {return obj.authorFilable});
+	};
     }
 });
 
@@ -171,6 +193,8 @@ Template.specificListingEdit.rendered = function () {
 	});
     } else {
 	$('#tokenfield').tokenfield();
+	//set default listing type
+	Session.set('listingType',Main.findOne().listingFields[0].listingType);
     };
     if (obj) {
 	Meteor.subscribe('images',[obj.image]);

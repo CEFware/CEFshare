@@ -1,82 +1,95 @@
-    defaultFields = [
+defaultFields = [
 	{
 	    name: 'title',
 	    title: 'Title',
 	    type: 'title',
 	    optional: false,
-	    active: true
+	    active: true,
+	    authorFilable: true
 	},
 	{
 	    name: 'description',
 	    title: 'Description',
 	    type: 'description',
 	    optional: false,
-	    active: true
+	    active: true,
+	    authorFilable: true
 	},
 	{
 	    name: 'details',
 	    title: 'Details',
 	    type: 'details',
 	    optional: false,
-	    active: true
+	    active: true,
+	    authorFilable: true
 	},
 	{
 	    name: 'price',
 	    title: 'Price',
 	    type: 'price',
 	    optional: false,
-	    active: true
+	    active: true,
+	    authorFilable: true
 	},
 	{
 	    name: 'tags',
 	    title: 'Tags',
 	    type: 'tags',
 	    optional: false,
-	    active: true
+	    active: true,
+	    authorFilable: true
 	},
 	{
 	    name: 'tax',
 	    title: 'Tax in % (0 - no tax)',
 	    type: 'tax',
 	    optional: false,
-	    active: true
+	    active: true,
+	    authorFilable: true
 	},
 	{
 	    name: 'shippingFee',
 	    title: 'Shipping (0 - no shipping)',
 	    type: 'shippingFee',
 	    optional: false,
-	    active: true
+	    active: true,
+	    authorFilable: true
 	},
 	{
 	    name: 'isRibbonSale',
 	    title: 'Show ribbon NEW?',
 	    type: 'isRibbonSale',
 	    optional: false,
-	    active: true
+	    active: true,
+	    authorFilable: true
 	},
 	{
 	    name: 'isRibbonNew',
 	    title: 'Show ribbon TRENDY?',
 	    type: 'isRibbonNew',
 	    optional: false,
-	    active: true
+	    active: true,
+	    authorFilable: true
 	},
 	{
 	    name: 'isPublic',
 	    title: 'Is this listing public?',
 	    type: 'isPublic',
 	    optional: false,
-	    active: true
+	    active: true,
+	    authorFilable: true
 	},
 	{
 	    name: 'active',
 	    title: 'Show in slider on homepage?',
 	    type: 'active',
 	    optional: false,
-	    active: true
+	    active: true,
+	    authorFilable: true
 	}
     ];
+
+var authorNonFilableFieldsTitles=['appStart', 'appEnd', 'appDuration', 'address'];
 
 Meteor.startup(function(){
 
@@ -168,7 +181,12 @@ Meteor.startup(function(){
 	    },
 	    listingFields: [{listingType: 'Product', listingFields:defaultFields},
 			    {listingType: 'Service', listingFields:defaultFields},
-			    {listingType: 'Rent', listingFields:defaultFields}]
+			    {listingType: 'Rent', listingFields:defaultFields}],
+	    defaultListingFields: [{listingType: 'Product', listingFields:defaultFields},
+			    {listingType: 'Service', listingFields:defaultFields},
+			    {listingType: 'Rent', listingFields:defaultFields},
+			    {listingType: 'DEFAULT', listingFields:defaultFields}],
+	    authorNonFilableFields: authorNonFilableFieldsTitles 
 	};
 	Main.insert(query);
     };

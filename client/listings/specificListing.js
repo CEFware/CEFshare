@@ -79,6 +79,30 @@ Template.specificListing.helpers({
 
     currency: function (amount) {
 	return accounting.formatMoney(amount);
+    },
+    customFields: function (listing) {
+        //return only custom fields
+        var curType=listing.listingType
+        var custF=[];
+        var defF=[];
+        if (curType) {
+            Main.findOne().listingFields.forEach(function (el) {
+                if (el.listingType===curType)
+                    custF=el.listingFields;
+            });
+            if (!Main.findOne({'defaultListingFields.listingType':curType}))
+                curType='DEFAULT';
+            Main.findOne().defaultListingFields.forEach(function (el) {
+                if (el.listingType===curType)
+                    defF=el.listingFields;
+            });
+	    
+            var res=_.filter(custF,function (obj) {return !_.findWhere(defF, obj)});
+	    for (var i=0;i<res.length;i++) {
+		res[i].value=listing[res[i].name];
+	    };
+	    return res;
+        };
     }
 });
 

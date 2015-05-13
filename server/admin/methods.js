@@ -1,3 +1,17 @@
+var makeId= function (n)
+{
+    if (!n)
+	n=5;
+    var text = "";
+    var possible = "abcdefghijklmnopqrstuvwxyz";
+//    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+    for( var i=0; i < n; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+
 Meteor.methods({
     saveAdminSocial: function (doc) {
 	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
@@ -111,6 +125,12 @@ Meteor.methods({
     },
     saveAdminListingTypeNewField: function (doc) {
 	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+	    //if this type is filable by author
+            if (Main.findOne({'authorNonFilableFieldsTitles':doc.name})) {
+		doc.authorFilable=false;
+	    } else {
+		doc.authorFilable=true;
+	    };
 	    check(doc, oneListingField);
 	    var typeName=doc.name;
 	    var cur=Main.findOne();
@@ -123,13 +143,10 @@ Meteor.methods({
 	    });
 	    arr=_.uniq(arr);
 	    //do increase new name addition until it becomes uniq in that array
-	    doc.name=doc.type;
-            var c=1;
+	    doc.name=makeId();
             while (arr.indexOf(doc.name)>-1) {
-                doc.name=doc.name+c;
-                c++;
+		doc.name=makeId();
             };
-	    
 	    var query=doc;
 	    Main.update({_id:cur._id, "listingFields.listingType":typeName}, {$addToSet:{"listingFields.$.listingFields":query}});
 	};

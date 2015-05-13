@@ -87,6 +87,10 @@
 		<span class="help-block">{{afFieldMessage name='tags'}}</span>
 		{{/if}}
 	      </div>
+	      {{#each customFields}}
+	      {{> afQuickField name=this.name options=afOptionsFromSchema}}
+	      {{/each}}
+	      
 	      {{> afQuickField name='isRibbonSale'}}
 	      {{> afQuickField name='isRibbonNew'}}
 	      {{> afQuickField name='isPublic'}}
@@ -164,6 +168,10 @@
 		<label class="control-label">{{t "Listing url"}}</label>
 		<input type="text" class="form-control" readonly value="{{appUrl}}listing/{{currentListing.uri}}">
 	      </div>
+	      {{#each customFields}}
+	      {{> afQuickField name=this.name options=afOptionsFromSchema}}
+	      {{/each}}
+
 	      {{> afQuickField name='isRibbonSale'}}
 	      {{> afQuickField name='isRibbonNew'}}
 	      {{> afQuickField name='isPublic'}}

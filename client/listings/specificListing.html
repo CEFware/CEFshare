@@ -153,6 +153,14 @@
 	  {{{listing.details}}}
         </div>
 
+        {{#each customFields listing}}
+        <div class="box" id="details">
+          <h4>{{this.title}}</h4>
+	  {{{this.value}}}
+        </div>
+        {{/each}}
+
+
 	{{#if isListingsByAuthor listing.author}}
         <div class="row">
           <div class="col-md-3 col-sm-6">
