@@ -37,6 +37,18 @@ Meteor.methods({
 	    };
 	};
     },
+    saveAdminDesign: function (doc) {
+	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+	    check(doc, designSchema);
+	    var query={design :doc};
+	    var cur=Main.findOne();
+	    if (cur) {
+		Main.update({_id:cur._id},{$set:query});
+	    } else {
+		Main.insert(query);
+	    };
+	};
+    },
     saveAdminLinks: function (doc) {
 	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
 	    check(doc, linksSchema);
