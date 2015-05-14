@@ -201,5 +201,15 @@ Meteor.methods({
 	    Main.update({'listingFields.listingType':lType},{$set:{'listingFields.$.listingType':newName}});
 	};
     },
-
+    saveAdminFilterUpdate : function (doc) {
+	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+	    if (!Main.findOne().filters) 
+		Main.update({},{$set:{filters:[]}},{upsert:1});
+	    if (Main.findOne({'filters.fieldName':doc.fieldName})) {
+		Main.update({'filters.fieldName':doc.fieldName},{$set:{"filters.$":doc}})
+	    } else {
+		Main.update({},{$addToSet:{filters:doc}})
+	    };
+	};	
+    }
 });

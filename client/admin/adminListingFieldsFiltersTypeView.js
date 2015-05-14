@@ -66,7 +66,10 @@ Template.adminListingFieldsFiltersTypeView.helpers({
         if (Main.findOne({'defaultListingFields.listingFields.title':this.title}))
             return false;
         return true;
-     }
+     },
+    letDefaultFilter: function () {
+	return this.name==='listingType';
+    }
 });
 
 Template.adminListingFieldsFiltersTypeView.rendered = function () {

@@ -42,5 +42,5 @@ cart
 mpowaga:autoform-summernote@0.4.1
 lepozepo:accounting
 aldeed:simple-schema@1.3.3
-dburles:google-maps@1.0.9
+dburles:google-maps@1.1.0
 summernote:standalone@0.6.6

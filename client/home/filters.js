@@ -25,6 +25,9 @@ Template.filters.helpers({
     },
     search: function () {
 	return Session.get('homeSearch');
+    },
+    filters: function () {
+	return Main.findOne().filters;
     }
 });
 

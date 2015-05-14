@@ -2,7 +2,7 @@ Meteor.publish('appSettings', function(){
     if (Roles.userIsInRole(this.userId,'admin')) {
 	return Main.find();
     };
-    return Main.find({},{fields:{publicData:1,listingFields:1,defaultListingFields:1,authorNonFilableFields:1}});
+    return Main.find({},{fields:{publicData:1,listingFields:1,defaultListingFields:1,authorNonFilableFields:1,filters:1}});
 });
 
 Meteor.publish('typesCount', function () {
