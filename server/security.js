@@ -74,3 +74,38 @@ Images.deny({
     }
 });
 
+Design.allow({
+    insert: function(userId, doc){
+	if (userId)
+            return true;
+    },
+    remove: function(userId, doc){
+	if (Roles.userIsInRole(userId,'admin'))
+            return true;
+    },
+    update: function(userId, doc, fieldNames, modifier){
+	if (Roles.userIsInRole(userId,'admin'))
+            return true;
+    },
+    download: function(userId, doc){
+        return true;
+    }
+});
+Design.deny({
+    insert: function(userId, doc){
+	if (userId)
+            return false;
+    },
+    remove: function(userId, doc){
+	if (Roles.userIsInRole(userId,'admin'))
+            return false;
+    },
+    update: function(userId, doc, fieldNames, modifier){
+	if (Roles.userIsInRole(userId,'admin'))
+            return false;
+    },
+    download: function(userId, doc){
+        return false;
+    }
+});
+

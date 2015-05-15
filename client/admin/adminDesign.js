@@ -6,7 +6,7 @@ Template.adminDesign.helpers({
         var res=Main.findOne();
         if (res)
             return res.design;
-     }
+    }
 });
 
 AutoForm.addHooks(['adminDesign'],{
@@ -17,4 +17,5 @@ AutoForm.addHooks(['adminDesign'],{
 
 Template.adminDesign.rendered = function () {
     Meteor.subscribe('appSettings');
+    Meteor.subscribe('design');
 };

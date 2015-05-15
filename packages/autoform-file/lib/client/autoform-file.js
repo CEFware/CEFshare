@@ -152,11 +152,37 @@ Template.afFileUpload.helpers({
           filename = collection.findOne({
             _id: file
           }).name();
-          src = collection.findOne({
-            _id: file
-          }).url({
-            store: 'thumbs'
-          });
+	    if (this.name==='desktopLogo') {
+		src = collection.findOne({
+		    _id: file
+		}).url({
+		    store: 'desktop'
+		});
+	    } else if (this.name==='socialLogo') {
+		src = collection.findOne({
+		    _id: file
+		}).url({
+		    store: 'social'
+		});
+	    } else if (this.name==='coverPhoto') {
+		src = collection.findOne({
+		    _id: file
+		}).url({
+		    store: 'thumb'
+		});
+	    } else if (this.name==='favicon') {
+		src = collection.findOne({
+		    _id: file
+		}).url({
+		    store: 'favicon'
+		});
+	    } else {
+		src = collection.findOne({
+		    _id: file
+		}).url({
+		    store: 'thumbs'
+		});
+	    };
         } else {
           filename = Session.get('fileUploadSelected[' + name + ']');
           obj = {
