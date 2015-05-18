@@ -28,5 +28,15 @@ Template.header.helpers({
         if (Accounts._loginButtonsSession.get("errorMessage"))
             return true;
         return false;
-    }
+    },
+    bigLogo: function () {
+	var res=Design.findOne({_id:Main.findOne().design.desktopLogo});
+	if (res)
+	    return res.url({store:"desktop"});
+    }, 
+    smallLogo: function () {
+	var res=Design.findOne({_id:Main.findOne().design.socialLogo});
+	if (res)
+	    return res.url({store:"social"});
+    } 
 });

@@ -179,6 +179,10 @@ Meteor.startup(function(){
 		googleClientId: "",
 		googleSecret: ""
 	    },
+	    design: {
+		color: "green",
+		defaultView: "grid"
+	    },
 	    listingFields: [{listingType: 'Product', listingFields:defaultFields},
 			    {listingType: 'Service', listingFields:defaultFields},
 			    {listingType: 'Rent', listingFields:defaultFields}],
