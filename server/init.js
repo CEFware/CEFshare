@@ -196,7 +196,7 @@ Meteor.startup(function(){
     };
     
     var main=Main.findOne();
-    if (main.basics.marketplaceName) {
+    if (main.basics && main.basics.marketplaceName) {
 	var title="<title>"+main.basics.marketplaceName+"</title>";
     } else {
 	var title="<title>"+TAPi18n.__('CEF new marketplace')+"</title>";
