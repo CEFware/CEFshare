@@ -196,7 +196,11 @@ Meteor.startup(function(){
     };
     
     var main=Main.findOne();
-    var title="<title>"+main.basics.marketplaceName+"</title>";
+    if (main.basics.marketplaceName) {
+	var title="<title>"+main.basics.marketplaceName+"</title>";
+    } else {
+	var title="<title>"+TAPi18n.__('CEF new marketplace')+"</title>";
+    };
     var style='<link rel="stylesheet" id="theme-stylesheet" type="text/css" href="/css/style.'+main.design.color+'.css">';
     var res=Design.findOne({_id:main.design.favicon});
     if (res) {
