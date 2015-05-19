@@ -203,3 +203,21 @@ Meteor.methods({
 	return  (process.env.METEOR_ENV || "development");
     }
 });
+
+var title="<title>"+Meteor.settings.public.marketplaceName+"</title>";
+var style='<link rel="stylesheet" id="theme-stylesheet" type="text/css" href="/css/style.'+Main.findOne().design.color+'.css">';
+var res=Design.findOne({_id:Main.findOne().design.favicon});
+if (res) {
+    res = res.url({store:"favicon"});
+} else {
+    res = "/img/CEF_favicon.png";
+};
+var favicon='<link rel="shortcut icon" type="text/css" href="'+res+'">';
+
+if (!Package.appcache)
+    WebApp.connectHandlers.use(function(req, res, next) {
+	if(Inject.appUrl(req.url)) {
+	    Inject.rawHead('myHead', title+style+favicon, res);
+	}
+	next();
+    });
