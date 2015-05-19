@@ -69,7 +69,7 @@ Meteor.methods({
 
     ban: function (userObj) {
 	this.unblock();
-	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+	if (Roles.userIsInRole(Meteor.userId(),'admin') && (userObj._id!==Meteor.userId())) {
             if (Roles.userIsInRole(userObj,'banned')) {
 		Roles.removeUsersFromRoles(userObj,'banned',Roles.GLOBAL_GROUP);
             } else {
@@ -80,7 +80,7 @@ Meteor.methods({
 
     makeAdmin: function (userObj) {
 	this.unblock();
-	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+	if (Roles.userIsInRole(Meteor.userId(),'admin') && (userObj._id!==Meteor.userId())) {
             if (Roles.userIsInRole(userObj,'admin')) {
 		Roles.removeUsersFromRoles(userObj,'admin',Roles.GLOBAL_GROUP);
             } else {
