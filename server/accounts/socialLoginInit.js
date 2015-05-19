@@ -29,19 +29,26 @@ ServiceConfiguration.configurations.insert({
 
 //staging settings - to be commented on localhost
 /**/
-ServiceConfiguration.configurations.insert({
+var resS=Main.findOne().socialAccounts
+
+if (resS && resS.twitterConsumerKey && resS.twitterSecret)
+    ServiceConfiguration.configurations.insert({
 	service: 'twitter',
-	consumerKey: "ojyyVrU0G11mhMgMDPuPoeWyG",
-	secret: "bssVKnnXSKzVoaoyhty3IcSeE45aJzf3SGwOaHnVlTgwnK1NvV"
-});
-ServiceConfiguration.configurations.insert({
+	consumerKey: resS.twitterConsumerKey,
+	secret: resS.twitterSecret
+    });
+
+if (resS && resS.fbAppId && resS.fbSecret)
+    ServiceConfiguration.configurations.insert({
 	service: 'facebook',
-	appId: "826479787389546",
-	secret: "c95d160223e2c54495d39b41cf4c6f66"
-});
-ServiceConfiguration.configurations.insert({
+	appId: 	resS.fbAppId,
+	secret: resS.fbSecret
+    });
+
+if (resS && resS.googleClientId && resS.googleSecret)
+    ServiceConfiguration.configurations.insert({
 	service: 'google',
-	clientId: "",
-	secret: ""
-});
+	clientId: resS.googleClientId,
+	secret: resS.googleSecret
+    });
 /**/

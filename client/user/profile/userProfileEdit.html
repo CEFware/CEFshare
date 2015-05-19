@@ -113,7 +113,9 @@
 
             {{#if isInRole 'verified'}}
             {{#each oauthService}}
+	    {{#if configured}}
             {{> atSocial}}
+	    {{/if}}
             {{/each}}
             <center>
               <br>
