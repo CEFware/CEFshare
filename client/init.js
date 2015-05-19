@@ -87,14 +87,5 @@ Meteor.startup(function() {
             Meteor.settings.public = Meteor.settings.public.development;
 	};
 	console.log("Using [ " + environment + " ] Meteor.settings");
-	
-//setting the right title & color to the html head -> we need to write own html head before app to start in order to have it working quick   
-	document.title=Meteor.settings.public.marketplaceName;
-	var sc = document.createElement("link");
-	sc.setAttribute("rel", "stylesheet");
-	sc.setAttribute("id", "theme-stylesheet");
-	sc.setAttribute("type", "text/css");
-	sc.setAttribute("href", "/css/style."+Meteor.settings.public.color+".css");
-	document.head.appendChild(sc);
     });
 });
