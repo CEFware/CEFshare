@@ -9,7 +9,19 @@ Template.home.helpers({
             if (imgs)
                 return imgs.url({store:'slider'});
         };
-    }
+    },
+    cover: function () {
+	return Main.findOne().design.coverPhotoUse;
+    },
+    coverPhoto: function () {
+        var pr=Main.findOne();
+        if (pr) {
+            var res=Design.findOne({_id:pr.design.coverPhoto});
+            if (res)
+                return res.url({store:"cover"});
+        };
+        return "/img/CEF_cover.jpg";
+     }
 });
 
 Template.home.events({

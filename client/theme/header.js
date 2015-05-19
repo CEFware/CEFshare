@@ -30,13 +30,21 @@ Template.header.helpers({
         return false;
     },
     bigLogo: function () {
-	var res=Design.findOne({_id:Main.findOne().design.desktopLogo});
-	if (res)
-	    return res.url({store:"desktop"});
+	var pr=Main.findOne();
+	if (pr) {
+	    var res=Design.findOne({_id:pr.design.desktopLogo});
+	    if (res) 
+		return res.url({store:"desktop"});
+	};
+	return "/img/CEF_logo.png";
     }, 
     smallLogo: function () {
-	var res=Design.findOne({_id:Main.findOne().design.socialLogo});
-	if (res)
-	    return res.url({store:"social"});
+	var pr=Main.findOne();
+	if (pr) {
+	    var res=Design.findOne({_id:pr.design.socialLogo});
+	    if (res)
+		return res.url({store:"social"});
+	};
+	return "/img/CEF_logo_small.png";
     } 
 });
