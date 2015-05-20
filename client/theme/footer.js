@@ -22,5 +22,11 @@ Template.footer.helpers({
 	if (res && res.socialAccounts && (res.socialAccounts.fbHandle || res.socialAccounts.twitterHandle || res.socialAccounts.googleHandle))
 	    return true;
 	return false;
-    }
+    },
+    address: function (key) {
+	var res=Main.findOne();
+	if (res && res.basics && res.basics.realAddress && res.basics.realAddress[key])
+	    return res.basics.realAddress[key];
+	return false;
+    } 
 });

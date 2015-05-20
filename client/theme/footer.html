@@ -17,13 +17,14 @@
                 <div class="col-md-3 col-sm-6">
 
                     <h4>{{t "Where to find us"}}</h4>
-
-                    <p><strong>{{t "CEF inc"}}</strong>
-                        <br>{{t "cef addr 1st line"}}
-                        <br>{{t "cef addr 2nd line"}}
-                        <br>{{t "cef city"}}
-                        <br>
-                        <strong>{{t "Great Britain"}}</strong>
+		    <p>
+                    {{#if address 'entityName'}}<strong>{{address 'entityName'}}</strong><br>{{/if}}
+                    {{#if address 'firstLine'}}{{address 'firstLine'}}<br>{{/if}}
+                    {{#if address 'secondLine'}}{{address 'secondLine'}}<br>{{/if}}
+                    {{#if address 'city'}}{{address 'city'}}&nbsp;{{/if}}
+                    {{#if address 'zip'}}{{address 'zip'}}&nbsp;{{/if}}
+                    {{#if address 'state'}}{{address 'state'}}<br>{{/if}}
+                    {{#if address 'country'}}<strong>{{address 'country'}}</strong>{{/if}}
                     </p>
 
                     <a href="{{pathFor 'contact'}}">{{t "Go to contact page"}}</a>

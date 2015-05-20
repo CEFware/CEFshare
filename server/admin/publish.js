@@ -8,6 +8,7 @@ Meteor.publish('appSettings', function(){
 				 authorNonFilableFields:1,
 				 filters:1,
 				 design:1,
+				 basics:1,
 				 'socialAccounts.fbHandle':1,
 				 'socialAccounts.twitterHandle':1,
 				 'socialAccounts.googleHandle':1
