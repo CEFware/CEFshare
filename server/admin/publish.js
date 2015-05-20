@@ -2,7 +2,16 @@ Meteor.publish('appSettings', function(){
     if (Roles.userIsInRole(this.userId,'admin')) {
 	return Main.find();
     };
-    return Main.find({},{fields:{publicData:1,listingFields:1,defaultListingFields:1,authorNonFilableFields:1,filters:1,design:1}});
+    return Main.find({},{fields:{publicData:1,
+				 listingFields:1,
+				 defaultListingFields:1,
+				 authorNonFilableFields:1,
+				 filters:1,
+				 design:1,
+				 'socialAccounts.fbHandle':1,
+				 'socialAccounts.twitterHandle':1,
+				 'socialAccounts.googleHandle':1
+				}});
 });
 
 Meteor.publish('typesCount', function () {
