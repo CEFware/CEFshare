@@ -12,7 +12,10 @@ Template.adminListingFieldsFiltersFieldFilter.helpers({
 	    return el.listingType=== Router.current().params.listingType})[0].listingFields, function (el2) {return el2.type===Router.current().params.field})[0].title;
     },
     filterObj: function () {
-	return _.filter(Main.findOne().filters, function (el) {return el.fieldName===Router.current().params.field})[0];
+	res=_.filter(Main.findOne().filters, function (el) {return el.fieldName===Router.current().params.field})[0];
+	if (res)
+	    return res;
+	return {title:'',active:false,fieldName:Router.current().params.field};
     }
 });
 
