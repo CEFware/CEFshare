@@ -65,8 +65,9 @@
                 <div class="col-md-3 col-sm-6">
 
                     <h4>{{t "Get the news"}}</h4>
-
-                    <p class="text-muted">{{t "subscribe text"}}</p>
+		    {{#if getNewsText}}
+                    <p class="text-muted">{{getNewsText}}</p>
+		    {{/if}}
 		    <div>
 		      {{flash '2'}}
 		    </div>

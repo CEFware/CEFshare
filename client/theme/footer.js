@@ -28,5 +28,11 @@ Template.footer.helpers({
 	if (res && res.basics && res.basics.realAddress && res.basics.realAddress[key])
 	    return res.basics.realAddress[key];
 	return false;
+    },
+    getNewsText: function () {
+	var res=Main.findOne();
+	if (res && res.instructions && res.instructions.subscribeInfo)
+	    return res.instructions.subscribeInfo;
+	return false;
     } 
 });
