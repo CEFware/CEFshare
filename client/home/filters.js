@@ -26,8 +26,12 @@ Template.filters.helpers({
     search: function () {
 	return Session.get('homeSearch');
     },
-    filters: function () {
-	return Main.findOne().filters;
+    homeFiltersSchemaObj: function () {
+	//build custom SimpleSchema for the filters form our of base schema
+	return new SimpleSchema({});
+    },
+    homeFiltersNow: function () {
+	//return current stage of the filters
     }
 });
 

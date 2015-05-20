@@ -31,14 +31,19 @@
     {{/if}}
     {{/each}}
 
-    {{#each filters}}
 
-    {{#if active}}
-    <h3>{{title}}</h3>
+    {{#autoForm schema=homeFiltersSchemaObj id="homeFilters" type="method" meteormethod="homeFilters" doc=homeFiltersNow}}
+    <fieldset>
+      {{#each afFieldNames}}
+      {{> afQuickField name=this.name options=afOptionsFromSchema}}
+      {{/each}}
 
-    {{/if}}
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">{{t "Use"}}</button>
+        <button type="reset" class="btn btn-default reset">{{t "Reset"}}</button>
+      </div>
+    </fieldset>
+    {{/autoForm}}
 
-    {{/each}}
-    
   </div>
 </template>
