@@ -36,28 +36,50 @@
                   <tr>
                     <th>{{t "Date"}}</th>
                     <th>{{t "Subject"}}</th>
+                    <th>{{t "Status"}}</th>
                     <th>{{t "Reach"}}</th>
                     <th>{{t "Action"}}</th>
+                    <th></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  {{#each listMaillistIssues}}
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a href="#" class="btn btn-primary">RESEND</a></td>
+                  {{#each listMaillistMsgs}}
+                  <tr {{ifEditing}}>
+                    <td>{{formatDate createdAt}}</td>
+                    <td>{{subject}}</td>
+                    <td><span class="label label-{{label status}}">{{status}}</span></td>
+                    <td>received/current # of users</td>
+                    <td><a href="#" class="btn btn-primary editMsg">{{t "EDIT"}}</a></td>
+		    {{#if sent}}
+                    <td>
+		      <input type="radio" name="{{_id}}" value="all"><small>{{t "ALL"}}</small><br>
+		      <input type="radio" name="{{_id}}" value="new"><small>{{t "NEW"}}</small>
+		    </td>
+                    <td>
+		      <button class="btn btn-primary sendMsg" type="button">{{t "RESEND"}}</button>
+		    </td>
+		    {{else}}
+                    <td colspan="2">
+		      <a href="#" class="btn btn-primary sendMsg">{{t "SEND"}}</a>
+		      <a href="#" class="btn btn-primary delMsg"><i class="fa fa-trash"></i></a>
+		    </td>
+		    {{/if}}
                   </tr>
                   {{else}}
                   <tr>
-                    <td colspan="5"><h4 class="text-center">Nothing here yet.</h4></td>
+                    <td colspan="5"><h4 class="text-center">{{t "Nothing here yet."}}</h4></td>
                   </tr>
                   {{/each}}
                 </tbody>
               </table>
             </div>
-	  <h3>{{t "Compose new broadcast message"}}</h3>
-                {{#autoForm schema=maillistSchemaObj id="sendBroadcastMessage" type="method" meteormethod="sendBroadcastMessage"}}
+	    {{#if curMsg}}
+	    <h3>{{t "Edit broadcast message"}}</h3>
+	    {{else}}
+	    <h3>{{t "Compose new broadcast message"}}</h3>
+	    {{/if}}
+                {{#autoForm collection="Maillist" id="sendBroadcastMessage" type=fType doc=curMsg}}
                 <fieldset>
                   <div>
                     {{flash '1'}}
@@ -68,8 +90,11 @@
                   {{> afFieldInput type="hidden" name="status" value="PREPARED"}}
 
                   <div class="text-center">
-                    <button type="submit" class="btn btn-primary">{{t "Send"}}</button>
+                    <button type="submit" class="btn btn-primary">{{t "Save"}}</button>
                     <button type="reset" class="btn btn-default">{{t "Reset"}}</button>
+		    {{#if curMsg}}
+                    <button class="btn btn-danger cancel">{{t "Cancel"}}</button>
+		    {{/if}}
                   </div>
                 </fieldset>
                 {{/autoForm}}

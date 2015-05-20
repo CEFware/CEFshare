@@ -37,6 +37,9 @@ Orders.permit(['insert']).ifLoggedIn().apply();
 Orders.permit(['update']).ifLoggedIn().ifOwner().apply();
 Orders.permit(['insert','update','remove']).ifLoggedIn().ifHasRole('admin').apply();
 
+//Maillist - only admin may do everything
+Maillist.permit(['insert','update','remove']).ifLoggedIn().ifHasRole('admin').apply();
+
 //Images - only verified user may insert, admin & owner remove, only owner - update
 //SAMPLE CURRENTLY
 Images.allow({

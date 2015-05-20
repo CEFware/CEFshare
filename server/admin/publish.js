@@ -23,3 +23,10 @@ Meteor.publish('typesCount', function () {
     });
     return TypesCount.find();
 });
+
+Meteor.publish('maillist', function(){
+    if (Roles.userIsInRole(this.userId,'admin')) {
+	return Maillist.find();
+    };
+});
+
