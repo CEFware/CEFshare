@@ -31,7 +31,7 @@
     {{/if}}
     {{/each}}
 
-
+    {{#if showFilters}}
     {{#autoForm schema=homeFiltersSchemaObj id="homeFilters" type="method" meteormethod="homeFilters" doc=homeFiltersNow}}
     <fieldset>
       {{#each afFieldNames}}
@@ -44,6 +44,6 @@
       </div>
     </fieldset>
     {{/autoForm}}
-
+    {{/if}}
   </div>
 </template>

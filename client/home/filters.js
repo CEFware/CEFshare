@@ -26,6 +26,11 @@ Template.filters.helpers({
     search: function () {
 	return Session.get('homeSearch');
     },
+    showFilters: function () {
+	if (Main.findOne({'filters.active':true}))
+	    return true;
+	return false;
+    },
     homeFiltersSchemaObj: function () {
 	//build custom SimpleSchema for the filters form our of base schema
 	return new SimpleSchema({});
