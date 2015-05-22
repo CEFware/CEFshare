@@ -50,6 +50,7 @@ dburles:google-maps@1.1.1
 ddp@1.1.0
 deps@1.0.7
 ejson@1.0.6
+elevatedevdesign:autoform-nouislider@0.0.4
 email@1.0.6
 facebook@1.2.0
 fastclick@1.0.3
@@ -107,6 +108,7 @@ ongoworks:security@1.1.0
 ordered-dict@1.0.3
 raix:eventemitter@0.1.2
 random@1.0.3
+rcy:nouislider@7.0.7_2
 reactive-dict@1.1.0
 reactive-var@1.0.5
 reload@1.1.3
