@@ -1,7 +1,0 @@
-allUserOrders = function () {
-  return Orders.find({owner:this.userId});
-}
-
-orderById = function (id) {
-    return Orders.find({idStripe:id}, {fields:});
-}
