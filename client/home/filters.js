@@ -100,7 +100,7 @@ Template.filters.helpers({
 	    var finSchema=new SimpleSchema(schema);
 	    var objL={};
 	    res.filters.forEach(function (el){
-		objL[el.fieldName]=el.title;
+		objL[el.fieldName]=eval("tmp=function () {return TAPi18n.__('"+el.title+"')}");
 	    });
 	    finSchema.labels(objL);
 	};
