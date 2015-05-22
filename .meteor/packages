@@ -12,7 +12,7 @@ twbs:bootstrap
 fortawesome:fontawesome
 natestrauser:select2
 aldeed:collection2
-aldeed:autoform@5.0.0
+aldeed:autoform@5.2.0
 aldeed:autoform-select2@2.0.2
 zimme:select2-bootstrap3-css@1.4.6
 naxio:flash
@@ -46,3 +46,4 @@ dburles:google-maps@1.1.1
 summernote:standalone@0.6.7
 useraccounts:core@1.10.0
 meteorhacks:inject-initial
+cunneen:mailgun

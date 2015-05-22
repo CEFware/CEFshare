@@ -29,7 +29,10 @@ ServiceConfiguration.configurations.insert({
 
 //staging settings - to be commented on localhost
 /**/
-var resS=Main.findOne().socialAccounts
+
+var resS=Main.findOne();
+if (resS && resS.socialAccounts)
+    resS=resS.socialAccounts;
 
 if (resS && resS.twitterConsumerKey && resS.twitterSecret)
     ServiceConfiguration.configurations.insert({

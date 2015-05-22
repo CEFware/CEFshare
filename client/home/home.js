@@ -11,7 +11,10 @@ Template.home.helpers({
         };
     },
     cover: function () {
-	return Main.findOne().design.coverPhotoUse;
+	var res=Main.findOne();
+	if (res && res.design && res.design.coverPhotoUse)
+	    return res.design.coverPhotoUse;
+	return false;
     },
     coverPhoto: function () {
         var pr=Main.findOne();

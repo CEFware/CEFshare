@@ -181,7 +181,8 @@ Meteor.startup(function(){
 	    },
 	    design: {
 		color: "green",
-		defaultView: "grid"
+		defaultView: "grid",
+		coverPhotoUse:false
 	    },
 	    listingFields: [{listingType: 'Product', listingFields:defaultFields},
 			    {listingType: 'Service', listingFields:defaultFields},
@@ -196,15 +197,18 @@ Meteor.startup(function(){
     };
     
     var main=Main.findOne();
-    if (main.basics && main.basics.marketplaceName) {
+    if (main && main.basics && main.basics.marketplaceName) {
 	var title="<title>"+main.basics.marketplaceName+"</title>";
     } else {
 	var title="<title>"+TAPi18n.__('CEF new marketplace')+"</title>";
     };
-    var style='<link rel="stylesheet" id="theme-stylesheet" type="text/css" href="/css/style.'+main.design.color+'.css">';
-    var res=Design.findOne({_id:main.design.favicon});
-    if (res) {
-	res = res.url({store:"favicon"});
+    if (main && main.design && main.design.color) {
+	var style='<link rel="stylesheet" id="theme-stylesheet" type="text/css" href="/css/style.'+main.design.color+'.css">';
+    } else {
+	var style='<link rel="stylesheet" id="theme-stylesheet" type="text/css" href="/css/style.green.css">';
+    };
+    if (main && main.design && main.design.favicon && Design.findOne({_id:main.design.favicon})) {
+	res = Design.findOne({_id:main.design.favicon}).url({store:"favicon"});
     } else {
 	res = "/img/CEF_favicon.png";
     };
