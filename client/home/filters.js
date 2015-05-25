@@ -27,8 +27,10 @@ var baseFilters = new SimpleSchema ({
     options: {
 	type: [String],
 	optional: true,
-	autoform: {
-	    options: [{label:'first',value:'f'}, {label:'2nd',value:'2'}]
+	autoform: { 
+	    options : function () {
+		return FiltersData.findOne()[this.name];
+	    } 
 	}
     }
 });
@@ -84,6 +86,8 @@ Template.filters.helpers({
 		    case 'Number':
 			var nObj = {};
 			nObj[el.fieldName]=baseFilters._schema.range;
+			nObj[el.fieldName+'.lower']=baseFilters._schema['range.lower'];
+			nObj[el.fieldName+'.upper']=baseFilters._schema['range.upper'];
 			schema.push(nObj);
 			break;
 		    case 'Boolean':
@@ -108,6 +112,19 @@ Template.filters.helpers({
     },
     homeFiltersNow: function () {
 	//return current stage of the filters
+    },
+    customRange: function () {
+	if (Listing._schema[this.name].type.name==='Number') {
+	    var res = FiltersData.findOne()[this.name];
+	    return '{"min":'+res.min+',"max":'+res.max+'}';
+	};
+	return '';
+    },
+    startRange: function () {
+	if (Listing._schema[this.name].type.name==='Number') {
+	    var res = FiltersData.findOne()[this.name];
+	    return '['+res.min+','+res.max+']';
+	};
     }
 });
 
@@ -157,5 +174,4 @@ Template.filters.events({
 
 Template.filters.rendered = function() {
     Meteor.subscribe('categories');
-    Meteor.subscribe('filtersData');
 };

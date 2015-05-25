@@ -37,7 +37,9 @@
     {{#autoForm schema=homeFiltersSchemaObj id="homeFilters" type="method" meteormethod="homeFilters" doc=homeFiltersNow}}
     <fieldset>
       {{#each afFieldNames}}
-      {{> afQuickField name=this.name options=afOptionsFromSchema}}
+      
+      {{> afQuickField name=this.name options=afOptionsFromSchema range=customRange start=startRange}}
+
       {{/each}}
 
       <div class="text-center">

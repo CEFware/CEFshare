@@ -11,7 +11,8 @@ Meteor.publish('filtersData',function () {
 		    //get variants for this filter field 
 		    var query={};
 		    query[el.fieldName]={$exists:true};
-		    queryG[el.fieldName]=_.uniq(_.map(Listings.find(query).fetch(),function (el2) {return el2[el.fieldName]}));
+		    var tA=_.uniq(_.map(Listings.find(query).fetch(),function (el2) {return el2[el.fieldName]}));
+		    queryG[el.fieldName]=tA.map(function (val){return {label: val, value: val}});
                     break;
                 case 'Number':
 		    //get range for this filter field
@@ -19,7 +20,7 @@ Meteor.publish('filtersData',function () {
 		    query[el.fieldName]={$exists:true};
 		    var max=Math.max.apply(null,_.map(Listings.find(query).fetch(),function (el2) {return el2[el.fieldName]}));
 		    var min=Math.min.apply(null,_.map(Listings.find(query).fetch(),function (el2) {return el2[el.fieldName]}));
-		    queryG[el.fieldName]={max:max,min:min};
+		    queryG[el.fieldName]={min:min,max:max};
                     break;
                 default:
                     break;
