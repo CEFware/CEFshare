@@ -18,7 +18,7 @@ var baseFilters = new SimpleSchema ({
 	}
     },
     bool: {
-	type: [String],
+	type: Boolean,
 	optional: true,
 	autoform: {
 	    options: [{label:'YES',value:true}, {label:'NO',value:false}]
@@ -93,7 +93,6 @@ Template.filters.helpers({
 		    case 'Boolean':
 			var nObj = {};
 			nObj[el.fieldName]=baseFilters._schema.bool;
-			nObj[el.fieldName+'.$']=baseFilters._schema['bool.$'];
 			schema.push(nObj);
 			break;
 		    default:
@@ -112,6 +111,9 @@ Template.filters.helpers({
     },
     homeFiltersNow: function () {
 	//return current stage of the filters
+	var res= Session.get('filters');
+	if (res && res.filters)
+	    return res.filters;
     },
     customRange: function () {
 	if (Listing._schema[this.name].type.name==='Number') {
@@ -169,18 +171,38 @@ Template.filters.events({
 	e.preventDefault();
 	$('#search-box').val("");
 	Session.set('homeSearch',null);
+    },
+    'click .reset': function (e,t) {
+	Session.set('filters',null);
     }
 });
 
 Template.filters.rendered = function() {
     Meteor.subscribe('categories');
-    var res=Main.findOne();
-    if (res && res.filters) {
-	res.filters.forEach(function (el){
-	    if (el.active && (Listing._schema[el.fieldName].type.name==='Number')) {
-		$('[name='+el.fieldName+'] .nouislider').Link('lower').to($('#lower'+el.fieldName));
-		$('[name='+el.fieldName+'] .nouislider').Link('upper').to($('#upper'+el.fieldName));
-	    };
-	});
-    };
+    Tracker.autorun(function () {
+	var k=Session.get('filters');
+	if (k) k=k.filters;
+	var res=Main.findOne();
+	if (res && res.filters) {
+	    res.filters.forEach(function (el){
+		if (el.active && (Listing._schema[el.fieldName].type.name==='Number')) {
+		    if (k && k[el.fieldName]) {
+			var newr=[];
+			newr.push(k[el.fieldName].lower);
+			newr.push(k[el.fieldName].upper);
+			$('[name='+el.fieldName+'] .nouislider').val(newr);
+		    };
+		    $('[name='+el.fieldName+'] .nouislider').Link('lower').to($('#lower'+el.fieldName));
+		    $('[name='+el.fieldName+'] .nouislider').Link('upper').to($('#upper'+el.fieldName));
+		};
+	    });
+	};
+    });
 };
+
+AutoForm.addHooks(['homeFilters'],{
+    onSuccess: function (){
+        window.scrollTo(0,0);
+    }
+});
+
