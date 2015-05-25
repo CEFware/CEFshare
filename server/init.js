@@ -182,7 +182,8 @@ Meteor.startup(function(){
 	    design: {
 		color: "green",
 		defaultView: "grid",
-		coverPhotoUse:false
+		coverPhotoUse:false,
+		stillPhotoUse:true
 	    },
 	    listingFields: [{listingType: 'Product', listingFields:defaultFields},
 			    {listingType: 'Service', listingFields:defaultFields},
