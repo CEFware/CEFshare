@@ -24,6 +24,21 @@ Template.home.helpers({
                 return res.url({store:"cover"});
         };
         return "/img/CEF_cover.jpg";
+    },
+    still: function () {
+	var res=Main.findOne();
+	if (res && res.design && res.design.stillPhotoUse)
+	    return res.design.stillPhotoUse;
+	return true;
+    },
+    stillPhoto: function () {
+        var pr=Main.findOne();
+        if (pr) {
+            var res=Design.findOne({_id:pr.design.stillPhoto});
+            if (res)
+                return res.url({store:"still"});
+        };
+        return "/img/CEF_still.jpg";
      }
 });
 

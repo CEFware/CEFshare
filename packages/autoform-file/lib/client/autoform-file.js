@@ -170,6 +170,12 @@ Template.afFileUpload.helpers({
 		}).url({
 		    store: 'thumb'
 		});
+	    } else if (this.name==='stillPhoto') {
+		src = collection.findOne({
+		    _id: file
+		}).url({
+		    store: 'thumb'
+		});
 	    } else if (this.name==='favicon') {
 		src = collection.findOne({
 		    _id: file

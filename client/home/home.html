@@ -77,8 +77,8 @@
             <!-- /.container -->
 
             <!-- *** PROMO BAR *** -->
-
-            <div class="bar background-image-fixed-2 no-mb color-white text-center">
+	    {{#if still}}
+            <div  style="background: url('{{stillPhoto}}') no-repeat center top; background-attachment: fixed; background-size: cover;" class="bar no-mb color-white text-center">
                 <div class="dark-mask"></div>
                 <div class="container">
                     <div class="row">
@@ -98,7 +98,7 @@
                     </div>
                 </div>
             </div>
-
+	    {{/if}}
             <!-- *** PROMO BAR END *** -->
 
         </div>
