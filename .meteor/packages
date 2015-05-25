@@ -47,4 +47,4 @@ summernote:standalone@0.6.7
 useraccounts:core@1.10.0
 meteorhacks:inject-initial
 cunneen:mailgun
-elevatedevdesign:autoform-nouislider
+elevatedevdesign:autoform-nouislider@0.0.5
