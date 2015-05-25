@@ -38,7 +38,19 @@
     <fieldset>
       {{#each afFieldNames}}
       
+      {{#if customRange}}
+      
+      <div class="form-group{{#if afFieldIsInvalid name=this.name}} has-error{{/if}}">
+        <label class="control-label">{{getLabel}} (<span id="lower{{this.name}}"></span> - <span id="upper{{this.name}}"></span>)</label><br>
+        {{> afFieldInput name=this.name options=afOptionsFromSchema range=customRange start=startRange}}
+        {{#if afFieldIsInvalid name=this.name}}
+        <span class="help-block">{{afFieldMessage name=this.name}}</span>
+        {{/if}}
+      </div>
+
+      {{else}} 
       {{> afQuickField name=this.name options=afOptionsFromSchema range=customRange start=startRange}}
+      {{/if}}
 
       {{/each}}
 

@@ -101,7 +101,7 @@ Template.filters.helpers({
 		    };
 		};
 	    });
-	    var finSchema=new SimpleSchema(schema);
+	    finSchema=new SimpleSchema(schema);
 	    var objL={};
 	    res.filters.forEach(function (el){
 		objL[el.fieldName]=eval("tmp=function () {return TAPi18n.__('"+el.title+"')}");
@@ -118,13 +118,17 @@ Template.filters.helpers({
 	    var res = FiltersData.findOne()[this.name];
 	    return '{"min":'+res.min+',"max":'+res.max+'}';
 	};
-	return '';
+	return null;
     },
     startRange: function () {
 	if (Listing._schema[this.name].type.name==='Number') {
 	    var res = FiltersData.findOne()[this.name];
 	    return '['+res.min+','+res.max+']';
 	};
+	return null;
+    },
+    getLabel: function () { 
+	return finSchema._schema[this.name].label();
     }
 });
 
@@ -166,12 +170,17 @@ Template.filters.events({
 	$('#search-box').val("");
 	Session.set('homeSearch',null);
     }
-
-
-
-
 });
 
 Template.filters.rendered = function() {
     Meteor.subscribe('categories');
+    var res=Main.findOne();
+    if (res && res.filters) {
+	res.filters.forEach(function (el){
+	    if (el.active && (Listing._schema[el.fieldName].type.name==='Number')) {
+		$('[name='+el.fieldName+'] .nouislider').Link('lower').to($('#lower'+el.fieldName));
+		$('[name='+el.fieldName+'] .nouislider').Link('upper').to($('#upper'+el.fieldName));
+	    };
+	});
+    };
 };
