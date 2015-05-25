@@ -157,4 +157,5 @@ Template.filters.events({
 
 Template.filters.rendered = function() {
     Meteor.subscribe('categories');
+    Meteor.subscribe('filtersData');
 };
