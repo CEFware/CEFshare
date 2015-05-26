@@ -1,3 +1,27 @@
+var getCustomFields = function (listing) {
+    var curType=listing.listingType;
+    var custF=[];
+    var defF=[];
+    if (curType) {
+        Main.findOne().listingFields.forEach(function (el) {
+            if (el.listingType===curType)
+                custF=el.listingFields;
+        });
+        if (!Main.findOne({'defaultListingFields.listingType':curType}))
+            curType='DEFAULT';
+        Main.findOne().defaultListingFields.forEach(function (el) {
+            if (el.listingType===curType)
+                defF=el.listingFields;
+        });
+	    
+        var res=_.filter(custF,function (obj) {return !_.findWhere(defF, obj)});
+	for (var i=0;i<res.length;i++) {
+	    res[i].value=listing[res[i].name];
+	};
+	return res;
+    };
+};
+
 Template.specificListing.helpers({
     listingImg: function (){
 	var listing = specificListingByURI(Router.current().params.uri).fetch().first();
@@ -76,33 +100,48 @@ Template.specificListing.helpers({
 	    return true;
 	return false;
     },
-
     currency: function (amount) {
 	return accounting.formatMoney(amount);
     },
     customFields: function (listing) {
-        //return only custom fields
-        var curType=listing.listingType
-        var custF=[];
-        var defF=[];
-        if (curType) {
-            Main.findOne().listingFields.forEach(function (el) {
-                if (el.listingType===curType)
-                    custF=el.listingFields;
-            });
-            if (!Main.findOne({'defaultListingFields.listingType':curType}))
-                curType='DEFAULT';
-            Main.findOne().defaultListingFields.forEach(function (el) {
-                if (el.listingType===curType)
-                    defF=el.listingFields;
-            });
-	    
-            var res=_.filter(custF,function (obj) {return !_.findWhere(defF, obj)});
-	    for (var i=0;i<res.length;i++) {
-		res[i].value=listing[res[i].name];
+        //return only custom fields filable by seller
+	return _.filter(getCustomFields(listing), function (el) {return el.authorFilable});
+    },
+    showClientFields: function (listing) {
+	return (_.filter(getCustomFields(listing), function (el) {return !el.authorFilable})).length>0;
+    },
+    clientFieldsSchemaObj: function () {
+	var listing=Listings.findOne({uri:Router.current().params.uri});
+	var fields=_.filter(getCustomFields(listing), function (el) {return !el.authorFilable});
+	var obj=[];
+        fields.forEach(function (el){
+            if (el.active) {
+		var newField=ListingMain._schema[el.type];
+		if (newField.type.name==="Array") {
+                    var nObj = {};
+                    nObj[el.name]=ListingMain._schema[el.type];
+                    nObj[el.name].optional=el.optional;
+                    nObj[el.name+'.$']=ListingMain._schema[el.type+'.$'];
+                    nObj[el.name+'.$'].optional=el.optional;
+                    obj.push(nObj);
+		} else {
+                    var nObj = {};
+                    newField.optional=el.optional;
+                    nObj[el.name]=newField;
+                    obj.push(nObj);
+		};
 	    };
-	    return res;
-        };
+        });
+
+        finSchema=new SimpleSchema(obj);
+
+        var objL={};
+        fields.forEach(function (el){
+            objL[el.name]=eval("tmp=function () {return TAPi18n.__('"+el.title+"')}");
+        });
+        finSchema.labels(objL);
+ 	
+	return finSchema;
     }
 });
 

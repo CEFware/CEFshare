@@ -137,12 +137,6 @@ Meteor.methods({
     },
     saveAdminListingTypeNewField: function (doc) {
 	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
-	    //if this type is filable by author
-            if (Main.findOne({'authorNonFilableFieldsTitles':doc.name})) {
-		doc.authorFilable=false;
-	    } else {
-		doc.authorFilable=true;
-	    };
 	    check(doc, oneListingField);
 	    var typeName=doc.name;
 	    var cur=Main.findOne();

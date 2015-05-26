@@ -99,22 +99,33 @@
             <div class="box">
 
               <form>
-                <div class="sizes">
+                <div>
 
-                  <h3>{{t "Available sizes"}}</h3>
 
-                  <label for="size_s">
-                    <a href="#">S</a>
-                    <input type="radio" id="size_s" name="size" value="s" class="size-input">
-                  </label>
-                  <label for="size_m">
-                    <a href="#">M</a>
-                    <input type="radio" id="size_m" name="size" value="m" class="size-input">
-                  </label>
-                  <label for="size_l">
-                    <a href="#">L</a>
-                    <input type="radio" id="size_l" name="size" value="l" class="size-input">
-                  </label>
+
+		  {{#if showClientFields listing}}
+
+		  {{#autoForm schema=clientFieldsSchemaObj id="clientFields" type="method" meteormethod="clientFields" resetOnSuccess=true}}
+		  <fieldset>
+
+		    {{#each afFieldNames}}
+
+		    {{> afQuickField name=this.name options=afOptionsFromSchema}}
+
+		    {{/each}}
+
+		    <div class="text-center">
+		      <button type="submit" class="btn btn-primary">{{t "Use"}}</button>
+		      <button type="reset" class="btn btn-default reset">{{t "Reset"}}</button>
+		    </div>
+		  </fieldset>
+		  {{/autoForm}}
+
+		  {{/if}}
+ 
+
+
+
 
                 </div>
 
