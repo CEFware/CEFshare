@@ -5,7 +5,6 @@ Meteor.publish('filtersData',function () {
         res.filters.forEach(function (el){
             if (el.active) {
                 var type=Listing._schema[el.fieldName].type.name;
-
                 switch (type) {
                 case 'String':
 		    //get variants for this filter field 
@@ -20,6 +19,9 @@ Meteor.publish('filtersData',function () {
 		    query[el.fieldName]={$exists:true};
 		    var max=Math.max.apply(null,_.map(Listings.find(query).fetch(),function (el2) {return el2[el.fieldName]}));
 		    var min=Math.min.apply(null,_.map(Listings.find(query).fetch(),function (el2) {return el2[el.fieldName]}));
+		    if ((max == Number.POSITIVE_INFINITY) || (max == Number.NEGATIVE_INFINITY)) max=100;
+		    if ((min == Number.POSITIVE_INFINITY) || (min == Number.NEGATIVE_INFINITY)) min=0;
+		    if (min === max) min=0;
 		    queryG[el.fieldName]={min:min,max:max};
                     break;
                 default:

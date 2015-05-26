@@ -112,8 +112,8 @@ Template.filters.helpers({
     homeFiltersNow: function () {
 	//return current stage of the filters
 	var res= Session.get('filters');
-	if (res && res.filters)
-	    return res.filters;
+	if (res)
+	    return res;
     },
     customRange: function () {
 	if (Listing._schema[this.name].type.name==='Number') {
@@ -173,7 +173,20 @@ Template.filters.events({
 	Session.set('homeSearch',null);
     },
     'click .reset': function (e,t) {
-	Session.set('filters',null);
+	var ses={};
+	($('.nouislider')).map(function (el,v){ 
+	    var name=$(v).parent().attr('name');
+	    var res = FiltersData.findOne()[name];
+	    ses[name]={lower:res.min,upper:res.max};
+	});
+	Session.set('filters',ses);
+	setTimeout(function () {
+	    ($('.nouislider')).map(function (el,v){ 
+		var name=$(v).parent().attr('name');
+		$('[name='+name+'] .nouislider').Link('lower').to($('#lower'+name));
+		$('[name='+name+'] .nouislider').Link('upper').to($('#upper'+name));
+	    });
+	}, 300);
     }
 });
 
@@ -181,10 +194,30 @@ Template.filters.rendered = function() {
     Meteor.subscribe('categories');
     Tracker.autorun(function () {
 	var curFilters=Session.get('filters');
-	if (curFilters && curFilters.filters) curFilters=curFilters.filters;
+	setTimeout(function () {
+	    ($('.nouislider')).map(function (el,v){ 
+		var name=$(v).parent().attr('name');
+		if (curFilters && curFilters[name]) {
+		    var newr=[];
+		    newr.push(curFilters[name].lower);
+		    newr.push(curFilters[name].upper);
+		    $('[name='+name+'] .nouislider').val(newr);
+		};
+		$('[name='+name+'] .nouislider').Link('lower').to($('#lower'+name));
+		$('[name='+name+'] .nouislider').Link('upper').to($('#upper'+name));
+	    });
+	}, 300);
+    });
+};
+
+AutoForm.addHooks(['homeFilters'],{
+    onSuccess: function (){
+        window.scrollTo(0,0);
+
+	var curFilters=Session.get('filters');
 	($('.nouislider')).map(function (el,v){ 
 	    var name=$(v).parent().attr('name');
-	    if (curFilters) {
+	    if (curFilters && curFilters[name]) {
 		var newr=[];
 		newr.push(curFilters[name].lower);
 		newr.push(curFilters[name].upper);
@@ -193,12 +226,7 @@ Template.filters.rendered = function() {
 	    $('[name='+name+'] .nouislider').Link('lower').to($('#lower'+name));
 	    $('[name='+name+'] .nouislider').Link('upper').to($('#upper'+name));
 	})
-    });
-};
 
-AutoForm.addHooks(['homeFilters'],{
-    onSuccess: function (){
-        window.scrollTo(0,0);
     }
 });
 
