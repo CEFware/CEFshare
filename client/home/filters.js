@@ -180,23 +180,19 @@ Template.filters.events({
 Template.filters.rendered = function() {
     Meteor.subscribe('categories');
     Tracker.autorun(function () {
-	var k=Session.get('filters');
-	if (k) k=k.filters;
-	var res=Main.findOne();
-	if (res && res.filters) {
-	    res.filters.forEach(function (el){
-		if (el.active && (Listing._schema[el.fieldName].type.name==='Number')) {
-		    if (k && k[el.fieldName]) {
-			var newr=[];
-			newr.push(k[el.fieldName].lower);
-			newr.push(k[el.fieldName].upper);
-			$('[name='+el.fieldName+'] .nouislider').val(newr);
-		    };
-		    $('[name='+el.fieldName+'] .nouislider').Link('lower').to($('#lower'+el.fieldName));
-		    $('[name='+el.fieldName+'] .nouislider').Link('upper').to($('#upper'+el.fieldName));
-		};
-	    });
-	};
+	var curFilters=Session.get('filters');
+	if (curFilters && curFilters.filters) curFilters=curFilters.filters;
+	($('.nouislider')).map(function (el,v){ 
+	    var name=$(v).parent().attr('name');
+	    if (curFilters) {
+		var newr=[];
+		newr.push(curFilters[name].lower);
+		newr.push(curFilters[name].upper);
+		$('[name='+name+'] .nouislider').val(newr);
+	    };
+	    $('[name='+name+'] .nouislider').Link('lower').to($('#lower'+name));
+	    $('[name='+name+'] .nouislider').Link('upper').to($('#upper'+name));
+	})
     });
 };
 
