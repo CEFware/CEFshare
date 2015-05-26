@@ -20,7 +20,7 @@ var baseFilters = new SimpleSchema ({
     bool: {
 	type: Boolean,
 	optional: true,
-	defaultValue: true,
+//	defaultValue: true,
 	autoform: {
 //	    type: "select-radio",
 	    options: [{label:'YES',value:true}, {label:'NO',value:false}]
