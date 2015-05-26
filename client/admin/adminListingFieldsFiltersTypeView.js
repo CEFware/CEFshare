@@ -113,6 +113,7 @@ Template.editFieldName.events({
         e.preventDefault();
 	this.title=t.$('#'+this.name).val();
 	this.optional=t.$('.fieldOptional').is(':checked');
+	this.authorFilable=t.$('.authorFilable').is(':checked');
 	if (this.title.length>0)
             Meteor.call('updateListingField',this,Router.current().params.listingType,function (e) {
 		if (!e)
@@ -128,6 +129,10 @@ Template.editFieldName.rendered = function () {
 Template.editFieldName.helpers({
     ifOptional: function () {
 	if (this.optional)
+	    return 'checked';
+    },
+    ifAuthorFilable: function () {
+	if (this.authorFilable)
 	    return 'checked';
     }
 });

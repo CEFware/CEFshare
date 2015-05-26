@@ -117,10 +117,10 @@
                 </div>
                 {{> afQuickField name="type"}}
                 {{> afQuickField name="optional"}}
+                {{> afQuickField name="authorFilable"}}
                 {{> afQuickField name="title" placeholder=getTitle}}
                 {{> afFieldInput type="hidden" name="name" value=currentType}}
                 {{> afFieldInput type="hidden" name="active" value="true"}}
-                {{> afFieldInput type="hidden" name="authorFilable" value="false"}}
 
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">{{t "Save"}}</button>
@@ -150,6 +150,7 @@
       <input type="text" class="form-control newFieldName" value="{{title}}" id="{{name}}">
       <div class="input-group-addon">
 	<input class="fieldOptional" type="checkbox" {{ifOptional}}> {{t "Optional"}}
+	<input class="authorFilable" type="checkbox" {{ifAuthorFilable}}> {{t "Seller fills"}}
       </div>
       <span class="input-group-btn">
         <button class="btn btn-primary saveEdit" type="submit">{{t "SAVE"}}</button>
