@@ -232,4 +232,9 @@ Meteor.methods({
 	return  (process.env.METEOR_ENV || "development");
     }
 });
+Meteor.startup(function () {
+    //replaced the default mailURL to our mailgun mail credential
+    process.env.MAIL_URL = 'smtp://postmaster@sandboxd6ac22f092a944dba6889033365ce18d.mailgun.org:0963b1bc2e079b4b918daeacc59e624a@smtp.mailgun.org:587';
+});
+
 
