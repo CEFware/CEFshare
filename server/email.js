@@ -40,6 +40,17 @@ Meteor.methods({
         this.unblock();
         Accounts.sendResetPasswordEmail(Meteor.userId());
         return true;
+    },
+    testMail:function(){
+        //tested now with mailgun this is not needed now email.send will send email from our mailgun credential
+        console.log('sendingMail');
+        this.unblock();
+        return Email.send({
+            to: 'piyushthapa74@gmail.com',
+            subject: 'testing Email',
+            text: 'just testing the email'
+        });
+
     }
 
 });
