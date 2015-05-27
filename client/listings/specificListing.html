@@ -98,51 +98,48 @@
           <div class="col-sm-6">
             <div class="box">
 
-              <form>
+              <div>
+		{{flash '1'}}
+              </div>
+ 
+	      {{#autoForm schema=clientFieldsSchemaObj id="clientFields" type="method" meteormethod="clientFields" resetOnSuccess=true}}
+
+	      <fieldset>
+
                 <div>
-
-
-
 		  {{#if showClientFields listing}}
 
-		  {{#autoForm schema=clientFieldsSchemaObj id="clientFields" type="method" meteormethod="clientFields" resetOnSuccess=true}}
-		  <fieldset>
+		  {{#each afFieldNames}}
+		  
+		  {{> afQuickField name=this.name options=afOptionsFromSchema}}
 
-		    {{#each afFieldNames}}
-
-		    {{> afQuickField name=this.name options=afOptionsFromSchema}}
-
-		    {{/each}}
-
-		    <div class="text-center">
-		      <button type="submit" class="btn btn-primary">{{t "Use"}}</button>
-		      <button type="reset" class="btn btn-default reset">{{t "Reset"}}</button>
-		    </div>
-		  </fieldset>
-		  {{/autoForm}}
+		  {{/each}}
 
 		  {{/if}}
- 
-
-
-
-
                 </div>
 
                 <p class="price">{{currency listing.price}}</p>
 
                 <p class="text-center">
-		  {{> CartAddItemButton}}
+
+		  <button type="submit" class="btn btn-primary add-item"><i class="fa fa-shopping-cart"></i> {{t "Add to cart"}}</button>
 
 		  {{#if isFavorited}}
-                  <button class="btn btn-default unfavoriteIt switchFavorite" data-toggle="tooltip" data-placement="top" title="{{t "Remove from wishlist"}}"><i class="fa fa-heart"></i></button>
+                  <button class="btn btn-default unfavoriteIt switchFavorite" data-toggle="tooltip" data-placement="top" title="{{t "Remove from wishlist"}}">
+		    <i class="fa fa-heart"></i>
+		  </button>
 		  {{else}}
-                  <button class="btn btn-default favoriteIt switchFavorite" data-toggle="tooltip" data-placement="top" title="{{t "Add to wishlist"}}"><i class="fa fa-heart-o"></i></button>
+                  <button class="btn btn-default favoriteIt switchFavorite" data-toggle="tooltip" data-placement="top" title="{{t "Add to wishlist"}}">
+		    <i class="fa fa-heart-o"></i>
+		  </button>
 		  {{/if}}
 
-
                 </p>
-              </form>
+
+	      </fieldset>
+
+	      {{/autoForm}}
+
             </div>
 
             <div class="row" id="thumbs">

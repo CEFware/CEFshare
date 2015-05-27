@@ -39,7 +39,15 @@ Meteor.methods({
 	} else {
 	    throw new Meteor.Error("security-check-fail","Only listing author or admin may delete the listing");
 	};
-    }
+    },
 
+    clientFields: function (doc) {
+	//generate schema to check the doc
+
+	//return true if doc checked but empty
+	//return false if doc don't pass the check
+
+        return doc;
+    }
 
 });

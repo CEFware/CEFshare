@@ -42,6 +42,13 @@ Template.userOrderTemplate.helpers({
     orderDate: function () {
         var res=new Date(this.addedOn);
         return res.toISOString().slice(0,10);
+    },
+    clientData: function () {
+	var cD=this.clientData;
+	return _.filter(getCustomFields(this.product), function (el) {return ((!el.authorFilable) && (cD[el.name]))});
+    },
+    exactData: function (data) {
+	return data[this.name];
     }
 });
 

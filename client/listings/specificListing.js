@@ -1,4 +1,4 @@
-var getCustomFields = function (listing) {
+getCustomFields = function (listing) {
     var curType=listing.listingType;
     var custF=[];
     var defF=[];
@@ -169,7 +169,9 @@ Template.specificListing.events({
 	    if (!e)
 		Router.go('home');
 	});
-    }
+    },
+
+    
 });
 
 Template.specificListing.rendered = function () {
@@ -195,3 +197,28 @@ Template.specificListing.rendered = function () {
     });
 };
 
+AutoForm.addHooks(['clientFields'],{
+    onSuccess: function (formType,result){
+	if (result) {
+            var item = {};
+            if(!Meteor.userId()){
+		item.deviceId = Session.get('Cart-deviceId');
+            }else{
+		item.userId = Meteor.userId();
+            };
+            var qty = 1;
+            var listing = specificListingByURI(Router.current().params.uri).fetch()[0];
+            if (listing) {
+		item.qty=qty;
+		item.product=listing;
+		item.price=listing.price;
+		item.clientData=result;
+		Cart.Items.insert(item);
+		//in case we do mistake - and do need to delete all the cart items: uncomment the line below & and add anything to the cart, comment this line again
+		//              Cart.Items.find().forEach(function (e){Cart.Items.remove({_id:e._id});});
+            };
+	    
+            Flash.success(1,TAPi18n.__("Thank you!"),2000);
+	};
+    }
+});
