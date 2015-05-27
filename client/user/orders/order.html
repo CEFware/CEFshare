@@ -33,7 +33,7 @@
               <tbody>
 		{{#each items}}
                 <tr>
-                  <td>
+                  <td rowspan="2">
                     <a href="{{pathFor 'specificListing' uri=product.uri}}">
                       <img src="{{listingImgById product.image.[0]}}" alt="{{product.title}}" width="100px">
                     </a>
@@ -44,6 +44,13 @@
                   <td>{{currency price}}</td>
                   <td>{{currency itemTotal}}</td>
                 </tr>
+		<tr><td colspan="5">
+		    {{#each clientData}}
+		    <b>{{title}}</b> &nbsp; {{exactData ../clientData}} &nbsp; | &nbsp;
+		    {{else}}
+		    {{t "No notes from client"}}
+		    {{/each}}
+		</td></tr>
 		{{/each}}
               </tbody>
 	      {{#with order}}
