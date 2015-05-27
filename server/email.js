@@ -7,7 +7,6 @@ Meteor.methods({
         var text = "From e-mail: " + doc.email + "\n\n\n\n"+ doc.message;
 
         this.unblock();
-
         return Email.send({
             to: Meteor.settings.private.supportEmail,
             subject: Meteor.settings.public.marketplaceName+" contact form from "+doc.email,

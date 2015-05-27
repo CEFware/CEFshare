@@ -119,17 +119,17 @@ Meteor.startup(function(){
             "development":
             {
                 "path":"/home/shkomg/marketplaces/",
-                "supportEmail":"meteor.test.mailbox@mail.com"
+                "supportEmail":"meteor.test.mailbox@gmail.com"
             },
             "staging":
             {
                 "path":"/root/marketplaces/",
-                "supportEmail":"meteor.test.mailbox@mail.com"
+                "supportEmail":"meteor.test.mailbox@gmail.com"
             },
             "production":
             {
                 "path":"/home/shkomg/marketplaces/",
-                "supportEmail":"meteor.test.mailbox@mail.com"
+                "supportEmail":"meteor.test.mailbox@gmail.com"
             }
         }
     };

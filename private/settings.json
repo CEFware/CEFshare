@@ -28,19 +28,19 @@
             "development":
             {
                 "path":"/home/shkomg/marketplaces/",
-                "supportEmail":"meteor.test.mailbox@mail.com",
+                "supportEmail":"meteor.test.mailbox@gmail.com",
 		"stripe_sk":"sk_test_NmpFcddBWjXdX45V5sN65oGq"
             },
             "staging":
             {
                 "path":"/root/marketplaces/",
-                "supportEmail":"meteor.test.mailbox@mail.com",
+                "supportEmail":"meteor.test.mailbox@gmail.com",
 		"stripe_sk":"sk_test_NmpFcddBWjXdX45V5sN65oGq"
             },
             "production":
             {
                 "path":"/home/shkomg/marketplaces/",
-                "supportEmail":"meteor.test.mailbox@mail.com",
+                "supportEmail":"meteor.test.mailbox@gmail.com",
 		"stripe_sk":"sk_test_NmpFcddBWjXdX45V5sN65oGq"
             }
         },
