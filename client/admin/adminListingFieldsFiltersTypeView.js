@@ -92,7 +92,10 @@ Template.adminListingFieldsFiltersTypeView.events({
 	Session.set('showInactive',null);
     },
     'click .fieldDelete': function () {
-	Meteor.call('deleteListingField',this,Router.current().params.listingType);
+	Meteor.call('deleteListingField',this,Router.current().params.listingType, function(e,r) {
+	    if (!e)
+		Session.set('restartApp',true);
+	});
     },
     'click .fieldActivate': function () {
 	Meteor.call('deleteListingField',this,Router.current().params.listingType);
@@ -142,7 +145,7 @@ AutoForm.addHooks(['adminListingTypeNewField'],{
     onSuccess: function (){
         window.scrollTo(0,0);
         Flash.success(1,TAPi18n.__("Thank you! <b>The app will be reloaded in a minute for changes to take place</b>"),4000);
-        Meteor.call('restartApp');
+        Session.set('restartApp',true);
     }
 });
 

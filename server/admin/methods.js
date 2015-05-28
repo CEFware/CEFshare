@@ -219,29 +219,31 @@ Meteor.methods({
 	};	
     },
     restartApp: function () {
-        fs=Npm.require('fs');
-	var pathToF=process.env.PWD+"/lib/lock.js";
-	fs.lstat(pathToF, function(err, stats) {
-	    if (!err && stats.isFile()) {
-		//console.log('have file');
-		fs.unlink(pathToF, function (err){
-		    if (err) {
-			//console.log(err);
-		    } else {
-			//console.log('deleted');
-		    };
-		});
-	    } else {
-		//console.log('no file');
-		fs.writeFile(pathToF,'', function (err){
-		    if (err) {
-			//console.log(err);
-		    } else {
-			//console.log('saved');
-		    };
-		});
-	    };
-	});
+	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+            fs=Npm.require('fs');
+	    var pathToF=process.env.PWD+"/lib/lock.js";
+	    fs.lstat(pathToF, function(err, stats) {
+		if (!err && stats.isFile()) {
+		    //console.log('have file');
+		    fs.unlink(pathToF, function (err){
+			if (err) {
+			    //console.log(err);
+			} else {
+			    //console.log('deleted');
+			};
+		    });
+		} else {
+		    //console.log('no file');
+		    fs.writeFile(pathToF,'', function (err){
+			if (err) {
+			    //console.log(err);
+			} else {
+			    //console.log('saved');
+			};
+		    });
+		};
+	    });
+	};
     },
     sendBroadcastInvite: function (doc) {
 	if (Roles.userIsInRole(Meteor.userId(),'admin')) {

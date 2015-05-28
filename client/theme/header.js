@@ -17,6 +17,14 @@ Template.errorMsg.events({
     }
 });
 
+Template.restartMsg.events({
+    'click .restart': function (event, template) {
+	event.preventDefault();
+	Session.set('restartApp',null);
+        Meteor.call('restartApp');
+     }
+});
+
 UI.registerHelper('showNewListingButton',function () {
     if (Router.current().lookupTemplate()!=='SpecificListingEdit')
 	return true;
@@ -46,5 +54,8 @@ Template.header.helpers({
 		return res.url({store:"social"});
 	};
 	return "/img/CEF_logo_small.png";
-    } 
+    } ,
+    restartApp: function () {
+	return Session.get('restartApp');
+    }
 });
