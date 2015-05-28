@@ -57,6 +57,13 @@ Template.cart.helpers({
             if (imgs)
                 return imgs.url({store:'thumbs'});
         };
+    },
+    clientData: function () {
+        var cD=this.clientData;
+        return _.filter(getCustomFields(this.product), function (el) {return ((!el.authorFilable) && (cD[el.name]))});
+    },
+    exactData: function (data) {
+        return data[this.name];
     }
 
 })
