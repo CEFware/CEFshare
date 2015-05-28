@@ -98,7 +98,10 @@ Template.adminListingFieldsFiltersTypeView.events({
 	});
     },
     'click .fieldActivate': function () {
-	Meteor.call('deleteListingField',this,Router.current().params.listingType);
+	Meteor.call('deleteListingField',this,Router.current().params.listingType, function(e,r) {
+	    if (!e)
+		Session.set('restartApp',true);
+	});
     },
     'click .editField': function (e,t) {
         e.preventDefault();

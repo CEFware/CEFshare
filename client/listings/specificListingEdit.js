@@ -1,4 +1,7 @@
 AutoForm.addHooks(['specificListingEdit'],{
+});
+
+AutoForm.addHooks(['specificListingCreate'],{
     docToForm: function(doc) {
 	if (_.isArray(doc.tags)) {
             doc.tags = doc.tags.join(", ");
@@ -16,10 +19,7 @@ AutoForm.addHooks(['specificListingEdit'],{
 	    this.template.$('#tokenfield').tokenfield({tags:this.template.data.doc.tags});
 	    Flash.success('listingSaved',TAPi18n.__("Saved successfuly!"),2000);
     },    
-    onError: function () {}
-});
-
-AutoForm.addHooks(['specificListingCreate'],{
+    onError: function () {},
     after: {
 	"method": function (e,r,t) {
 	    var curCat=Session.get('listingCategory');
@@ -35,7 +35,9 @@ AutoForm.addHooks(['specificListingCreate'],{
 
 Template.specificListingEdit.helpers({
     currentListing: function () {
-	return specificListingByURI(Router.current().params.uri).fetch().first();
+        if (Router.current().params.uri==='new')
+            return '';
+  	return specificListingByURI(Router.current().params.uri).fetch().first();
     },
     newListing: function (){
 	if (Router.current().params.uri==='new')
@@ -43,7 +45,9 @@ Template.specificListingEdit.helpers({
 	return false;
     },
     listingSchema: function () {
-	return Listing;
+        if (Router.current().params.uri==='new')
+	    return Listing;
+  	return '';
     },
     appUrl: function () {
 	return Meteor.settings.public.url;
@@ -122,9 +126,33 @@ Template.specificListingEdit.helpers({
 
 	    var resF=_.filter(custF,function (obj) {return !_.findWhere(defF, obj)});
 
-	    return _.filter(resF,function (obj) {return obj.authorFilable});
+	    return _.filter(resF,function (obj) {return (obj.authorFilable && obj.active)});
 	};
-    }
+    },
+    showField: function (name) {
+	var pre=_.filter(Main.findOne().listingFields,function (el) {return el.listingType===Session.get('listingType')});
+	if (pre.length>0) {
+	    var res = _.filter(pre[0].listingFields, function (el2) {return el2.name===name});
+	    if (res.length>0) 
+		return res[0].active;
+	};
+	return false;
+    },
+    formType: function () {
+        if (Router.current().params.uri==='new')
+            return 'method';
+        return 'update';
+    },
+    formMethod: function () {
+        if (Router.current().params.uri==='new')
+            return 'createNewListing';
+        return '';
+    },
+    formCollection: function () {
+        if (Router.current().params.uri==='new')
+            return '';
+        return "Listings";
+    } 
 });
 
 Template.specificListingEdit.events({

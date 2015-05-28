@@ -5,7 +5,8 @@ defaultFields = [
 	    type: 'title',
 	    optional: false,
 	    active: true,
-	    authorFilable: true
+	    authorFilable: true,
+	    letDelete: false
 	},
 	{
 	    name: 'description',
@@ -13,7 +14,8 @@ defaultFields = [
 	    type: 'description',
 	    optional: false,
 	    active: true,
-	    authorFilable: true
+	    authorFilable: true,
+	    letDelete: false
 	},
 	{
 	    name: 'details',
@@ -21,7 +23,8 @@ defaultFields = [
 	    type: 'details',
 	    optional: false,
 	    active: true,
-	    authorFilable: true
+	    authorFilable: true,
+	    letDelete: false
 	},
 	{
 	    name: 'price',
@@ -29,7 +32,8 @@ defaultFields = [
 	    type: 'price',
 	    optional: false,
 	    active: true,
-	    authorFilable: true
+	    authorFilable: true,
+	    letDelete: false
 	},
 	{
 	    name: 'tags',
@@ -37,7 +41,8 @@ defaultFields = [
 	    type: 'tags',
 	    optional: false,
 	    active: true,
-	    authorFilable: true
+	    authorFilable: true,
+	    letDelete: true
 	},
 	{
 	    name: 'tax',
@@ -45,7 +50,8 @@ defaultFields = [
 	    type: 'tax',
 	    optional: false,
 	    active: true,
-	    authorFilable: true
+	    authorFilable: true,
+	    letDelete: true
 	},
 	{
 	    name: 'shippingFee',
@@ -53,7 +59,8 @@ defaultFields = [
 	    type: 'shippingFee',
 	    optional: false,
 	    active: true,
-	    authorFilable: true
+	    authorFilable: true,
+	    letDelete: true
 	},
 	{
 	    name: 'isRibbonSale',
@@ -61,7 +68,8 @@ defaultFields = [
 	    type: 'isRibbonSale',
 	    optional: false,
 	    active: true,
-	    authorFilable: true
+	    authorFilable: true,
+	    letDelete: true
 	},
 	{
 	    name: 'isRibbonNew',
@@ -69,7 +77,8 @@ defaultFields = [
 	    type: 'isRibbonNew',
 	    optional: false,
 	    active: true,
-	    authorFilable: true
+	    authorFilable: true,
+	    letDelete: true
 	},
 	{
 	    name: 'isPublic',
@@ -77,7 +86,8 @@ defaultFields = [
 	    type: 'isPublic',
 	    optional: false,
 	    active: true,
-	    authorFilable: true
+	    authorFilable: true,
+	    letDelete: false
 	},
 	{
 	    name: 'active',
@@ -85,7 +95,8 @@ defaultFields = [
 	    type: 'active',
 	    optional: false,
 	    active: true,
-	    authorFilable: true
+	    authorFilable: true,
+	    letDelete: true
 	}
     ];
 

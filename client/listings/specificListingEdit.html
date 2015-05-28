@@ -20,9 +20,7 @@
       
 	<div class="col-md-8 col-md-offset-2 clearfix">
 	  <div class="box" id="text-page">
-	    {{#if newListing}}
-	    
-	    {{#autoForm schema=listingSchema id="specificListingCreate" type="method" meteormethod="createNewListing"}}
+	    {{#autoForm schema=listingSchema id="specificListingCreate" type=formType meteormethod=formMethod doc=currentListing collection=formCollection}}
 	    <div>{{flash 'listingSaved'}}</div>
 
 	    <!-- listing type & listing category START-->
@@ -71,15 +69,22 @@
 	      {{> afQuickField name='title'}}
 	      {{> afQuickField name='description'}}
 	      {{> afQuickField name='details' rows=5}}
+	      <div class="row">
 	      <div class="col-md-4">
 		{{> afQuickField name='price'}}
 	      </div>
 	      <div class="col-md-4">
+		{{#if showField "shippingFee"}}
 		{{> afQuickField name='shippingFee'}}
+		{{/if}}
 	      </div>
 	      <div class="col-md-4">
+		{{#if showField "tax"}}
 		{{> afQuickField name='tax'}}
+		{{/if}}
 	      </div>
+	      </div>
+	      {{#if showField "tags"}}
 	      <div class="form-group{{#if afFieldIsInvalid name='tags'}} has-error{{/if}}">
 		<label class="control-label">{{t "Tags"}}</label><br>
 		{{> afFieldInput name='tags' type='text' id='tokenfield'}}
@@ -87,14 +92,24 @@
 		<span class="help-block">{{afFieldMessage name='tags'}}</span>
 		{{/if}}
 	      </div>
+	      {{/if}}
 	      {{#each customFields}}
 	      {{> afQuickField name=this.name options=afOptionsFromSchema}}
 	      {{/each}}
 	      
+	      {{#if showField "isRibbonSale"}}
 	      {{> afQuickField name='isRibbonSale'}}
+	      {{/if}}
+
+	      {{#if showField "isRibbonNew"}}
 	      {{> afQuickField name='isRibbonNew'}}
+	      {{/if}}
+
 	      {{> afQuickField name='isPublic'}}
+	      
+	      {{#if showField "active"}}
 	      {{> afQuickField name='active'}}
+	      {{/if}}
 	      
               {{> afFieldInput type="hidden" name="listingType" value=listingTypeGet}}
  	    </fieldset>
@@ -102,90 +117,7 @@
 <!--	    <button type="reset" class="btn btn-default">{{t "Reset"}}</button> -->
 	    <button class="btn btn-danger cancelEditListing">{{t "Cancel & don't save"}}</button>
 	    {{/autoForm}}
-	    
-	    {{else}}
-	    
-	    {{#autoForm collection="Listings" id="specificListingEdit" type="update" doc=currentListing}}
-	    <div>{{flash 'listingSaved'}}</div>
 
-	    <!-- listing type & listing category START-->
-	    <label class="control-label">{{t "Select listing type"}}:</label><br>
-	    <select id="listingType" class="form-control input-sm">
-	      {{#each listingTypes}}
-	      <option value={{listingType}} {{ifSelected}}> {{listingType}} </option>
-	      {{/each}}
-	    </select>
-	    <br>
-	    {{#if ifCategorySelectedHasSub}}
-	    <div class="row">	    
-	      <div class="col-md-6">
-		<label class="control-label">{{t "Select listing category"}}:</label><br>
-		<select id="listingCategory" class="form-control input-sm">
-		  <option value="" {{ifCategorySelected}}> {{t "Not selected"}} </option>
-		  {{#each listingParentCategories}}
-		  <option value={{name}} {{ifCategorySelected}}> {{name}} </option>
-		  {{/each}}
-		</select>
-	      </div>
-	      <div class="col-md-6">
-		<label class="control-label">{{t "Select listing subcategory"}}:</label><br>
-		<select id="listingSubCategory" class="form-control input-sm">
-		  <option value="" {{ifSubCategorySelected}}> {{t "Not selected"}} </option>
-		  {{#each listingChildrenCategories}}
-		  <option value={{name}} {{ifSubCategorySelected}}> {{name}} </option>
-		  {{/each}}
-		</select>
-	      </div>
-	    </div>
-	    {{else}}
-	    <label class="control-label">{{t "Select listing category"}}:</label><br>
-	    <select id="listingCategory" class="form-control input-sm">
-	      <option value="" {{ifCategorySelected}}> {{t "Not selected"}} </option>
-	      {{#each listingParentCategories}}
-	      <option value={{name}} {{ifCategorySelected}}> {{name}} </option>
-	      {{/each}}
-	    </select>
-	    {{/if}}
-	    <br>
-	    <!-- listing type & listing category END -->
-
-	    <fieldset>
-	      {{> afQuickField name='image'}}
-	      {{> afQuickField name='title'}}
-	      {{> afQuickField name='description'}}
-	      {{> afQuickField name='details' rows=3}}
-	      <div class="col-md-4">
-		{{> afQuickField name='price'}}
-	      </div>
-	      <div class="col-md-4">
-		{{> afQuickField name='shippingFee'}}
-	      </div>
-	      <div class="col-md-4">
-		{{> afQuickField name='tax'}}
-	      </div>
-	      {{> afQuickField name='tags' type='text' id='tokenfield'}}
-	      <div class="form-group">
-		<label class="control-label">{{t "Listing url"}}</label>
-		<input type="text" class="form-control" readonly value="{{appUrl}}listing/{{currentListing.uri}}">
-	      </div>
-	      {{#each customFields}}
-	      {{> afQuickField name=this.name options=afOptionsFromSchema}}
-	      {{/each}}
-
-	      {{> afQuickField name='isRibbonSale'}}
-	      {{> afQuickField name='isRibbonNew'}}
-	      {{> afQuickField name='isPublic'}}
-	      {{> afQuickField name='active'}}
-
-              {{> afFieldInput type="hidden" name="listingType" value=listingTypeGet}}
-	      
-	    </fieldset>
-	    <button type="submit" class="btn btn-primary">{{t "Save"}}</button>
-<!--	    <button type="reset" class="btn btn-default">{{t "Reset"}}</button> -->
-	    <button class="btn btn-danger cancelEditListing">{{t "Cancel & don't save"}}</button>
-	    {{/autoForm}}
-	    
-	    {{/if}}
 	  </div>      
 	</div>
     </div>

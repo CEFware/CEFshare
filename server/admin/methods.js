@@ -161,7 +161,7 @@ Meteor.methods({
 	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
 	    var query={}
 	    query[field.name]={$exists:true};
-	    if ((Listings.find(query).count()===0) && (field.active)) {
+	    if ((Listings.find(query).count()===0) && (field.active) && (field.letDelete)) {
 		//if no listings with that field & it's active - delete
 		Main.update({"listingFields.listingType":lType}, {$pull:{"listingFields.$.listingFields":field}});
 	    } else {

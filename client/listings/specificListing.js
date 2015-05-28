@@ -105,7 +105,7 @@ Template.specificListing.helpers({
     },
     customFields: function (listing) {
         //return only custom fields filable by seller
-	return _.filter(getCustomFields(listing), function (el) {return el.authorFilable});
+	return _.filter(getCustomFields(listing), function (el) {return (el.authorFilable && el.active)});
     },
     showClientFields: function (listing) {
 	return (_.filter(getCustomFields(listing), function (el) {return !el.authorFilable})).length>0;
