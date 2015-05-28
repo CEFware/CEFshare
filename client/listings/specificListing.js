@@ -61,13 +61,14 @@ Template.specificListing.helpers({
     },
 
     isListingsByTags: function (tags){
-	if ((specificListingByURI(Router.current().params.uri).fetch().first()) && (allListingsByTags(tags,specificListingByURI(Router.current().params.uri).fetch().first()._id,3).fetch().length>0))
+	if (tags && (specificListingByURI(Router.current().params.uri).fetch().first()) && (allListingsByTags(tags,specificListingByURI(Router.current().params.uri).fetch().first()._id,3).fetch().length>0))
 	    return true;
 	return false;
     },
 
     listingsByTags: function (tags){
-	return allListingsByTags(tags,specificListingByURI(Router.current().params.uri).fetch().first()._id,3);
+	if (tags)
+	    return allListingsByTags(tags,specificListingByURI(Router.current().params.uri).fetch().first()._id,3);
     },
 
     isRecentListings: function () {
@@ -142,7 +143,16 @@ Template.specificListing.helpers({
         finSchema.labels(objL);
  	
 	return finSchema;
-    }
+    },
+    showField: function (name,type) {
+        var pre=_.filter(Main.findOne().listingFields,function (el) {return el.listingType===type});
+        if (pre.length>0) {
+            var res = _.filter(pre[0].listingFields, function (el2) {return el2.name===name});
+            if (res.length>0) 
+                return res[0].active;
+        };
+        return false;
+    }     
 });
 
 Template.specificListing.events({
@@ -182,7 +192,8 @@ Template.specificListing.rendered = function () {
 	if (listing) {
 	    Meteor.subscribe('userById',listing.author);
 	    Meteor.subscribe('getPublicListingsByAuthor',listing.author);
-	    Meteor.subscribe('getListingsByTags',listing.tags);
+	    if (listing.tags)
+		Meteor.subscribe('getListingsByTags',listing.tags);
 	    var uriArr=Cookie.get('recentListings');
 	    if (uriArr)
 		uriArr = uriArr.split(",");
