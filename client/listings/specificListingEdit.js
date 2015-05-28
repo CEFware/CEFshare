@@ -36,7 +36,7 @@ AutoForm.addHooks(['specificListingCreate'],{
 Template.specificListingEdit.helpers({
     currentListing: function () {
         if (Router.current().params.uri==='new')
-            return '';
+            return null;
   	return specificListingByURI(Router.current().params.uri).fetch().first();
     },
     newListing: function (){
@@ -47,7 +47,7 @@ Template.specificListingEdit.helpers({
     listingSchema: function () {
         if (Router.current().params.uri==='new')
 	    return Listing;
-  	return '';
+  	return null;
     },
     appUrl: function () {
 	return Meteor.settings.public.url;
@@ -146,11 +146,11 @@ Template.specificListingEdit.helpers({
     formMethod: function () {
         if (Router.current().params.uri==='new')
             return 'createNewListing';
-        return '';
+        return null;
     },
     formCollection: function () {
         if (Router.current().params.uri==='new')
-            return '';
+            return null;
         return "Listings";
     } 
 });
