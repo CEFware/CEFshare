@@ -237,10 +237,9 @@ AutoForm.addHooks(['clientFields'],{
             }else{
 		item.userId = Meteor.userId();
             };
-            var qty = 1;
             var listing = specificListingByURI(Router.current().params.uri).fetch()[0];
             if (listing) {
-		item.qty=qty;
+		item.qty=result.qtyToBuy;
 		item.product=listing;
 		item.price=listing.price;
 		item.clientData=result;
