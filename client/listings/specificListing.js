@@ -181,10 +181,10 @@ Template.specificListing.helpers({
 	return false;
     },
     dateStartOptions: function () {
-	return {startDate: new Date(), todayBtn: "linked"}
+	return {startDate: new Date(), todayBtn: "linked", autoclose:true, todayHighlight: true, format: "dd-M-yyyy"}
     },
     dateEndOptions: function () {
-	return {startDate: new Date(), todayBtn: "linked"}
+	return {startDate: new Date(), todayBtn: "linked", autoclose:true, todayHighlight: true, format: "dd-M-yyyy"}
     },
     getDays: function () {
 	var res = Session.get('daysNum');
@@ -220,7 +220,13 @@ Template.specificListing.events({
 	});
     },
 
-    
+    'change [name=dateStart], change [name=dateEnd]': function (e,t) {
+	var date1 = new Date($('[name=dateEnd]').val());
+	var date2 = new Date($('[name=dateStart]').val());
+	var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+	var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+	Session.set('daysNum',diffDays);
+    }
 });
 
 Template.specificListing.rendered = function () {
