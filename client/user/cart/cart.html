@@ -35,7 +35,7 @@
                 <tbody>
 		  {{#each cartItems}}
                   <tr>
-		    {{#if clientData}}
+		    {{#if this.clientData}}
                     <td rowspan="2">
                       <a href="{{pathFor 'specificListing' uri=product.uri}}">
                         <img src="{{listingImgById product.image.[0]}}" alt="{{productName}}">
@@ -50,14 +50,20 @@
 		    {{/if}}
                     <td><a href="{{pathFor 'specificListing' uri=product.uri}}">{{productName}}</a></td>
                     <td>{{#if letChange}}<input type="number" value="{{qty}}" class="form-control qty" style="width:60px">{{else}}{{qty}}{{/if}}</td>
-                    <td class="text-center">{{product.itemName}}</td>
+                    <td class="text-center">{{product.itemName}}{{t "(s)"}}</td>
                     <td class="text-center">{{currency product.price}}</td>
                     <td class="text-center">{{currency price}}</td>
                     <td class="text-center"><a href="#" class="link removeFromCart"><i class="fa fa-trash-o"></i></a></td>
                   </tr>
 		  
-		  {{#if clientData}}
+		  {{#if this.clientData}}
                   <tr><td colspan="6">
+		      {{#if this.clientData.dateStart}}
+		      <b>{{t "From:"}}</b> &nbsp; {{orderDate this.clientData.dateStart}} &nbsp; | &nbsp;
+		      {{/if}}
+		      {{#if this.clientData.dateEnd}}
+		      <b>{{t "Till:"}}</b> &nbsp; {{orderDate this.clientData.dateEnd}} &nbsp; | &nbsp;
+		      {{/if}}
                       {{#each clientData}}
                       <b>{{title}}</b> &nbsp; {{exactData ../clientData}} &nbsp; | &nbsp;
                       {{/each}}

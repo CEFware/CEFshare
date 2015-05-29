@@ -69,7 +69,16 @@ Template.cart.helpers({
 	if (this.product.itemName==='day')
 	    return false;
 	return true;
+    },
+    orderDate: function (date) {
+        if (date) {
+            var res=new Date(date);
+        } else {
+            var res=new Date();
+        };
+        return res.toISOString().slice(0,10);
     }
+     
 
 })
 

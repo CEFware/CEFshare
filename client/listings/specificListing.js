@@ -181,10 +181,10 @@ Template.specificListing.helpers({
 	return false;
     },
     dateStartOptions: function () {
-	return {startDate: new Date(), todayBtn: "linked", autoclose:true, todayHighlight: true, format: "dd-M-yyyy"}
+	return {startDate: new Date(), todayBtn: "linked", autoclose:true, todayHighlight: true}
     },
     dateEndOptions: function () {
-	return {startDate: new Date(), todayBtn: "linked", autoclose:true, todayHighlight: true, format: "dd-M-yyyy"}
+	return {startDate: new Date(), todayBtn: "linked", autoclose:true, todayHighlight: true}
     },
     getDays: function () {
 	var res = Session.get('daysNum');

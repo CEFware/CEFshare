@@ -45,10 +45,18 @@
                   <td>{{currency itemTotal}}</td>
                 </tr>
 		<tr><td colspan="5">
-		    {{#each clientData}}
+                    {{#if this.clientData.dateStart}}
+                    <b>{{t "From:"}}</b> &nbsp; {{orderDate this.clientData.dateStart}} &nbsp; | &nbsp;
+                    {{/if}}
+                    {{#if this.clientData.dateEnd}}
+                    <b>{{t "Till:"}}</b> &nbsp; {{orderDate this.clientData.dateEnd}} &nbsp; | &nbsp;
+                    {{/if}}
+ 		    {{#each clientData}}
 		    <b>{{title}}</b> &nbsp; {{exactData ../clientData}} &nbsp; | &nbsp;
 		    {{else}}
+                    {{#if this.clientData.dateStart}}{{else}}
 		    {{t "No notes from client"}}
+		    {{/if}}
 		    {{/each}}
 		</td></tr>
 		{{/each}}
