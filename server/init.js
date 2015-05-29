@@ -36,6 +36,15 @@ defaultFields = [
 	    letDelete: false
 	},
 	{
+	    name: 'itemName',
+	    title: 'Item name (item, hour, day etc.)',
+	    type: 'itemName',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: false
+	},
+	{
 	    name: 'tags',
 	    title: 'Tags',
 	    type: 'tags',

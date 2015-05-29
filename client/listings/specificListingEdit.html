@@ -70,19 +70,28 @@
 	      {{> afQuickField name='description'}}
 	      {{> afQuickField name='details' rows=5}}
 	      <div class="row">
-	      <div class="col-md-4">
-		{{> afQuickField name='price'}}
+		<div class="col-md-5">
+		  {{> afQuickField name='price'}}
+		</div>
+		<div class="col-md-1">
+		  <br>
+		  <b>{{t "PER"}}</b>
+		</div>
+		<div class="col-md-6">
+		  {{> afQuickField name='itemName'}}
+		</div>
 	      </div>
-	      <div class="col-md-4">
-		{{#if showField "shippingFee"}}
-		{{> afQuickField name='shippingFee'}}
-		{{/if}}
-	      </div>
-	      <div class="col-md-4">
-		{{#if showField "tax"}}
-		{{> afQuickField name='tax'}}
-		{{/if}}
-	      </div>
+	      <div class="row">
+		<div class="col-md-6">
+		  {{#if showField "shippingFee"}}
+		  {{> afQuickField name='shippingFee'}}
+		  {{/if}}
+		</div>
+		<div class="col-md-6">
+		  {{#if showField "tax"}}
+		  {{> afQuickField name='tax'}}
+		  {{/if}}
+		</div>
 	      </div>
 	      {{#if showField "tags"}}
 	      <div class="form-group{{#if afFieldIsInvalid name='tags'}} has-error{{/if}}">

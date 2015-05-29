@@ -107,6 +107,7 @@
 	      {{#autoForm schema=clientFieldsSchemaObj id="clientFields" type="method" meteormethod="clientFields" resetOnSuccess=true}}
 
 	      <fieldset>
+		
 
                 <div>
 		  {{#if showClientFields listing}}

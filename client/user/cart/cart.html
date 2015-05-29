@@ -26,6 +26,7 @@
                   <tr>
                     <th colspan="2">{{t "Product"}}</th>
                     <th>{{t "Quantity"}}</th>
+                    <th class="text-center">{{t "Unit"}}</th>
                     <th class="text-center">{{t "Unit price"}}</th>
                     <th class="text-center">{{t "Total"}}</th>
                     <th>&nbsp;</th>
@@ -34,25 +35,26 @@
                 <tbody>
 		  {{#each cartItems}}
                   <tr>
-                    <td>
+                    <td rowspan="2">
                       <a href="{{pathFor 'specificListing' uri=product.uri}}">
                         <img src="{{listingImgById product.image.[0]}}" alt="{{productName}}">
                       </a>
                     </td>
                     <td><a href="{{pathFor 'specificListing' uri=product.uri}}">{{productName}}</a></td>
-                    <td><input type="number" value="{{qty}}" class="form-control qty" style="width:60px"></td>
+                    <td>{{#if letChange}}<input type="number" value="{{qty}}" class="form-control qty" style="width:60px">{{else}}{{qty}}{{/if}}</td>
+                    <td class="text-center">{{product.itemName}}</td>
                     <td class="text-center">{{currency product.price}}</td>
                     <td class="text-center">{{currency price}}</td>
                     <td class="text-center"><a href="#" class="link removeFromCart"><i class="fa fa-trash-o"></i></a></td>
                   </tr>
-
-                  <tr><td colspan="5">
+		  
+		  {{#if clientData}}
+                  <tr><td colspan="6">
                       {{#each clientData}}
                       <b>{{title}}</b> &nbsp; {{exactData ../clientData}} &nbsp; | &nbsp;
-                      {{else}}
-                      {{t "No notes from client"}}
                       {{/each}}
                   </td></tr>
+		  {{/if}}
  
 		  {{else}}
 		  <tr><td colspan="6" class="text-center"><h3>{{t "Cart is empty"}}</h3></td></tr>

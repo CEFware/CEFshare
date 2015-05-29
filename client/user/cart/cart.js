@@ -64,6 +64,12 @@ Template.cart.helpers({
     },
     exactData: function (data) {
         return data[this.name];
+    },
+
+    letChange: function () {
+	if (this.product.itemName==='day')
+	    return false;
+	return true;
     }
 
 })
