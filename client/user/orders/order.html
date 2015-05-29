@@ -56,19 +56,33 @@
 	      {{#with order}}
 	      <tfoot>
                 <tr>
-                  <th colspan="4" class="text-right">Order subtotal</th>
+                  <th colspan="4" class="text-right">{{t "Order subtotal"}}</th>
                   <th>{{currency orderSubtotal}}</th>
                 </tr>
+		{{#if shippingFee}}
                 <tr>
-                  <th colspan="4" class="text-right">Shipping and handling</th>
+                  <th colspan="4" class="text-right">{{t "Shipping and handling"}}</th>
                   <th>{{currency shippingFee}}</th>
                 </tr>
+		{{else}}
                 <tr>
-                  <th colspan="4" class="text-right">Tax</th>
+                  <th colspan="4" class="text-right">{{t "Shipping and handling"}}</th>
+                  <th>{{currency "0"}}</th>
+                </tr>
+		{{/if}}
+		{{#if tax}}
+                <tr>
+                  <th colspan="4" class="text-right">{{t "Tax"}}</th>
                   <th>{{currency tax}}</th>
                 </tr>
+		{{else}}
                 <tr>
-                  <th colspan="4" class="text-right">Total</th>
+                  <th colspan="4" class="text-right">{{t "Tax"}}</th>
+                  <th>{{currency "0"}}</th>
+                </tr>
+		{{/if}}
+                <tr>
+                  <th colspan="4" class="text-right">{{t "Total"}}</th>
                   <th>{{currency orderTotal}}</th>
                 </tr>
               </tfoot>
