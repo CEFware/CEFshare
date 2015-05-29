@@ -47,6 +47,14 @@ Template.userOrderTemplate.helpers({
 	};
         return res.toISOString().slice(0,10);
     },
+    orderDateTime: function (date) {
+	if (date) {
+            var res=new Date(date);
+	} else {
+            var res=new Date(this.addedOn);
+	};
+        return res.toISOString().slice(0,16).replace('T',' ');
+    },
     clientData: function () {
 	var cD=this.clientData;
 	return _.filter(getCustomFields(this.product), function (el) {return ((!el.authorFilable) && (cD[el.name]))});

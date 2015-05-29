@@ -45,6 +45,9 @@
                   <td>{{currency itemTotal}}</td>
                 </tr>
 		<tr><td colspan="5">
+                    {{#if this.clientData.dateTime}}
+                    <b>{{t "Appointment starts:"}}</b> &nbsp; {{orderDateTime this.clientData.dateTime}} &nbsp; | &nbsp;
+                    {{/if}}
                     {{#if this.clientData.dateStart}}
                     <b>{{t "From:"}}</b> &nbsp; {{orderDate this.clientData.dateStart}} &nbsp; | &nbsp;
                     {{/if}}

@@ -77,6 +77,14 @@ Template.cart.helpers({
             var res=new Date();
         };
         return res.toISOString().slice(0,10);
+    },
+    orderDateTime: function (date) {
+        if (date) {
+            var res=new Date(date);
+        } else {
+            var res=new Date();
+        };
+        return res.toISOString().slice(0,16).replace('T',' ');
     }
      
 

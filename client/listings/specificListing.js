@@ -144,6 +144,8 @@ Template.specificListing.helpers({
             obj.push({qtyToBuy:ListingMain._schema.qtyToBuy});
 	    break;
 	    case 'hour':
+            obj.push({dateTime:ListingMain._schema.dateTime});
+            obj.push({qtyToBuy:ListingMain._schema.qtyToBuy});
 	    break;
 	};
 
@@ -191,6 +193,14 @@ Template.specificListing.helpers({
 	if (res)
 	    return res;
 	return 1;
+    },
+    getStartTime: function (name) {
+	if (name==='hour')
+	    return true;
+	return false;
+    },
+    dateTimeOptions: function () {
+	return {minDate: new Date(), useCurrent: true, inline:true, sideBySide:true, todayHighlight: true, showTodayButton:true}
     }
 });
 

@@ -121,6 +121,21 @@
 		</div>
 		{{/if}}
 
+		{{#if getStartTime listing.itemName}}
+		<div class="row text-center">
+		  <div class="form-group form-inline">
+                    <label class="control-label">{{t "Appointment start"}}:</label><br>
+		    <div class="input-group date">
+ 		      {{> afFieldInput name="dateTime" buttonClasses="glyphicon glyphicon-calendar" dateTimePickerOptions=dateTimeOptions}}
+		      <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+		    </div>
+		  </div>
+		</div>
+		{{/if}}
+		
+
                 <div>
 		  {{#if showClientFields listing}}
 
