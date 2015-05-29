@@ -44,10 +44,11 @@ Template.adminListingFieldsFilters.rendered = function () {
 Template.adminListingFieldsFilters.events({
     'click .fa-trash': function (e,t) {
 	e.preventDefault();
-	Meteor.call('deleteListingType',this.listingType, function (e,r){
-	    if (!e) 
-		Session.set('restartApp',true);
-	});
+	if (confirm(TAPi18n.__("Are you sure you want to delete this listing type?")))
+	    Meteor.call('deleteListingType',this.listingType, function (e,r){
+		if (!e) 
+		    Session.set('restartApp',true);
+	    });
     },
     'click .fa-pencil': function (e,t) {
         e.preventDefault();
