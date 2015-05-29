@@ -49,3 +49,5 @@ meteorhacks:inject-initial
 gfk:mailgun-api
 elevatedevdesign:autoform-nouislider@0.0.5
 francocatena:status
+aldeed:autoform-bs-datepicker
+rajit:bootstrap3-datepicker

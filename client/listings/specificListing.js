@@ -139,13 +139,15 @@ Template.specificListing.helpers({
             obj.push({qtyToBuy:ListingMain._schema.qtyToBuy});
 	    break;
 	    case 'day':
+            obj.push({dateStart:ListingMain._schema.dateStart});
+            obj.push({dateEnd:ListingMain._schema.dateEnd});
+            obj.push({qtyToBuy:ListingMain._schema.qtyToBuy});
 	    break;
 	    case 'hour':
 	    break;
 	};
 
         finSchema=new SimpleSchema(obj);
-
         var objL={};
         fields.forEach(function (el){
             objL[el.name]=eval("tmp=function () {return TAPi18n.__('"+el.title+"')}");
@@ -169,9 +171,26 @@ Template.specificListing.helpers({
 	return false;
     },
     customField: function () {
-	if (this.name==='qtyToBuy')
+	if ((this.name==='qtyToBuy') || (this.name==='dateStart') || (this.name==='dateEnd') || (this.name==='dateTime'))
 	    return false;
 	return true;
+    },
+    getDateRange: function (name) {
+	if (name==='day')
+	    return true;
+	return false;
+    },
+    dateStartOptions: function () {
+	return {startDate: new Date(), todayBtn: "linked"}
+    },
+    dateEndOptions: function () {
+	return {startDate: new Date(), todayBtn: "linked"}
+    },
+    getDays: function () {
+	var res = Session.get('daysNum');
+	if (res)
+	    return res;
+	return 1;
     }
 });
 

@@ -108,6 +108,18 @@
 
 	      <fieldset>
 		
+		{{#if getDateRange listing.itemName}}
+		<div class="row">
+		  <div class="form-group form-inline">
+		    <div class="col-md-6">
+		      {{> afQuickField name="dateStart" buttonClasses="glyphicon glyphicon-calendar" datePickerOptions=dateStartOptions}}
+		    </div>
+		    <div class="col-md-6">
+		      {{> afQuickField name="dateEnd" buttonClasses="glyphicon glyphicon-calendar" datePickerOptions=dateEndOptions}}
+		    </div>
+		  </div>
+		</div>
+		{{/if}}
 
                 <div>
 		  {{#if showClientFields listing}}
@@ -126,10 +138,19 @@
                 <p class="price">{{currency listing.price}} <span style="font-size:70%"><small>{{t "per"}}</small> {{listing.itemName}}</span></p>
 
                 <p class="text-center">
-		  {{#if showQtyToBuy listing.itemName}}
 
 		  <div class="form-group{{#if afFieldIsInvalid name='qtyToBuy'}} has-error{{/if}} form-inline">
-                    {{> afFieldInput name='qtyToBuy' style="width:100px;"}} {{listing.itemName}}{{t "(s)"}} &nbsp;
+		    {{#if showQtyToBuy listing.itemName}}
+
+                    {{> afFieldInput name='qtyToBuy' style="width:100px;"}}
+
+		    {{else}}
+		    <span id="hoursQty" style="font-size:40px;">{{getDays}}</span>
+                    {{> afFieldInput name='qtyToBuy' type="hidden" value=getDays}}
+
+		    {{/if}}
+
+		    {{listing.itemName}}{{t "(s)"}} &nbsp;
 
 		    <button type="submit" class="btn btn-primary add-item"><i class="fa fa-shopping-cart"></i> {{t "Add to cart"}}</button>
 
@@ -143,11 +164,6 @@
 		    </button>
 		    {{/if}}
 		  </div>
-
-		  {{else}}
-		  <span id="hoursQty"></span>
-		  {{/if}}
- 
 
                 </p>
 
