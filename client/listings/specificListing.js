@@ -134,6 +134,16 @@ Template.specificListing.helpers({
 	    };
         });
 
+	switch (listing.itemName) {
+	    case 'item':
+            obj.push({qtyToBuy:ListingMain._schema.qtyToBuy});
+	    break;
+	    case 'day':
+	    break;
+	    case 'hour':
+	    break;
+	};
+
         finSchema=new SimpleSchema(obj);
 
         var objL={};
@@ -152,7 +162,17 @@ Template.specificListing.helpers({
                 return res[0].active;
         };
         return false;
-    }     
+    },
+    showQtyToBuy: function (itemName) {
+	if ((itemName==='item') || (itemName==='hour'))
+	    return true;
+	return false;
+    },
+    customField: function () {
+	if (this.name==='qtyToBuy')
+	    return false;
+	return true;
+    }
 });
 
 Template.specificListing.events({

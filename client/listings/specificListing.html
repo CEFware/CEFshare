@@ -107,13 +107,16 @@
 	      {{#autoForm schema=clientFieldsSchemaObj id="clientFields" type="method" meteormethod="clientFields" resetOnSuccess=true}}
 
 	      <fieldset>
+		
 
                 <div>
 		  {{#if showClientFields listing}}
 
 		  {{#each afFieldNames}}
 		  
+		  {{#if customField}} 
 		  {{> afQuickField name=this.name options=afOptionsFromSchema}}
+		  {{/if}}
 
 		  {{/each}}
 
@@ -123,18 +126,28 @@
                 <p class="price">{{currency listing.price}} <span style="font-size:70%"><small>{{t "per"}}</small> {{listing.itemName}}</span></p>
 
                 <p class="text-center">
+		  {{#if showQtyToBuy listing.itemName}}
 
-		  <button type="submit" class="btn btn-primary add-item"><i class="fa fa-shopping-cart"></i> {{t "Add to cart"}}</button>
+		  <div class="form-group{{#if afFieldIsInvalid name='qtyToBuy'}} has-error{{/if}} form-inline">
+                    {{> afFieldInput name='qtyToBuy' style="width:100px;"}} {{listing.itemName}}{{t "(s)"}} &nbsp;
 
-		  {{#if isFavorited}}
-                  <button class="btn btn-default unfavoriteIt switchFavorite" data-toggle="tooltip" data-placement="top" title="{{t "Remove from wishlist"}}">
-		    <i class="fa fa-heart"></i>
-		  </button>
+		    <button type="submit" class="btn btn-primary add-item"><i class="fa fa-shopping-cart"></i> {{t "Add to cart"}}</button>
+
+		    {{#if isFavorited}}
+                    <button class="btn btn-default unfavoriteIt switchFavorite" data-toggle="tooltip" data-placement="top" title="{{t "Remove from wishlist"}}">
+		      <i class="fa fa-heart"></i>
+		    </button>
+		    {{else}}
+                    <button class="btn btn-default favoriteIt switchFavorite" data-toggle="tooltip" data-placement="top" title="{{t "Add to wishlist"}}">
+		      <i class="fa fa-heart-o"></i>
+		    </button>
+		    {{/if}}
+		  </div>
+
 		  {{else}}
-                  <button class="btn btn-default favoriteIt switchFavorite" data-toggle="tooltip" data-placement="top" title="{{t "Add to wishlist"}}">
-		    <i class="fa fa-heart-o"></i>
-		  </button>
+		  <span id="hoursQty"></span>
 		  {{/if}}
+ 
 
                 </p>
 
