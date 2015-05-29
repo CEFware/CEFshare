@@ -35,11 +35,19 @@
                 <tbody>
 		  {{#each cartItems}}
                   <tr>
+		    {{#if clientData}}
                     <td rowspan="2">
                       <a href="{{pathFor 'specificListing' uri=product.uri}}">
                         <img src="{{listingImgById product.image.[0]}}" alt="{{productName}}">
                       </a>
                     </td>
+		    {{else}}
+                    <td>
+                      <a href="{{pathFor 'specificListing' uri=product.uri}}">
+                        <img src="{{listingImgById product.image.[0]}}" alt="{{productName}}">
+                      </a>
+                    </td>
+		    {{/if}}
                     <td><a href="{{pathFor 'specificListing' uri=product.uri}}">{{productName}}</a></td>
                     <td>{{#if letChange}}<input type="number" value="{{qty}}" class="form-control qty" style="width:60px">{{else}}{{qty}}{{/if}}</td>
                     <td class="text-center">{{product.itemName}}</td>

@@ -108,12 +108,17 @@ var StripeCheckoutHandler;
 Template.CartPayNow.events({
     'click #pay-now':function(event, template){
 	event.preventDefault();
-	if (Meteor.user()) { 
-	    StripeCheckoutHandler.open({
-		description: Session.get('Cart-itemCount') + ' items ($' + Session.get("Cart-itemTotal") + ')',
-		amount: Math.floor(Session.get("Cart-itemTotal") * 100),
-		bitcoin:true
-	    });
+	var res = Meteor.user();
+	if (res) { 
+	    if (res.profile && res.profile.firstName && res.profile.shipping && res.profile.shipping.firstLine && res.profile.shipping.city && res.profile.shipping.zip && res.profile.shipping.country) {
+		StripeCheckoutHandler.open({
+		    description: Session.get('Cart-itemCount') + ' items ($' + Session.get("Cart-itemTotal") + ')',
+		    amount: Math.floor(Session.get("Cart-itemTotal") * 100),
+		    bitcoin:true
+		});
+	    } else {
+		alert(TAPi18n.__("Please, state your shipping address in PROFILE"));
+	    };
 	} else {
 	    Router.go('entrySignIn');
 	};

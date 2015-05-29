@@ -11,7 +11,6 @@ Template.cart.helpers({
         var shippingFee = 0;
         var tax = 0;
 
-	//here we need to work with variants name & retail_price as in productTemplate.js
 	if (cartItems.fetch().length>0) {
 	    shopCart.empty=false;
 	    cartItems.forEach(function(cartitem){
@@ -93,7 +92,6 @@ Template.cart.events({
 });
 
 Template.cart.rendered = function () {
-//add here images for cart items
     Tracker.autorun (function (){
         var uriArr=Cookie.get('recentListings');
         if (uriArr)
@@ -104,6 +102,13 @@ Template.cart.rendered = function () {
         allListings().forEach(function(el){
             imgA=_.union(imgA, el.image);
         });
+
+        var cartItems = Cart.Items.find({});
+	if (cartItems.fetch().length>0)
+	    cartItems.forEach(function(cartitem){
+		imgA=_.union(imgA, cartitem.product.image[0]);
+	    });
+	
         Meteor.subscribe('images',imgA);
     });
 };
