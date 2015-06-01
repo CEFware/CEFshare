@@ -155,7 +155,9 @@ Template.specificListing.helpers({
             objL[el.name]=eval("tmp=function () {return TAPi18n.__('"+el.title+"')}");
         });
         finSchema.labels(objL);
- 	
+	
+	var msg=TAPi18n.__("Start date can't be after End date.");
+ 	finSchema.messages({"wrongStartDate":msg});
 	return finSchema;
     },
     showField: function (name,type) {
