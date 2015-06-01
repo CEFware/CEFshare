@@ -137,19 +137,22 @@ Template.specificListing.helpers({
 	switch (listing.itemName) {
 	    case 'item':
             obj.push({qtyToBuy:ListingMain._schema.qtyToBuy});
+            obj.push({uri:ListingMain._schema.uri});
 	    break;
 	    case 'day':
             obj.push({dateStart:ListingMain._schema.dateStart});
             obj.push({dateEnd:ListingMain._schema.dateEnd});
             obj.push({qtyToBuy:ListingMain._schema.qtyToBuy});
+            obj.push({uri:ListingMain._schema.uri});
 	    break;
 	    case 'hour':
             obj.push({dateTime:ListingMain._schema.dateTime});
             obj.push({qtyToBuy:ListingMain._schema.qtyToBuy});
+            obj.push({uri:ListingMain._schema.uri});
 	    break;
 	};
 
-        finSchema=new SimpleSchema(obj);
+        var finSchema=new SimpleSchema(obj);
         var objL={};
         fields.forEach(function (el){
             objL[el.name]=eval("tmp=function () {return TAPi18n.__('"+el.title+"')}");
@@ -203,7 +206,11 @@ Template.specificListing.helpers({
     },
     dateTimeOptions: function () {
 	return {minDate: new Date(), useCurrent: true, inline:true, sideBySide:true, todayHighlight: true, showTodayButton:true}
+    },
+    listingUri: function () {
+	return Router.current().params.uri;
     }
+    
 });
 
 Template.specificListing.events({

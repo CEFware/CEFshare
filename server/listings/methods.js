@@ -44,9 +44,82 @@ Meteor.methods({
     clientFields: function (doc) {
 	//generate schema to check the doc
 
-	//return true if doc checked but empty
-	//return false if doc don't pass the check
+	var getCustomFields = function (listing) {
+	    var curType=listing.listingType;
+	    var custF=[];
+	    var defF=[];
+	    if (curType) {
+		Main.findOne().listingFields.forEach(function (el) {
+		    if (el.listingType===curType)
+			custF=el.listingFields;
+		});
+		if (!Main.findOne({'defaultListingFields.listingType':curType}))
+		    curType='DEFAULT';
+		Main.findOne().defaultListingFields.forEach(function (el) {
+		    if (el.listingType===curType)
+			defF=el.listingFields;
+		});
 
+		var res=_.filter(custF,function (obj) {return !_.findWhere(defF, obj)});
+		for (var i=0;i<res.length;i++) {
+		    res[i].value=listing[res[i].name];
+		};
+		return res;
+	    };
+	};
+
+        var listing=Listings.findOne({uri:doc.uri});
+        var fields=_.filter(getCustomFields(listing), function (el) {return !el.authorFilable});
+        var obj=[];
+        fields.forEach(function (el){
+            if (el.active) {
+                var newField=ListingMain._schema[el.type];
+                if (newField.type.name==="Array") {
+                    var nObj = {};
+                    nObj[el.name]=ListingMain._schema[el.type];
+                    nObj[el.name].optional=el.optional;
+                    nObj[el.name+'.$']=ListingMain._schema[el.type+'.$'];
+                    nObj[el.name+'.$'].optional=el.optional;
+                    obj.push(nObj);
+                } else {
+                    var nObj = {};
+                    newField.optional=el.optional;
+                    nObj[el.name]=newField;
+                    obj.push(nObj);
+                };
+            };
+        });
+
+        switch (listing.itemName) {
+            case 'item':
+            obj.push({qtyToBuy:ListingMain._schema.qtyToBuy});
+            obj.push({uri:ListingMain._schema.uri});
+            break;
+            case 'day':
+            obj.push({dateStart:ListingMain._schema.dateStart});
+            obj.push({dateEnd:ListingMain._schema.dateEnd});
+            obj.push({qtyToBuy:ListingMain._schema.qtyToBuy});
+            obj.push({uri:ListingMain._schema.uri});
+            break;
+            case 'hour':
+            obj.push({dateTime:ListingMain._schema.dateTime});
+            obj.push({qtyToBuy:ListingMain._schema.qtyToBuy});
+            obj.push({uri:ListingMain._schema.uri});
+            break;
+        };
+
+        var finSchema=new SimpleSchema(obj);
+        var objL={};
+        fields.forEach(function (el){
+            objL[el.name]=eval("tmp=function () {return TAPi18n.__('"+el.title+"')}");
+        });
+        finSchema.labels(objL);
+
+        var msg=TAPi18n.__("Start date can't be after End date.");
+        finSchema.messages({"wrongStartDate":msg});
+
+	check(doc,finSchema);
+	
         return doc;
     }
 
