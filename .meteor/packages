@@ -7,7 +7,7 @@
 meteor-platform
 email
 ongoworks:security
-iron:router
+iron:router@1.0.8
 twbs:bootstrap
 fortawesome:fontawesome
 natestrauser:select2
@@ -30,7 +30,7 @@ joshowens:accounts-entry
 service-configuration
 splendido:accounts-meld
 splendido:accounts-meld-client-bootstrap
-useraccounts:bootstrap@1.10.0
+useraccounts:bootstrap@1.11.0
 ajduke:bootstrap-tokenfield
 cfs:standard-packages@0.5.9
 cfs:filesystem
@@ -44,12 +44,13 @@ lepozepo:accounting
 aldeed:simple-schema@1.3.3
 dburles:google-maps@1.1.1
 summernote:standalone@0.6.7
-useraccounts:core@1.10.0
+useraccounts:core@1.11.0
 meteorhacks:inject-initial
 gfk:mailgun-api
 elevatedevdesign:autoform-nouislider@0.0.5
-francocatena:status
+francocatena:status@1.2.3
 aldeed:autoform-bs-datepicker
 rajit:bootstrap3-datepicker
 tsega:bootstrap3-datetimepicker@=3.1.3_3
 aldeed:autoform-bs-datetimepicker
+stripe-connect
