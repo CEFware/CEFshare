@@ -18,3 +18,7 @@ AutoForm.addHooks(['Emails'],{
         Flash.success(2,TAPi18n.__("Thank you!"),2000);
     }
 });
+
+Template.registerHelper('serviceConfigured', function () {
+    return ServiceConfiguration.configurations.findOne({service:this.toString()});
+});
