@@ -7,6 +7,9 @@ ServiceConfiguration.configurations.remove({
 ServiceConfiguration.configurations.remove({
 	service: 'google'
 });
+ServiceConfiguration.configurations.remove({
+	service: 'stripe'
+});
 
 //Localhost settings - to be commented on server
 /**//*
@@ -54,4 +57,12 @@ if (resS && resS.googleClientId && resS.googleSecret)
 	clientId: resS.googleClientId,
 	secret: resS.googleSecret
     });
+
+//STRIPE
+ServiceConfiguration.configurations.insert({
+    service: 'stripe',
+    appId: Meteor.settings.client_id,
+    secret: Meteor.settings.stripe_sk,
+    scope: 'read_write'
+});
 /**/
