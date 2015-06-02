@@ -20,5 +20,6 @@ AutoForm.addHooks(['Emails'],{
 });
 
 Template.registerHelper('serviceConfigured', function () {
+    if (this.toString()==='stripe') return false;
     return ServiceConfiguration.configurations.findOne({service:this.toString()});
 });
