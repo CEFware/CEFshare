@@ -16,18 +16,27 @@ Template.adminPayments.rendered = function () {
 
 Template.adminPayments.events({
     'click .stripe-connect': function(e, t){
-	Meteor.loginWithStripe({
-	    stripe_landing: 'register', // or login
-	    newAccountDetails: {
-		'stripe_user[business_type]': 'non_profit',
-		'stripe_user[product_category]': 'charity'
-	    }
-	}, function (err) {
-            if (err){
-		console.log('ERROR: ' + err); //error handling
-            } else {
-		console.log('NO ERROR ON LOGIN'); //show an alert
-            }
+	if (Roles.userIsInRole(Meteor.userId(),'admin'))
+	    Meteor.loginWithStripe({
+		stripe_landing: 'register', // or login
+		newAccountDetails: {
+		    'stripe_user[business_type]': 'non_profit',
+		    'stripe_user[product_category]': 'charity'
+		}
+	    }, function (err) {
+		if (err){
+		    if (err.message.indexOf('correctly added')>-1) {
+			Meteor.call('addStripeToMain',Meteor.user().services.stripe);
+		    } else {
+			console.log('ERROR: ' + err); //error handling
+		    };
+		} else {
+		};
 	});
+    },
+    'click .stripe-disconnect': function(e, t){
+	if (confirm(TAPi18n.__("Are you sure?")) && Roles.userIsInRole(Meteor.userId(),'admin'))
+	    //call method to delete from user profile & MAIN schema
+	    Meteor.call('disconnectStripeAdmin');
     }
 });

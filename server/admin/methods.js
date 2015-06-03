@@ -272,6 +272,22 @@ Meteor.methods({
 	    if (res && (res.status==='PREPARED'))
 		Maillist.remove({_id:id});
 	};	
+    },
+    addStripeToMain: function (doc) {
+	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+	    //add to Main
+	    var cur=Main.findOne();
+	    Main.update({_id:cur._id}, {$set:{stripe:doc}});
+	};	
+    },
+    disconnectStripeAdmin: function () {
+	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+	    //remove from Main
+	    var cur=Main.findOne();
+	    Main.update({_id:cur._id}, {$unset:{stripe:""}});
+	    //remove from Users
+	    Users.update({_id:Meteor.userId()}, {$unset:{'services.stripe':"1"}});
+	};	
     }
 
 });
