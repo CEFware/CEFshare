@@ -34,12 +34,12 @@
 		{{#each items}}
                 <tr>
                   <td rowspan="2">
-                    <a href="{{pathFor 'specificListing' uri=product.uri}}">
+                    <a href="/listing/{{product.uri}}">
                       <img src="{{listingImgById product.image.[0]}}" alt="{{product.title}}" width="100px">
                     </a>
                   </td>
-                  <td><a href="{{pathFor 'specificListing' uri=product.uri}}">{{product.title}}</a></td>
-                  <td><a href="{{pathFor 'userProfile' username=product.authorUsername}}">{{product.authorUsername}}</a></td>
+                  <td><a href="/listing/{{product.uri}}">{{product.title}}</a></td>
+                  <td><a href="/user/{{product.authorUsername}}">{{product.authorUsername}}</a></td>
                   <td>{{qty}}</td>
                   <td>{{currency price}}</td>
                   <td>{{currency itemTotal}}</td>

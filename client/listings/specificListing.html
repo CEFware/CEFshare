@@ -10,11 +10,11 @@
               <h1>{{listing.title}}</h1>
               <h3>
 		{{#if isListingOwner}}<br>
-		<a href="{{pathFor 'specificListingEdit' uri=listing.uri}}"><span class="glyphicon glyphicon-pencil"></span></a>
+		<a href="/listing/{{listing.uri}}/edit"><span class="glyphicon glyphicon-pencil"></span></a>
 		<a href="#" class="deleteListing"><span class="glyphicon glyphicon-trash"></span></a>
 		{{else}}
 		{{#if isInRole 'admin'}}<br>
-		<a href="{{pathFor 'specificListingEdit' uri=listing.uri}}"><span class="glyphicon glyphicon-pencil"></span></a>
+		<a href="/listing/{{listing.uri}}/edit"><span class="glyphicon glyphicon-pencil"></span></a>
 		<a href="#" class="deleteListing"><span class="glyphicon glyphicon-trash"></span></a>
 		{{/if}}
 		{{/if}}
@@ -229,7 +229,7 @@
           <div class="col-md-3 col-sm-6">
             <div class="product">
               <div class="image">
-                <a href="{{pathFor 'specificListing' uri=uri}}">
+                <a href="/listing/{{uri}}">
                   <img src="{{listingImgById image.[0]}}" alt="" class="img-responsive image1">
                 </a>
               </div>
@@ -258,7 +258,7 @@
           <div class="col-md-3 col-sm-6">
             <div class="product">
               <div class="image">
-                <a href="{{pathFor 'specificListing' uri=uri}}">
+                <a href="/listing/{{uri}}">
                   <img src="{{listingImgById image.[0]}}" alt="" class="img-responsive image1">
                 </a>
               </div>
@@ -287,7 +287,7 @@
           <div class="col-md-3 col-sm-6">
             <div class="product">
               <div class="image">
-                <a href="{{pathFor 'specificListing' uri=uri}}">
+                <a href="/listing/{{uri}}">
                   <img src="{{listingImgById image.[0]}}" alt="" class="img-responsive image1">
                 </a>
               </div>
@@ -319,7 +319,7 @@
           <div class="col-md-12 col-sm-12">
             <div class="product">
               <div class="image">
-                <a href="{{pathFor 'specificListing' uri=uri}}">
+                <a href="/listing/{{uri}}">
                   <img src="{{listingImgById image.[0]}}" alt="" class="img-responsive image1">
                 </a>
               </div>

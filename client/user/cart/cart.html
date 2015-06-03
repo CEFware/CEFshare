@@ -37,18 +37,18 @@
                   <tr>
 		    {{#if this.clientData}}
                     <td rowspan="2">
-                      <a href="{{pathFor 'specificListing' uri=product.uri}}">
+                      <a href="/listing/{{product.uri}}">
                         <img src="{{listingImgById product.image.[0]}}" alt="{{productName}}">
                       </a>
                     </td>
 		    {{else}}
                     <td>
-                      <a href="{{pathFor 'specificListing' uri=product.uri}}">
+                      <a href="/listing/{{product.uri}}">
                         <img src="{{listingImgById product.image.[0]}}" alt="{{productName}}">
                       </a>
                     </td>
 		    {{/if}}
-                    <td><a href="{{pathFor 'specificListing' uri=product.uri}}">{{productName}}</a></td>
+                    <td><a href="/listing/{{product.uri}}">{{productName}}</a></td>
                     <td>{{#if letChange}}<input type="number" value="{{qty}}" class="form-control qty" style="width:60px">{{else}}{{qty}}{{/if}}</td>
                     <td class="text-center">{{product.itemName}}{{t "(s)"}}</td>
                     <td class="text-center">{{currency product.price}}</td>
@@ -116,7 +116,7 @@
           <div class="col-md-3 col-sm-6">
             <div class="product">
               <div class="image">
-                <a href="{{pathFor 'specificListing' uri=uri}}">
+                <a href="/listing/{{uri}}">
                   <img src="{{listingImgById image.[0]}}" alt="" class="img-responsive image1">
                 </a>
               </div>

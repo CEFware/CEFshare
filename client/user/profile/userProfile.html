@@ -22,7 +22,6 @@
 		{{#if editingProfile}}
 		<a href="" class="btn btn-default cancelEditProfile">&#10006; {{t "EDIT"}}</a>
 		{{else}}
-<!--		<a href="{{pathFor 'userProfileEdit' username=currentUser.username}}" class="btn btn-default editProfile">{{t "EDIT"}}</a> -->
 		<a href="/user/{{currentUser.username}}/edit" class="btn btn-default editProfile">{{t "EDIT"}}</a>
 		{{/if}}
 
@@ -81,9 +80,9 @@
               {{/if}}
 	      <br style="font-size:x-small">
 	      <br style="font-size:x-small">
-	      <a href="{{pathFor 'userOrders' username=currentUser.username}}" style="text-transform:uppercase;font-family: Montserrat, Helvetica, Arial, sans-serif;color=rgb(106,174,122);font-size:x-small;">{{t "Orders"}}</a>
+	      <a href="/user/{{currentUser.username}}/orders" style="text-transform:uppercase;font-family: Montserrat, Helvetica, Arial, sans-serif;color=rgb(106,174,122);font-size:x-small;">{{t "Orders"}}</a>
 	      &nbsp;|&nbsp;
-	      <a href="{{pathFor 'userOrders' username=currentUser.username}}" style="text-transform:uppercase;font-family: Montserrat, Helvetica, Arial, sans-serif;color=rgb(106,174,122)font-size:x-small;">{{t "Transactions"}}</a>
+	      <a href="/user/{{currentUser.username}}/transactions" style="text-transform:uppercase;font-family: Montserrat, Helvetica, Arial, sans-serif;color=rgb(106,174,122)font-size:x-small;">{{t "Transactions"}}</a>
 	    </div>
 	  </div>
 

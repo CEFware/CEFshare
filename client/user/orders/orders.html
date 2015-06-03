@@ -37,7 +37,7 @@
                 <tr>
 		  <td>{{orderNum}}</td>
                   <td>
-		    <a href="{{pathFor 'userOrder' username=currentUser.username id=idStripe}}">
+		    <a href="/user/{{currentUser.username}}/orders/{{idStripe}}">
 		      <img src="{{listingImgById items.[0].product.image.[0]}}" width="100px" class="img-rounded"> 
 		    </a>
 		  </td>
@@ -47,7 +47,7 @@
                   <td><span class="label label-info">{{status}}</span>
                   </td>
                   <td>
-		    <a href="{{pathFor 'userOrder' username=currentUser.username id=idStripe}}" class="btn btn-primary btn-sm">
+		    <a href="/user/{{currentUser.username}}/orders/{{idStripe}}" class="btn btn-primary btn-sm">
 		      {{t "View"}}
 		    </a>
                   </td>
