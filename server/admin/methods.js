@@ -288,6 +288,10 @@ Meteor.methods({
 	    //remove from Users
 	    Users.update({_id:Meteor.userId()}, {$unset:{'services.stripe':"1"}});
 	};	
+    },
+    disconnectStripe: function () {
+	//remove from Users
+	Users.update({_id:Meteor.userId()}, {$unset:{'services.stripe':"1"}});
     }
 
 });

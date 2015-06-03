@@ -103,6 +103,14 @@
         </div>
 
         <div class="col-lg-4">
+          <h2 class="text-center">{{t "Payments"}}</h2>
+          <div class="box clearfix text-center">
+            {{#if currentUser.services.stripe}}
+            <a href="" class="btn btn-danger stripe-disconnect">{{t "Disconnect your Stripe account"}}</a>
+            {{else}}
+            <a href="" class="btn btn-primary stripe-connect">{{t "Connect your Stripe account"}}</a>
+            {{/if}}
+  	  </div>
           <h2 class="text-center">{{t "Login credentials"}}</h2>
           <div class="box clearfix">
             {{#if isOwner}}
@@ -114,7 +122,9 @@
             {{#if isInRole 'verified'}}
             {{#each oauthService}}
 	    {{#if configured}}
+	    {{#if showService}}
             {{> atSocial}}
+	    {{/if}}
 	    {{/if}}
             {{/each}}
             <center>

@@ -26,7 +26,12 @@ Template.userProfileEdit.helpers({
     },
     oauthService: function() {
         return AccountsTemplates.oauthServices();
-    }
+    },
+    showService: function () {
+	if (this._id==='stripe')
+	    return false;
+	return true;
+   }
 });
 
 AutoForm.addHooks(['EditUserProfilePage'],{
@@ -52,6 +57,28 @@ Template.userProfileEdit.events({
 		Flash.danger('profileSaved',TAPi18n.__("Error happened while sending drop password to your e-mail!"),2000);
             };
         });
+    },
+    'click .stripe-connect': function(e, t){
+        Meteor.loginWithStripe({
+            stripe_landing: 'register', // or login
+            newAccountDetails: {
+                'stripe_user[business_type]': 'non_profit',
+                'stripe_user[product_category]': 'charity'
+            }
+        }, function (err) {
+                if (err){
+                    if (err.message.indexOf('correctly added')>-1) {
+                    } else {
+                        console.log('ERROR: ' + err); //error handling
+                    };
+                } else {
+                };
+        });
+    },
+    'click .stripe-disconnect': function(e, t){
+        if (confirm(TAPi18n.__("Are you sure?")))
+            //call method to delete from user profile only
+            Meteor.call('disconnectStripe');
     }
 });
 
