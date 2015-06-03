@@ -49,7 +49,7 @@
               </div>
               <div class="col-md-1 text-center">
 		{{#if letDefaultFilter}}
-		<a href="{{pathFor 'adminListingFieldsFiltersFieldFilter' listingType=currentType field=name}}"><i class="fa fa-filter"></i></a>
+		<a href="/admin/listingFieldsFilters/{{currentType}}/filter/{{name}}"><i class="fa fa-filter"></i></a>
 		{{else}}
 		<i class="fa fa-filter"></i>
 		{{/if}}
@@ -88,7 +88,7 @@
 		{{/if}}
               </div>
               <div class="col-md-1 text-center">
-		<a href="{{pathFor 'adminListingFieldsFiltersFieldFilter' listingType=currentType field=name}}"><i class="fa fa-filter"></i></a>
+		<a href="/admin/listingFieldsFilters/{{currentType}}/filter/{{name}}"><i class="fa fa-filter"></i></a>
               </div>
               <div class="col-md-2 text-center">
 		{{#if active}}

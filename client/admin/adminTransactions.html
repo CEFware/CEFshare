@@ -50,7 +50,7 @@
                   <tr>
                     <td>{{orderNum}}</td>
                     <td>
-                      <a href="{{pathFor 'userOrder' username=ownerUsername id=idStripe}}">
+                      <a href="/user/{{ownerUsername}}/orders/{{idStripe}}">
 			<img src="{{listingImgById items.[0].product.image.[0]}}" width="100px" class="img-rounded">
                       </a>
 		    </td>
@@ -63,13 +63,13 @@
                     <td>{{orderDate}}</td>
                     <td>
 		      {{#each merchants}}
-		      <a href="{{pathFor 'userProfile' username=this}}">
+		      <a href="/user/{{this}}">
 			{{this}}
 		      </a>
 		      <br>
 		      {{/each}}
 		    </td>
-                    <td><a href="{{pathFor 'userProfile' username=ownerUsername}}">{{ownerUsername}}</a></td>
+                    <td><a href="/user/{{ownerUsername}}">{{ownerUsername}}</a></td>
  
                   </tr>
                   {{else}}

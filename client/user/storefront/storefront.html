@@ -18,7 +18,7 @@
 		{{/if}}
 
 		{{#if isOwner}}
-		<a href="{{pathFor 'userProfileEdit' username=user.username}}" class="btn btn-default">{{t "EDIT"}}</a>
+		<a href="/user/{{user.username}}/edit" class="btn btn-default">{{t "EDIT"}}</a>
 		{{/if}}
 	      </h1>
 	      {{#if notEmpty user.profile.bio}}<p class="lead">{{user.profile.bio}}</p>{{/if}}
