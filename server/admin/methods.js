@@ -282,16 +282,24 @@ Meteor.methods({
     },
     disconnectStripeAdmin: function () {
 	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
-	    //remove from Main
-	    var cur=Main.findOne();
-	    Main.update({_id:cur._id}, {$unset:{stripe:""}});
-	    //remove from Users
-	    Users.update({_id:Meteor.userId()}, {$unset:{'services.stripe':"1"}});
+	    //disconnect on Stipe side
+	    HTTP.post('https://connect.stripe.com/oauth/deauthorize',{params:{client_secret:Meteor.settings.stripe_sk, client_id:Meteor.settings.client_id, stripe_user_id:Meteor.user().services.stripe.stripe_user_id}}, function (e){
+		if (!e) {
+		    //remove from Main
+		    var cur=Main.findOne();
+		    Main.update({_id:cur._id}, {$unset:{stripe:""}});
+		    //remove from Users
+		    Users.update({_id:Meteor.userId()}, {$unset:{'services.stripe':"1"}});
+		};
+	    });
 	};	
     },
     disconnectStripe: function () {
-	//remove from Users
-	Users.update({_id:Meteor.userId()}, {$unset:{'services.stripe':"1"}});
+	//disconnect on Stripe side
+	HTTP.post('https://connect.stripe.com/oauth/deauthorize',{params:{client_secret:Meteor.settings.stripe_sk, client_id:Meteor.settings.client_id, stripe_user_id:Meteor.user().services.stripe.stripe_user_id}}, function (e){
+	    if (!e)
+		Users.update({_id:Meteor.userId()}, {$unset:{'services.stripe':"1"}});
+	});
     }
 
 });
