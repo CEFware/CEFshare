@@ -60,11 +60,7 @@ Template.userProfileEdit.events({
     },
     'click .stripe-connect': function(e, t){
         Meteor.loginWithStripe({
-            stripe_landing: 'register', // or login
-            newAccountDetails: {
-                'stripe_user[business_type]': 'non_profit',
-                'stripe_user[product_category]': 'charity'
-            }
+            stripe_landing: 'login' // or register
         }, function (err) {
                 if (err){
                     if (err.message.indexOf('correctly added')>-1) {
