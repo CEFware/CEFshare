@@ -300,6 +300,15 @@ Meteor.methods({
 	    if (!e)
 		Users.update({_id:Meteor.userId()}, {$unset:{'services.stripe':"1"}});
 	});
+    },
+    saveAdminPayments: function (doc) {
+	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+	    check(doc, paymentsSchema);
+	    var cur=Main.findOne();
+	    var query=doc;
+	    Main.update({_id:cur._id}, {$set:{payments:query}});
+	};
     }
+
 
 });

@@ -1,14 +1,20 @@
 Template.adminPayments.helpers({
-    socialSchemaObj: function() {
-        return socialSchema;
+    paymentsSchemaObj: function() {
+        return paymentsSchema;
     },
-    mainSocial: function () {
+    mainPayments: function () {
 	var res=Main.findOne();
 	if (res)
-	    return res.socialAccounts;
+	    return res.payments;
     }
 });
 
+AutoForm.addHooks(['adminPayments'],{
+    onSuccess: function (){
+        window.scrollTo(0,0);
+        Flash.success(1,TAPi18n.__("Thank you!"),2000);
+    }
+});
 
 Template.adminPayments.rendered = function () {
     Meteor.subscribe('appSettings');

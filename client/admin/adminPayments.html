@@ -30,6 +30,8 @@
 
         <div class="col-md-9 clearfix">
 
+
+	  <h3>{{t "Attach your payment accout"}}</h3>
           <div class="box" id="text-page">
 	    {{#if currentUser.services.stripe}}
 	    <a href="" class="btn btn-danger stripe-disconnect">{{t "Disconnect your Stripe account"}}</a>
@@ -38,6 +40,24 @@
 	    {{/if}}
           </div>
 
+	  <h3>{{t "Set up marketplace payment parameters"}}</h3>
+          <div class="box" id="text-page">
+            {{#autoForm schema=paymentsSchemaObj id="adminPayments" type="method" meteormethod="saveAdminPayments" doc=mainPayments}}
+            <fieldset>
+              <div>
+		{{flash '1'}}
+              </div>
+              {{#each afFieldNames}}
+              {{> afQuickField name=this.name options=afOptionsFromSchema}}
+              {{/each}}
+
+              <div class="text-center">
+		<button type="submit" class="btn btn-primary">{{t "Save"}}</button>
+		<button type="reset" class="btn btn-default">{{t "Reset"}}</button>
+              </div>
+            </fieldset>
+            {{/autoForm}}
+          </div>
 
         </div>
         <!-- /.col-md-9 -->

@@ -20,9 +20,10 @@ var baseFilters = new SimpleSchema ({
     bool: {
 	type: Boolean,
 	optional: true,
-//	defaultValue: true,
 	autoform: {
+//test select-radio-inline && boolean-radios
 //	    type: "select-radio",
+//	defaultValue: true,
 	    options: [{label:'YES',value:true}, {label:'NO',value:false}]
 	}
     },
