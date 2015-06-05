@@ -104,14 +104,14 @@
           <div class="row addresses">
             <div class="col-sm-6">
               <h2 class="text-right">{{t "Payment data"}}</h2>
-	      {{#with stripeCharge}}
+	      {{#with order.stripeResult.source}}
 	      {{#if card}}
-              <p class="text-right">{{source.name}}
-		<br><b>{{source.brand}}</b>: XXXX-XXXX-XXXX-{{source.last4}}
+              <p class="text-right">{{name}}
+		<br><b>{{brand}}</b>: XXXX-XXXX-XXXX-{{last4}}
 	      </p>
 	      {{else}}
-              <p class="text-right">{{source.email}}
-		<br><b>BTC address</b>: {{source.inbound_address}}
+              <p class="text-right">{{email}}
+		<br><b>BTC address</b>: {{inbound_address}}
 	      </p>
 	      {{/if}}
 	      {{/with}}

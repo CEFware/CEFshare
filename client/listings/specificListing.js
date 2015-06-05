@@ -283,7 +283,7 @@ Template.specificListing.rendered = function () {
 				var order={};
 				order.id=result.id;
 				//we need to save all the carges id's to keep track the client orders
-				Orders.update({_id:result.metadata.orderId}, {$set:{idStripe:result.id,status:"paid"}});
+				Orders.update({_id:result.metadata.orderId}, {$set:{idStripe:result.id,status:"paid",stripeResult:result}});
 				alert("Payment Complete");
 				Router.go('/user/'+Meteor.user().username+'/orders/'+result.id);
 			    }

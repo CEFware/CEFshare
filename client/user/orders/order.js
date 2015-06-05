@@ -10,6 +10,7 @@ Template.userOrderTemplate.helpers({
 	return (this.price*this.qty).toFixed(2);
     },
     stripeCharge: function () {
+/*
 	Meteor.call('stripeChargeRetrieve', Router.current().params.id, function (e,r) {
 	    if (!e) {
 		return Session.set('stripeCharge',r);
@@ -18,6 +19,7 @@ Template.userOrderTemplate.helpers({
 	    };
 	}); 
 	return Session.get('stripeCharge');
+*/
     },
     listingImgById: function (image){
         if (image) {
@@ -61,6 +63,11 @@ Template.userOrderTemplate.helpers({
     },
     exactData: function (data) {
 	return data[this.name];
+    },
+    card: function () {
+	if (this.object==="card")
+	    return true;
+	return false;
     }
 });
 
