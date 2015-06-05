@@ -28,7 +28,7 @@ AutoForm.addHooks(['specificListingCreate'],{
 		Meteor.call('setListingCategory',curL._id,curCat);
 	    };
 	    if (!e)
-		Router.go('specificListingEdit', {uri:r})
+		Router.go('/listing/'+r+'/edit')
 	}
     }
 });
@@ -162,7 +162,7 @@ Template.specificListingEdit.events({
 	if (uri==='new') {
 	    Router.go('home');
 	} else {
-	    Router.go('specificListing',{uri:uri});
+	    Router.go('/listing/'+uri);
 	};
     },
     'change #listingType': function (e,t) {

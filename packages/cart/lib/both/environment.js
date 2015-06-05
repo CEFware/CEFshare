@@ -99,13 +99,15 @@ Meteor.methods({
 		    break;
 		};
 	    };
+	    var key=Meteor.users.findOne({_id:items.first().product.author}).services.stripe.accessToken;
+ 
 	    var result = wrappedStripeChargeCreate({
 		card: token.id,
 		currency: "USD",
 		metadata: {orderId:Orders.insert({items:items, currency: "USD", amount:Math.floor(total*100), shipping: shipping, shippingFee: shippingFee, tax: tax, status: "placed"})},
 		amount:Math.floor(total*100),
 		application_fee:Number(fee*100)
-	    }, "sk_test_43ObSPHVE1NHSRoCeKvsyt6N");
+	    }, key);
 	}
 
 	items.forEach(function(item){

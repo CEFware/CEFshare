@@ -251,23 +251,7 @@ Template.specificListing.events({
 Template.specificListing.rendered = function () {
     $('#jsToLoad').html('<script type="text/javascript" src="/js/jquery.cookie.js"></script><script type="text/javascript" src="/js/front.js"></script>');
 
-    StripeCheckoutHandler = StripeCheckout.configure({
-        key: "pk_test_9Da2pggVWZY3kxoQ85iK2qRD",//Meteor.settings.public.stripe_pk,
-        token: function(token) {
-            Meteor.call("CartPayForItems", token, Session.get('curBuyItem'), function(error, result) {
-                if (error) {
-                    alert(JSON.stringify(error));
-                }else{
-                    var order={};
-                    order.id=result.id;
-                    //we need to save all the carges id's to keep track the client orders
-                    Orders.update({_id:result.metadata.orderId}, {$set:{idStripe:result.id,status:"paid"}});
-                    alert("Payment Complete");
-                    Router.go('userOrder',{username:Meteor.user().username,id:result.id});
-                }
-            });
-        }
-    });
+
 
     Tracker.autorun (function (){
 	Meteor.subscribe('wishlist');
@@ -287,6 +271,26 @@ Template.specificListing.rendered = function () {
 		imgA=_.union(imgA, el.image);
  	    });
 	    Meteor.subscribe('images',imgA);
+	    var key=Meteor.users.findOne({_id:listing.author})
+	    if (key && key.services.stripe.stripe_publishable_key)
+		StripeCheckoutHandler = StripeCheckout.configure({
+		    key: key.services.stripe.stripe_publishable_key,
+		    token: function(token) {
+			Meteor.call("CartPayForItems", token, Session.get('curBuyItem'), function(error, result) {
+			    if (error) {
+				alert(JSON.stringify(error));
+			    }else{
+				var order={};
+				order.id=result.id;
+				//we need to save all the carges id's to keep track the client orders
+				Orders.update({_id:result.metadata.orderId}, {$set:{idStripe:result.id,status:"paid"}});
+				alert("Payment Complete");
+				Router.go('/user/'+Meteor.user().username+'/orders/'+result.id);
+			    }
+			});
+		    }
+		});
+
 	};
     });
 };
