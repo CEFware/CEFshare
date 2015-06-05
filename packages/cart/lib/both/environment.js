@@ -50,11 +50,12 @@ Meteor.methods({
     CartPayForItems:function(token, deviceId){
 	this.unblock();
 	var items, result;
-	if(this.userId)
+/*	if(this.userId)
 	    items = Cart.Items.find({userId:this.userId});
 	else
 	    items = Cart.Items.find({deviceId:deviceId});
-	
+*/
+	items=deviceId;
 	if(Meteor.isServer){
 	    var total = 0;
 	    var shippingFee=0;
@@ -85,12 +86,26 @@ Meteor.methods({
 	    if (Meteor.user().profile.lastName)
 		shipping.lastName=Meteor.user().profile.lastName;
 
+	    var curm=Main.findOne().payments;
+	    var fee=0;
+	    if (curm) {
+		switch (curm.feeOrPercentage) {
+		    case "fee":
+		    fee=curm.fee;
+		    break;
+		    case "percentage":
+		    fee=total*curm.percentage/100;
+		    fee=Number(fee.toFixed(2));
+		    break;
+		};
+	    };
 	    var result = wrappedStripeChargeCreate({
 		card: token.id,
 		currency: "USD",
-		metadata: {orderId:Orders.insert({items:items.fetch(), currency: "USD", amount:Math.floor(total*100), shipping: shipping, shippingFee: shippingFee, tax: tax, status: "placed"})},
-		amount:Math.floor(total*100)
-	    });
+		metadata: {orderId:Orders.insert({items:items, currency: "USD", amount:Math.floor(total*100), shipping: shipping, shippingFee: shippingFee, tax: tax, status: "placed"})},
+		amount:Math.floor(total*100),
+		application_fee:Number(fee*100)
+	    }, "sk_test_43ObSPHVE1NHSRoCeKvsyt6N");
 	}
 
 	items.forEach(function(item){

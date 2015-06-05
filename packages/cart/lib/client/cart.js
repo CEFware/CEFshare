@@ -127,7 +127,7 @@ Template.CartPayNow.events({
 
 Template.CartPayNow.rendered = function(){
     StripeCheckoutHandler = StripeCheckout.configure({
-	key: Meteor.settings.public.stripe_pk,
+	key: "pk_test_9Da2pggVWZY3kxoQ85iK2qRD",//Meteor.settings.public.stripe_pk,
 	token: function(token) {
 	    Meteor.call("CartPayForItems", token, Session.get('Cart-deviceId'), function(error, result) {
 		if (error) {

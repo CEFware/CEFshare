@@ -249,7 +249,26 @@ Template.specificListing.events({
 });
 
 Template.specificListing.rendered = function () {
-   $('#jsToLoad').html('<script type="text/javascript" src="/js/jquery.cookie.js"></script><script type="text/javascript" src="/js/front.js"></script>');
+    $('#jsToLoad').html('<script type="text/javascript" src="/js/jquery.cookie.js"></script><script type="text/javascript" src="/js/front.js"></script>');
+
+    StripeCheckoutHandler = StripeCheckout.configure({
+        key: "pk_test_9Da2pggVWZY3kxoQ85iK2qRD",//Meteor.settings.public.stripe_pk,
+        token: function(token) {
+            Meteor.call("CartPayForItems", token, Session.get('curBuyItem'), function(error, result) {
+                if (error) {
+                    alert(JSON.stringify(error));
+                }else{
+                    var order={};
+                    order.id=result.id;
+                    //we need to save all the carges id's to keep track the client orders
+                    Orders.update({_id:result.metadata.orderId}, {$set:{idStripe:result.id,status:"paid"}});
+                    alert("Payment Complete");
+                    Router.go('userOrder',{username:Meteor.user().username,id:result.id});
+                }
+            });
+        }
+    });
+
     Tracker.autorun (function (){
 	Meteor.subscribe('wishlist');
 	var listing = specificListingByURI(Router.current().params.uri).fetch().first();
@@ -274,25 +293,39 @@ Template.specificListing.rendered = function () {
 
 AutoForm.addHooks(['clientFields'],{
     onSuccess: function (formType,result){
+        var res = Meteor.user();
+        if (res) {
+            if (res.profile && res.profile.firstName && res.profile.shipping && res.profile.shipping.firstLine && res.profile.shipping.city && res.profile.shipping.zip && res.profile.shipping.country) {
+
 	if (result) {
             var item = {};
-            if(!Meteor.userId()){
-		item.deviceId = Session.get('Cart-deviceId');
-            }else{
-		item.userId = Meteor.userId();
-            };
             var listing = specificListingByURI(Router.current().params.uri).fetch()[0];
             if (listing) {
 		item.qty=result.qtyToBuy;
 		item.product=listing;
 		item.price=listing.price;
 		item.clientData=result;
-		Cart.Items.insert(item);
-		//in case we do mistake - and do need to delete all the cart items: uncomment the line below & and add anything to the cart, comment this line again
-		//              Cart.Items.find().forEach(function (e){Cart.Items.remove({_id:e._id});});
+		Session.set('curBuyItem',[item]);
+		var total=item.qty*(listing.price+listing.shippingFee);
+		total=total+total*listing.tax/100;
+		total=Number(total.toFixed(2));
+		//here we need to charge
+                StripeCheckoutHandler.open({
+                    description: 'Buy '+item.qty+' "'+listing.title + '" for $' + total,
+                    amount: Math.floor(total * 100),
+                    bitcoin:true
+                });
             };
 	    
             Flash.success(1,TAPi18n.__("Thank you!"),2000);
 	};
+
+            } else {
+                alert(TAPi18n.__("Please, state your shipping address in PROFILE"));
+            };
+        } else {
+            Router.go('entrySignIn');
+        };
+ 
     }
 });
