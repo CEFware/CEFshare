@@ -284,6 +284,29 @@ Template.specificListing.rendered = function () {
 				order.id=result.id;
 				//we need to save all the carges id's to keep track the client orders
 				Orders.update({_id:result.metadata.orderId}, {$set:{idStripe:result.id,status:"paid",stripeResult:result}});
+				//initiate application_fee transfer from platform to marketplace owner
+ 
+				var curm=Main.findOne();
+				var fee=0;
+				if (curm.payments) {
+				    switch (curm.payments.feeOrPercentage) {
+				    case "fee":
+					fee=curm.payments.fee;
+					break;
+				    case "percentage":
+					fee=(result.amount/100)*curm.payments.percentage/100;
+					fee=Number(fee.toFixed(2));
+					break;
+				    };
+				};
+ 				
+				var transferObj={
+				    amount:Number(fee*100),
+				    destination:key.services.stripe.id,
+//				    source_transaction: result.id,
+				    currency:result.currency
+				};
+				Meteor.call('appFeeFromPlatform',transferObj);
 				alert("Payment Complete");
 				Router.go('/user/'+Meteor.user().username+'/orders/'+result.id);
 			    }

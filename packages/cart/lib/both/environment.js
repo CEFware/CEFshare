@@ -14,7 +14,7 @@ Cart.Items.allow({
   },
   fetch: ['userId','deviceId']
 });
-/*
+/**/
 var myWrapAsync = function (fn, context) {
   var wrapped = Meteor.wrapAsync(fn, context);
   return function () {
@@ -29,13 +29,14 @@ var myWrapAsync = function (fn, context) {
     }
   };
 };
-*/
+/**/
 
 if(Meteor.isServer){
     if(Meteor.settings && Meteor.settings.stripe_sk){
 	Stripe = StripeAPI(Meteor.settings.stripe_sk);
 	wrappedStripeChargeCreate = Meteor.wrapAsync(Stripe.charges.create, Stripe.charges);
 	wrappedStripeChargeRetrieve = Meteor.wrapAsync(Stripe.charges.retrieve, Stripe.charges);
+	wrappedStripeTransfer = myWrapAsync(Stripe.transfers.create, Stripe.transfers);
 //	wrappedStripeChargeCreate = myWrapAsync(Stripe.charges.create, Stripe.charges);
     }else{
 	console.log('ERROR - stripe secret key not found in settings');
@@ -123,5 +124,14 @@ Meteor.methods({
 	    var result = wrappedStripeChargeRetrieve(id);
 	};
 	return result;
+    },
+
+    appFeeFromPlatform: function (obj) {
+	this.unblock();
+	if(Meteor.isServer){
+	    var result = wrappedStripeTransfer(obj);
+	};
+	return result;
+
     }
 });

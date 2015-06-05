@@ -45,8 +45,11 @@ Template.specificListingEdit.helpers({
 	return false;
     },
     listingSchema: function () {
-        if (Router.current().params.uri==='new')
+        if (Router.current().params.uri==='new') {
+	    Listing._schema.price.min=Main.findOne().payments.minPrice;
+	    Listing._schema.price.autoform.defaultValue=Main.findOne().payments.minPrice;
 	    return Listing;
+	};
   	return null;
     },
     appUrl: function () {
