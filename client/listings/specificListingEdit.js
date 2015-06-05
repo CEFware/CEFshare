@@ -1,3 +1,22 @@
+var getEarnings = function () {
+    var total=Number($('[name=price]').val()).toFixed(2);
+    var curm=Main.findOne();
+    var fee=0;
+    var stripeFee=total*0.029+0.3;
+    if (curm.payments) {
+        switch (curm.payments.feeOrPercentage) {
+        case "fee":
+            fee=curm.payments.fee;
+            break;
+        case "percentage":
+            fee=(total/100)*curm.payments.percentage/100;
+            fee=Number(fee.toFixed(2));
+            break;
+        };
+    };
+    return {total:total, fee: fee, stripeFee:stripeFee};
+};
+
 AutoForm.addHooks(['specificListingEdit'],{
 });
 
@@ -195,13 +214,25 @@ Template.specificListingEdit.events({
 	    Meteor.call('setListingCategory',curL._id,curCat);
 	};
         Session.set('listingCategory',curCat);
+    },
+    'change [name=price]': function (e,t) {
+	var a=getEarnings();
+	var res=a.total-a.fee-a.stripeFee;
+	$('#earn').text('$'+res.toFixed(2));
+	$('#explanation').text('$'+res.toFixed(2)+'=$'+a.total+' - Stripe fee of $'+a.stripeFee.toFixed(2)+' - Marketplace fee of $'+a.fee.toFixed(2));
     }
 
 });
 
+
 Template.specificListingEdit.rendered = function () {
     Meteor.subscribe('categories');
-    
+
+    var a=getEarnings();
+    var res=a.total-a.fee-a.stripeFee;
+    $('#earn').text('$'+res.toFixed(2));
+    $('#explanation').text('$'+res.toFixed(2)+'=$'+a.total+' - Stripe fee of $'+a.stripeFee.toFixed(2)+' - Marketplace fee of $'+a.fee.toFixed(2));
+
     var obj=null;
     if (Router.current().params.uri!=='new') {
 	obj=specificListingByURI(Router.current().params.uri).fetch().first();
