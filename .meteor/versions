@@ -69,10 +69,10 @@ iron:controller@1.0.8
 iron:core@1.0.8
 iron:dynamic-template@1.0.8
 iron:layout@1.0.8
-iron:location@1.0.8
-iron:middleware-stack@1.0.8
-iron:router@1.0.8
-iron:url@1.0.8
+iron:location@1.0.9
+iron:middleware-stack@1.0.9
+iron:router@1.0.9
+iron:url@1.0.9
 jeremy:geocomplete@1.6.5_5
 joshowens:accounts-entry@1.0.3
 joshowens:simple-form@0.2.2
@@ -101,7 +101,7 @@ mpowaga:autoform-summernote@0.4.1
 mrt:cookies@0.3.0
 mrt:underscore-string-latest@2.3.3
 natestrauser:select2@3.5.1
-naxio:flash@0.2.3
+naxio:flash@0.2.4
 npm-bcrypt@0.7.8_2
 oauth@1.1.4
 oauth1@1.1.4
@@ -141,8 +141,8 @@ twitter@1.1.4
 ui@1.0.6
 underscore@1.0.3
 url@1.0.4
-useraccounts:bootstrap@1.11.0
-useraccounts:core@1.11.0
+useraccounts:bootstrap@1.11.1
+useraccounts:core@1.11.1
 webapp@1.2.0
 webapp-hashing@1.0.3
 zimme:select2-bootstrap3-css@1.4.6
