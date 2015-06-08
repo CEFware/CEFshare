@@ -24,6 +24,9 @@ Template.adminTransactions.helpers({
     },
     currency: function (amount) {
         return accounting.formatMoney(amount/100);
+     },
+    currencyU: function (amount) {
+        return accounting.formatMoney(amount);
      }
 });
 
