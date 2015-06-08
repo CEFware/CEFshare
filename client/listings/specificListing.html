@@ -157,10 +157,10 @@
 		  <div class="form-group{{#if afFieldIsInvalid name='qtyToBuy'}} has-error{{/if}} form-inline">
 		    {{#if showQtyToBuy listing.itemName}}
 
-                    {{> afFieldInput name='qtyToBuy' style="width:100px;"}}
+		    <span id="listingQty" style="font-size:40px;"></span> {{t "for"}} {{> afFieldInput name='qtyToBuy' style="width:100px;"}}
 
 		    {{else}}
-		    <span id="hoursQty" style="font-size:40px;">{{getDays}}</span>
+		    <span style="font-size:40px;">{{currency getTotal}}</span> {{t "for"}} <span id="hoursQty" style="font-size:40px;">{{getDays}}</span>
                     {{> afFieldInput name='qtyToBuy' type="hidden" value=getDays}}
 
 		    {{/if}}
@@ -168,7 +168,7 @@
 		    {{listing.itemName}}{{t "(s)"}} &nbsp;
 
                     {{> afFieldInput name='uri' type="hidden" value=listingUri}}
-		    <button type="submit" class="btn btn-primary add-item"><!--<i class="fa fa-shopping-cart"></i> -->{{t "Buy now"}}</button>
+		    <button type="submit" class="btn btn-primary add-item">{{t "Buy now"}}</button>
 
 		    {{#if isFavorited}}
                     <button class="btn btn-default unfavoriteIt switchFavorite" data-toggle="tooltip" data-placement="top" title="{{t "Remove from wishlist"}}">

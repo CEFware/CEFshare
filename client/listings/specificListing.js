@@ -209,6 +209,16 @@ Template.specificListing.helpers({
     },
     listingUri: function () {
 	return Router.current().params.uri;
+    },
+    getTotal: function () {
+	var listing=specificListingByURI(Router.current().params.uri).fetch().first();
+	var res = Session.get('daysNum');
+	if ((listing.itemName==='item') || (listing.itemName==='hour')) {
+	} else if (res) {
+	    return res*listing.price;
+	} else {
+	    return listing.price;
+	};
     }
     
 });
@@ -245,12 +255,21 @@ Template.specificListing.events({
 	var timeDiff = Math.abs(date2.getTime() - date1.getTime());
 	var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
 	Session.set('daysNum',diffDays);
+    },
+    
+    'change [name=qtyToBuy]': function (e,t) {
+	var listing=specificListingByURI(Router.current().params.uri).fetch().first();
+	var res=Number($('[name=qtyToBuy]').val())*listing.price;
+	$('#listingQty').text('$'+res);
     }
 });
 
 Template.specificListing.rendered = function () {
     $('#jsToLoad').html('<script type="text/javascript" src="/js/jquery.cookie.js"></script><script type="text/javascript" src="/js/front.js"></script>');
 
+	var listing=specificListingByURI(Router.current().params.uri).fetch().first();
+	var res=Number($('[name=qtyToBuy]').val())*listing.price;
+	$('#listingQty').text('$'+res);
 
 
     Tracker.autorun (function (){
