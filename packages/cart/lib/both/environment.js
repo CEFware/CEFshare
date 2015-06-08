@@ -105,7 +105,7 @@ Meteor.methods({
 	    var result = wrappedStripeChargeCreate({
 		card: token.id,
 		currency: "USD",
-		metadata: {orderId:Orders.insert({items:items, currency: "USD", amount:Math.floor(total*100), shipping: shipping, shippingFee: shippingFee, tax: tax, status: "placed"})},
+		metadata: {orderId:Orders.insert({items:items, currency: "USD", amount:Math.floor(total*100), shipping: shipping, shippingFee: shippingFee, tax: tax, marketFee: fee, status: "placed"})},
 		amount:Math.floor(total*100),
 		application_fee:Number(fee*100)
 	    }, key);

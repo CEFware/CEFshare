@@ -1,0 +1,2 @@
+Meteor.publish('getUserTransactions', allUserTransactions);
+
