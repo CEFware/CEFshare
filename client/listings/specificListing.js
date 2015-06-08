@@ -292,7 +292,7 @@ Template.specificListing.rendered = function () {
  	    });
 	    Meteor.subscribe('images',imgA);
 	    var key=Meteor.users.findOne({_id:listing.author})
-	    if (key && key.services.stripe.stripe_publishable_key)
+	    if (key && key.services.stripe && key.services.stripe.stripe_publishable_key)
 		StripeCheckoutHandler = StripeCheckout.configure({
 		    key: key.services.stripe.stripe_publishable_key,
 		    token: function(token) {
