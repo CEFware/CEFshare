@@ -213,12 +213,13 @@ Template.specificListing.helpers({
     getTotal: function () {
 	var listing=specificListingByURI(Router.current().params.uri).fetch().first();
 	var res = Session.get('daysNum');
-	if ((listing.itemName==='item') || (listing.itemName==='hour')) {
-	} else if (res) {
-	    return res*listing.price;
-	} else {
-	    return listing.price;
-	};
+	if (listing)
+	    if ((listing.itemName==='item') || (listing.itemName==='hour')) {
+	    } else if (res) {
+		return res*listing.price;
+	    } else {
+		return listing.price;
+	    };
     }
     
 });
