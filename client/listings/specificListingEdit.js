@@ -65,8 +65,11 @@ Template.specificListingEdit.helpers({
     },
     listingSchema: function () {
         if (Router.current().params.uri==='new') {
-	    Listing._schema.price.min=Main.findOne().payments.minPrice;
-	    Listing._schema.price.autoform.defaultValue=Main.findOne().payments.minPrice;
+	    var res=Main.findOne().payments;
+	    if (res && res.minPrice) {
+		Listing._schema.price.min=res.minPrice;
+		Listing._schema.price.autoform.defaultValue=res.minPrice;
+	    };
 	    return Listing;
 	};
   	return null;
