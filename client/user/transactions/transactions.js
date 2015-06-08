@@ -5,6 +5,10 @@ Template.userTransactionsTemplate.helpers({
     currency : function (amount) {
         return '$'+(amount/100);
     },
+    currencyU : function (amount) {
+        if (amount)
+            return '$'+Number(amount).toFixed(2);
+    },
     itemsCount: function () {
 	return Orders.findOne({_id:this._id}).items.length;
     },
@@ -18,7 +22,13 @@ Template.userTransactionsTemplate.helpers({
     orderDate: function () {
 	var res=new Date(this.addedOn);
 	return res.toISOString().slice(0,10);
-    } 
+    }, 
+    stripeFee : function () {
+	return (((this.amount/100)*0.029)+0.3).toFixed(2);
+    },
+    income : function () {
+	return (this.amount/100-this.marketFee-(((this.amount/100)*0.029)+0.3).toFixed(2));
+    }
 });
 
 Template.userTransactionsTemplate.rendered = function () {

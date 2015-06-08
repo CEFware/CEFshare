@@ -47,9 +47,9 @@
                   <td>{{orderDate}}</td>
 		  <td>{{itemsCount}} {{items.[0].product.itemName}}{{t "(s)"}}</td>
                   <td>{{currency amount}}</td>
-                  <td>{{currencyU marketFee}}</td>
-                  <td>{{currencyU stripeFee}}</td>
-                  <td>{{currencyU income}}</td>
+                  <td>{{currency marketFee}}</td>
+                  <td>{{currency stripeFee}}</td>
+                  <td>{{currency income}}</td>
                   <td><span class="label label-info">{{status}}</span>
                   </td>
                   <td>

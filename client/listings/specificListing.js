@@ -321,9 +321,9 @@ Template.specificListing.rendered = function () {
 				};
  				
 				var transferObj={
-				    amount:Number(fee*100),
+				    amount:Number(fee*0.90*100),
 				    destination:key.services.stripe.id,
-//				    source_transaction: result.id,
+//				    source_transaction: result.application_fee,
 				    currency:result.currency
 				};
 				Meteor.call('appFeeFromPlatform',transferObj);
