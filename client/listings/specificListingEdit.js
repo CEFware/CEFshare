@@ -9,7 +9,7 @@ var getEarnings = function () {
             fee=curm.payments.fee;
             break;
         case "percentage":
-            fee=(total/100)*curm.payments.percentage/100;
+            fee=total*curm.payments.percentage/100;
             fee=Number(fee.toFixed(2));
             break;
         };
