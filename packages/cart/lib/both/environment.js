@@ -63,8 +63,8 @@ Meteor.methods({
 	    var tax=total*0.06; 
 	    items.forEach(function(item){
 		total += Number(item.price)*Number(item.qty);
-		shippingFee += item.product.shippingFee*item.qty;
-		tax += (item.price + item.product.shippingFee)*item.qty*(item.product.tax/100);
+		shippingFee += item.product.shippingFee;
+		tax += (item.price*item.qty + item.product.shippingFee)*(item.product.tax/100);
 	    });
 
 	    //shipping

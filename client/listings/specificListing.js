@@ -355,7 +355,7 @@ AutoForm.addHooks(['clientFields'],{
 		item.price=listing.price;
 		item.clientData=result;
 		Session.set('curBuyItem',[item]);
-		var total=item.qty*(listing.price+listing.shippingFee);
+		var total=item.qty*listing.price+listing.shippingFee;
 		total=total+total*listing.tax/100;
 		total=Number(total.toFixed(2));
 		//here we need to charge
