@@ -11,6 +11,7 @@ Meteor.publish('appSettings', function(){
 				 basics:1,
 				 payments:1,
 				 instructions:1,
+				 'stripe.id':1,
 				 'socialAccounts.fbHandle':1,
 				 'socialAccounts.twitterHandle':1,
 				 'socialAccounts.googleHandle':1
