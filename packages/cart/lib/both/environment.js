@@ -34,7 +34,8 @@ var myWrapAsync = function (fn, context) {
 if(Meteor.isServer){
     if(Meteor.settings && Meteor.settings.stripe_sk){
 	Stripe = StripeAPI(Meteor.settings.stripe_sk);
-	wrappedStripeChargeCreate = Meteor.wrapAsync(Stripe.charges.create, Stripe.charges);
+	wrappedStripeChargeCreate = myWrapAsync(Stripe.charges.create, Stripe.charges);
+//	wrappedStripeChargeCreate = Meteor.wrapAsync(Stripe.charges.create, Stripe.charges);
 	wrappedStripeChargeRetrieve = Meteor.wrapAsync(Stripe.charges.retrieve, Stripe.charges);
 	wrappedStripeTransfer = myWrapAsync(Stripe.transfers.create, Stripe.transfers);
 //	wrappedStripeChargeCreate = myWrapAsync(Stripe.charges.create, Stripe.charges);
@@ -95,19 +96,18 @@ Meteor.methods({
 		    fee=curm.fee;
 		    break;
 		    case "percentage":
-		    fee=total*curm.percentage/100;
+		    fee=total*Number(curm.percentage)/100;
 		    fee=Number(fee.toFixed(2));
 		    break;
 		};
 	    };
 	    var key=Meteor.users.findOne({_id:items.first().product.author}).services.stripe.accessToken;
- 
 	    var result = wrappedStripeChargeCreate({
 		card: token.id,
 		currency: "USD",
 		metadata: {orderId:Orders.insert({items:items, currency: "USD", amount:Math.floor(total*100), shipping: shipping, shippingFee: shippingFee, tax: tax, marketFee: fee, status: "placed"})},
 		amount:Math.floor(total*100),
-		application_fee:Number(fee*100)
+		application_fee:Math.round(fee*100)
 	    }, key);
 	}
 
