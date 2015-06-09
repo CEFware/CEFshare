@@ -216,9 +216,9 @@ Template.specificListing.helpers({
 	if (listing)
 	    if ((listing.itemName==='item') || (listing.itemName==='hour')) {
 	    } else if (res) {
-		return res*listing.price;
+		return res*listing.price+(((res*listing.price)+listing.shippingFee)*listing.tax/100)+listing.shippingFee;;
 	    } else {
-		return listing.price;
+		return listing.price+((listing.price+listing.shippingFee)*listing.tax/100)+listing.shippingFee;
 	    };
     }
     
@@ -260,7 +260,8 @@ Template.specificListing.events({
     
     'change [name=qtyToBuy]': function (e,t) {
 	var listing=specificListingByURI(Router.current().params.uri).fetch().first();
-	var res=Number($('[name=qtyToBuy]').val())*listing.price;
+	var res=Number($('[name=qtyToBuy]').val());
+	res=res*listing.price+(((res*listing.price)+listing.shippingFee)*listing.tax/100)+listing.shippingFee;
 	$('#listingQty').text('$'+res);
     }
 });
@@ -269,7 +270,8 @@ Template.specificListing.rendered = function () {
     $('#jsToLoad').html('<script type="text/javascript" src="/js/jquery.cookie.js"></script><script type="text/javascript" src="/js/front.js"></script>');
 
 	var listing=specificListingByURI(Router.current().params.uri).fetch().first();
-	var res=Number($('[name=qtyToBuy]').val())*listing.price;
+	var res=Number($('[name=qtyToBuy]').val());
+	res=res*listing.price+(((res*listing.price)+listing.shippingFee)*listing.tax/100)+listing.shippingFee;
 	$('#listingQty').text('$'+res);
 
 
