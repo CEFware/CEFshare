@@ -19,7 +19,13 @@ AutoForm.addHooks(['Emails'],{
     }
 });
 
-Template.registerHelper('serviceConfigured', function () {
+UI.registerHelper('serviceConfigured', function () {
     if (this.toString()==='stripe') return false;
     return ServiceConfiguration.configurations.findOne({service:this.toString()});
+});
+
+UI.registerHelper('showOR', function () {
+    if (ServiceConfiguration.configurations.find({service:{$ne:'stripe'}}).count()>0)
+	return true;
+    return false;
 });

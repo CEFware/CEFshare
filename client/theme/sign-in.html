@@ -15,9 +15,11 @@
 	  {{/if}}
           {{/each}}
           {{#if passwordLoginService}}
+          {{#if showOR}}
           <div class="email-option">
             <strong class="line-thru or-sign-in">{{t9n "OR"}}</strong>
           </div>
+          {{/if}}
           {{/if}}
         </div>
         {{/if}}
