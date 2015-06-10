@@ -21,7 +21,9 @@ Template.restartMsg.events({
     'click .restart': function (event, template) {
 	event.preventDefault();
 	Session.set('restartApp',null);
-        Meteor.call('restartApp');
+        Meteor.call('restartApp', function (e) {
+	    
+	});
      }
 });
 

@@ -59,9 +59,10 @@ Template.userProfileEdit.events({
         });
     },
     'click .stripe-connect': function(e, t){
-        Meteor.loginWithStripe({
-            stripe_landing: 'login' // or register
-        }, function (err) {
+	if (Roles.userIsInRole(Meteor.userId,'verified')) {
+            Meteor.loginWithStripe({
+		stripe_landing: 'login' // or register
+            }, function (err) {
                 if (err){
                     if (err.message.indexOf('correctly added')>-1) {
                         Flash.success('stripeMsg',TAPi18n.__("Thank you!"),2000);
@@ -72,7 +73,10 @@ Template.userProfileEdit.events({
                     };
                 } else {
                 };
-        });
+            });
+	} else {
+            Flash.danger('stripeMsg',TAPi18n.__("Please, verify you e-mail first!"),4000);
+	};
     },
     'click .stripe-disconnect': function(e, t){
         if (confirm(TAPi18n.__("Are you sure?")))
