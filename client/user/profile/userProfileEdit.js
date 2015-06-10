@@ -64,8 +64,11 @@ Template.userProfileEdit.events({
         }, function (err) {
                 if (err){
                     if (err.message.indexOf('correctly added')>-1) {
+                        Flash.success('stripeMsg',TAPi18n.__("Thank you!"),2000);
+                    } else if (err.message.indexOf('Another account registered')>-1) {
+                        Flash.danger('stripeMsg',TAPi18n.__("Another account using the same Stripe account was found!"),4000);
                     } else {
-                        console.log('ERROR: ' + err); //error handling
+                        Flash.danger('stripeMsg',TAPi18n.__("Error")+err,4000);
                     };
                 } else {
                 };

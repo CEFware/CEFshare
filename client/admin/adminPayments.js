@@ -22,6 +22,7 @@ Template.adminPayments.rendered = function () {
 
 Template.adminPayments.events({
     'click .stripe-connect': function(e, t){
+	e.preventDefault();
 	if (Roles.userIsInRole(Meteor.userId(),'admin'))
 	    Meteor.loginWithStripe({
 		stripe_landing: 'login' // or register
@@ -29,6 +30,8 @@ Template.adminPayments.events({
 		if (err){
 		    if (err.message.indexOf('correctly added')>-1) {
 			Meteor.call('addStripeToMain',Meteor.user().services.stripe);
+		    } else if (err.message.indexOf('Another account registered')>-1) {
+			Flash.danger(1,TAPi18n.__("Another account using the same Stripe account was found!"),2000);
 		    } else {
 			console.log('ERROR: ' + err); //error handling
 		    };
@@ -37,6 +40,7 @@ Template.adminPayments.events({
 	});
     },
     'click .stripe-disconnect': function(e, t){
+	e.preventDefault();
 	if (confirm(TAPi18n.__("Are you sure?")) && Roles.userIsInRole(Meteor.userId(),'admin'))
 	    //call method to delete from user profile & MAIN schema
 	    Meteor.call('disconnectStripeAdmin');
