@@ -22,7 +22,8 @@ Template.restartMsg.events({
 	event.preventDefault();
 	Session.set('restartApp',null);
         Meteor.call('restartApp', function (e) {
-	    
+	    if (!e)
+		Router.go('/admin');
 	});
      }
 });

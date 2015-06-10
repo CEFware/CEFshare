@@ -34,8 +34,8 @@ Meteor.methods({
         var imgs=listing.image;
 	//security check - admin or author
 	if ((Meteor.userId()===listing.author) || (Roles.userIsInRole(Meteor.userId(),'admin'))) {
-            Listings.remove({_id:id});
-            Images.remove({_id:{$in:imgs}},{multi:true});
+            Listings.update({_id:id},{$set:{isPublic:false}});
+//            Images.remove({_id:{$in:imgs}},{multi:true});
 	} else {
 	    throw new Meteor.Error("security-check-fail","Only listing author or admin may delete the listing");
 	};
