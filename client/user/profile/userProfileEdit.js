@@ -59,7 +59,7 @@ Template.userProfileEdit.events({
         });
     },
     'click .stripe-connect': function(e, t){
-	if (Roles.userIsInRole(Meteor.userId,'verified')) {
+	if (Roles.userIsInRole(Meteor.userId(),'verified')) {
             Meteor.loginWithStripe({
 		stripe_landing: 'login' // or register
             }, function (err) {
