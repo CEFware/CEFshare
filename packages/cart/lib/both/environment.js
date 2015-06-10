@@ -34,11 +34,11 @@ var myWrapAsync = function (fn, context) {
 if(Meteor.isServer){
     if(Meteor.settings && Meteor.settings.stripe_sk){
 	Stripe = StripeAPI(Meteor.settings.stripe_sk);
-	wrappedStripeChargeCreate = myWrapAsync(Stripe.charges.create, Stripe.charges);
-//	wrappedStripeChargeCreate = Meteor.wrapAsync(Stripe.charges.create, Stripe.charges);
-	wrappedStripeChargeRetrieve = Meteor.wrapAsync(Stripe.charges.retrieve, Stripe.charges);
-	wrappedStripeTransfer = myWrapAsync(Stripe.transfers.create, Stripe.transfers);
 //	wrappedStripeChargeCreate = myWrapAsync(Stripe.charges.create, Stripe.charges);
+	wrappedStripeChargeCreate = Meteor.wrapAsync(Stripe.charges.create, Stripe.charges);
+	wrappedStripeChargeRetrieve = Meteor.wrapAsync(Stripe.charges.retrieve, Stripe.charges);
+//	wrappedStripeTransfer = myWrapAsync(Stripe.transfers.create, Stripe.transfers);
+	wrappedStripeTransfer = Meteor.wrapAsync(Stripe.transfers.create, Stripe.transfers);
     }else{
 	console.log('ERROR - stripe secret key not found in settings');
     }
