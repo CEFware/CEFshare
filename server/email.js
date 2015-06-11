@@ -19,6 +19,23 @@ Meteor.methods({
         });
     },
 
+    sendMaillist: function (to,subj,msg) {
+
+	var from=Main.findOne().basics;
+	if (from) {
+	    from=from.marketplaceEmail;
+	} else {
+	    from=Meteor.settings.private.supportEmail;
+	};
+
+        return Email.send({
+	    from: from,
+            to: to,
+            subject: subj,
+            text: msg
+        });
+    },
+
     newFollowerEmail: function (username) {
 
         var text = Meteor.user().username+' is now following you! Check your new follower profile here: '+Meteor.settings.public.url+'user/'+Meteor.user().username;

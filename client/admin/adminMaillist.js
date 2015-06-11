@@ -41,9 +41,15 @@ Template.adminMaillist.helpers({
 	    case 'PENDING':
 	    return 'warning';
 	    break;
+	    case 'SENT':
+	    return 'success';
+	    break;
 	    default:
 	    break;
 	};
+    },
+    numUsersNow: function () {
+	return Session.get('numUsersNow');
     }
 });
 
@@ -84,6 +90,10 @@ Template.adminMaillist.events({
 
 Template.adminMaillist.rendered = function () {
     Meteor.subscribe('maillist');
+    Meteor.call('numUsersNow', function (e,r) {
+	if (!e)
+	    Session.set('numUsersNow',r);
+    });
     if (!Session.get('msgId')) {
 	$('[name=subject]').val("");
 	$('.note-editable').text("");

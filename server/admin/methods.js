@@ -247,6 +247,7 @@ Meteor.methods({
     },
     sendBroadcastInvite: function (doc) {
 	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+	    console.log(doc);
 	    //we may check all emails for right format - may do so over MailGun API too, 
 	    //save email as array in invites collection along with the invite message,
 	    //actually send the invitation over MailGun API,
@@ -255,15 +256,24 @@ Meteor.methods({
     },
     sendBroadcastMsg: function (id,option) {
 	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+	    Maillist.update({_id:id}, {$set:{status:'PENDING', reach: Meteor.users.find().count(), lastSend: new Date}});
 	    //send message id to all user e-mail we have over MailGun API
 	    if (option) {
 		//show where to send - to all or new users only
-//console.log(option);
 	    } else {
-		option='all'
+		option='all';
 	    };
-//console.log(Maillist.findOne({_id:id}).subject);
-	    Maillist.update({_id:id}, {$set:{status:'PENDING'}});
+
+	    var res = Maillist.findOne({_id:id});
+	    if (option==='all') {
+		var u=Meteor.users.find();
+	    } else {
+		var u=Meteor.users.find();
+	    };
+	    u.forEach(function (el) {
+		Meteor.call('sendMaillist',el.emails[0].address,res.subject, res.message);
+	    });
+	    Maillist.update({_id:id}, {$set:{status:'SENT', reach: Meteor.users.find().count(), lastSend: new Date}});
 	};	
     },
     deleteBroadcastMsg: function (id) {
@@ -314,6 +324,9 @@ Meteor.methods({
 	    var query=doc;
 	    Main.update({_id:cur._id}, {$set:{payments:query}});
 	};
+    },
+    numUsersNow: function () {
+	return Meteor.users.find().count();
     }
 
 
