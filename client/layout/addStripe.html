@@ -5,7 +5,11 @@
           <div class="box">
             <h3>{{t "To create new listing, please, add Stripe account in"}} 
 	      {{#if isInRole 'admin'}}
+	      {{#if mainStripe}}
+	      <a href="/user/{{currentUser.username}}/edit">{{t "PROFILE"}}</a>
+	      {{else}}
 	      <a href="/admin/payments">{{t "ADMIN - payments"}}</a>
+	      {{/if}}
 	      {{else}}
 	      <a href="/user/{{currentUser.username}}/edit">{{t "PROFILE"}}</a>
 	      {{/if}}

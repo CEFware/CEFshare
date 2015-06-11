@@ -33,7 +33,7 @@
 
 	  <h3>{{t "Attach your payment accout"}}</h3>
           <div class="box" id="text-page">
-	    {{#if currentUser.services.stripe}}
+	    {{#if stripeConnected}}
 	    <a href="" class="btn btn-danger stripe-disconnect">{{t "Disconnect your Stripe account"}}</a>
 	    {{else}}
 	    <a href="" class="btn btn-primary stripe-connect">{{t "Connect your Stripe account"}}</a>

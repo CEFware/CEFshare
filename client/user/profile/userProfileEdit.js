@@ -31,7 +31,20 @@ Template.userProfileEdit.helpers({
 	if (this._id==='stripe')
 	    return false;
 	return true;
-   }
+    },
+    stripeRes: function () {
+	var res=Session.get('stripeRes');
+	switch (res) {
+	    case "sameAsMarket":
+	    Flash.danger('stripeMsg',TAPi18n.__("You may not use the same Stripe account as marketplace owner!"),10000);
+	    break;
+	    case "success":
+            Flash.success('stripeMsg',TAPi18n.__("Thank you!"),2000);
+	    break;
+	    default:
+	    break;
+	};
+    }
 });
 
 AutoForm.addHooks(['EditUserProfilePage'],{
@@ -65,7 +78,14 @@ Template.userProfileEdit.events({
             }, function (err) {
                 if (err){
                     if (err.message.indexOf('correctly added')>-1) {
-                        Flash.success('stripeMsg',TAPi18n.__("Thank you!"),2000);
+			if (Meteor.user().services.stripe.id === Main.findOne().stripe.id) {
+			    Meteor.call('disconnectStripe', function (e) {
+				if (!e) 
+				    Session.set('stripeRes','sameAsMarket');
+			    });
+			} else {
+			    Session.set('stripeRes','success');
+			};
                     } else if (err.message.indexOf('Another account registered')>-1) {
                         Flash.danger('stripeMsg',TAPi18n.__("Another account using the same Stripe account was found!"),4000);
                     } else {

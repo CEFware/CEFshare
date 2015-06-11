@@ -283,15 +283,21 @@ Meteor.methods({
     disconnectStripeAdmin: function () {
 	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
 	    //disconnect on Stipe side
-	    HTTP.post('https://connect.stripe.com/oauth/deauthorize',{params:{client_secret:Meteor.settings.stripe_sk, client_id:Meteor.settings.client_id, stripe_user_id:Meteor.user().services.stripe.stripe_user_id}}, function (e){
-		if (!e) {
-		    //remove from Main
-		    var cur=Main.findOne();
-		    Main.update({_id:cur._id}, {$unset:{stripe:""}});
-		    //remove from Users
-		    Users.update({_id:Meteor.userId()}, {$unset:{'services.stripe':"1"}});
-		};
-	    });
+	    if (Meteor.user().services.stripe) {
+		HTTP.post('https://connect.stripe.com/oauth/deauthorize',{params:{client_secret:Meteor.settings.stripe_sk, client_id:Meteor.settings.client_id, stripe_user_id:Main.findOne().stripe.id}}, function (e){
+		    if (!e) {
+			//remove from Main
+			var cur=Main.findOne();
+			Main.update({_id:cur._id}, {$unset:{stripe:""}});
+			//remove from Users
+			Users.update({_id:Meteor.userId()}, {$unset:{'services.stripe':"1"}});
+		    };
+		});
+	    } else {
+		//remove from Main
+		var cur=Main.findOne();
+		Main.update({_id:cur._id}, {$unset:{stripe:""}});
+	    };
 	};	
     },
     disconnectStripe: function () {

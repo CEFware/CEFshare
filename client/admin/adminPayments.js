@@ -6,6 +6,9 @@ Template.adminPayments.helpers({
 	var res=Main.findOne();
 	if (res)
 	    return res.payments;
+    },
+    stripeConnected: function () {
+	return Main.findOne().stripe;
     }
 });
 
@@ -29,7 +32,10 @@ Template.adminPayments.events({
 	    }, function (err) {
 		if (err){
 		    if (err.message.indexOf('correctly added')>-1) {
-			Meteor.call('addStripeToMain',Meteor.user().services.stripe);
+			Meteor.call('addStripeToMain',Meteor.user().services.stripe, function (e) {
+			    if (!e) 
+				Meteor.call('disconnectStripe');
+			});
 		    } else if (err.message.indexOf('Another account registered')>-1) {
 			Flash.danger(1,TAPi18n.__("Another account using the same Stripe account was found!"),2000);
 		    } else {
