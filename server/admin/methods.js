@@ -247,10 +247,10 @@ Meteor.methods({
     },
     sendBroadcastInvite: function (doc) {
 	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
-	    console.log(doc);
-	    //we may check all emails for right format - may do so over MailGun API too, 
-	    //save email as array in invites collection along with the invite message,
-	    //actually send the invitation over MailGun API,
+	    var mails=doc.emails.split(',');
+	    mails.forEach(function (el) {
+		Meteor.call('sendMaillist',el.trim(),doc.subject, doc.message);
+	    });
 	    //later show who accepted invitation and became user 
 	};	
     },
