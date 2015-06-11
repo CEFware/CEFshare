@@ -1,14 +1,19 @@
 Meteor.methods({
 
     sendEmail: function (doc) {
+        this.unblock();
 
         check(doc, Schema.contact);
 
         var text = "From e-mail: " + doc.email + "\n\n\n\n"+ doc.message;
-        this.unblock();
+
+	var to=Meteor.settings.private.supportEmail;
+	if (doc.toEmail)
+	    to=doc.toEmail;
+
         return Email.send({
 	    from: doc.email,
-            to: Meteor.settings.private.supportEmail,
+            to: to,
             subject: Meteor.settings.public.marketplaceName+" contact form from "+doc.email,
             text: text
         });

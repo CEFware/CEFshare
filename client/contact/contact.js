@@ -1,6 +1,11 @@
 Template.contact.helpers({
     contactFormSchema: function() {
 	return Schema.contact;
+    },
+    mainEmail: function () {
+	var res=Main.findOne().basics;
+	if (res)
+	    return res.marketplaceEmail;
     }
 });
 
