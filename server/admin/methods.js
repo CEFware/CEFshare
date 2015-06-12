@@ -256,7 +256,6 @@ Meteor.methods({
     },
     sendBroadcastMsg: function (id,option) {
 	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
-	    Maillist.update({_id:id}, {$set:{status:'PENDING', reach: Meteor.users.find().count(), lastSend: new Date}});
 	    //send message id to all user e-mail we have over MailGun API
 	    if (option) {
 		//show where to send - to all or new users only
@@ -267,13 +266,23 @@ Meteor.methods({
 	    var res = Maillist.findOne({_id:id});
 	    if (option==='all') {
 		var u=Meteor.users.find();
+		Maillist.update({_id:id}, {$set:{status:'PENDING', reach: 0}});
 	    } else {
-		var u=Meteor.users.find();
+		var last=res.lastSend;
+		var u=Meteor.users.find({createdAt: {$gt:new Date(last)}});
+		Maillist.update({_id:id}, {$set:{status:'PENDING'}});
 	    };
+	    res = Maillist.findOne({_id:id});
+	    var cnt=res.reach;
 	    u.forEach(function (el) {
-		Meteor.call('sendMaillist',el.emails[0].address,res.subject, res.message);
+		Meteor.call('sendMaillist',el.emails[0].address,res.subject, res.message, function (e) {
+		    if (!e) {
+			cnt++;
+			Maillist.update({_id:id}, {$set:{status:'PENDING', reach: cnt}});
+		    };
+		});
 	    });
-	    Maillist.update({_id:id}, {$set:{status:'SENT', reach: Meteor.users.find().count(), lastSend: new Date}});
+	    Maillist.update({_id:id}, {$set:{status:'SENT', reach: cnt, lastSend: new Date}});
 	};	
     },
     deleteBroadcastMsg: function (id) {

@@ -31,7 +31,15 @@ Template.adminMaillist.helpers({
 	    return {class:"active"};
     },
     sent: function () {
-	return this.status!='PREPARED';
+	return this.status==='SENT';
+    },
+    pending: function () {
+	return this.status==='PENDING';
+    },
+    wentOut: function () {
+	if (this.reach)
+	    return '#'+this.reach;
+	return '...';
     },
     label: function (status) {
 	switch (status) {
