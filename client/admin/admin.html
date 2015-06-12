@@ -32,14 +32,18 @@
 
 	  <h3>{{t "Progress quest to start marketplace"}}</h3>
           <div class="box" id="text-page">
-	    {{t "Steps needed for marketplace to start working:"}}<br>
-	    1. {{t "Verify e-mail"}}<br>
-	    2. {{t "Add stripe keys"}}<br>
-	    3. {{t "Add social media (FB, Twitter & G+) keys"}}<br>
-	    {{t "Add first listings"}}<br>
-	    <br>
-	    {{t "do this checklist reactive - show what is done & what has to be done"}}<br>
-	    <br>
+	    <h4 class="text-center">{{t "3 steps for your marketplace to start working:"}}</h4><br>
+	    <div class="row">
+	      <div class="col-md-4 text-center text-{{email}}"><i class="fa fa-envelope-o" style="font-size:120px;font-weight:bold;"></i><br>
+		<a href="/user/{{currentUser.username}}/edit">{{t "Verify e-mail"}}</a>
+	      </div>
+	      <div class="col-md-4 text-center text-{{stripe}}"><i class="fa fa-cc-stripe" style="font-size:120px;font-weight:bold;"></i><br>
+		<a href="/admin/payments">{{t "Connect Stripe"}}</a>
+	      </div>
+	      <div class="col-md-4 text-center text-{{social}}"><i class="fa fa-share-alt" style="font-size:120px;font-weight:bold;"></i><br>
+		<a href="/admin/social">{{t "Add social API"}}</a>
+	      </div>
+            </div>
 	    <br>
           </div>
 	  <h3>{{t "Dashboard"}}</h3>
