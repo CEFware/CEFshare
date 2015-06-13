@@ -15,3 +15,9 @@ Template.admin.helpers({
 	return 'danger';
     }
 });
+
+Template.admin.rendered=function () {
+    $('#timeleft').countdown((new Date()).setDate((new Date(Main.findOne().createdAt)).getDate()+30), function(event) {
+	$(this).html(event.strftime('%D days %H:%M:%S'));
+    });
+};

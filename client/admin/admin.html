@@ -32,7 +32,7 @@
 
 	  <h3>{{t "Progress quest to start marketplace"}}</h3>
           <div class="box" id="text-page">
-	    <h4 class="text-center">{{t "3 steps for your marketplace to start working:"}}</h4><br>
+	    <h3 class="text-center">{{t "3 steps for your marketplace to start working:"}}</h3><br>
 	    <div class="row">
 	      <div class="col-md-4 text-center text-{{email}}"><i class="fa fa-envelope-o" style="font-size:120px;font-weight:bold;"></i><br>
 		<a href="/user/{{currentUser.username}}/edit">{{t "Verify e-mail"}}</a>
@@ -44,6 +44,8 @@
 		<a href="/admin/social">{{t "Add social API"}}</a>
 	      </div>
             </div>
+	    <h3 class="text-center text-danger">{{t "Your free testing period ends in"}}</h3><br>
+	    <div id="timeleft" class="text-center text-danger" style="font-size:50px;font-weight:bold;"></div>
 	    <br>
           </div>
 	  <h3>{{t "Dashboard"}}</h3>

@@ -61,6 +61,7 @@ geojson-utils@1.0.3
 gfk:mailgun-api@1.1.0
 google@1.1.5
 handlebars@1.0.3
+hilios:jquery.countdown@2.0.4
 html-tools@1.0.4
 htmljs@1.0.4
 http@1.1.0
