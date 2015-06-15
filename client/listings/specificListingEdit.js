@@ -239,9 +239,10 @@ Template.specificListingEdit.rendered = function () {
     var obj=null;
     if (Router.current().params.uri!=='new') {
 	obj=specificListingByURI(Router.current().params.uri).fetch().first();
-	$('#tokenfield').tokenfield({
-	    tokens: obj.tags
-	});
+	Meteor.setTimeout(function () {
+	    $('#tokenfield').tokenfield({
+		tokens: obj.tags
+	    })}, 2000);
 	//set current listing type
 	Session.set('listingType',obj.listingType);
 	//set current listing categories
@@ -257,7 +258,7 @@ Template.specificListingEdit.rendered = function () {
 		Session.set('listingCategory',curCat);
 	});
     } else {
-	$('#tokenfield').tokenfield();
+	Meteor.setTimeout(function () {$('#tokenfield').tokenfield();}, 2000);
 	//set default listing type
 	Session.set('listingType',Main.findOne().listingFields[0].listingType);
     };
