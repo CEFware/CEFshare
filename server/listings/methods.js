@@ -96,8 +96,7 @@ Meteor.methods({
             obj.push({uri:ListingMain._schema.uri});
             break;
             case 'day':
-            obj.push({dateStart:ListingMain._schema.dateStart});
-            obj.push({dateEnd:ListingMain._schema.dateEnd});
+            obj.push({datePick:ListingMain._schema.datePick});
             obj.push({qtyToBuy:ListingMain._schema.qtyToBuy});
             obj.push({uri:ListingMain._schema.uri});
             break;

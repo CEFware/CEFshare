@@ -86,7 +86,16 @@
 		{{t "You earn:"}} <b><span id="earn"></span></b><br><small><span id="explanation"></span><br><br></small>
 		</div>
 	      </div>
-	      <div class="row">
+	      {{#if itemDay}}
+              <div class="row">
+		<div class="col-md-12">
+                  {{> afQuickField name="daysPick"}}
+                  {{> afQuickField name="datePick" buttonClasses="glyphicon glyphicon-calendar" datePickerOptions=dateOptions}}
+		</div>
+              </div>
+	      {{populateDates}}
+	      {{/if}}
+ 	      <div class="row">
 		<div class="col-md-6">
 		  {{#if showField "shippingFee"}}
 		  {{> afQuickField name='shippingFee'}}

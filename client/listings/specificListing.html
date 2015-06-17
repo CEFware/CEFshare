@@ -109,13 +109,11 @@
 	      <fieldset>
 		
 		{{#if getDateRange listing.itemName}}
-		<div class="row">
+		<div class="row text-center">  
 		  <div class="form-group form-inline">
-		    <div class="col-md-6">
-		      {{> afQuickField name="dateStart" buttonClasses="glyphicon glyphicon-calendar" datePickerOptions=dateStartOptions}}
-		    </div>
-		    <div class="col-md-6">
-		      {{> afQuickField name="dateEnd" buttonClasses="glyphicon glyphicon-calendar" datePickerOptions=dateEndOptions}}
+                    <label class="control-label">{{t "Appointment start"}}:</label><br>
+		    <div class="input-group date">
+ 		      {{> afFieldInput name="datePick" buttonClasses="glyphicon glyphicon-calendar" datePickerOptions=dateOptions}}
 		    </div>
 		  </div>
 		</div>

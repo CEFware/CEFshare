@@ -140,8 +140,7 @@ Template.specificListing.helpers({
             obj.push({uri:ListingMain._schema.uri});
 	    break;
 	    case 'day':
-            obj.push({dateStart:ListingMain._schema.dateStart});
-            obj.push({dateEnd:ListingMain._schema.dateEnd});
+            obj.push({datePick:ListingMain._schema.datePick});
             obj.push({qtyToBuy:ListingMain._schema.qtyToBuy});
             obj.push({uri:ListingMain._schema.uri});
 	    break;
@@ -178,7 +177,7 @@ Template.specificListing.helpers({
 	return false;
     },
     customField: function () {
-	if ((this.name==='qtyToBuy') || (this.name==='dateStart') || (this.name==='dateEnd') || (this.name==='dateTime'))
+	if ((this.name==='qtyToBuy') || (this.name==='datePick') || (this.name==='dateTime'))
 	    return false;
 	return true;
     },
@@ -187,22 +186,22 @@ Template.specificListing.helpers({
 	    return true;
 	return false;
     },
-    dateStartOptions: function () {
+    dateOptions: function () {
+	var days=specificListingByURI(Router.current().params.uri).fetch().first().daysPick;
+	if (!days)
+	    days='';
+	var dates=specificListingByURI(Router.current().params.uri).fetch().first().datePick;
+	if (dates) {
+	    dates=dates.split(',');
+	} else {
+	    dates="";
+	};
 	return {startDate: new Date(), 
 		todayBtn: "linked", 
-		autoclose:true, 
 		todayHighlight: true, 
-		datesDisabled: Meteor.user().profile.notAvailableDates.split(','),
-		daysOfWeekDisabled: Meteor.user().profile.notAvailableDays
-	       }
-    },
-    dateEndOptions: function () {
-	return {startDate: new Date(), 
-		todayBtn: "linked", 
-		autoclose:true, 
-		todayHighlight: true, 
-		datesDisabled: Meteor.user().profile.notAvailableDates.split(','),
-		daysOfWeekDisabled: Meteor.user().profile.notAvailableDays
+		multidate: true,
+		datesDisabled: dates,
+		daysOfWeekDisabled: days
 	       }
     },
     getDays: function () {
@@ -270,12 +269,11 @@ Template.specificListing.events({
 	});
     },
 
-    'change [name=dateStart], change [name=dateEnd]': function (e,t) {
-	var date1 = new Date($('[name=dateEnd]').val());
-	var date2 = new Date($('[name=dateStart]').val());
-	var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-	var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
-	Session.set('daysNum',diffDays);
+    'change [name=datePick]': function (e,t) {
+	var diffDays = $('[name=datePick]').val();
+	if (diffDays)
+	    diffDays=diffDays.split(',');
+	Session.set('daysNum',diffDays.length);
     },
     
     'change [name=qtyToBuy]': function (e,t) {
