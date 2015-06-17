@@ -1,6 +1,7 @@
 Meteor.methods({
     editUserProfile: function (doc) {
 	if (Meteor.userId()) {
+
 	    check(doc, User.User)
 
 	    if (Meteor.user().emails[0].address===doc.emails[0].address) {
@@ -9,7 +10,9 @@ Meteor.methods({
 			profile: doc.profile,
 			formatted_address: doc.formatted_address,
 			lat:doc.lat,
-			lng:doc.lng
+			lng:doc.lng,
+			notAvailableDates:doc.notAvailableDates, 
+			notAvailableDays:doc.notAvailableDays 
 		    }
 		});
 		
@@ -25,7 +28,9 @@ Meteor.methods({
 			emails : [{address:doc.emails[0].address,verified:false}],
 			formatted_address: doc.formatted_address,
 			lat:doc.lat,
-			lng:doc.lng
+			lng:doc.lng,
+			notAvailableDates:doc.notAvailableDates, 
+			notAvailableDays:doc.notAvailableDays 
 		    }
 		});
 

@@ -111,19 +111,29 @@
 	      {{> afQuickField name=this.name options=afOptionsFromSchema}}
 	      {{/each}}
 	      
-	      {{#if showField "isRibbonSale"}}
-	      {{> afQuickField name='isRibbonSale'}}
-	      {{/if}}
+	      <div class="col-md-6">
+		{{#if showField "isRibbonSale"}}
+		{{> afQuickField name='isRibbonSale'}}
+		{{/if}}
 
-	      {{#if showField "isRibbonNew"}}
-	      {{> afQuickField name='isRibbonNew'}}
-	      {{/if}}
+		{{#if showField "isRibbonNew"}}
+		{{> afQuickField name='isRibbonNew'}}
+		{{/if}}
 
-	      {{> afQuickField name='isPublic'}}
+		{{> afQuickField name='isPublic'}}
 	      
-	      {{#if showField "active"}}
-	      {{> afQuickField name='active'}}
-	      {{/if}}
+		{{#if showField "active"}}
+		{{> afQuickField name='active'}}
+		{{/if}}
+	      </div>
+
+	      <div class="col-md-6">
+		{{#if setDates}}
+		{{t "Set unavailable days of week:"}}
+		
+		{{t "Set unavailable dates:"}}
+		{{/if}}
+	      </div>
 	      
               {{> afFieldInput type="hidden" name="listingType" value=listingTypeGet}}
  	    </fieldset>

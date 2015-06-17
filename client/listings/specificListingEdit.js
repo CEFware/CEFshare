@@ -177,7 +177,10 @@ Template.specificListingEdit.helpers({
         if (Router.current().params.uri==='new')
             return null;
         return "Listings";
-    } 
+    },
+    setDates: function () {
+	
+    }
 });
 
 Template.specificListingEdit.events({

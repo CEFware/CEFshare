@@ -188,10 +188,22 @@ Template.specificListing.helpers({
 	return false;
     },
     dateStartOptions: function () {
-	return {startDate: new Date(), todayBtn: "linked", autoclose:true, todayHighlight: true}
+	return {startDate: new Date(), 
+		todayBtn: "linked", 
+		autoclose:true, 
+		todayHighlight: true, 
+		datesDisabled: Meteor.user().profile.notAvailableDates.split(','),
+		daysOfWeekDisabled: Meteor.user().profile.notAvailableDays
+	       }
     },
     dateEndOptions: function () {
-	return {startDate: new Date(), todayBtn: "linked", autoclose:true, todayHighlight: true}
+	return {startDate: new Date(), 
+		todayBtn: "linked", 
+		autoclose:true, 
+		todayHighlight: true, 
+		datesDisabled: Meteor.user().profile.notAvailableDates.split(','),
+		daysOfWeekDisabled: Meteor.user().profile.notAvailableDays
+	       }
     },
     getDays: function () {
 	var res = Session.get('daysNum');
@@ -205,7 +217,15 @@ Template.specificListing.helpers({
 	return false;
     },
     dateTimeOptions: function () {
-	return {minDate: new Date(), useCurrent: true, inline:true, sideBySide:true, todayHighlight: true, showTodayButton:true}
+	return {minDate: new Date(), 
+		useCurrent: true, 
+		inline:true, 
+		sideBySide:true, 
+		todayHighlight: true, 
+		showTodayButton:true,
+		disabledDates: Meteor.user().profile.notAvailableDates.split(','),
+		daysOfWeekDisabled: Meteor.user().profile.notAvailableDays
+	       }
     },
     listingUri: function () {
 	return Router.current().params.uri;
