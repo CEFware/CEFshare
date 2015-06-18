@@ -1,0 +1,115 @@
+<template name="sidebar_mobile_filter">
+    <div class="filters-sidenav">
+        <!-- price select -->
+        <li>
+            <span class="filter-title">Price Select</span>
+            <form action="#">
+                <p class="range-field">
+                    <input type="range" id="test5" min="0" max="100" />
+                </p>
+            </form>
+        </li>
+
+        <!-- Checkbox select -->
+        <li>
+            <span class="filter-title">Checkbox Filter</span>
+            <form action="#">
+                <p>
+                    <input type="checkbox" id="test1" />
+                    <label for="test1">Checkbox 1</label>
+                </p>
+
+                <p>
+                    <input type="checkbox" id="test2" />
+                    <label for="test2">Checkbox 2</label>
+                </p>
+
+                <p>
+                    <input type="checkbox" id="test3" />
+                    <label for="test3">Checkbox 3</label>
+                </p>
+
+                <p>
+                    <input type="checkbox" id="test4" />
+                    <label for="test4">Checkbox 4</label>
+                </p>
+            </form>
+        </li>
+
+        <!-- Radio select -->
+        <li>
+            <span class="filter-title">Radio Filter</span>
+            <form action="#">
+                <p>
+                    <input name="group1" type="radio" id="test1r" />
+                    <label for="test1r">Radio 1</label>
+                </p>
+                <p>
+                    <input name="group1" type="radio" id="test2r" />
+                    <label for="test2r">Radio 2</label>
+                </p>
+                <p>
+                    <input name="group1" type="radio" id="test3r" />
+                    <label for="test3r">Radio 3</label>
+                </p>
+                <p>
+                    <input name="group1" type="radio" id="test4r" />
+                    <label for="test4r">Radio 4</label>
+                </p>
+            </form>
+        </li>
+
+        <!-- Category select -->
+        <li>
+            <span class="filter-title">Category Filter</span>
+            <ul class="category-small-list">
+                <li><a href="#">Category List Item</a></li>
+                <li><a href="#">Category List Item</a></li>
+                <li><a href="#">Category List Item</a></li>
+                <li><a href="#">Category List Item</a></li>
+                <li><a href="#">Category List Item</a></li>
+            </ul>
+        </li>
+    </div>
+</template>
+<template name="sidebar_mobile_main">
+    <li>
+        <a href="#" class="create_side"><i class="mdi-content-create"></i>Add a Listing</a>
+    </li>
+
+    <li>
+        <a href="/cart"><i class="mdi-action-shopping-cart"></i>Cart Item</a>
+    </li>
+    <li>
+        <a href="#"><i class="mdi-action-dashboard"></i>Dashboard</a>
+    </li>
+    <li>
+        <a href="#"><i class="mdi-hardware-keyboard-return"></i>Log Out</a>
+    </li>
+
+    <li>
+        <div class="input-field col s12 translate-div">
+            <select class="mat-select">
+                <option value="" selected>Choose Language</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+            </select>
+        </div>
+    </li>
+
+    <li>
+        <a href="#"><i class="mdi-action-info"></i>About</a>
+    </li>
+    <li>
+        <a href="#"><i class="mdi-action-help"></i>How it Works</a>
+    </li>
+    <li>
+        <a href="#"><i class="mdi-communication-quick-contacts-mail"></i>Contact</a>
+    </li>
+</template>
+
+<template name="sidebar_Wrapper_mobile">
+{{> UI.dynamic template=templateName}}
+
+</template>

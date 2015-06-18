@@ -1,0 +1,42 @@
+<template name="listingNew">
+    {{#if Template.subscriptionsReady}}
+            {{#each listing}}
+                {{> listingData}}
+
+            {{/each}}
+        {{else}}
+            {{> loading text='Loading'}}
+    {{/if}}
+</template>
+
+<template name="listingData">
+    <div class="col s12 m6 l4 card-wrapper">
+
+        <div class="back" id="{{_id}}-back">
+            <h5>Product Title</h5>
+            <p>
+                {{description}}
+            </p>
+            <p><a href="/listing/Details/{{_id}}" class="btn-link btn">Learn More</a></p>
+
+        </div>
+
+        <div class="card" id="{{_id}}">
+            <div class="card-image center-align">
+                {{#if imageLoaded}}
+                    <a href="/inner"><img src="{{getThumbnail '0'}}"></a>
+                   {{else}}
+                        {{> loading text=''}}
+                {{/if}}
+            </div>
+            <div class="card-content">
+                <h5><a href="/inner">{{title}}</a></h5>
+            </div>
+            <div class="card-action">
+                {{price}}
+                <span class="new right">New</span>
+            </div>
+        </div>
+
+    </div>
+</template>
