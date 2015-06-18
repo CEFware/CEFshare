@@ -193,6 +193,7 @@ Template.specificListing.helpers({
 	var dates=specificListingByURI(Router.current().params.uri).fetch().first().datePick;
 	if (dates) {
 	    dates=dates.split(',');
+	    dates=_.union(dates,UnavailableDates.findOne().dates)
 	} else {
 	    dates="";
 	};

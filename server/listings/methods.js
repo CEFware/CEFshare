@@ -121,5 +121,4 @@ Meteor.methods({
 	
         return doc;
     }
-
 });
