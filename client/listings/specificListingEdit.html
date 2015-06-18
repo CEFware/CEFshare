@@ -90,8 +90,14 @@
               <div class="row">
 		<div class="col-md-12">
                   {{> afQuickField name="daysPick"}}
-                  {{> afQuickField name="datePick" buttonClasses="glyphicon glyphicon-calendar" datePickerOptions=dateOptions}}
-		</div>
+
+                  <div class="form-group form-inline">
+                    <label class="control-label">{{t "Select unavailable days"}}:</label><br>
+                    <div class="input-group date">
+                      {{> afFieldInput name="datePick" buttonClasses="glyphicon glyphicon-calendar" datePickerOptions=dateOptions}}
+                    </div>
+                  </div>
+ 		</div>
               </div>
 	      {{populateDates}}
 	      {{/if}}
