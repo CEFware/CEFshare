@@ -17,3 +17,7 @@ Meteor.publish('getListingsByURI', allListingsByURI);
 Meteor.publish('getPublicListingsByAuthor', publicListingsByAuthor);
 
 Meteor.publish('allListings', allListings);
+
+Meteor.publish('unavailableDates', unavailableDates);
+
+

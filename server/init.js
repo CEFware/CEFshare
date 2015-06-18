@@ -45,6 +45,24 @@ defaultFields = [
 	    letDelete: false
 	},
 	{
+	    name: 'datePick',
+	    title: 'Pick needed dates:',
+	    type: 'datePick',
+	    optional: true,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: false
+	},
+	{
+	    name: 'daysPick',
+	    title: 'Set unavailable days of week:',
+	    type: 'daysPick',
+	    optional: true,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: false
+	},
+	{
 	    name: 'tags',
 	    title: 'Tags',
 	    type: 'tags',

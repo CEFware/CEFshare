@@ -49,10 +49,10 @@ meteorhacks:inject-initial
 gfk:mailgun-api
 elevatedevdesign:autoform-nouislider@0.0.5
 francocatena:status@1.2.3
-aldeed:autoform-bs-datepicker
 rajit:bootstrap3-datepicker
 tsega:bootstrap3-datetimepicker@=3.1.3_3
 aldeed:autoform-bs-datetimepicker
 stripe-connect
 http
 hilios:jquery.countdown
+our:autoform-bs-datepicker
