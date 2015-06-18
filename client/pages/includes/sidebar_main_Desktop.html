@@ -1,0 +1,163 @@
+<template name="sidebar_main_Desktop">
+    <div class="main-side-menu">
+        <!-- create listing button -->
+        <ul class="create-listing">
+            <li>
+                <a class="waves-effect waves-light create">Add a Listing &nbsp; &nbsp;
+                    <i class="mdi-content-create"></i></a>
+            </li>
+        </ul>
+
+        <!-- Cart Items Dashboard Logout Menu -->
+        <ul class="main-sidebar end-ul">
+            <li>
+                <i class="mdi-action-shopping-cart"></i> &nbsp;&nbsp;
+                <a href="/cart" class="waves-effect waves-light">Cart Item</a>
+            </li>
+            <li>
+                <i class="mdi-action-dashboard"></i>&nbsp;&nbsp;
+                <a href="#">Dashboard</a>
+            </li>
+            <li>
+                <i class="mdi-hardware-keyboard-return"></i>&nbsp;&nbsp;
+                <a href="#">Log Out</a>
+            </li>
+        </ul>
+
+        <!-- Translate Item -->
+        <div class="row end-ul translate-div">
+            <div class="col s1">
+                <i class="mdi-action-translate"></i>
+            </div>
+            <div class="input-field col s10">
+                <select class="mat-select">
+                    <option value="" disabled selected>Choose Language</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Secondary side Menu -->
+        <ul class="main-sidebar">
+            <li>
+                <i class="mdi-action-info"></i> &nbsp;&nbsp;
+                <a href="#">About</a>
+            </li>
+            <li>
+                <i class="mdi-action-help"></i>&nbsp;&nbsp;
+                <a href="#">How It Works</a>
+            </li>
+            <li>
+                <i class="mdi-communication-quick-contacts-mail"></i>&nbsp;&nbsp;
+                <a href="#">Contact</a>
+            </li>
+        </ul>
+
+    </div>
+</template>
+<template name="sidebar_filter_form_desktop">
+    <div class="filter-menu">
+        <!-- Filter close -->
+        <div class="col s12">
+            <div class="col s3">
+                <a href="#" class="close-filter">
+                    <i class="mdi-navigation-close"></i>
+                </a>
+            </div>
+            <div class="col s9">
+                <h5>Filter</h5>
+            </div>
+        </div>
+        <!-- Begin White bg wrapper -->
+        <div class="col s12 wrapper-filter">
+
+            <!-- Price select -->
+            <div class="indie-filter">
+                <h5 class="center-align">Price Select</h5>
+                <form action="#">
+                    <p class="range-field">
+                        <input type="range" id="test5" min="0" max="100" />
+                    </p>
+                </form>
+            </div>
+
+            <!-- Checkbox select -->
+            <div class="indie-filter">
+                <h5 class="center-align">Checkbox Filter</h5>
+
+                <form action="#">
+                    <p>
+                        <input type="checkbox" id="test1" />
+                        <label for="test1">Checkbox 1</label>
+                    </p>
+
+                    <p>
+                        <input type="checkbox" id="test2" />
+                        <label for="test2">Checkbox 2</label>
+                    </p>
+
+                    <p>
+                        <input type="checkbox" id="test3" />
+                        <label for="test3">Checkbox 3</label>
+                    </p>
+
+                    <p>
+                        <input type="checkbox" id="test4" />
+                        <label for="test5">Checkbox 4</label>
+                    </p>
+                </form>
+            </div>
+
+            <!-- Radio select -->
+            <div class="indie-filter">
+                <h5 class="center-align">Radio Filter</h5>
+
+                <form action="#">
+                    <p>
+                        <input name="group1" type="radio" id="test1" />
+                        <label for="test1">Radio 1</label>
+                    </p>
+                    <p>
+                        <input name="group1" type="radio" id="test2" />
+                        <label for="test2">Radio 2</label>
+                    </p>
+                    <p>
+                        <input name="group1" type="radio" id="test3" />
+                        <label for="test3">Radio 3</label>
+                    </p>
+                    <p>
+                        <input name="group1" type="radio" id="test4" />
+                        <label for="test4">Radio 4</label>
+                    </p>
+                    <p>
+                        <input name="group1" type="radio" id="test5" />
+                        <label for="test5">Radio 5</label>
+                    </p>
+                    <p>
+                        <input name="group1" type="radio" id="test6" />
+                        <label for="test6">Radio 6</label>
+                    </p>
+                </form>
+
+            </div>
+
+            <!-- Category select -->
+            <div class="indie-filter">
+                <h5 class="center-align">Category Filter</h5>
+                <ul class="category-filter">
+                    <li><a href="#">Category List Item</a></li>
+                    <li><a href="#">Category List Item</a></li>
+                    <li><a href="#">Category List Item</a></li>
+                    <li><a href="#">Category List Item</a></li>
+                    <li><a href="#">Category List Item</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</template>
+<template name="sidebar_desktop_wrapper">
+    {{> UI.dynamic template=templateName}}
+</template>

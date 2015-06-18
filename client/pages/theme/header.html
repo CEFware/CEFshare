@@ -1,0 +1,202 @@
+<template name="header">
+  <!--  <div class="navbar navbar-default navbar-fixed-top yamm" role="navigation" id="navbar">
+        <div class="container">
+            <div class="navbar-header">
+
+                <a class="navbar-brand home" href="/">
+                    <img src="{{bigLogo}}" alt={{t "logo"}} class="hidden-xs hidden-sm">
+                    <img src="{{smallLogo}}" alt={{t "logo"}} class="visible-xs visible-sm"><span class="sr-only">{{t "go to homepage"}}</span>
+                </a>
+                <div class="navbar-buttons">
+                    <button type="button" class="navbar-toggle btn-primary" data-toggle="collapse" data-target="#navigation">
+                        <span class="sr-only">{{t "Toggle navigation"}}</span>
+                        <i class="fa fa-align-justify"></i>
+                    </button>
+                </div>
+            </div>
+            &lt;!&ndash;/.navbar-header &ndash;&gt;
+
+            <div class="navbar-collapse collapse" id="navigation">
+
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="{{pathFor 'about'}}">{{t "About"}}</a></li>
+                    <li><a href="{{pathFor 'how-it-works'}}">{{t "How it works"}}</a></li>
+                    <li><a href="{{pathFor 'contact'}}">{{t "Contact"}}</a></li>
+                </ul>
+		{{> loginButtonMenu}}
+            </div>
+            &lt;!&ndash;/.nav-collapse &ndash;&gt;
+	    {{> loginButtonTop}}
+ 
+        </div>
+    </div>-->
+    <div class="navbar-fixed">
+        <nav class="white" role="navigation">
+            <div class="nav-wrapper">
+
+                <!-- Logo shown only on small screen -->
+                <a id="logo-container" href="/" class="brand-logo pad-logo hide-on-large-only">
+                    <img src="imgs/cef_logo.png" alt="" width="75">
+                </a>
+
+                <!-- logo Search bar  and top menu shown only on large screen-->
+                <div class="row hide-on-med-and-down">
+                    <!-- large screen logo -->
+                    <div class="col s3 pad-logo-main">
+                        <a href="/"><img src="imgs/cef_logo.png" alt="" width="75"></a>
+                    </div>
+
+                    <!-- large screen search -->
+                    <div class="col s5 main-search">
+                        <form class="">
+                            <div class="input-field">
+                                <input id="search" type="search" class="search-top" placeholder="Search From Here" required="">
+                                <label for="search" id="search_label"><i class="mdi-action-search"></i></label>
+                                <i class="mdi-navigation-close"></i>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Large screen Account info -->
+                    <div class="col s4 account-link">
+                        <div class="col s10 right-align">
+                            {{> loginButtonMenu}}
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Menu shown on small screen -->
+                <ul id="nav-mobile" class="side-nav" style="left: -250px;">
+                   {{> UI.dynamic template=getTemplate}}
+
+                </ul>
+                <a href="#" data-activates="nav-mobile" class="button-collapse">
+                    <i class="mdi-navigation-menu"></i>
+                </a>
+            </div>
+        </nav>
+    </div>
+    {{#if isInRole 'unverified'}}
+    <div class="main">
+      <div class="col-lg-12">
+        {{> errorMsg}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if loginError}}
+    <div class="main">
+      <div class="col-lg-12">
+        {{> errorLogin}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if isInRole 'admin'}}
+    {{#if restartApp}}
+    <div class="main">
+      <div class="col-lg-12">
+        {{> restartMsg}}
+      </div>
+    </div>
+    {{/if}}
+    {{/if}}
+
+    {{> status}}
+
+</template>
+
+<template name="restartMsg">
+  <div class="alert alert-danger alert-dismissible" role="alert" style="padding-right:35px">
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{t "Close"}}</span></button>
+    <strong>{{t "Warning!"}}</strong> 
+    {{t "The app must be restarted for the changes to take place. Click "}} <a href="#" class="alert-link restart">{{t "RESTART"}}</a> {{t "to do so."}}
+  </div>
+</template>
+
+<template name="errorMsg">
+  <div class="alert alert-danger alert-dismissible" role="alert" style="padding-right:35px">
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{t "Close"}}</span></button>
+    <strong>{{t "Warning!"}}</strong> 
+    {{#if userEmail}}
+    {{t "Your e-mail is not verified - the use of our site is limited."}} <a href="#" class="alert-link sendVerEmail">{{t "Click here"}}</a> {{t "to resend the verification link for"}} {{userEmail}}.
+    {{else}}
+    {{t "Your account is in pending mode. Please, enter your e-mail in"}} <a href="/user/{{currentUser.username}}/edit" class="alert-link">{{t "PROFILE"}}</a> {{t "to confirm your account."}}
+    {{/if}}
+  </div>
+</template>
+
+<template name="errorLogin">
+  <div class="alert alert-danger alert-dismissible" role="alert" style="padding-right:35px" id="loginError">
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{t "Close"}}</span></button>
+    <strong>{{t "Warning!"}}</strong> {{t "Email, from the social network account you are using, already exists in our system. Please, try to log in with e-mail/password or other social network account."}}
+  </div>
+</template>
+
+<template name="loginButtonMenu">
+  <!-- formatting for drop down menu on mobile -->
+  <div class="hidden-sm hidden-lg text-center" id="basket-overview">
+
+<!-- add new listing button -->
+
+  {{#if currentUser}}
+      <div class="col s4 account-link">
+          <div class="col s10 right-align">
+              {{usernameById currentUser._id}}
+          </div>
+          <div class="col s2 teal-text text-darken-2">
+              <a href="/user/{{usernameById currentUser._id}}" class="user-link">{{> avatar user=currentUser shape="rounded" size="small"}} </a>
+          </div>
+      </div>
+  <a href="/sign-out/" class="btn-flat"><span class="glyphicon glyphicon-log-out"></span></a>
+  {{else}}
+         <a href="/sign-in/" class="btn-flat">{{t "loginButton"}}</a>
+  {{/if}}
+  </div>
+</template>
+
+<template name="loginButtonTop">
+  <!-- formatting for only user related drop down menu on big screen -->
+  <div class="navbar-collapse collapse right" id="basket-overview">
+    <div class="form-inline">
+      <div class="form-group">
+	{{#if showNewListingButton}}
+	<a href="/listing/new/edit" class="btn btn-primary navbar-btn">{{t "New listing"}}</a>
+	{{/if}}
+      </div>
+<!--
+      <div class="form-group">
+         <a href="{{pathFor 'cart'}}" class="btn btn-primary">
+          <i class="fa fa-shopping-cart"></i> {{> CartSummary}}
+        </a>
+      </div>
+-->
+      {{#if currentUser}}
+      <div class="form-group">
+	{{> avatar user=currentUser shape="rounded" size="small"}}
+      </div>
+      <div class="form-group">
+	<a href="/user/{{usernameById currentUser._id}}" class="btn btn-primary navbar-btn">
+	  {{usernameById currentUser._id}}
+	</a>
+      </div>
+      {{#if isInRole 'admin'}}
+      <div class="form-group">
+	<a href="{{pathFor 'admin'}}" class="btn btn-primary navbar-btn">
+	  <i class="fa fa-cogs"></i>
+	</a>
+      </div>
+      {{/if}}
+      <div class="form-group">
+	<a href="/sign-out/" class="btn btn-primary navbar-btn"><span class="glyphicon glyphicon-log-out"></span></a>
+      </div>
+      {{else}}
+      <div class="form-group">
+	<a href="/sign-in/" class="btn btn-primary navbar-btn">{{t "loginButton"}}</a>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+</template>
+

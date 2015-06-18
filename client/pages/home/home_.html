@@ -1,0 +1,85 @@
+<template name="home">
+<!--  {{#if cover}}
+  <div id="intro" style="background: url('{{coverPhoto}}') no-repeat center top;">
+    <div class="item">
+      <div class="container">
+        <div class="row">
+          <div class="carousel-caption">
+            <h1 class="text-uppercase">{{t "welcome text"}}</h1>
+	    <h3>{{t "marketplace description"}}</h3>
+	    <p>
+	      <form>
+		<div class="input-group col-md-6 col-md-offset-3">
+		  <input type="text" id="search-box" class="form-control" placeholder="{{t 'Search listings here'}}">
+		  <span class="input-group-btn">
+		    <button class="btn btn-primary search-btn" type="submit"><i class="fa fa-search"></i></button>
+		  </span>
+		</div>
+	      </form>
+	    </p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{else}}
+  <div id="slider" class="owl-carousel owl-theme">
+    {{#each sliderItems}}
+    <div class="item">
+	<a href="/listing/{{uri}}">
+        <img src="{{listingImg}}" alt="{{title}}" class="img-responsive">
+      </a>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+&lt;!&ndash;    <div id="all"> &ndash;&gt;
+
+        &lt;!&ndash; *** CONTENT ***   &ndash;&gt;
+
+	<a id="success-stories"></a>
+        <div id="content">
+            <div class="container">
+                <div class="col-sm-12">
+                  <div class="box text-center">
+		    {{#if cover}}
+		    &nbsp;
+		    {{else}}
+                    <h1 class="text-uppercase">{{t "welcome text"}}</h1>
+		    <p>{{t "marketplace description"}}</p>
+		    <p>
+		      
+		      <form>
+			<div class="input-group col-md-6 col-md-offset-3">
+			  <input type="text" id="search-box" class="form-control" placeholder="{{t 'Search listings here'}}">
+			  <span class="input-group-btn">
+			    <button class="btn btn-primary search-btn" type="submit"><i class="fa fa-search"></i></button>
+			  </span>
+			</div>
+		      </form>
+		    </p>
+		    {{/if}}
+                  </div>
+                    <div class="row products">
+                      <div class="col-sm-3">
+			{{> filters}}
+                      </div>
+                      <div class="col-sm-9">
+			{{> allListings}}
+                      </div>
+                    </div>
+                    &lt;!&ndash; /.products &ndash;&gt;
+
+                </div>
+                &lt;!&ndash; /.col-sm-12 &ndash;&gt;
+		
+            </div>-->
+            <!-- /.container -->
+
+            <!-- *** PROMO BAR *** -->
+        {{> listingNew publishTemplate='allListingsActive'}}
+	   {{> freePromotion}}
+        {{> newsLetter}}
+            <!-- *** PROMO BAR END *** -->
+        <!-- /#content -->
+</template>

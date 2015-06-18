@@ -1,0 +1,24 @@
+<template name="listingImages">
+    <div class="col s12 m6 l6 center-align picZoomer">
+        <img src="{{getThumbnail '0' 'images' null}}" alt="" class="main-image-edit main-img img-mainImg">
+    </div>
+
+    <div class="col s12 m6 l6">
+        <div class="col s12 thumbnails">
+            <div class="col s12 thumbs">
+                {{#each image}}
+                <div class="col s2 m3 l3">
+                    <a href="#">
+                        <img src="{{getThumbnail '-1' 'thumbs' this}}" alt="" class="main-image-edit imgs-thumbs">
+                    </a>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        <div class="col s12 m12">
+            <div class="col s12 price-div">
+                Price <span class="price">${{price}}</span> Per Item
+            </div>
+        </div>
+    </div>
+</template>

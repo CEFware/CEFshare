@@ -1,0 +1,25 @@
+<template name="newsLetter">
+    <div class="row">
+        <div class="col s12 newsletter center-align">
+            <h3>Get the News</h3>
+            <p>Start receiving the latest share market news and updates.</p>
+            {{flash '2'}}
+            <div class="input-field col s12 m12 l9 offset-m2 offset-l2 ">
+                {{#autoForm collection="Emails" id="Emails" type="insert"}}
+                    <div class="col m5 l6 s12 {{#if afFieldIsInvalid name='email'}}has-error{{/if}}">
+                        {{> afFieldInput name="email"}}
+
+                    </div>
+                    <div class="col m5 l6 s12 left-align">
+                        <button class="waves-effect waves-light btn" type="submit">{{t "Subscribe!"}}</button>
+                    </div>
+
+                {{/autoForm}}
+
+
+
+            </div>
+
+        </div>
+    </div>
+</template>
