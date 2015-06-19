@@ -44,6 +44,9 @@ Template.userProfileEdit.helpers({
 	    default:
 	    break;
 	};
+    },
+    dateOptions: function () {
+	return {multidate: true, todayBtn: "linked", todayHighlight: true}
     }
 });
 

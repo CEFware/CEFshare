@@ -177,7 +177,18 @@ Template.specificListingEdit.helpers({
         if (Router.current().params.uri==='new')
             return null;
         return "Listings";
-    } 
+    },
+    itemDay: function () {
+	return Session.get('itemName') === 'day';
+    },
+    dateOptions: function() {
+        return {startDate: new Date(),
+                todayBtn: "linked",
+                autoclose:true,
+                todayHighlight: true,
+		multidate:true
+               }
+    }
 });
 
 Template.specificListingEdit.events({
@@ -223,14 +234,31 @@ Template.specificListingEdit.events({
 	var res=a.total-a.fee-a.stripeFee;
 	$('#earn').text('$'+res.toFixed(2));
 	$('#explanation').text('$'+res.toFixed(2)+'=$'+a.total+' - Stripe fee of $'+a.stripeFee.toFixed(2)+' - Marketplace fee of $'+a.fee.toFixed(2));
+    },
+    'change [name=itemName]': function (e,t) {
+	Session.set('itemName',$('[name=itemName]').val());
+	Meteor.setTimeout(function () {
+	    if ((Session.get('itemName')==='day') && (specificListingByURI(Router.current().params.uri).fetch().first()===undefined)) {
+		var dates=Meteor.user().profile.notAvailableDates;
+		if (dates) {
+		    $('[name=datePick]').datepicker('setDates', dates.split(','));
+		};
+		var days=Meteor.user().profile.notAvailableDays;
+		if (days) {
+		    days.forEach(function (el) {
+			$('[name=daysPick][value='+el+']').attr('checked',true);
+		    });
+ 		};
+	    };
+	}, 500);
     }
 
 });
 
 
 Template.specificListingEdit.rendered = function () {
-    Meteor.subscribe('categories');
 
+    Meteor.subscribe('categories');
     var a=getEarnings();
     var res=a.total-a.fee-a.stripeFee;
     $('#earn').text('$'+res.toFixed(2));

@@ -4,7 +4,8 @@ Meteor.publish(null, function () {
 							    emails:1, profile:1, 
 							    username:1, followers:1, 
 							    lat:1, lng:1, 
-							    formatted_address:1, createdAt:1
+							    formatted_address:1,
+							    createdAt:1
 							   }});
     };
 });
@@ -52,6 +53,8 @@ Meteor.publish('userByUsername', function (username) {
 							      'profile.lastName':1,
 							      'profile.bio':1,
 							      'profile.gender':1,
+							      'profile.notAvailableDays':1,
+							      'profile.notAvailableDates':1,
 							      formatted_address:1,
 							      lat:1,
 							      lng:1}});
@@ -82,6 +85,8 @@ Meteor.publish('userById', function (id) {
 							      'profile.lastName':1,
 							      'profile.bio':1,
 							      'profile.gender':1,
+							      'profile.notAvailableDays':1,
+							      'profile.notAvailableDates':1,
 							      formatted_address:1,
 							      lat:1,
 							      lng:1}});
