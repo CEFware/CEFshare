@@ -182,7 +182,8 @@ Template.specificListingEdit.helpers({
 	return Session.get('itemName') === 'day';
     },
     dateOptions: function() {
-        return {startDate: new Date(),
+        return {
+	    startDate: new Date(),
                 todayBtn: "linked",
                 autoclose:true,
                 todayHighlight: true,
