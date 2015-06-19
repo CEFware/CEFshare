@@ -201,7 +201,7 @@ Template.specificListing.helpers({
 		todayBtn: "linked", 
 		todayHighlight: true, 
 		multidate: true,
-		datesDisabled: dates,
+		disabled: dates,
 		daysOfWeekDisabled: days
 	       }
     },
