@@ -1,39 +1,23 @@
 <template name="adminSupport">
-    <div id="content">
-      <div class="container">
-	
-        <div class="col-md-12">
-          <div class="box text-center">
-            <div class="row">
-              <div class="col-sm-10 col-sm-offset-1">
-                <h1>{{t "Marketplace admin"}} - {{t "Support"}}</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-
-          <div class="box" id="text-page">
-     		{{#autoForm schema=contactFormSchema id="contactForm" type="method" meteormethod="sendEmail"}}
-		<fieldset>
-		  <div>
-		    {{flash '1'}}
-		  </div>
-
-		  {{> afFieldInput type="hidden" name="email" value=userEmail}}
- 
-		  {{> afQuickField name="message" rows=5}}
-		  <div class="text-center">
-		    <button type="submit" class="btn btn-primary">{{t "Submit"}}</button>
-		    <button type="reset" class="btn btn-default">{{t "Reset"}}</button>
-		  </div>
-		</fieldset>
-		{{/autoForm}}
-          </div>
-
-      </div>
-      <!-- /.container -->
+  <div class="row inner-page admin-dashboard">
+    <div class="col s12">
+      <h4>{{t "Support"}}</h4>
     </div>
-    <!-- /#content -->
+    <div class="col s12">
+      <div class="row">
 
+	{{#autoForm schema=contactFormSchema id="contactForm" type="method" meteormethod="sendEmail"}}
+	<fieldset>
+	  {{> afFieldInput type="hidden" name="email" value=userEmail}}
+	  
+	  {{> afQuickField name="message" rows=5 class="materialize-textarea"}}
+	  <div class="text-center">
+	    <button type="submit" class="btn btn-primary">{{t "Submit"}}</button>
+	    <button type="reset" class="btn btn-default">{{t "Reset"}}</button>
+	  </div>
+	</fieldset>
+	{{/autoForm}}
+      </div>
+    </div>
+  </div>
 </template>
-
