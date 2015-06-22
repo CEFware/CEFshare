@@ -1,31 +1,24 @@
 <template name="adminMaillist">
-    <div id="content">
-      <div class="container">
-	
-        <div class="col-md-12">
-          <div class="box text-center">
-            <div class="row">
-              <div class="col-sm-10 col-sm-offset-1">
-                <h1>{{t "Marketplace admin"}} - {{t "Send email to users"}}</h1>
-              </div>
-            </div>
-          </div>
-        </div>
 
-	  <h3>{{t "Previous maillist issues"}}</h3>
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>{{t "Date"}}</th>
-                    <th>{{t "Subject"}}</th>
-                    <th>{{t "Status"}}</th>
-                    <th>{{t "Reach"}}</th>
-                    <th>{{t "Action"}}</th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                </thead>
+  <div class="row inner-page admin-dashboard">
+    <div class="col s12">
+      <h4>{{t "Send email to users"}}</h4>
+    </div>
+    <div class="col s12">
+      <h5>{{t "Previous maillist issues"}}</h5>
+      <table>
+	<thead>
+	  <tr>
+            <th>{{t "Date"}}</th>
+            <th>{{t "Subject"}}</th>
+            <th>{{t "Status"}}</th>
+            <th>{{t "Reach"}}</th>
+            <th>{{t "Action"}}</th>
+            <th></th>
+            <th></th>
+ 	  </tr>
+	</thead>
+
                 <tbody>
                   {{#each listMaillistMsgs}}
                   <tr {{ifEditing}}>
@@ -34,64 +27,63 @@
                     <td><span class="label label-{{label status}}">{{status}}</span></td>
                     <td>{{reach}}/{{numUsersNow}}</td>
                     <td><a href="#" class="btn btn-primary editMsg">{{t "EDIT"}}</a></td>
-		    {{#if sent}}
+                    {{#if sent}}
                     <td>
-		      <input type="radio" name="{{_id}}" value="all"><small>{{t "ALL"}}</small><br>
-		      <input type="radio" name="{{_id}}" value="new"><small>{{t "NEW"}}</small>
-		    </td>
+                      <input type="radio" name="{{_id}}" value="all"><small>{{t "ALL"}}</small><br>
+                      <input type="radio" name="{{_id}}" value="new"><small>{{t "NEW"}}</small>
+                    </td>
                     <td>
-		      <button class="btn btn-primary sendMsg" type="button">{{t "RESEND"}}</button>
-		    </td>
-		    {{else}}
-		    {{#if pending}}
+                      <button class="btn btn-primary sendMsg" type="button">{{t "RESEND"}}</button>
+                    </td>
+                    {{else}}
+                    {{#if pending}}
                     <td colspan="2">
-		      <i class="fa fa-spinner"></i> {{t "Sending"}} {{wentOut}}
-		    </td>
-		    {{else}}
+                      <i class="fa fa-spinner"></i> {{t "Sending"}} {{wentOut}}
+                    </td>
+                    {{else}}
                     <td colspan="2">
-		      <a href="#" class="btn btn-primary sendMsg">{{t "SEND"}}</a>
-		      <a href="#" class="btn btn-primary delMsg"><i class="fa fa-trash"></i></a>
-		    </td>
-		    {{/if}}
-		    {{/if}}
+                      <a href="#" class="btn waves-effect waves-light sendMsg">{{t "SEND"}}</a>
+                      <a href="#" class="btn waves-effect waves-light red delMsg"><i class="fa fa-trash"></i></a>
+                    </td>
+                    {{/if}}
+                    {{/if}}
                   </tr>
                   {{else}}
                   <tr>
-                    <td colspan="5"><h4 class="text-center">{{t "Nothing here yet."}}</h4></td>
+                    <td colspan="5"><h5 class="text-center">{{t "Nothing here yet."}}</h5></td>
                   </tr>
                   {{/each}}
                 </tbody>
-              </table>
-            </div>
-	    {{#if curMsg}}
-	    <h3>{{t "Edit broadcast message"}}</h3>
-	    {{else}}
-	    <h3>{{t "Compose new broadcast message"}}</h3>
-	    {{/if}}
-                {{#autoForm collection="Maillist" id="sendBroadcastMessage" type=fType doc=curMsg}}
-                <fieldset>
-                  <div>
-                    {{flash '1'}}
-                  </div>
-
-                  {{> afQuickField name="subject"}}
-                  {{> afQuickField name="message" rows=5}}
-                  {{> afFieldInput type="hidden" name="status" value="PREPARED"}}
-
-                  <div class="text-center">
-                    <button type="submit" class="btn btn-primary">{{t "Save"}}</button>
-                    <button type="reset" class="btn btn-default">{{t "Reset"}}</button>
-		    {{#if curMsg}}
-                    <button class="btn btn-danger cancel">{{t "Cancel"}}</button>
-		    {{/if}}
-                  </div>
-                </fieldset>
-                {{/autoForm}}
  
-      </div>
-      <!-- /.container -->
+      </table>
     </div>
-    <!-- /#content -->
+    
+    <div class="col s12">
+      {{#if curMsg}}
+      <h5>{{t "Edit broadcast message"}}</h5>
+      {{else}}
+      <h5>{{t "Compose new broadcast message"}}</h5>
+      {{/if}}
+    </div>
 
+    <div class="col s12">
+      {{#autoForm collection="Maillist" id="sendBroadcastMessage" type=fType doc=curMsg}}
+      <fieldset>
+
+        {{> afQuickField name="subject"}}
+        {{> afQuickField name="message" rows=5 class="materialize-textarea"}}
+        {{> afFieldInput type="hidden" name="status" value="PREPARED"}}
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">{{t "Save"}}</button>
+          <button type="reset" class="btn btn-default">{{t "Reset"}}</button>
+          {{#if curMsg}}
+          <button class="btn btn-danger cancel">{{t "Cancel"}}</button>
+          {{/if}}
+        </div>
+      </fieldset>
+      {{/autoForm}}
+    </div>
+
+  </div>
 </template>
-
