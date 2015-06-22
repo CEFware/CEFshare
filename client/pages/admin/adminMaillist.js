@@ -65,7 +65,7 @@ AutoForm.addHooks(['sendBroadcastMessage'],{
     onSuccess: function (){
         window.scrollTo(0,0);
 	Session.set('msgId',this.docId);
-        Flash.success(1,TAPi18n.__("Thank you!"),2000);
+        Materialize.toast(TAPi18n.__("Thank you!"),2000);
     }
 });
 

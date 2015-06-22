@@ -6,6 +6,6 @@ Template.adminInvite.helpers({
 
 AutoForm.addHooks(['sendBroadcastInvite'],{
     onSuccess: function (){
-        Flash.success(1,TAPi18n.__("Your invites went out. Thank you!"),2000);
+        Materialize.toast(TAPi18n.__("Your invites went out. Thank you!"),2000);
     }
 });

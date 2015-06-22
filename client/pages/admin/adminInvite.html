@@ -1,39 +1,23 @@
 <template name="adminInvite">
-    <div id="content">
-      <div class="container">
-	
-        <div class="col-md-12">
-          <div class="box text-center">
-            <div class="row">
-              <div class="col-sm-10 col-sm-offset-1">
-                <h1>{{t "Marketplace admin"}} - {{t "Invite new users"}}</h1>
-              </div>
-            </div>
-          </div>
-        </div>
 
-          {{#autoForm schema=inviteSchemaObj id="sendBroadcastInvite" type="method" meteormethod="sendBroadcastInvite"}}
-          <fieldset>
-            <div>
-              {{flash '1'}}
-            </div>
-	    
-            {{> afQuickField name="emails" rows=5 placeholder="friend1@email.com, friend2@email.com ..."}}
-            {{> afQuickField name="subject" placeholder="I've just created awesome marketplace - welcome aboard!"}}
-            {{> afQuickField name="message" rows=5 placeholder="I created this amazing marketplace. You should try it!"}}
-
-            <div class="text-center">
-              <button type="submit" class="btn btn-primary">{{t "Invite"}}</button>
-              <button type="reset" class="btn btn-default">{{t "Reset"}}</button>
-            </div>
-          </fieldset>
-          {{/autoForm}}
-
-
-      </div>
-      <!-- /.container -->
+  <div class="row inner-page admin-dashboard">
+    <div class="col s12">
+      <h4>{{t "Invite new users"}}</h4>
     </div>
-    <!-- /#content -->
 
+    {{#autoForm schema=inviteSchemaObj id="sendBroadcastInvite" type="method" meteormethod="sendBroadcastInvite"}}
+    <fieldset>
+      
+      {{> afQuickField name="emails" rows=5 placeholder="friend1@email.com, friend2@email.com ..."}}
+      {{> afQuickField name="subject" placeholder="I've just created awesome marketplace - welcome aboard!"}}
+      {{> afQuickField name="message" rows=5 placeholder="I created this amazing marketplace. You should try it!" class="materialize-textarea"}}
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">{{t "Invite"}}</button>
+        <button type="reset" class="btn btn-default">{{t "Reset"}}</button>
+      </div>
+    </fieldset>
+    {{/autoForm}}
+
+  </div>
 </template>
-
