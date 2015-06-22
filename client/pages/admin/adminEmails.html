@@ -12,23 +12,6 @@
           </div>
         </div>
 
-        <!-- *** LEFT COLUMN ***
-             _________________________________________________________ -->
-
-        <div class="col-sm-3">
-          <!-- *** PAGES MENU *** -->
-
-	  {{> adminMenu}}
-
-          <!-- *** PAGES MENU END *** -->
-        </div>        <!-- /.col-md-3 -->
-
-        <!-- *** LEFT COLUMN END *** -->
-	
-        <!-- *** RIGHT COLUMN ***
-             _________________________________________________________ -->
-
-        <div class="col-md-9 clearfix">
 
           {{#autoForm schema=emailsSchemaObj id="adminEmails" type="method" meteormethod="saveAdminEmails" doc=mainEmails}}
           <fieldset>
@@ -47,12 +30,6 @@
           {{/autoForm}}
 
 
-
-        </div>
-        <!-- /.col-md-9 -->
-	
-
-        <!-- *** RIGHT COLUMN END *** -->
       </div>
       <!-- /.container -->
     </div>
