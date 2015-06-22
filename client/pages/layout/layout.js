@@ -4,6 +4,9 @@
  */
 
 
+Template.layout.events({
+});
+
 Template.layout.onCreated(function(){
     Session.set('sidebarMenu',{
         mobile:'sidebar_mobile_main',
@@ -13,22 +16,36 @@ Template.layout.onCreated(function(){
 Template.layout.helpers({
     getDesktopTemplate:function(){
 
-        if(Session.get('sideBarMenu'))
-            return Session.get('sideBarMenu').desktop;
-        else{
-
+        if(Session.get('sideBarMenu')) {
+	    if (Router.current().url.indexOf('admin')>-1) {
+		return "sidebar_admin_desktop";
+	    } else {
+		return Session.get('sideBarMenu').desktop;
+	    };
+	} else {
             Session.set('sideBarMenu',{
                 mobile:'sidebar_mobile_main',
                 desktop:'sidebar_main_Desktop'
             });
-            return Session.get('sideBarMenu').desktop;
+	    if (Router.current().url.indexOf('admin')>-1) {
+ 		return "sidebar_admin_desktop";
+	    } else {
+		return Session.get('sideBarMenu').desktop;
+	    };
         }
 
+    },
+    filter: function () {
+        if (Session.get('filter'))
+            return true;
     }
 });
+
 Template.layout.onRendered(function(){
-   $('select').material_select();
+    $('select').material_select();
+    $(".button-collapse").sideNav();
 });
+
 Template.layout.events({
     'focus .search-top': function(){
         $('.overlay-contentscale').addClass('open');
@@ -36,9 +53,26 @@ Template.layout.events({
         $('.search-top').focusout(function(){
             $('#search-field').focus();
         });
+    },
+    'focus #search': function () {
+        $('#search_label').addClass('green-highlight');
+        $('#closeSearch').addClass('green-highlight');
+    },
+    'click .button-collapse': function(e){
+        Session.set('filter', false);
+    },
+    'click .btn-close':function(e){
+        e.preventDefault();
+        $('.overlay-contentscale').removeClass('open');
+        $('.content-wrapper').removeClass('open');
+    },
+    'click .search-card a':function(e){
+        $('.overlay-contentscale').removeClass('open');
+        $('.content-wrapper').removeClass('open');
     }
 
 });
+
 Template.searchOverlay.events({
     'click .btn-close':function(e){
         e.preventDefault();

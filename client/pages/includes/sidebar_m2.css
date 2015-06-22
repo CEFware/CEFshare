@@ -1,0 +1,29 @@
+.sidebar-admin-mobile {
+	color: #000 !important;
+}
+
+.sidebar-admin-mobile li {
+	margin-top: 10px;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+	height: 50px;
+}
+
+.sidebar-admin-mobile li a{
+	margin-top: -20px;
+	height: 40px;
+}
+
+.sidebar-admin-mobile li a i {
+	height: 40px;
+}
+
+.sidebar-admin-mobile h1, 
+.sidebar-admin-mobile h2, 
+.sidebar-admin-mobile h3, 
+.sidebar-admin-mobile h4, 
+.sidebar-admin-mobile h5{
+	padding-left: 20px;
+	font-weight: 200;
+	margin-bottom: 0px !important;
+}
