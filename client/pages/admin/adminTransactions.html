@@ -1,70 +1,54 @@
 <template name="adminTransactions">
-    <div id="content">
-      <div class="container">
-	
-        <div class="col-md-12">
-          <div class="box text-center">
-            <div class="row">
-              <div class="col-sm-10 col-sm-offset-1">
-                <h1>{{t "Marketplace admin"}} - {{t "Transactions"}}</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>{{t "#"}}</th>
-                    <th>{{t "Order pic"}}</th>
-                    <th>{{t "Country"}}</th>
-                    <th>{{t "Sum"}}</th>
-                    <th>{{t "Profit"}}</th>
-                    <th>{{t "Status"}}</th>
-                    <th>{{t "Started"}}</th>
-                    <th>{{t "Merchant"}}</th>
-                    <th>{{t "Buyer"}}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {{#each listAllOrders}}
-                  <tr>
-                    <td>{{orderNum}}</td>
-                    <td>
-                      <a href="/user/{{ownerUsername}}/orders/{{idStripe}}">
-			<img src="{{listingImgById items.[0].product.image.[0]}}" width="100px" class="img-rounded">
-                      </a>
-		    </td>
-                    <td>{{shipping.country}}</td>
-                    <td>{{currency amount}}</td>
-                    <td>{{currencyU marketFee}}</td>
-                    <td><span class="label label-primary">{{status}}</span></td>
-                    <td>{{orderDate}}</td>
-                    <td>
-		      {{#each merchants}}
-		      <a href="/user/{{this}}">
-			{{this}}
-		      </a>
-		      <br>
-		      {{/each}}
-		    </td>
-                    <td><a href="/user/{{ownerUsername}}">{{ownerUsername}}</a></td>
- 
-                  </tr>
-                  {{else}}
-                  <tr>
-                    <td colspan="8"><h4 class="text-center">Nothing here yet.</h4></td>
-                  </tr>
-                  {{/each}}
-                </tbody>
-              </table>
-            </div>
-
-      </div>
-      <!-- /.container -->
+  <div class="row inner-page admin-dashboard">
+    <div class="col s12">
+      <h4>{{t "Transactions"}}</h4>
     </div>
-    <!-- /#content -->
-
+    <div class="col s12">
+      <table class="hoverable responsive-table">
+	<thead>
+	  <tr>
+            <th>{{t "#"}}</th>
+            <th>{{t "Order pic"}}</th>
+            <th>{{t "Country"}}</th>
+            <th>{{t "Sum"}}</th>
+            <th>{{t "Profit"}}</th>
+            <th>{{t "Status"}}</th>
+            <th>{{t "Started"}}</th>
+            <th>{{t "Merchant"}}</th>
+            <th>{{t "Buyer"}}</th>
+ 	  </tr>
+	</thead>
+	<tbody>
+          {{#each listAllOrders}}
+          <tr>
+            <td>{{orderNum}}</td>
+            <td>
+              <a href="/user/{{ownerUsername}}/orders/{{idStripe}}">
+                <img src="{{listingImgById items.[0].product.image.[0]}}" width="100px" class="img-rounded">
+              </a>
+            </td>
+            <td>{{shipping.country}}</td>
+            <td>{{currency amount}}</td>
+            <td>{{currencyU marketFee}}</td>
+            <td><span class="label label-primary">{{status}}</span></td>
+            <td>{{orderDate}}</td>
+            <td>
+              {{#each merchants}}
+              <a href="/user/{{this}}">
+                {{this}}
+              </a>
+              <br>
+              {{/each}}
+            </td>
+            <td><a href="/user/{{ownerUsername}}">{{ownerUsername}}</a></td>
+          </tr>
+          {{else}}
+          <tr>
+            <td colspan="8"><h4 class="text-center">Nothing here yet.</h4></td>
+          </tr>
+          {{/each}}
+ 	</tbody>
+      </table>			
+    </div>
+  </div>
 </template>
-
