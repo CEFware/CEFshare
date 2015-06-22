@@ -44,7 +44,7 @@ Template.adminListingCategories.helpers({
 
 AutoForm.addHooks(['adminListingCategories'],{
     onSuccess: function (){
-        Flash.success(1,TAPi18n.__("Thank you!"),2000);
+        Materialize.toast(TAPi18n.__("Thank you!"),2000);
     }
 });
 
@@ -82,3 +82,7 @@ Template.editCategoryName.events({
 Template.editCategoryName.rendered = function () {
     $('.newCatName').focus();
 };
+
+Template.adminListingCategories.onRendered(function(){
+        $('select').material_select();
+});
