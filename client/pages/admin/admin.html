@@ -1,124 +1,217 @@
 <template name="admin">
-    <div id="content">
-      <div class="container">
-	
-        <div class="col-md-12">
-          <div class="box text-center">
-            <div class="row">
-              <div class="col-sm-10 col-sm-offset-1">
-                <h1>{{t "Marketplace admin"}} - {{t "Getting started guide"}}</h1>
+
+	<div class="row inner-page admin-dashboard">
+		<h4>{{t "Dashboard"}}</h4>
+		<!-- Steps completed -->
+		<div class="wrapper-instruction">
+			<p>
+				{{t "Steps needed for marketplace to start working"}}
+			</p>
+			<ol class="completed-list">
+				<li> <i class="fa fa-{{email}}"></i> 
+				  <a href="/user/{{currentUser.username}}/edit"> {{t "Verify e-mail"}}</a>
+				</li>
+				<li> <i class="fa fa-{{stripe}}"></i>  <a href="/admin/payments">{{t "Add Stripe keys"}}</a></li>
+				<li> <i class="fa fa-{{social}}"></i>  <a href="/admin/social">{{t "Add social media (FB, Twitter &amp; G+) keys"}}</a></li>
+			</ol>
+
+
+		</div>
+
+		<div class="wrapper-instruction">
+		  <h3 class="text-center text-danger" style="margin-bottom:0px;">{{t "Your free testing period ends in"}}</h3><br>
+		  <div id="timeleft" class="text-center text-danger" style="font-size:50px;font-weight:bold;"></div>
+
+
+            <div class="box">
+              <ul class="nav nav-pills nav-justified">
+                {{#if equals curPlan "monthly"}}
+                <li class="active"><a href="" class="monthly"><h3>{{t "Monthly"}}</h3></a></li>
+                <li class="disabled"><a href="" class="halfYear"><h3>{{t "6 month"}}</h3></a></li>
+                <li class="disabled"><a href="" class="yearly"><h3>{{t "Yearly"}}</h3></a></li>
+                {{else}}
+                {{#if equals curPlan "halfYear"}}
+                <li class="disabled"><a href="" class="monthly"><h3>{{t "Monthly"}}</h3></a></li>
+                <li class="active"><a href="" class="halfYear"><h3>{{t "6 month"}}</h3></a></li>
+                <li class="disabled"><a href="" class="yearly"><h3>{{t "Yearly"}}</h3></a></li>
+                {{else}}
+                {{#if equals curPlan "yearly"}}
+                <li class="disabled"><a href="" class="monthly"><h3>{{t "Monthly"}}</h3></a></li>
+                <li class="disabled"><a href="" class="halfYear"><h3>{{t "6 month"}}</h3></a></li>
+                <li class="active"><a href="" class="yearly"><h3>{{t "Yearly"}}</h3></a></li>
+                {{else}}
+                <li class="disabled"><a href="" class="monthly"><h3>{{t "Monthly"}}</h3></a></li>
+                <li class="active"><a href="" class="halfYear"><h3>{{t "6 month"}}</h3></a></li>
+                <li class="disabled"><a href="" class="yearly"><h3>{{t "Yearly"}}</h3></a></li>
+                {{/if}}
+                {{/if}}
+                {{/if}}
+              </ul>
+              <div class="content">
+                {{#if equals curPlan "monthly"}}
+                <div class="row text-center" style="font-size:15px;"><br>
+                  <b>{{t "Monthly Pro plan features"}}:</b><br><br>
+                  {{t "Own domain"}}<br>
+                  {{t "Up to 1000 sellers"}}<br>
+                  {{t "NO discount!"}}<br><br>
+                  <h3>{{t "$99"}}<small>/{{t "per month"}}</small></h3>
+                  <a href="" class="btn btn-primary">{{t "BUY NOW"}}</a>
+                </div>
+                {{else}}
+                {{#if equals curPlan "halfYear"}}
+                <div class="row text-center" style="font-size:15px;"><br>
+                  <b>{{t "6 month Pro plan features"}}:</b><br><br>
+                  {{t "Own domain"}}<br>
+                  {{t "Up to 1000 sellers"}}<br>
+                  {{t "20% discount!"}}<br>
+                  {{t "Most popular!!!"}}<br>
+                  <h3>{{t "$79"}}<small>/{{{t "per month <br>when billed each 6 month upfront"}}}</small></h3>
+                  <a href="" class="btn btn-primary">{{t "BUY NOW"}}</a>
+                </div>
+                {{else}}
+                {{#if equals curPlan "yearly"}}
+                <div class="row text-center" style="font-size:15px;"><br><br>
+                  <b>{{t "Yearly Pro plan features"}}:</b><br><br>
+                  {{t "Own domain"}}<br>
+                  {{t "Up to 1000 sellers"}}<br>
+                  {{t "30% discount!"}}<br>
+                  <h3>{{t "$69"}}<small>{{{t "per month <br>when billed yearly upfront"}}}</small></h3>
+                  <a href="" class="btn btn-primary">{{t "BUY NOW"}}</a>
+                </div>
+                {{else}}
+                <div class="row text-center" style="font-size:15px;"><br>
+                  <b>{{t "6 month Pro plan features"}}:</b><br><br>
+                  {{t "Own domain"}}<br>
+                  {{t "Up to 1000 sellers"}}<br>
+                  {{t "20% discount!"}}<br>
+                  {{t "Most popular!!!"}}<br>
+                  <h3>{{t "$79"}}<small>/{{{t "per month <br>when billed each 6 month upfront"}}}</small></h3>
+                  <a href="" class="btn btn-primary">{{t "BUY NOW"}}</a>
+                </div>
+                {{/if}}
+                {{/if}}
+                {{/if}}
               </div>
+            </div>
+
+		</div>
+ 
+		
+		<!-- Charts -->
+		<div class="col s12">
+			<div class="col s12 m6 l6">
+				{{> piechart}}
+			</div>
+
+			<div class="col s12 m6 l6">
+				{{> piechart2}}
+			</div>
+		</div>
+
+		<!-- Dashboard Stats -->
+
+		<div class="col s12">
+			
+			<div class="col s12 m5 l5 stat-wrapper new-user-stat center-align">
+				<div class="heading">New Users Since Last Week</div>
+				<div class="big-stat">
+					14,670
+				</div>
+			</div>
+			
+			<div class="col s12 m5 l5 offset-m1 offset-l1 stat-wrapper new-listing-stat center-align">
+				<div class="heading">New Listings Since Last Week</div>
+				<div class="big-stat">
+					4,670
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col s12">
+			<div class="col s12 m5 l5 offset-m1 stat-wrapper grey-bg-stat center-align">
+				<div class="col s6">
+					<div class="heading">Merchant Profit</div>
+					<div class="med-stat center-align">
+						$467
+					</div>
+				</div>
+
+				<div class="col s6">
+					<div class="heading">Merchant Profit</div>
+					<div class="med-stat center-align">
+						$667
+					</div>
+				</div>
+
+
+			</div>
+
+			<div class="col s12 m5 l5 offset-m1 offset-l1 stat-wrapper grey-bg-stat">
+				<div class="heading">Total Sales Since Last Week</div>
+				<div class="big-stat">
+					321
+				</div>
+				<div class="small-stat">
+					+ Counting
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Heading and filter button -->
+	<div class="row">
+		<div class="col s6 m9 l9">
+			<h4>Listings Recently Viewed</h4> 
+		</div>
+	</div>
+
+	<!-- Listings -->
+	<div class="row">
+        <div class="col s12 m6 l4">
+          <div class="card">
+            <div class="card-image">
+              <a href="/inner"><img class="waves-effect waves-default" src="https://unsplash.it/400/325?random"></a>
+            </div>
+            <div class="card-content">
+              <h5><a href="/inner">Ubrella</a></h5>
+            </div>
+            <div class="card-action">
+              $100.00
+              <span class="new right">New</span>
             </div>
           </div>
         </div>
 
-
-	  <h3>{{t "Progress quest to start marketplace"}}</h3>
-          <div class="box" id="text-page">
-	    <h3 class="text-center">{{t "3 steps for your marketplace to start working:"}}</h3><br>
-	    <div class="row">
-	      <div class="col-md-4 text-center text-{{email}}"><i class="fa fa-envelope-o" style="font-size:120px;font-weight:bold;"></i><br>
-		<a href="/user/{{currentUser.username}}/edit">{{t "Verify e-mail"}}</a>
-	      </div>
-	      <div class="col-md-4 text-center text-{{stripe}}"><i class="fa fa-cc-stripe" style="font-size:120px;font-weight:bold;"></i><br>
-		<a href="/admin/payments">{{t "Connect Stripe"}}</a>
-	      </div>
-	      <div class="col-md-4 text-center text-{{social}}"><i class="fa fa-share-alt" style="font-size:120px;font-weight:bold;"></i><br>
-		<a href="/admin/social">{{t "Add social API"}}</a>
-	      </div>
+        <div class="col s12 m6 l4">
+          <div class="card">
+            <div class="card-image">
+              <a href="/inner"><img class="waves-effect waves-default" src="https://unsplash.it/400/325?random"></a>
             </div>
-	    <h3 class="text-center text-danger" style="margin-bottom:0px;">{{t "Your free testing period ends in"}}</h3><br>
-	    <div id="timeleft" class="text-center text-danger" style="font-size:50px;font-weight:bold;"></div>
-	    <br>
-
-            <div class="box">
-              <ul class="nav nav-pills nav-justified">
-		{{#if equals curPlan "monthly"}}
-                <li class="active"><a href="" class="monthly"><h3>{{t "Monthly"}}</h3></a></li>
-                <li class="disabled"><a href="" class="halfYear"><h3>{{t "6 month"}}</h3></a></li>
-                <li class="disabled"><a href="" class="yearly"><h3>{{t "Yearly"}}</h3></a></li>
-		{{else}}
-		{{#if equals curPlan "halfYear"}}
-                <li class="disabled"><a href="" class="monthly"><h3>{{t "Monthly"}}</h3></a></li>
-                <li class="active"><a href="" class="halfYear"><h3>{{t "6 month"}}</h3></a></li>
-                <li class="disabled"><a href="" class="yearly"><h3>{{t "Yearly"}}</h3></a></li>
-		{{else}}
-		{{#if equals curPlan "yearly"}}
-                <li class="disabled"><a href="" class="monthly"><h3>{{t "Monthly"}}</h3></a></li>
-                <li class="disabled"><a href="" class="halfYear"><h3>{{t "6 month"}}</h3></a></li>
-                <li class="active"><a href="" class="yearly"><h3>{{t "Yearly"}}</h3></a></li>
-		{{else}}
-                <li class="disabled"><a href="" class="monthly"><h3>{{t "Monthly"}}</h3></a></li>
-                <li class="active"><a href="" class="halfYear"><h3>{{t "6 month"}}</h3></a></li>
-                <li class="disabled"><a href="" class="yearly"><h3>{{t "Yearly"}}</h3></a></li>
-		{{/if}}
-		{{/if}}
-		{{/if}}
-              </ul>
-              <div class="content">
-		{{#if equals curPlan "monthly"}}
-                <div class="row text-center" style="font-size:15px;"><br>
-		  <b>{{t "Monthly Pro plan features"}}:</b><br><br>
-		  {{t "Own domain"}}<br>
-		  {{t "Up to 1000 sellers"}}<br>
-		  {{t "NO discount!"}}<br><br>
-		  <h3>{{t "$99"}}<small>/{{t "per month"}}</small></h3>
-		  <a href="" class="btn btn-primary">{{t "BUY NOW"}}</a>
-		</div>
-		{{else}}
-		{{#if equals curPlan "halfYear"}}
-                <div class="row text-center" style="font-size:15px;"><br>
-		  <b>{{t "6 month Pro plan features"}}:</b><br><br>
-		  {{t "Own domain"}}<br>
-		  {{t "Up to 1000 sellers"}}<br>
-		  {{t "20% discount!"}}<br>
-		  {{t "Most popular!!!"}}<br>
-		  <h3>{{t "$79"}}<small>/{{{t "per month <br>when billed each 6 month upfront"}}}</small></h3>
-		  <a href="" class="btn btn-primary">{{t "BUY NOW"}}</a>
-		</div>
-		{{else}}
-		{{#if equals curPlan "yearly"}}
-                <div class="row text-center" style="font-size:15px;"><br><br>
-		  <b>{{t "Yearly Pro plan features"}}:</b><br><br>
-		  {{t "Own domain"}}<br>
-		  {{t "Up to 1000 sellers"}}<br>
-		  {{t "30% discount!"}}<br>
-		  <h3>{{t "$69"}}<small>{{{t "per month <br>when billed yearly upfront"}}}</small></h3>
-		  <a href="" class="btn btn-primary">{{t "BUY NOW"}}</a>
-		</div>
-		{{else}}
-                <div class="row text-center" style="font-size:15px;"><br>
-		  <b>{{t "6 month Pro plan features"}}:</b><br><br>
-		  {{t "Own domain"}}<br>
-		  {{t "Up to 1000 sellers"}}<br>
-		  {{t "20% discount!"}}<br>
-		  {{t "Most popular!!!"}}<br>
-		  <h3>{{t "$79"}}<small>/{{{t "per month <br>when billed each 6 month upfront"}}}</small></h3>
-		  <a href="" class="btn btn-primary">{{t "BUY NOW"}}</a>
-		</div>
-		{{/if}}
-		{{/if}}
-		{{/if}}
-              </div>
+            <div class="card-content">
+              <h5><a href="/inner">Ubrella</a></h5>
             </div>
- 
-
+            <div class="card-action">
+              $100.00
+              <span class="new right">New</span>
+            </div>
           </div>
-	  <h3>{{t "Dashboard"}}</h3>
-          <div class="box" id="text-page">
-	    pie chart users: users with no listings/merchats<br>
-	    pie chart listings: separated by types<br>
-	    pie chart sales: litings type or merchants or categories<br>
-	    new users for last week + amount of merchants<br>
-	    new listings for last week<br>
-	    sales for last week: total, merchants profit, our profit<br>
+        </div>
+
+        <div class="col s12 m6 l4">
+          <div class="card">
+            <div class="card-image">
+              <a href="/inner"><img class="waves-effect waves-default" src="https://unsplash.it/400/325?random"></a>
+            </div>
+            <div class="card-content">
+              <h5><a href="/inner">Ubrella</a></h5>
+            </div>
+            <div class="card-action">
+              $100.00
+              <span class="new right">New</span>
+            </div>
           </div>
+        </div>
 
-
-      </div>
-      <!-- /.container -->
-    </div>
-    <!-- /#content -->
-
+  	</div>
 </template>
-

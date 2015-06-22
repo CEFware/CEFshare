@@ -1,18 +1,18 @@
 Template.admin.helpers({
     email: function() {
 	if (Roles.userIsInRole(Meteor.userId(),'verified'))
-	    return 'success';
-	return 'danger';
+	    return 'check';
+	return 'times';
     },
     stripe: function() {
 	if (Main.findOne() && Main.findOne().stripe)
-	    return 'success';
-	return 'danger';
+	    return 'check';
+	return 'times';
     },
     social: function() {
 	if (ServiceConfiguration.configurations.find({service:{$ne:"stripe"}}).count()>0)
-	    return 'success';
-	return 'danger';
+	    return 'check';
+	return 'times';
     },
     equals: function(a,b) {
 	return (a==b);

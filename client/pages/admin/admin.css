@@ -1,0 +1,93 @@
+.admin-dashboard {
+	padding: 10px 20px 20px 20px;
+}
+
+.wrapper-instruction {
+	background: #f2f2f2;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+.completed-list li{
+	margin-bottom: 5px;
+}
+
+.completed-list i{
+	color: #009688;
+	margin-right: 15px;
+}
+
+.stat-wrapper {
+	border-radius: 4px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	padding: 20px !important;
+	min-height: 170px;
+}
+
+.stat-wrapper .heading{
+	font-size: 1.2em;
+	font-weight: 600;
+}
+
+.stat-wrapper .big-stat{
+	font-size: 4.5em;
+	font-weight: 100;
+}
+
+.stat-wrapper .med-stat{
+	font-size: 2.5em;
+	font-weight: 400;
+	margin-top: 10px;
+}
+
+.new-user-stat {
+	background: #30aa9e;
+}
+
+.new-user-stat .heading, .new-listing-stat .heading{
+	color: #fff;
+}
+
+.new-user-stat .big-stat{
+	color: #000;
+}
+
+.new-listing-stat {
+	background: #ff7246;
+}
+
+.new-listing-stat .big-stat{
+	color: #fff;
+}
+
+.grey-bg-stat {
+	background: #f5f5f5;
+	position: relative;
+}
+
+.small-stat {
+	position: absolute;
+	top: 75px;
+	right: 55px;
+	font-size: 2em;
+	font-weight: 300;
+}
+
+.action-links {
+	padding: 20px 20px 0px 20px !important;
+	font-size: 1.3em;
+}
+
+.action-links a {
+	color: #e64a19;
+	font-weight: 400;
+}
+
+.modal-content {
+	max-height: 50% !important;
+}
+.btn-collapse {
+	margin-left: 20px;
+	color: #fff;
+}
