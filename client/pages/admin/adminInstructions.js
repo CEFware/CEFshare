@@ -11,7 +11,7 @@ Template.adminInstructions.helpers({
 
 AutoForm.addHooks(['adminInstructions'],{
     onSuccess: function (){
-        Flash.success(1,TAPi18n.__("Thank you!"),2000);
+        Materialize.toast(TAPi18n.__("Thank you!"),2000);
     }
 });
 
