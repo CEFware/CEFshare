@@ -15,7 +15,7 @@ Template.adminPayments.helpers({
 AutoForm.addHooks(['adminPayments'],{
     onSuccess: function (){
         window.scrollTo(0,0);
-        Flash.success(1,TAPi18n.__("Thank you!"),2000);
+        Materialize.toast(TAPi18n.__("Thank you!"),2000);
     }
 });
 
