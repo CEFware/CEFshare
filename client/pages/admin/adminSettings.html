@@ -5,13 +5,24 @@
     </div>
     <div class="col s12">
       {{#autoForm schema=settingsSchemaObj id="adminSettings" type="method" meteormethod="saveAdminSettings" doc=mainSettings}}
-    <div>
+    <div class="col s12" id="settingForm">
 
         {{#each afFieldNames}}
-        {{> afQuickField name=this.name options=afOptionsFromSchema}}
+            <p>
+                {{#if isEqual 'transactionsDays'}}
+                    <br>
+                    {{> afQuickField name=this.name options=afOptionsFromSchema}}
+                    {{else}}
+
+                    {{> afQuickField name=this.name options=afOptionsFromSchema}}
+                 {{/if}}
+
+            </p>
+
         {{/each}}
 
-        <div class="text-center">
+        <div class="col s12">
+            <br><br>
           <button type="submit" class="btn"><i class="mdi-navigation-check left"></i> {{t "Save"}}</button>
           <button type="reset" class="btn-flat red-text"><i class="mdi-navigation-close left"></i> {{t "Reset"}}</button>
         </div>

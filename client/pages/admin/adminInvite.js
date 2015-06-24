@@ -14,4 +14,5 @@ Template.adminInvite.onRendered(function(){
     $('.ck-editor').parent().children('label').remove();
     $('.ck-editor').parent().prepend('<h6>Message</h6>');
     $('.txt-subject').parent().addClass('col s6');
+
 });
