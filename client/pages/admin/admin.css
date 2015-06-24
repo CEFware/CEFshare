@@ -91,3 +91,10 @@
 	margin-left: 20px;
 	color: #fff;
 }
+.active-sidebar{
+    background: #fff;
+    color: #000;
+}
+.active-sidebar a{
+    color: #000;
+}
