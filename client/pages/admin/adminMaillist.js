@@ -98,7 +98,8 @@ Template.adminMaillist.events({
 
 Template.adminMaillist.onRendered(function () {
     Meteor.subscribe('maillist');
-    Meteor.call('numUsersNow', function (e,r) {
+    $('.ck-editor').ckeditor();
+     Meteor.call('numUsersNow', function (e,r) {
 	if (!e)
 	    Session.set('numUsersNow',r);
     });
