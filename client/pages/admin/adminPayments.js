@@ -9,6 +9,9 @@ Template.adminPayments.helpers({
     },
     stripeConnected: function () {
 	return Main.findOne().stripe;
+    },
+    isEqual:function(param){
+        return this.name==param;
     }
 });
 
@@ -19,9 +22,12 @@ AutoForm.addHooks(['adminPayments'],{
     }
 });
 
-Template.adminPayments.rendered = function () {
+Template.adminPayments.onRendered(function () {
     Meteor.subscribe('appSettings');
-};
+    $('.input-field').addClass('col s12');
+    $('#radio .input-field').children('label').remove();
+    $('#radio .input-field').removeClass('col s12');
+});
 
 Template.adminPayments.events({
     'click .stripe-connect': function(e, t){

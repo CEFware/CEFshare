@@ -19,17 +19,28 @@
       <h5>{{t "Set up marketplace payment parameters"}}</h5>
       <div class="col s6">
         {{#autoForm schema=paymentsSchemaObj id="adminPayments" type="method" meteormethod="saveAdminPayments" doc=mainPayments}}
-        <fieldset>
+        <div class="col s12">
 
           {{#each afFieldNames}}
-          {{> afQuickField name=this.name options=afOptionsFromSchema}}
+              {{#if isEqual 'feeOrPercentage'}}
+                  <p>
+                      {{t 'Do you take Fee or Percentage from each sale?'}}
+                  </p>
+                  <p id="radio">
+                      {{> afQuickField name=this.name options=afOptionsFromSchema}}
+                  </p>
+                  {{else}}
+                  {{> afQuickField name=this.name options=afOptionsFromSchema}}
+              {{/if}}
+
           {{/each}}
 
-          <div class="text-center">
+          <div class="col s12">
+              <br><br>
             <button type="submit" class="btn"><i class="mdi-navigation-check left"></i> {{t "Save"}}</button>
             <button type="reset" class="btn-flat red-text"><i class="mdi-navigation-close left"></i> {{t "Reset"}}</button>
           </div>
-        </fieldset>
+        </div>
         {{/autoForm}}
       </div>
     </div>
