@@ -19,6 +19,3 @@ Template.adminSettings.rendered = function () {
     Meteor.subscribe('appSettings');
 };
 
-Template.settings.onRendered(function(){
-        $('select').material_select();
-});

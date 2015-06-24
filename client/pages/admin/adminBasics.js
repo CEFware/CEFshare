@@ -17,6 +17,11 @@ AutoForm.addHooks(['adminBasics'],{
     }
 });
 
-Template.adminBasics.rendered = function () {
+Template.adminBasics.onRendered(function () {
+
+    $('.ck-editor').ckeditor();
+    $('.ck-editor').parent().prepend("<h5>Agreement text</h5>");
+    $('.ck-editor').parent().children("label").remove();
     Meteor.subscribe('appSettings');
-};
+});
+

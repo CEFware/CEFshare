@@ -18,3 +18,8 @@ AutoForm.addHooks(['adminLinks'],{
 Template.adminLinks.rendered = function () {
     Meteor.subscribe('appSettings');
 };
+
+Template.afQuickField.onRendered(function(){
+   var card=$('.card-panel');
+  card.removeClass('card-panel');
+});

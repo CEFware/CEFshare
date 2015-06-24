@@ -1,22 +1,78 @@
 <template name="adminLinks">
-  <div class="row inner-page admin-dashboard">
-    <div class="col s12">
-      <h4>{{t "Menu links"}}</h4>
-    </div>
-
-    <div class="col s12">
-      {{#autoForm schema=linksSchemaObj id="adminLinks" type="method" meteormethod="saveAdminLinks" doc=mainLinks}}
-      <fieldset>
-        {{#each afFieldNames}}
-        {{> afQuickField name=this.name options=afOptionsFromSchema}}
-        {{/each}}
-
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary">{{t "Save"}}</button>
-          <button type="reset" class="btn btn-default">{{t "Reset"}}</button>
+    <div class="row inner-page admin-dashboard">
+        <div class="col s12">
+            <h4>{{t "Menu links"}}</h4>
         </div>
-      </fieldset>
-      {{/autoForm}}
+
+        <div class="col s12">
+            {{#autoForm schema=linksSchemaObj id="adminLinks" type="method" meteormethod="saveAdminLinks" doc=mainLinks}}
+                <div>
+                    {{#each afFieldNames}}
+                        <div id={{this.name}}>
+                            {{> afArrayField name=this.name options=afOptionsFromSchema template="menuLInks"}}
+                        </div>
+
+                    {{/each}}
+                    <div class="col s12">
+                        <br> <br>
+                        <button type="submit" class="btn"> <i class="mdi-navigation-check left"></i> {{t "Save"}}</button>
+                        <button type="reset" class="btn-flat red-text"> <i class="mdi-navigation-close left"></i> {{t "Reset"}}</button>
+                    </div>
+                </div>
+            {{/autoForm}}
+        </div>
     </div>
-  </div>
+</template>
+
+
+<template name="afArrayField_menuLInks">
+
+    <div class="col s12">
+        {{#if afFieldIsInvalid name=this.atts.name}}
+            <div class="col s12">
+                <span class="red-text">{{{afFieldMessage name=this.atts.name}}}</span>
+            </div>
+        {{/if}}
+
+
+            {{#afEachArrayItem name=this.atts.name minCount=this.atts.minCount maxCount=this.atts.maxCount}}
+            <div class="col s12">
+                <div class="col s2">
+                    {{#if afArrayFieldHasMoreThanMinimum name=../atts.name minCount=../atts.minCount maxCount=../atts.maxCount}}
+
+                        <button type="button"
+                                class="btn-flat deep-orange white-text waves-effect waves-default autoform-remove-item">
+                            <span class="mdi-content-clear"></span>
+                        </button>
+
+                    {{/if}}
+                </div>
+                <div class="s10">
+                    <div class="input-field col s6">
+                        {{> afQuickField name=this.name label=false options=afOptionsFromSchema}}
+                    </div>
+                </div>
+            </div>
+
+            {{/afEachArrayItem}}
+
+
+        <div class="row">
+            <div class="col s12">
+                <div class="col s2">
+                    {{#if afArrayFieldHasLessThanMaximum name=this.atts.name minCount=this.atts.minCount maxCount=this.atts.maxCount}}
+                        <button type="button" class="btn  white-text waves-effect waves-default autoform-add-item"
+                                data-autoform-field="{{this.atts.name}}" data-autoform-minCount="{{this.atts.minCount}}"
+                                data-autoform-maxCount="{{this.atts.maxCount}}"><i class="mdi-content-add"></i>
+                        </button>
+                    {{/if}}
+                </div>
+                <div class="s10">
+
+                </div>
+                <br>
+            </div>
+        </div>
+
+    </div>
 </template>
