@@ -5,16 +5,18 @@
     </div>
     <div class="col s12">
       {{#autoForm schema=emailsSchemaObj id="adminEmails" type="method" meteormethod="saveAdminEmails" doc=mainEmails}}
-      <fieldset>
+      <div>
         {{#each afFieldNames}}
+            <h5>Welcome email text</h5>
         {{> afQuickField name=this.name options=afOptionsFromSchema}}
         {{/each}}
 
-        <div class="text-center">
+        <div class="col s12">
+            <br><br>
           <button type="submit" class="btn"><i class="mdi-navigation-check left"></i> {{t "Save"}}</button>
           <button type="reset" class="btn-flat red-text"><i class="mdi-navigation-close left"></i> {{t "Reset"}}</button>
          </div>
-      </fieldset>
+      </div>
       {{/autoForm}}
     </div>
   </div>

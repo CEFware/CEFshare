@@ -15,6 +15,8 @@ AutoForm.addHooks(['adminEmails'],{
     }
 });
 
-Template.adminEmails.rendered = function () {
+Template.adminEmails.onRendered( function () {
     Meteor.subscribe('appSettings');
-};
+    $('.ck-editor').ckeditor();
+    $('.ck-editor').parent().children('label').remove();
+});
