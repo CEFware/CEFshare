@@ -10,3 +10,7 @@ Template.sidebar_admin_desktop.events({
        Router.go(href);
    }
 });
+Template.sidebar_admin_desktop.onRendered(function(){
+   var loc=Iron.Location.get().path;
+    $('a[href^="'+loc+'"]').parent().addClass('active-sidebar');
+});
