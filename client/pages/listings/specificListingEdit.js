@@ -258,7 +258,7 @@ Template.specificListingEdit.events({
 
 
 Template.specificListingEdit.rendered = function () {
-
+    $('select').material_select();
     Meteor.subscribe('categories');
     var a=getEarnings();
     var res=a.total-a.fee-a.stripeFee;

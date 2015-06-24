@@ -1,164 +1,247 @@
 <template name="specificListingEdit">
-  <div id="content">
-    <div class="container">
-
-        <div class="col-md-12">
-          <div class="box text-center">
-            <div class="row">
-              <div class="col-sm-10 col-sm-offset-1">
-		{{#if newListing}}
-                <h1>{{t "Add new listing"}}</h1>	    
-		<button class="btn btn-danger cancelEditListing">{{t "Cancel & don't save"}}</button>
-		{{else}}
-                <h1>{{t "Edit listing"}}</h1>	    
-		<button class="btn btn-danger cancelEditListing">{{t "Cancel & don't save"}}</button>
-		{{/if}} 
-              </div>
-            </div>
-          </div>
+    <div class="row inner-page edit-page">
+        <div class="col s12 center-align">
+            {{#if newListing}}
+                <h5 class=""><span class="in-h3">{{t "Add new listing"}}</span></h5>
+            {{else}}
+                <h5 class=""><span class="in-h3">{{t " Edit Listing"}}</span></h5>
+            {{/if}}
         </div>
-      
-	<div class="col-md-8 col-md-offset-2 clearfix">
-	  <div class="box" id="text-page">
-	    {{#autoForm schema=listingSchema id="specificListingCreate" type=formType meteormethod=formMethod doc=currentListing collection=formCollection}}
-	    <div>{{flash 'listingSaved'}}</div>
 
-	    <!-- listing type & listing category START-->
-	    <label class="control-label">{{t "Select listing type"}}:</label><br>
-	    <select id="listingType" class="form-control input-sm">
-	      {{#each listingTypes}}
-	      <option value={{listingType}} {{ifSelected}}> {{listingType}} </option>
-	      {{/each}}
-	    </select>
-	    <br>
-	    {{#if ifCategorySelectedHasSub}}
-	    <div class="row">	    
-	      <div class="col-md-6">
-		<label class="control-label">{{t "Select listing category"}}:</label><br>
-		<select id="listingCategory" class="form-control input-sm">
-		  <option value="" {{ifCategorySelected}}> {{t "Not selected"}} </option>
-		  {{#each listingParentCategories}}
-		  <option value={{name}} {{ifCategorySelected}}> {{name}} </option>
-		  {{/each}}
-		</select>
-	      </div>
-	      <div class="col-md-6">
-		<label class="control-label">{{t "Select listing subcategory"}}:</label><br>
-		<select id="listingSubCategory" class="form-control input-sm">
-		  <option value="" {{ifSubCategorySelected}}> {{t "Not selected"}} </option>
-		  {{#each listingChildrenCategories}}
-		  <option value={{name}} {{ifSubCategorySelected}}> {{name}} </option>
-		  {{/each}}
-		</select>
-	      </div>
-	    </div>
-	    {{else}}
-	    <label class="control-label">{{t "Select listing category"}}:</label><br>
-	    <select id="listingCategory" class="form-control input-sm">
-	      <option value="" {{ifCategorySelected}}> {{t "Not selected"}} </option>
-	      {{#each listingParentCategories}}
-	      <option value={{name}} {{ifCategorySelected}}> {{name}} </option>
-	      {{/each}}
-	    </select>
-	    {{/if}}
-	    <br>
-	    <!-- listing type & listing category END -->
 
-	    <fieldset>
-	      {{> afQuickField name='image'}}
-	      {{> afQuickField name='title'}}
-	      {{> afQuickField name='description'}}
-	      {{> afQuickField name='details' rows=5}}
-	      <div class="row">
-		<div class="col-md-5">
-		  {{> afQuickField name='price'}}
-		</div>
-		<div class="col-md-1">
-		  <br>
-		  <b>{{t "PER"}}</b>
-		</div>
-		<div class="col-md-6">
-		  {{> afQuickField name='itemName'}}
-		</div>
-	      </div>
-	      <div class="row">
-		<div class="col-md-12">
-		{{t "You earn:"}} <b><span id="earn"></span></b><br><small><span id="explanation"></span><br><br></small>
-		</div>
-	      </div>
-	      {{#if itemDay}}
-              <div class="row">
-		<div class="col-md-12">
-                  {{> afQuickField name="daysPick"}}
 
-                  <div class="form-group form-inline">
-                    <label class="control-label">{{t "Select unavailable days"}}:</label><br>
-                    <div class="input-group date">
-                      {{> afFieldInput name="datePick" buttonClasses="glyphicon glyphicon-calendar" pickadateOptions=dateOptions}}
+        {{#autoForm schema=listingSchema id="specificListingCreate" type=formType meteormethod=formMethod doc=currentListing collection=formCollection}}
+            <div>{{flash 'listingSaved'}}</div>
+            <div class="col s12">
+                <table class="bordered edit-table">
+                    <tr>
+                        <td class="subject-table"><strong>{{t "Select listing type"}}</strong></td>
+                        <td class="valign-wrapper">
+                            <div class="input-field col s12 m10 l10">
+                                <select id="listingType" class="form-control input-sm">
+                                    {{#each listingTypes}}
+                                        <option value={{listingType}} {{ifSelected}}> {{listingType}} </option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                    {{#if ifCategorySelectedHasSub}}
+                        <tr>
+                            <td class="subject-table"><strong>{{t "Select listing category"}}</strong></td>
+                            <td class="valign-wrapper">
+                                <div class="input-field col s12 m10 l10">
+                                    <select id="listingCategory" class="form-control input-sm">
+                                        <option value="" {{ifCategorySelected}}> {{t "Not selected"}} </option>
+                                        {{#each listingParentCategories}}
+                                            <option value={{name}} {{ifCategorySelected}}> {{name}} </option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="subject-table"><strong></strong></td>
+                            <td class="valign-wrapper">
+                                <select id="listingSubCategory" class="form-control input-sm">
+                                    <option value="" {{ifSubCategorySelected}}> {{t "Not selected"}} </option>
+                                    {{#each listingChildrenCategories}}
+                                        <option value={{name}} {{ifSubCategorySelected}}> {{name}} </option>
+                                    {{/each}}
+                                </select>
+                            </td>
+                        </tr>
+                    {{else}}
+                        <tr>
+                            <td class="subject-table"><strong>{{t "Select listing category"}}</strong></td>
+                            <td class="valign-wrapper">
+                                <div class="input-field col s12 m10 l10">
+                                    <select id="listingCategory" class="form-control input-sm">
+                                        <option value="" {{ifCategorySelected}}> {{t "Not selected"}} </option>
+                                        {{#each listingParentCategories}}
+                                            <option value={{name}} {{ifCategorySelected}}> {{name}} </option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    {{/if}}
+                    <tr>
+                        <td class="subject-table"><strong>Title</strong></td>
+                        <td>
+                            <div class="input-field col s12 m10 l10">
+                                {{> afQuickField name='title'}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="subject-table"><strong>Description</strong></td>
+                        <td>
+                            <div class="input-field col s12 m10 l10">
+                                {{> afQuickField name='description'}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="subject-table"><strong>Details</strong></td>
+                        <td>
+                            <div class="input-field col s12 m10 l10">
+                                {{> afQuickField name='details' rows=5 class=""}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="subject-table"><strong>Price</strong></td>
+                        <td class="valign-wrapper">
+                            <div class="col s6 m3 l3">
+                                <div class="input-field">
+                                    {{> afQuickField name='price'}}
+                                </div>
+                            </div>
+                            <div class="col s4 l1 m1 center-align valign">
+                                {{t "PER"}}
+                            </div>
+                            <div class="col s6">
+                                {{> afQuickField name='itemName'}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="subject-table"></td>
+                        <td>
+                            <cite>{{t "You earn:"}} <strong><span id="earn"></span></strong>.
+                                <span id="explanation"></span>
+                            </cite>
+                        </td>
+                    </tr>
+                    {{#if itemDay}}
+                        <tr>
+                            <td class="subject-table"><strong>{{t "Select unavailable days"}}</strong></td>
+                            <td>
+                                <div class="input-field col s12 m10 l10">
+                                    {{> afQuickField name="daysPick"}}
+
+                                </div>
+                                <div class="input-group col s12 date">
+                                    {{> afFieldInput name="datePick" buttonClasses="glyphicon glyphicon-calendar" pickadateOptions=dateOptions}}
+                                </div>
+                            </td>
+                        </tr>
+                        {{populateDates}}
+                    {{/if}}
+                    {{#if showField "shippingFee"}}
+                        <tr>
+                            <td class="subject-table"><strong>Shipping <br> (0 - no shipping)</strong></td>
+                            <td>
+                                <div class="input-field col s12 m10 l10">
+                                    {{> afQuickField name='shippingFee'}}
+                                </div>
+                            </td>
+                        </tr>
+
+                    {{/if}}
+                    {{#if showField "tax"}}
+                        <tr>
+                            <td class="subject-table"><strong>Tax in % (0 - no tax)</strong></td>
+                            <td>
+                                <div class="input-field col s12 m10 l10">
+                                    {{> afQuickField name='tax'}}
+                                </div>
+                            </td>
+                        </tr>
+                    {{/if}}
+                    {{#if showField "tags"}}
+                        <tr>
+                            <td class="subject-table"><strong>{{t "Tags"}}</strong></td>
+                            <td>
+                                <div class="input-field col s12 m10 l10">
+                                    {{> afFieldInput name='tags' type='text' id='tagsField' data-role='materialtags'}}
+                                    {{#if afFieldIsInvalid name='tags'}}
+                                        <span class="help-block">{{afFieldMessage name='tags'}}</span>
+                                    {{/if}}
+                                </div>
+                            </td>
+                        </tr>
+                    {{/if}}
+                    {{#each customFields}}
+                        <tr>
+                            <td> {{> afQuickField name=this.name options=afOptionsFromSchema}} </td>
+                        </tr>
+
+                    {{/each}}
+                </table>
+            </div>
+            <div class="row">
+                <div class="col s12">
+
+
+                    {{#if showField "isRibbonSale"}}
+                        <div class="col s6">
+                            <p>
+                                {{> afQuickField name='isRibbonSale'}}
+                            </p>
+
+                        </div>
+                    {{/if}}
+
+                    {{#if showField "isRibbonNew"}}
+                        <div class="col s6">
+                            <p>
+                                {{> afQuickField name='isRibbonNew'}}
+                            </p>
+                        </div>
+
+                    {{/if}}
+                    <div class="col s6">
+                        <p>
+                            {{> afQuickField name='isPublic'}}
+                        </p>
                     </div>
-                  </div>
- 		</div>
-              </div>
-	      {{populateDates}}
-	      {{/if}}
- 	      <div class="row">
-		<div class="col-md-6">
-		  {{#if showField "shippingFee"}}
-		  {{> afQuickField name='shippingFee'}}
-		  {{/if}}
-		</div>
-		<div class="col-md-6">
-		  {{#if showField "tax"}}
-		  {{> afQuickField name='tax'}}
-		  {{/if}}
-		</div>
-	      </div>
-	      {{#if showField "tags"}}
-	      <div class="form-group{{#if afFieldIsInvalid name='tags'}} has-error{{/if}}">
-		<label class="control-label">{{t "Tags"}}</label><br>
-		{{> afFieldInput name='tags' type='text' id='tagsField' data-role='materialtags'}}
-		{{#if afFieldIsInvalid name='tags'}}
-		<span class="help-block">{{afFieldMessage name='tags'}}</span>
-		{{/if}}
-	      </div>
-	      {{/if}}
-	      {{#each customFields}}
-	      {{> afQuickField name=this.name options=afOptionsFromSchema}}
-	      {{/each}}
-	      
-	      <div class="col-md-6">
-		{{#if showField "isRibbonSale"}}
-		{{> afQuickField name='isRibbonSale'}}
-		{{/if}}
+                    <div class="col s6">
 
-		{{#if showField "isRibbonNew"}}
-		{{> afQuickField name='isRibbonNew'}}
-		{{/if}}
+                    </div>
 
-		{{> afQuickField name='isPublic'}}
-	      
-		{{#if showField "active"}}
-		{{> afQuickField name='active'}}
-		{{/if}}
-	      </div>
 
-	      <div class="col-md-6">
-		{{#if setDates}}
-		{{t "Set unavailable days of week:"}}
-		
-		{{t "Set unavailable dates:"}}
-		{{/if}}
-	      </div>
-	      
-              {{> afFieldInput type="hidden" name="listingType" value=listingTypeGet}}
- 	    </fieldset>
-	    <button type="submit" class="btn btn-primary">{{t "Save"}}</button>
-<!--	    <button type="reset" class="btn btn-default">{{t "Reset"}}</button> -->
-	    <button class="btn btn-danger cancelEditListing">{{t "Cancel & don't save"}}</button>
-	    {{/autoForm}}
+                    {{#if showField "active"}}
+                        <div class="col s6">
+                            <p>
+                                {{> afQuickField name='active'}}
+                            </p>
 
-	  </div>      
-	</div>
+                        </div>
+
+                    {{/if}}
+
+
+                    <div class="col s6">
+                        {{#if setDates}}
+                            {{t "Set unavailable days of week:"}}
+
+                            {{t "Set unavailable dates:"}}
+                        {{/if}}
+                    </div>
+
+                    {{> afFieldInput type="hidden" name="listingType" value=listingTypeGet}}
+                </div>
+            </div>
+        <div class="row">
+            <div class="col s12 listing-image-wrapper">
+                {{> afQuickField name='image' template="custom"}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 center-align form-buttons">
+                <button type="submit" class="waves-effect waves-light btn"><i
+                        class="mdi-navigation-check left"></i> {{t "Save"}}</button>
+                <button class="cancelEditListing deep-orange waves-effect waves-dark btn"><i
+                        class="mdi-navigation-close left"></i> {{t "Cancel & don't save"}}</button>
+            </div>
+        </div>
+
+
+
+        {{/autoForm}}
+
+
     </div>
-  </div>
 </template>

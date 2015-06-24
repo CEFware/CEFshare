@@ -763,4 +763,8 @@ table .subject-table {
     font-size: 14px;
     color: #000;
 }
+.listing-image-wrapper {
+    background: #f7f7f7;
+    padding-top: 15px !important;
+}
 

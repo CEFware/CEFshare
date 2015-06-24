@@ -3,3 +3,4 @@
  */
 AutoForm.setDefaultTemplate('materialize');
 AutoForm.setDefaultTemplateForType('afArrayField','menuLInks');
+AutoForm.setDefaultTemplateForType('afFileUpload','custom');

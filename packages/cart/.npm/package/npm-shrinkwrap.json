@@ -1,10 +1,10 @@
 {
   "dependencies": {
     "stripe": {
-      "version": "http://registry.npmjs.org/stripe/-/stripe-2.8.0.tgz",
+      "version": "2.8.0",
       "dependencies": {
         "when": {
-          "version": "http://registry.npmjs.org/when/-/when-3.1.0.tgz"
+          "version": "3.1.0"
         }
       }
     }
