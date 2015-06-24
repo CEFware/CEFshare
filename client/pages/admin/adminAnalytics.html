@@ -5,7 +5,7 @@
     </div>
     <div class="col s12">
       {{#autoForm schema=analyticsSchemaObj id="adminAnalytics" type="method" meteormethod="saveAdminAnalytics" doc=mainAnalytics}}
-      <fieldset>
+      <div>
 
         {{#each afFieldNames}}
         {{> afQuickField name=this.name options=afOptionsFromSchema}}
@@ -15,7 +15,7 @@
           <button type="submit" class="btn"><i class="mdi-navigation-check left"></i> {{t "Save"}}</button>
           <button type="reset" class="btn-flat red-text"><i class="mdi-navigation-close left"></i> {{t "Reset"}}</button>
         </div>
-      </fieldset>
+      </div>
       {{/autoForm}}
     </div>
   </div>
