@@ -69,12 +69,19 @@
     <div class="col s12">
       {{#autoForm collection="Maillist" id="sendBroadcastMessage" type=fType doc=curMsg}}
       <div>
+	<div class="col s12">
+          {{> afQuickField name="subject" class="txt-subject"}}
 
-        {{> afQuickField name="subject"}}
-        {{> afQuickField name="message" rows=5 class="ck-editor"}}
+	</div>
+	<div class="col s12">
+          {{> afQuickField name="message" rows=5 class="ck-editor"}}
+
+	</div>
+	<div class="col s12">
         {{> afFieldInput type="hidden" name="status" value="PREPARED"}}
-<br><br>
-        <div class="text-center">
+	<br><br>
+	</div>
+        <div class="col s12 text-center">
           <button type="submit" class="btn"><i class="mdi-navigation-check left"></i> {{t "Save"}}</button>
           <button type="reset" class="btn-flat red-text"><i class="mdi-navigation-close left"></i> {{t "Reset"}}</button>
           {{#if curMsg}}

@@ -99,7 +99,11 @@ Template.adminMaillist.events({
 Template.adminMaillist.onRendered(function () {
     Meteor.subscribe('maillist');
     $('.ck-editor').ckeditor();
-     Meteor.call('numUsersNow', function (e,r) {
+    $('.ck-editor').parent().children('label').remove();
+    $('.ck-editor').parent().prepend('<h6>Message</h6>');
+//    $('.txt-subject').parent().addClass('col s6');
+
+    Meteor.call('numUsersNow', function (e,r) {
 	if (!e)
 	    Session.set('numUsersNow',r);
     });
