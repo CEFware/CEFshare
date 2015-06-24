@@ -30,12 +30,11 @@
                 <i class="mdi-action-translate"></i>
             </div>
             <div class="input-field col s10">
-                <select class="mat-select">
-                    <option value="" disabled selected>Choose Language</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                </select>
+                <select class="mat-select" id="languages">
+		  {{#each languages}}
+                  <option value="{{code}}" {{selected}}> {{name}}</option>
+		  {{/each}}
+		</select>
             </div>
         </div>
 
