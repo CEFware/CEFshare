@@ -68,7 +68,7 @@
 
     <div class="col s12">
       {{#autoForm collection="Maillist" id="sendBroadcastMessage" type=fType doc=curMsg}}
-      <fieldset>
+      <div>
 
         {{> afQuickField name="subject"}}
         {{> afQuickField name="message" rows=5 class="materialize-textarea"}}
@@ -81,7 +81,7 @@
           <button class="btn btn-danger cancel">{{t "Cancel"}}</button>
           {{/if}}
         </div>
-      </fieldset>
+      </div>
       {{/autoForm}}
     </div>
 

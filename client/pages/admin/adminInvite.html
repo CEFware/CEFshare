@@ -6,17 +6,27 @@
     </div>
 
     {{#autoForm schema=inviteSchemaObj id="sendBroadcastInvite" type="method" meteormethod="sendBroadcastInvite"}}
-    <fieldset>
-      
-      {{> afQuickField name="emails" rows=5 placeholder="friend1@email.com, friend2@email.com ..."}}
-      {{> afQuickField name="subject" placeholder="I've just created awesome marketplace - welcome aboard!"}}
-      {{> afQuickField name="message" rows=5 placeholder="I created this amazing marketplace. You should try it!" class="materialize-textarea"}}
+    <div>
+        <div class="col s12">
+            {{> afQuickField name="emails" rows=5 placeholder="" class="materialize-textarea"}}
 
-      <div class="text-center">
-        <button type="submit" class="btn btn-primary">{{t "Invite"}}</button>
-        <button type="reset" class="btn btn-default">{{t "Reset"}}</button>
-      </div>
-    </fieldset>
+        </div>
+        <div class="col s12">
+            {{> afQuickField name="subject" placeholder="" class="txt-subject"}}
+
+        </div>
+        <div class="col s12">
+            {{> afQuickField name="message" rows=5 placeholder="" class="ck-editor"}}
+
+        </div>
+        <div class="col s12">
+            <br><br>
+            <button type="submit" class="waves-effect waves-light btn"> <i class="mdi-navigation-check left"></i> {{t "Invite"}}</button>
+
+            <button type="reset" class="waves-effect waves-light btn-flat red-text"><i class="mdi-navigation-close left"></i> {{t "Reset"}}</button>
+
+        </div>
+    </div>
     {{/autoForm}}
 
   </div>
