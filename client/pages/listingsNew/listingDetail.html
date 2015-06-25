@@ -16,69 +16,169 @@
       {{/if}}
       {{/if}}
     </div>
+    
+    {{#if imageLoaded}}
+    {{> listingImages this}}
+    {{/if}}
+    <div class="col s12">
+                  {{#autoForm schema=clientFieldsSchemaObj id="clientFields" type="method" meteormethod="clientFields" resetOnSuccess=true}}
 
-        {{#if imageLoaded}}
-            {{> listingImages this}}
-        {{/if}}
-        <div class="col s12">
-            <div class="col s12 m6 l6">
-                <div class="input-field">
-                    <input id="add_note" type="text" class="validate">
-                    <label for="add_note">Add Some Notes to Product</label>
-                </div>
-            </div>
+              <fieldset>
 
-            <div class="col s12 m6 l6">
-                <div class="col s4">
-                    <div class="input-field">
-                        <input id="qnty" type="text" class="validate">
-                        <label for="qnty">Quantity</label>
+                {{#if getDateRange listing.itemName}}
+                <div class="row text-center">
+                  <div class="form-group form-inline">
+                    <label class="control-label">{{t "Select days"}}:</label><br>
+                    <div class="input-group date">
+                      {{> afFieldInput name="datePick" buttonClasses="glyphicon glyphicon-calendar" pickadateOptions=dateOptions}}
                     </div>
+                  </div>
                 </div>
-                <div class="col s6 l5">
-                    <a class="waves-effect waves-light btn cart">{{t "Buy Now"}}</a>
-                </div>
-                <div class="col s2">
-                    <a href="#"><i class="mdi-action-favorite-outline fav-btn"></i></a>
-                </div>
-            </div>
-        </div>
+                {{/if}}
 
-        <div class="col s12">
+                {{#if getStartTime listing.itemName}}
+                <div class="row text-center">
+                  <div class="form-group form-inline">
+                    <label class="control-label">{{t "Appointment start"}}:</label><br>
+                    <div class="input-group date">
+                      {{> afFieldInput name="dateTime" buttonClasses="glyphicon glyphicon-calendar" dateTimePickerOptions=dateTimeOptions}}
+                      <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                {{/if}}
+                <div>
+                  {{#if showClientFields listing}}
 
-            <table class="responsive-table table-spec">
-                <tr>
-                    <td class="subject-table"><strong>Listing Details</strong></td>
-                    <td>
-                        {{description}}
-                     </td>
-                </tr>
-                <tr>
-                    <td><strong>Brand</strong></td>
-                    <td>Real Estate Brand Name</td>
-                </tr>
-                <tr>
-                    <td><strong>Author</strong></td>
-                    <td>Al Pacino</td>
-                </tr>
-                <tr>
-                    <td><strong>Share</strong></td>
-                    <td>
-                        <a href="#" class="share-social"><i class="fa fa-facebook"></i></a>
-                        <a href="#" class="share-social"><i class="fa fa-google"></i></a>
-                        <a href="#" class="share-social"><i class="fa fa-twitter"></i></a>
-                        <a href="#" class="share-social"><i class="fa fa-tumblr"></i></a>
-                    </td>
-                </tr>
-            </table>
+                  {{#each afFieldNames}}
+
+                  {{#if customField}}
+                  {{> afQuickField name=this.name options=afOptionsFromSchema}}
+                  {{/if}}
+
+                  {{/each}}
+
+                  {{/if}}
+                </div>
+
+                <p class="price">{{currency listing.price}} <span style="font-size:70%"><small>{{t "per"}}</small> {{listing.itemName}}</span></p>
+
+                <p class="text-center">
+
+                  <div class="form-group{{#if afFieldIsInvalid name='qtyToBuy'}} has-error{{/if}} form-inline">
+                    {{#if showQtyToBuy listing.itemName}}
+
+                    <span id="listingQty" style="font-size:40px;"></span> {{t "for"}} {{> afFieldInput name='qtyToBuy' style="width:100px;"}}
+
+                    {{else}}
+                    <span style="font-size:40px;">{{currency getTotal}}</span> {{t "for"}} <span id="hoursQty" style="font-size:40px;">{{getDays}}</span>
+                    {{> afFieldInput name='qtyToBuy' type="hidden" value=getDays}}
+
+                    {{/if}}
+
+                    {{listing.itemName}}{{t "(s)"}} &nbsp;
+
+                    {{> afFieldInput name='uri' type="hidden" value=listingUri}}
+                    <button type="submit" class="btn btn-primary add-item">{{t "Buy now"}}</button>
+
+                    {{#if isFavorited}}
+                    <button class="btn btn-default unfavoriteIt switchFavorite" data-toggle="tooltip" data-placement="top" title="{{t "Remove from wishlist"}}">
+                      <i class="fa fa-heart"></i>
+                    </button>
+                    {{else}}
+                    <button class="btn btn-default favoriteIt switchFavorite" data-toggle="tooltip" data-placement="top" title="{{t "Add to wishlist"}}">
+                      <i class="fa fa-heart-o"></i>
+                    </button>
+                    {{/if}}
+                  </div>
+                  <small>({{t "Tax"}} {{listing.tax}} {{t "%, Shipping & handling fee "}} {{currency listing.shippingFee}})</small>
+
+                </p>
+
+              </fieldset>
+
+              {{/autoForm}}
+  
+    </div>
+    <div class="col s12 m6 l6">
+      <div class="input-field">
+        <input id="add_note" type="text" class="validate">
+        <label for="add_note">Add Some Notes to Product</label>
+      </div>
+    </div>
+    
+    <div class="col s12 m6 l6">
+      <div class="col s4">
+        <div class="input-field">
+          <input id="qnty" type="text" class="validate">
+          <label for="qnty">Quantity</label>
         </div>
+      </div>
+      <div class="col s6 l5">
+        <a class="waves-effect waves-light btn cart">{{t "Buy Now"}}</a>
+      </div>
+      <div class="col s2">
+        <a href="#"><i class="mdi-action-favorite-outline fav-btn"></i></a>
+      </div>
     </div>
-    <div class="row">
-        <div class="col s6 m9 l9">
-            <h4>Other listings by the author</h4>
-        </div>
+  </div>
+
+  <div class="col s12">
+
+    <table class="responsive-table table-spec">
+      <tr>
+        <td class="subject-table"><strong>{{t "Listing Details"}}</strong></td>
+        <td>
+          {{description}}
+        </td>
+      </tr>
+      {{#if showField "tags" listing.listingType}}
+      <tr>
+        <td><strong>{{t "Tags"}}</strong></td>
+	<td>
+          {{#each listing.tags}}
+          <span class="new badge left-align">{{this}}</span>
+          {{/each}}
+        </td>
+      </tr>
+      {{/if}}
+      <tr>
+        <td><strong>{{t "Author"}}</strong></td>
+        <td>
+	  <div class="">
+	    <div class="col s2 teal-text text-darken-2 top-15">
+			<a href="/user/{{usernameById listing.author}}" class="user-link">
+			  {{> avatar userId=listing.author shape="circle"  size="small" bgColor="#009688" textColor="#fff"}} 
+			</a>
+	    </div>
+	    <div class="col s10 left-align">
+	      <a href="/user/{{usernameById listing.author}}">
+                <b>{{usernameById listing.author}}</b>
+	      </a>
+	    </div>
+	  </div>
+ 	</td>
+      </tr>
+      <tr>
+        <td><strong>{{t "Share"}}</strong></td>
+        <td>
+          <a href="#" class="share-social"><i class="fa fa-facebook"></i></a>
+          <a href="#" class="share-social"><i class="fa fa-google"></i></a>
+          <a href="#" class="share-social"><i class="fa fa-twitter"></i></a>
+          <a href="#" class="share-social"><i class="fa fa-tumblr"></i></a>
+        </td>
+      </tr>
+    </table>
+  </div>
+  
+  <div class="row">
+    <div class="col s6 m9 l9">
+      <h4>Other listings by the author</h4>
     </div>
-    <div class="row">
-        {{> listingNew publishTemplate='getListingsByAuthor' author=this.author _id=this._id}}
-    </div>
+  </div>
+  <div class="row">
+    {{> listingNew publishTemplate='getListingsByAuthor' author=this.author _id=this._id}}
+  </div>
 </template>

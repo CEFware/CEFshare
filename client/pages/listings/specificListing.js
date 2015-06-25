@@ -287,8 +287,8 @@ Template.listingDetail.events({
     }
 });
 
-Template.specificListing.rendered = function () {
-    $('#jsToLoad').html('<script type="text/javascript" src="/js/jquery.cookie.js"></script><script type="text/javascript" src="/js/front.js"></script>');
+//Template.specificListing.rendered = function () {
+Template.listingDetail.rendered = function () {
 
 	var listing=specificListingByURI(Router.current().params.uri).fetch().first();
 	var res=Number($('[name=qtyToBuy]').val());
