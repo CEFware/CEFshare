@@ -7,8 +7,10 @@
     <div class="col s12">
       <h5>{{t "Listing categories & subcategories"}}</h5> <br>
     </div>
+      {{#if isCategoryLoaded}}
 
     <div class="col s12">
+
       <table class="bordered">
 	{{#each categoriesParents}}
 	<tr>
@@ -79,7 +81,8 @@
       <div>
 
         {{> afQuickField name="name"}}
-        {{> afQuickField name="parent"}}
+            {{> afQuickField name="parent"}}
+
 
         <div class="col s12">
             <br><br>
@@ -90,6 +93,7 @@
       {{/autoForm}}
  
     </div>
+      {{/if}}
 
   </div>
 

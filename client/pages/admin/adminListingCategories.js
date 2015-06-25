@@ -2,6 +2,11 @@ Template.adminListingCategories.helpers({
     categoriesSchemaObj: function() {
         return categoriesSchema;
     },
+    isCategoryLoaded:function(){
+        var subs= Meteor.subscribe('categories');
+        if(subs.ready())
+            return true;
+    },
     categoriesParents: function() {
         var res=Categories.find({parent:{$exists:false}}).fetch();
         if (res.length>0)
@@ -48,9 +53,15 @@ AutoForm.addHooks(['adminListingCategories'],{
     }
 });
 
-Template.adminListingCategories.rendered = function () {
-    Meteor.subscribe('categories');
-};
+Template.adminListingCategories.onRendered(function(){
+    this.autorun(function(){
+       var count= Categories.find({parent: {$exists: false}}).count();
+        setTimeout(function(){
+            $('select').material_select();
+        },500);
+
+    });
+});
 
 Template.adminListingCategories.events({
     'click .adminListingCategoryDelete': function (e,t) {
