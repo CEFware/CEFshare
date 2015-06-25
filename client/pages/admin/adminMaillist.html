@@ -29,8 +29,8 @@
                     <td><a href="#" class="btn btn-primary editMsg">{{t "EDIT"}}</a></td>
                     {{#if sent}}
                     <td>
-                      <input type="radio" name="{{_id}}" value="all"><small>{{t "ALL"}}</small><br>
-                      <input type="radio" name="{{_id}}" value="new"><small>{{t "NEW"}}</small>
+			<input type="radio" name="{{_id}}" value="all" id="all"><label for="all"><small>{{t "ALL"}}</small></label><br>
+			<input type="radio" name="{{_id}}" value="new" id="new"><label for="new"><small>{{t "NEW"}}</small></label>
                     </td>
                     <td>
                       <button class="btn btn-primary sendMsg" type="button">{{t "RESEND"}}</button>
