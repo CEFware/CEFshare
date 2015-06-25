@@ -38,7 +38,9 @@ AutoForm.addHooks(['specificListingCreate'],{
 	    this.template.$('#tagsField').materialtags('items');
 	    Flash.success('listingSaved',TAPi18n.__("Saved successfuly!"),2000);
     },    
-    onError: function () {},
+    onError: function (operation, error, template) {
+        console.log(error);
+    },
     after: {
 	"method": function (e,r,t) {
 	    var curCat=Session.get('listingCategory');
@@ -257,8 +259,11 @@ Template.specificListingEdit.events({
 });
 
 
-Template.specificListingEdit.rendered = function () {
+Template.specificListingEdit.onRendered(function () {
     $('select').material_select();
+    $('.ck-editor').ckeditor();
+    $('.ck-editor').parent().children('label').remove();
+    $('.ck-editor').parent().prepend('<strong>'+TAPi18n.__('Details')+'</strong>');
     Meteor.subscribe('categories');
     var a=getEarnings();
     var res=a.total-a.fee-a.stripeFee;
@@ -296,4 +301,4 @@ Template.specificListingEdit.rendered = function () {
     } else {
 	Meteor.subscribe('images');
     };
-};
+});
