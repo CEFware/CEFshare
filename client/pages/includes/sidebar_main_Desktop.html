@@ -10,17 +10,31 @@
 
         <!-- Cart Items Dashboard Logout Menu -->
         <ul class="main-sidebar end-ul">
+	  {{#if isInRole 'admin'}}
+          <li>
+            <i class="mdi-action-dashboard"></i>&nbsp;&nbsp;
+            <a href="/admin">{{t "Dashboard"}}</a>
+          </li>
+	  {{/if}}
+          <li>
+            <i class="mdi-hardware-keyboard-return"></i>&nbsp;&nbsp;
+            <a href="/sign-out">{{t "Log Out"}}</a>
+          </li>
+        </ul>
+
+        <!-- Secondary side Menu -->
+        <ul class="main-sidebar end-ul">
             <li>
-                <i class="mdi-action-shopping-cart"></i> &nbsp;&nbsp;
-                <a href="/cart" class="waves-effect waves-light">Cart Item</a>
+                <i class="mdi-action-info"></i> &nbsp;&nbsp;
+                <a href="/about">About</a>
             </li>
             <li>
-                <i class="mdi-action-dashboard"></i>&nbsp;&nbsp;
-                <a href="/admin">Dashboard</a>
+                <i class="mdi-action-help"></i>&nbsp;&nbsp;
+                <a href="/how-it-works">How It Works</a>
             </li>
             <li>
-                <i class="mdi-hardware-keyboard-return"></i>&nbsp;&nbsp;
-                <a href="/sign-out">Log Out</a>
+                <i class="mdi-communication-quick-contacts-mail"></i>&nbsp;&nbsp;
+                <a href="/contact">Contact</a>
             </li>
         </ul>
 
@@ -37,22 +51,6 @@
 		</select>
             </div>
         </div>
-
-        <!-- Secondary side Menu -->
-        <ul class="main-sidebar">
-            <li>
-                <i class="mdi-action-info"></i> &nbsp;&nbsp;
-                <a href="/about">About</a>
-            </li>
-            <li>
-                <i class="mdi-action-help"></i>&nbsp;&nbsp;
-                <a href="/how-it-works">How It Works</a>
-            </li>
-            <li>
-                <i class="mdi-communication-quick-contacts-mail"></i>&nbsp;&nbsp;
-                <a href="/contact">Contact</a>
-            </li>
-        </ul>
 
     </div>
 </template>
