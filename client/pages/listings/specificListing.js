@@ -22,7 +22,8 @@ getCustomFields = function (listing) {
     };
 };
 
-Template.specificListing.helpers({
+//Template.specificListing.helpers({
+Template.listingDetail.helpers({
     listingImg: function (){
 	var listing = specificListingByURI(Router.current().params.uri).fetch().first();
 	if (listing) {
@@ -244,7 +245,8 @@ Template.specificListing.helpers({
     
 });
 
-Template.specificListing.events({
+//Template.specificListing.events({
+Template.listingDetail.events({
     'click .switchFavorite': function (e,t) {
 	e.preventDefault();
 	if (Meteor.user()) {

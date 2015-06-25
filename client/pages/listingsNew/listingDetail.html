@@ -1,16 +1,22 @@
 <template name="listingDetail">
-    <div class="row inner-page">
-        <div class="col s12">
-            <div class="col s6 m9 l9">
-                <h3>{{title}}</h3>
-            </div>
-        {{#if authorListing}}
-            <div class="col s6 m3 l3 right-align edit-options">
-                <a href="/edit"><i class="mdi-content-create"></i>Edit</a>
-                <a href="#"><i class="mdi-action-delete"></i>Delete</a>
-            </div>
-        {{/if}}
-        </div>
+  <div class="row inner-page">
+    <div class="col s12">
+      <div class="col s6 m9 l9">
+        <h3>{{title}}</h3>
+      </div>
+      {{#if authorListing}}
+      <div class="col s6 m3 l3 right-align edit-options">
+        <a href="/listing/{{listing.uri}}/edit"><i class="mdi-content-create"></i>{{t "Edit"}}</a>
+        <a href="#" class="deleteListing"><i class="mdi-action-delete"></i>{{t "Delete"}}</a>
+      </div>
+      {{else}}
+      {{#if isInRole 'admin'}}<br>
+      <a href="/listing/{{listing.uri}}/edit"><i class="mdi-content-create"></i>{{t "Edit"}}</a>
+      <a href="#" class="deleteListing"><i class="mdi-action-delete"></i>{{t "Delete"}}</a>
+      {{/if}}
+      {{/if}}
+    </div>
+
         {{#if imageLoaded}}
             {{> listingImages this}}
         {{/if}}
@@ -30,7 +36,7 @@
                     </div>
                 </div>
                 <div class="col s6 l5">
-                    <a class="waves-effect waves-light btn cart"><i class="mdi-action-add-shopping-cart right"></i>Add</a>
+                    <a class="waves-effect waves-light btn cart">{{t "Buy Now"}}</a>
                 </div>
                 <div class="col s2">
                     <a href="#"><i class="mdi-action-favorite-outline fav-btn"></i></a>
