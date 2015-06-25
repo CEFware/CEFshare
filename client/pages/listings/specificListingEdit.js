@@ -38,7 +38,9 @@ AutoForm.addHooks(['specificListingCreate'],{
 	    this.template.$('#tagsField').materialtags('items');
 	    Flash.success('listingSaved',TAPi18n.__("Saved successfuly!"),2000);
     },    
-    onError: function () {},
+    onError: function (operation, error, template) {
+        console.log(error);
+    },
     after: {
 	"method": function (e,r,t) {
 	    var curCat=Session.get('listingCategory');
