@@ -128,3 +128,8 @@ Template.locationMap.helpers({
 });
 
 
+
+Template.userProfile.onRendered(function(){
+        $('.modal-trigger').leanModal();
+        $('ul.tabs').tabs();
+});

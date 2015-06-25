@@ -1,0 +1,386 @@
+<template name="userProfile">
+  <div class="col s12 user-profile">
+    <div class="col m4 l4 s12">
+      <div class="col s12">
+        <img src="https://placeimg.com/200/200/people" alt="" class="main-image-edit">
+      </div>
+      <div class="col s12">
+        <h5>
+          {{#if notEmpty user.profile.firstName}}
+
+          {{user.profile.firstName}} {{user.profile.lastName}}
+
+          {{else}}
+
+          {{user.username}}
+
+          {{/if}}
+
+	</h5>
+	{{#if user.profile.bio}}
+        <p>
+	  {{user.profile.bio}}
+        </p>
+	{{/if}}
+        {{#if isOwner}}
+        <p>
+          <a href="/user/{{currentUser.username}}/edit" class="btn waves-effect waves-light"><i class="mdi-content-create left"></i>{{t "EDIT"}}</a>
+	</p>
+        {{/if}}
+      </div>
+    </div>
+    <div class="col m8 l8 s12">
+      <div class="row">
+          <div class="col s12">
+            <ul class="tabs">
+              <li class="tab col s3"><a class="active" href="#test1">ORDERS</a></li>
+              <li class="tab col s3"><a href="#test2">TRANSACTIONS</a></li>
+              <li class="tab col s3"><a href="#test3">Followers</a></li>
+              <li class="tab col s3"><a href="#test4">Following</a></li>
+            </ul>
+          </div>
+          <div id="test1" class="col s12 tab-wrapper">
+              <table class="bordered responsive-table tab-table">
+                    
+                    <thead>
+                      <tr>
+                          <th data-field="id" class="product">Product</th>
+                          <th data-field="name" class="quantity">Quantity</th>
+                          
+                          <th data-field="price" class="unit_price">Unit Price</th>
+                          <th data-field="price" class="total">Total</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="col s12">
+                            <div class="col s12">
+                              <p>
+                                <a href="#">Ubrella Item Listing Name</a> <br>
+                                
+                              </p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="input-field col s11">
+                                4
+                              </div>
+                        </td>
+                        
+                        <td>$100.00</td>
+                        <td>$100.00</td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <div class="col s12">
+                            
+                            <div class="col s12">
+                              <p>
+                                <a href="#">Ubrella Item Listing Name</a> <br>
+                                
+                              </p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="input-field col s11">
+                                4
+                              </div>
+                        </td>
+                        
+                        <td>$100.00</td>
+                        <td>$100.00</td>
+                      </tr>
+
+                    </tbody>
+
+              </table>
+          </div>
+          <div id="test2" class="col s12">
+            <table class="bordered responsive-table tab-table">
+                  
+                  <thead>
+                    <tr>
+                        <th data-field="id" class="product">Product</th>
+                        <th data-field="name" class="quantity">Quantity</th>
+                        
+                        <th data-field="price" class="unit_price">Unit Price</th>
+                        <th data-field="price" class="total">Total</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td>
+                        <a href="#">Ubrella Item Listing Name</a> 
+                      </td>
+                      <td>
+                        <div class="input-field col s11">
+                              4
+                            </div>
+                      </td>
+                      
+                      <td>$100.00</td>
+                      <td>$100.00</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <a href="#">Ubrella Item Listing Name</a>
+                      </td>
+                      <td>
+                        <div class="input-field col s11">
+                              4
+                            </div>
+                      </td>
+                      
+                      <td>$100.00</td>
+                      <td>$100.00</td>
+                    </tr>
+
+                  </tbody>
+
+            </table>
+          </div>
+          <div id="test3" class="col s12">
+            <ul class="collection tab-collection">
+                <li class="collection-item avatar">
+                  <img src="https://placeimg.com/200/200/people" alt="" class="circle">
+                  <span class="title">Title</span>
+                  <p>First Line <br>
+                     Second Line
+                  </p>
+                  <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+                </li>
+                <li class="collection-item avatar">
+                  <i class="mdi-file-folder circle"></i>
+                  <span class="title">Title</span>
+                  <p>First Line <br>
+                     Second Line
+                  </p>
+                  <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+                </li>
+                <li class="collection-item avatar">
+                  <i class="mdi-action-assessment circle green"></i>
+                  <span class="title">Title</span>
+                  <p>First Line <br>
+                     Second Line
+                  </p>
+                  <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+                </li>
+                <li class="collection-item avatar">
+                  <i class="mdi-av-play-arrow circle red"></i>
+                  <span class="title">Title</span>
+                  <p>First Line <br>
+                     Second Line
+                  </p>
+                  <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+                </li>
+            </ul>
+          </div>
+          <div id="test4" class="col s12">
+            <ul class="collection tab-collection">
+                <li class="collection-item avatar">
+                  <img src="https://placeimg.com/200/200/people" alt="" class="circle">
+                  <span class="title">Title</span>
+                  <p>First Line <br>
+                     Second Line
+                  </p>
+                  <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+                </li>
+                <li class="collection-item avatar">
+                  <i class="mdi-file-folder circle"></i>
+                  <span class="title">Title</span>
+                  <p>First Line <br>
+                     Second Line
+                  </p>
+                  <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+                </li>
+                <li class="collection-item avatar">
+                  <i class="mdi-action-assessment circle green"></i>
+                  <span class="title">Title</span>
+                  <p>First Line <br>
+                     Second Line
+                  </p>
+                  <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+                </li>
+                <li class="collection-item avatar">
+                  <i class="mdi-av-play-arrow circle red"></i>
+                  <span class="title">Title</span>
+                  <p>First Line <br>
+                     Second Line
+                  </p>
+                  <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+                </li>
+            </ul>
+          </div>
+        </div>
+    </div>
+	</div>
+	<div class="col s12 border">
+		<iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387144.0075834208!2d-73.97800349999999!3d40.7056308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY!5e0!3m2!1sen!2sus!4v1394298866288' width='600' height='450' frameborder='0' style='border:0'></iframe>
+	</div>
+
+	<!-- Heading and filter button -->
+	<div class="row">
+		<div class="col s6 m9 l9">
+			<h4>Created Listings</h4> 
+		</div>
+	</div>
+
+	<!-- Listings -->
+	<div class="row">
+        <div class="col s12 m3 l3">
+          <div class="card">
+            <div class="card-image">
+              <a href="/inner"><img class="waves-effect waves-default" src="https://unsplash.it/400/325?random"></a>
+            </div>
+            <div class="card-content">
+              <h5><a href="/inner">Ubrella</a></h5>
+            </div>
+            <div class="card-action">
+              $100.00
+              <span class="new right">New</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m3 l3">
+          <div class="card">
+            <div class="card-image">
+              <a href="/inner"><img class="waves-effect waves-default" src="https://unsplash.it/400/325?random"></a>
+            </div>
+            <div class="card-content">
+              <h5><a href="/inner">Ubrella</a></h5>
+            </div>
+            <div class="card-action">
+              $100.00
+              <span class="new right">New</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m3 l3">
+          <div class="card">
+            <div class="card-image">
+              <a href="/inner"><img class="waves-effect waves-default" src="https://unsplash.it/400/325?random"></a>
+            </div>
+            <div class="card-content">
+              <h5><a href="/inner">Ubrella</a></h5>
+            </div>
+            <div class="card-action">
+              $100.00
+              <span class="new right">New</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m3 l3">
+          <div class="card">
+            <div class="card-image">
+              <a href="/inner"><img class="waves-effect waves-default" src="https://unsplash.it/400/325?random"></a>
+            </div>
+            <div class="card-content">
+              <h5><a href="/inner">Ubrella</a></h5>
+            </div>
+            <div class="card-action">
+              $100.00
+              <span class="new right">New</span>
+            </div>
+          </div>
+        </div>
+  	</div>
+
+  	<!-- Heading and filter button -->
+  	<div class="row">
+  		<div class="col s6 m9 l9">
+  			<h4>Wishlist</h4> 
+  		</div>
+  	</div>
+
+	<!-- Listings -->
+	<div class="row">
+        <div class="col s12 m3 l3">
+          <div class="card">
+            <div class="card-image">
+              <a href="/inner"><img class="waves-effect waves-default" src="https://unsplash.it/400/325?random"></a>
+            </div>
+            <div class="card-content">
+              <h5><a href="/inner">Ubrella</a></h5>
+            </div>
+            <div class="card-action">
+              $100.00
+              <span class="new right">New</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m3 l3">
+          <div class="card">
+            <div class="card-image">
+              <a href="/inner"><img class="waves-effect waves-default" src="https://unsplash.it/400/325?random"></a>
+            </div>
+            <div class="card-content">
+              <h5><a href="/inner">Ubrella</a></h5>
+            </div>
+            <div class="card-action">
+              $100.00
+              <span class="new right">New</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m3 l3">
+          <div class="card">
+            <div class="card-image">
+              <a href="/inner"><img class="waves-effect waves-default" src="https://unsplash.it/400/325?random"></a>
+            </div>
+            <div class="card-content">
+              <h5><a href="/inner">Ubrella</a></h5>
+            </div>
+            <div class="card-action">
+              $100.00
+              <span class="new right">New</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m3 l3">
+          <div class="card">
+            <div class="card-image">
+              <a href="/inner"><img class="waves-effect waves-default" src="https://unsplash.it/400/325?random"></a>
+            </div>
+            <div class="card-content">
+              <h5><a href="/inner">Ubrella</a></h5>
+            </div>
+            <div class="card-action">
+              $100.00
+              <span class="new right">New</span>
+            </div>
+          </div>
+        </div>
+  	</div>
+
+  	<!-- Modal Windows -->
+	<!-- model2 -->
+  	<div id="modal2" class="modal">
+  		<div class="modal-content">
+  			
+  		</div>
+  	</div>
+
+  	<!-- Modal Structure -->
+  	  <div id="modal1" class="modal">
+  	    <div class="modal-content">
+  			
+  	    </div>
+  	    <div class="modal-footer">
+  	      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+  	    </div>
+  	</div>
+
+</template>
