@@ -259,8 +259,11 @@ Template.specificListingEdit.events({
 });
 
 
-Template.specificListingEdit.rendered = function () {
+Template.specificListingEdit.onRendered(function () {
     $('select').material_select();
+    $('.ck-editor').ckeditor();
+    $('.ck-editor').parent().children('label').remove();
+    $('.ck-editor').parent().prepend('<strong>'+TAPi18n.__('Details')+'</strong>');
     Meteor.subscribe('categories');
     var a=getEarnings();
     var res=a.total-a.fee-a.stripeFee;
@@ -298,4 +301,4 @@ Template.specificListingEdit.rendered = function () {
     } else {
 	Meteor.subscribe('images');
     };
-};
+});
