@@ -2,8 +2,8 @@
   <div class="col s12 user-profile">
     <div class="col m4 l4 s12">
       <div class="col s12">
-        <img src="https://placeimg.com/200/200/people" alt="" class="main-image-edit">
-      </div>
+        {{> avatar user=user size="large" shape="rounded"}}
+       </div>
       <div class="col s12">
         <h5>
           {{#if notEmpty user.profile.firstName}}
@@ -22,6 +22,8 @@
 	  {{user.profile.bio}}
         </p>
 	{{/if}}
+        {{#if notEmpty user.formatted_address}}<p><i class="fa fa-map-marker"></i>&nbsp;{{user.formatted_address}}</p>{{/if}}
+ 
         {{#if isOwner}}
         <p>
           <a href="/user/{{currentUser.username}}/edit" class="btn waves-effect waves-light"><i class="mdi-content-create left"></i>{{t "EDIT"}}</a>
