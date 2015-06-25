@@ -1,71 +1,71 @@
 .user-profile {
-	background: #fff;
-	margin-top: 20px;
-	padding: 20px 20px 20px 10px !important;
+    background: #fff;
+    margin-top: 20px;
+    padding: 20px 20px 20px 10px !important;
 }
 
 .border {
-	padding: 0 !important;
-	margin-bottom: 40px;
+    padding: 0 !important;
+    margin-bottom: 40px;
 }
 
 .border iframe{
-	width: 100%;
+    width: 100%;
 }
 
 .profile-main {
-	padding-left: 0 !important;
+    padding-left: 0 !important;
 }
 
 .user-links {
-	list-style: none;
+    list-style: none;
 }
 
 .user-links li{
-	display: inline-block;
+    display: inline-block;
 }
 
 .user-links li a{
-	display:block;
-	padding:10px;
-	margin-right: 10px;
-	color: #000;
-	border-radius: 4px;
-	transition: all 0.3s;
-	text-transform: uppercase;
+    display:block;
+    padding:10px;
+    margin-right: 10px;
+    color: #000;
+    border-radius: 4px;
+    transition: all 0.3s;
+    text-transform: uppercase;
 }
 
 .user-links li a:hover{
-	background: #2fa69a;
-	color: #fff;
+    background: #2fa69a;
+    color: #fff;
 }
 
 .edit-profile-btn {
-	padding: 10px;
-	background: #fff;
-	color: #fc3f1d;
-	border-radius: 4px;
+    padding: 10px;
+    background: #fff;
+    color: #fc3f1d;
+    border-radius: 4px;
 }
 
 .edit-profile-btn:hover {
-	color: #000;
+    color: #000;
 }
 
 .edit-profile-btn i{
-	margin-right: 7px;
+    margin-right: 7px;
 }
 
 .user-name {
-	margin-top: -10px;
+    margin-top: -10px;
 }
 .modal .product, .modal .quantity, .modal .unit, .modal .unit_price, .modal .total {
-	width: auto;
+    width: auto;
 }
 
 .tab-table {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 .tab-collection {
-	margin-top: 30px;
+    margin-top: 30px;
 }
