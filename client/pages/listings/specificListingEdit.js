@@ -273,10 +273,6 @@ Template.specificListingEdit.onRendered(function () {
     var obj=null;
     if (Router.current().params.uri!=='new') {
 	obj=specificListingByURI(Router.current().params.uri).fetch().first();
-	Meteor.setTimeout(function () {
-	    $('#tokenfield').tokenfield({
-		tokens: obj.tags
-	    })}, 2000);
 	//set current listing type
 	Session.set('listingType',obj.listingType);
 	//set current listing categories
