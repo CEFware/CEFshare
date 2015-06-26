@@ -27,12 +27,36 @@ Template.adminListingFieldsFilters.helpers({
 	if (Main.findOne({'defaultListingFields.listingType':this.listingType}))
             return false;
         return true;
+    },
+    fieldName: function () {
+        return Router.current().params.field;
+    },
+    oneFilterObj: function () {
+        return oneFilter;
+    },
+    fieldTitle: function () {
+        if (Router.current().params.field === 'listingType')
+            return ListingDefault._schema.listingType.label();
+        return _.filter(_.filter(Main.findOne().listingFields,function (el) {
+            return el.listingType=== Router.current().params.listingType})[0].listingFields, function (el2) {return el2.type===Router.current().params.field})[0].title;
+    },
+    filterObj: function () {
+        res=_.filter(Main.findOne().filters, function (el) {return el.fieldName===Router.current().params.field})[0];
+        if (res)
+            return res;
+        return {title:'',active:false,fieldName:Router.current().params.field};
     }
 });
 
 AutoForm.addHooks(['adminListingTypes'],{
     onSuccess: function (){
-        Flash.success(1,TAPi18n.__("Thank you!"),2000);
+        Materialize.toast(TAPi18n.__("Thank you!"),2000);
+    }
+});
+
+AutoForm.addHooks(['adminFilterUpdate'],{
+    onSuccess: function (){
+        Materialize.toast(TAPi18n.__("Thank you!"),2000);
     }
 });
 
@@ -42,7 +66,7 @@ Template.adminListingFieldsFilters.rendered = function () {
 };
 
 Template.adminListingFieldsFilters.events({
-    'click .fa-trash': function (e,t) {
+    'click .deleteType': function (e,t) {
 	e.preventDefault();
 	if (confirm(TAPi18n.__("Are you sure you want to delete this listing type?")))
 	    Meteor.call('deleteListingType',this.listingType, function (e,r){
@@ -75,3 +99,12 @@ Template.editTypeName.events({
 Template.editTypeName.rendered = function () {
     $('.newTypeName').focus();
 };
+
+
+Template.adminListingFieldsFilters.onRendered(function(){
+    $('.collapsible').collapsible({
+        accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+    $('select').material_select();
+    $('.modal-trigger').leanModal();
+});

@@ -22,7 +22,8 @@ getCustomFields = function (listing) {
     };
 };
 
-Template.specificListing.helpers({
+//Template.specificListing.helpers({
+Template.listingDetail.helpers({
     listingImg: function (){
 	var listing = specificListingByURI(Router.current().params.uri).fetch().first();
 	if (listing) {
@@ -244,7 +245,8 @@ Template.specificListing.helpers({
     
 });
 
-Template.specificListing.events({
+//Template.specificListing.events({
+Template.listingDetail.events({
     'click .switchFavorite': function (e,t) {
 	e.preventDefault();
 	if (Meteor.user()) {
@@ -285,8 +287,8 @@ Template.specificListing.events({
     }
 });
 
-Template.specificListing.rendered = function () {
-    $('#jsToLoad').html('<script type="text/javascript" src="/js/jquery.cookie.js"></script><script type="text/javascript" src="/js/front.js"></script>');
+//Template.specificListing.rendered = function () {
+Template.listingDetail.rendered = function () {
 
 	var listing=specificListingByURI(Router.current().params.uri).fetch().first();
 	var res=Number($('[name=qtyToBuy]').val());

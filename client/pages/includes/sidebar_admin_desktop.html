@@ -4,7 +4,7 @@
 			<!-- create listing button -->
 			<ul class="create-listing">
 				<li>
-					<a class="waves-effect waves-light create">Add a Listing &nbsp; &nbsp;
+					<a href="/listing/new/edit" class="waves-effect waves-light create">Add a Listing &nbsp; &nbsp;
 					<i class="mdi-content-create"></i></a>
 				</li>
 			</ul>
@@ -13,11 +13,11 @@
 			<ul class="main-sidebar end-ul">
 				<li>
 					<i class="mdi-action-dashboard"></i>&nbsp;&nbsp;
-					<a href="#">Dashboard</a>
+                    <a href="{{pathFor 'admin'}}">{{t "Dashboard"}}</a>
 				</li>
 				<li>
 					<i class="mdi-hardware-keyboard-return"></i>&nbsp;&nbsp;
-					<a href="#">Log Out</a>
+					<a href="/sign-out">Log Out</a>
 				</li>
 			</ul>
 
@@ -26,85 +26,97 @@
 				<h5>General</h5>
 				<li>
 					<i class="mdi-action-help"></i> &nbsp;&nbsp;
-					<a href="#">Support</a>
+					<a href="{{pathFor 'adminSupport'}}">Support</a>
 				</li>
 			</ul>
 
 			<!-- Dashboard Main side Menu -->
 			<ul class="main-sidebar end-ul">
-				<h5>Users &amp; Transaction</h5>
+				<h5>{{t "Users & transactions"}}</h5>
 				<li>
 					<i class="fa fa-users"></i> &nbsp;&nbsp;
-					<a href="#">Manage Users</a>
+                    <a href="{{pathFor 'adminUsers'}}"> {{t "Manage users"}}</a>
 				</li>
 				<li>
 					<i class="fa fa-envelope"></i>&nbsp;&nbsp;
-					<a href="#">Send Email to users</a>
-				</li>
+                    <a href="{{pathFor 'adminMaillist'}}">{{t "Send email to users"}}</a>
+
+                </li>
 				<li>
 					<i class="fa fa-user-plus"></i>&nbsp;&nbsp;
-					<a href="#">Invite new users</a>
-				</li>
+                    <a href="{{pathFor 'adminInvite'}}"> {{t "Invite new users"}}</a>
+
+                </li>
 				<li>
 					<i class="fa fa-bar-chart"></i>&nbsp;&nbsp;
-					<a href="#">View Transactions</a>
-				</li>
+                    <a href="{{pathFor 'adminTransactions'}}">{{t "View transactions"}}</a>
+
+                </li>
 			</ul>
 
 			<!-- Dashboard Main side Menu -->
 			<ul class="main-sidebar">
-				<h5>Configuration</h5>
+				<h5>{{t "Configuration"}}</h5>
 				<li>
 					<i class="fa fa-bars"></i> &nbsp;&nbsp;
-					<a href="#">Basic Details</a>
+                    <a href="{{pathFor 'adminBasics'}}">{{t "Basic details"}}</a>
 				</li>
 				<li>
 					<i class="fa fa-paint-brush"></i>&nbsp;&nbsp;
-					<a href="#">Design</a>
-				</li>
+                    <a href="{{pathFor 'adminDesign'}}">{{t "Design"}}</a>
+
+                </li>
 				<li>
 					<i class="fa fa-link"></i>&nbsp;&nbsp;
-					<a href="#">Menu Links</a>
+                    <a href="{{pathFor 'adminLinks'}}">{{t "Menu links"}}</a>
 				</li>
 				<li>
 					<i class="fa fa-tags"></i>&nbsp;&nbsp;
-					<a href="#">Listing Categories</a>
-				</li>
+                    <a href="{{pathFor 'adminListingCategories'}}"> {{t "Categories"}}</a>
+
+                </li>
 
 				<li>
 					<i class="fa fa-list-ul"></i>&nbsp;&nbsp;
-					<a href="#">Listing fields &amp; filters</a>
-				</li>
+                    <a href="{{pathFor 'adminListingFieldsFilters'}}">{{t "Listing fields & filters"}}</a>
+
+                </li>
 
 				<li>
 					<i class="fa fa-credit-card"></i>&nbsp;&nbsp;
-					<a href="#">Payments</a>
-				</li>
+                    <a href="{{pathFor 'adminPayments'}}">{{t "Payments"}}</a>
+
+                </li>
 
 				<li>
 					<i class="fa fa-share-alt"></i>&nbsp;&nbsp;
-					<a href="#">Social Media</a>
-				</li>
+                    <a href="{{pathFor 'adminSocial'}}">{{t "Social media"}}</a>
+
+                </li>
 
 				<li>
 					<i class="fa fa-area-chart"></i>&nbsp;&nbsp;
-					<a href="#">Analytics</a>
-				</li>
+                    <a href="{{pathFor 'adminAnalytics'}}">{{t "Analytics"}}</a>
+
+                </li>
 
 				<li>
 					<i class="fa fa-pencil"></i>&nbsp;&nbsp;
-					<a href="#">Instructions Texts</a>
-				</li>
+                    <a href="{{pathFor 'adminInstructions'}}">{{t "Instructions texts"}}</a>
+
+                </li>
 
 				<li>
 					<i class="fa fa-envelope-o"></i>&nbsp;&nbsp;
-					<a href="#">Emails</a>
-				</li>
+                    <a href="{{pathFor 'adminEmails'}}">{{t "Emails"}}</a>
+
+                </li>
 
 				<li>
 					<i class="fa fa-cog"></i>&nbsp;&nbsp;
-					<a href="#">Settings</a>
-				</li>
+                    <a href="{{pathFor 'adminSettings'}}">{{t "Settings"}}</a>
+
+                </li>
 
 			</ul>
 

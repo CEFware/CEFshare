@@ -79,7 +79,7 @@ Template.adminMaillist.events({
 	e.preventDefault();
 	if (Session.get('msgId')===this._id) {
 	    $('[name=subject]').val("");
-	    $('.note-editable').text("");
+	   // $('.note-editable').text("");
 	    Session.set('msgId',null);
 	};
 	Meteor.call('deleteBroadcastMsg',this._id);
@@ -87,7 +87,7 @@ Template.adminMaillist.events({
     'click .cancel': function (e,t) {
 	e.preventDefault();
 	$('[name=subject]').val("");
-	$('.note-editable').text("");
+	//$('.note-editable').text("");
 	Session.set('msgId',null);
     },
     'click .editMsg': function (e,t) {
@@ -96,8 +96,13 @@ Template.adminMaillist.events({
     }
 });
 
-Template.adminMaillist.rendered = function () {
+Template.adminMaillist.onRendered(function () {
     Meteor.subscribe('maillist');
+    $('.ck-editor').ckeditor();
+    $('.ck-editor').parent().children('label').remove();
+    $('.ck-editor').parent().prepend('<h6>Message</h6>');
+//    $('.txt-subject').parent().addClass('col s6');
+
     Meteor.call('numUsersNow', function (e,r) {
 	if (!e)
 	    Session.set('numUsersNow',r);
@@ -106,4 +111,6 @@ Template.adminMaillist.rendered = function () {
 	$('[name=subject]').val("");
 	$('.note-editable').text("");
     };
-};
+
+
+});

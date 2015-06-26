@@ -1,49 +1,18 @@
 <template name="header">
-  <!--  <div class="navbar navbar-default navbar-fixed-top yamm" role="navigation" id="navbar">
-        <div class="container">
-            <div class="navbar-header">
-
-                <a class="navbar-brand home" href="/">
-                    <img src="{{bigLogo}}" alt={{t "logo"}} class="hidden-xs hidden-sm">
-                    <img src="{{smallLogo}}" alt={{t "logo"}} class="visible-xs visible-sm"><span class="sr-only">{{t "go to homepage"}}</span>
-                </a>
-                <div class="navbar-buttons">
-                    <button type="button" class="navbar-toggle btn-primary" data-toggle="collapse" data-target="#navigation">
-                        <span class="sr-only">{{t "Toggle navigation"}}</span>
-                        <i class="fa fa-align-justify"></i>
-                    </button>
-                </div>
-            </div>
-            &lt;!&ndash;/.navbar-header &ndash;&gt;
-
-            <div class="navbar-collapse collapse" id="navigation">
-
-                <ul class="nav navbar-nav navbar-left">
-                    <li><a href="{{pathFor 'about'}}">{{t "About"}}</a></li>
-                    <li><a href="{{pathFor 'how-it-works'}}">{{t "How it works"}}</a></li>
-                    <li><a href="{{pathFor 'contact'}}">{{t "Contact"}}</a></li>
-                </ul>
-		{{> loginButtonMenu}}
-            </div>
-            &lt;!&ndash;/.nav-collapse &ndash;&gt;
-	    {{> loginButtonTop}}
- 
-        </div>
-    </div>-->
     <div class="navbar-fixed">
         <nav class="white" role="navigation">
             <div class="nav-wrapper">
 
                 <!-- Logo shown only on small screen -->
                 <a id="logo-container" href="/" class="brand-logo pad-logo hide-on-large-only">
-                    <img src="imgs/cef_logo.png" alt="" width="75">
+                    <img src="{{smallLogo}}" alt="{{t "logo"}}" width="75">
                 </a>
 
                 <!-- logo Search bar  and top menu shown only on large screen-->
                 <div class="row hide-on-med-and-down">
                     <!-- large screen logo -->
                     <div class="col s3 pad-logo-main">
-                        <a href="/"><img src="imgs/cef_logo.png" alt="" width="75"></a>
+                        <a href="/"><img src="{{bigLogo}}" alt="{{t "logo"}}" width="75"></a>
                     </div>
 
                     <!-- large screen search -->
@@ -141,15 +110,15 @@
 <!-- add new listing button -->
 
   {{#if currentUser}}
-      <div class="col s4 account-link">
+      <div class="">
           <div class="col s10 right-align">
+              {{t "Welcome"}}, &nbsp;
               {{usernameById currentUser._id}}
           </div>
-          <div class="col s2 teal-text text-darken-2">
-              <a href="/user/{{usernameById currentUser._id}}" class="user-link">{{> avatar user=currentUser shape="rounded" size="small"}} </a>
+          <div class="col s2 teal-text text-darken-2 top-15">
+              <a href="/user/{{usernameById currentUser._id}}" class="user-link">{{> avatar user=currentUser shape="circle"  size="small" bgColor="#009688" textColor="#fff"}} </a>
           </div>
       </div>
-  <a href="/sign-out/" class="btn-flat"><span class="glyphicon glyphicon-log-out"></span></a>
   {{else}}
          <a href="/sign-in/" class="btn-flat">{{t "loginButton"}}</a>
   {{/if}}

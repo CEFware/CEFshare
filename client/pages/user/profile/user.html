@@ -1,0 +1,165 @@
+<template name="userProfile">
+  <div class="col s12 user-profile">
+    <div class="col m4 l4 s12">
+      <div class="col s12">
+        {{> avatar user=user size="large" shape="rounded"}}
+       </div>
+      <div class="col s12">
+        <h5>
+          {{#if notEmpty user.profile.firstName}}
+
+          {{user.profile.firstName}} {{user.profile.lastName}}
+
+          {{else}}
+
+          {{user.username}}
+
+          {{/if}}
+
+	</h5>
+	{{#if user.profile.bio}}
+        <p>
+	  {{user.profile.bio}}
+        </p>
+	{{/if}}
+        {{#if notEmpty user.formatted_address}}<p><i class="fa fa-map-marker"></i>&nbsp;{{user.formatted_address}}</p>{{/if}}
+ 
+        {{#if isOwner}}
+        <p>
+          <a href="/user/{{currentUser.username}}/edit" class="btn waves-effect waves-light"><i class="mdi-content-create left"></i>{{t "EDIT"}}</a>
+	</p>
+        {{/if}}
+      </div>
+    </div>
+    <div class="col m8 l8 s12">
+      <div class="row">
+          <div class="col s12">
+            <ul class="tabs">
+              <li class="tab col s3"><a class="active" href="#oders">ORDERS</a></li>
+              <li class="tab col s3"><a href="#transaction">TRANSACTIONS</a></li>
+              <li class="tab col s3"><a href="#followers">Followers</a></li>
+              <li class="tab col s3"><a href="#test4">Following</a></li>
+            </ul>
+          </div>
+          <div id="oders" class="col s12 tab-wrapper">
+            {{> odersNew}}
+          </div>
+          <div id="transaction" class="col s12">
+            {{> transactionNew}}
+          </div>
+          <div id="followers" class="col s12" style="display: block">
+            {{> followersNew}}
+          </div>
+          <div id="test4" class="col s12">
+             {{> followingNew}}
+          </div>
+        </div>
+    </div>
+	</div>
+	<div class="col s12 border">
+		<iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387144.0075834208!2d-73.97800349999999!3d40.7056308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY!5e0!3m2!1sen!2sus!4v1394298866288' width='600' height='450' frameborder='0' style='border:0'></iframe>
+	</div>
+
+	<!-- Heading and filter button -->
+	<div class="row">
+		<div class="col s6 m9 l9">
+			<h4>Created Listings</h4> 
+		</div>
+	</div>
+
+	<!-- Listings -->
+	<div class="row">
+        <div class="row">
+            {{> listingNew publishTemplate='getListingsByAuthor' author=autherId _id=null}}
+        </div>
+  	</div>
+
+  	<!-- Heading and filter button -->
+  	<div class="row">
+  		<div class="col s6 m9 l9">
+  			<h4>Wishlist</h4> 
+  		</div>
+  	</div>
+
+	<!-- Listings -->
+	<div class="row">
+        <div class="col s12 m3 l3">
+          <div class="card">
+            <div class="card-image">
+              <a href="/inner"><img class="waves-effect waves-default" src="https://unsplash.it/400/325?random"></a>
+            </div>
+            <div class="card-content">
+              <h5><a href="/inner">Ubrella</a></h5>
+            </div>
+            <div class="card-action">
+              $100.00
+              <span class="new right">New</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m3 l3">
+          <div class="card">
+            <div class="card-image">
+              <a href="/inner"><img class="waves-effect waves-default" src="https://unsplash.it/400/325?random"></a>
+            </div>
+            <div class="card-content">
+              <h5><a href="/inner">Ubrella</a></h5>
+            </div>
+            <div class="card-action">
+              $100.00
+              <span class="new right">New</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m3 l3">
+          <div class="card">
+            <div class="card-image">
+              <a href="/inner"><img class="waves-effect waves-default" src="https://unsplash.it/400/325?random"></a>
+            </div>
+            <div class="card-content">
+              <h5><a href="/inner">Ubrella</a></h5>
+            </div>
+            <div class="card-action">
+              $100.00
+              <span class="new right">New</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m3 l3">
+          <div class="card">
+            <div class="card-image">
+              <a href="/inner"><img class="waves-effect waves-default" src="https://unsplash.it/400/325?random"></a>
+            </div>
+            <div class="card-content">
+              <h5><a href="/inner">Ubrella</a></h5>
+            </div>
+            <div class="card-action">
+              $100.00
+              <span class="new right">New</span>
+            </div>
+          </div>
+        </div>
+  	</div>
+
+  	<!-- Modal Windows -->
+	<!-- model2 -->
+  	<div id="modal2" class="modal">
+  		<div class="modal-content">
+  			
+  		</div>
+  	</div>
+
+  	<!-- Modal Structure -->
+  	  <div id="modal1" class="modal">
+  	    <div class="modal-content">
+  			
+  	    </div>
+  	    <div class="modal-footer">
+  	      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+  	    </div>
+  	</div>
+
+</template>

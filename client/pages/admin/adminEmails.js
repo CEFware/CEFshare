@@ -11,10 +11,12 @@ Template.adminEmails.helpers({
 
 AutoForm.addHooks(['adminEmails'],{
     onSuccess: function (){
-        Flash.success(1,TAPi18n.__("Thank you!"),2000);
+        Materialize.toast(TAPi18n.__("Thank you!"),2000);
     }
 });
 
-Template.adminEmails.rendered = function () {
+Template.adminEmails.onRendered( function () {
     Meteor.subscribe('appSettings');
-};
+    $('.ck-editor').ckeditor();
+    $('.ck-editor').parent().children('label').remove();
+});

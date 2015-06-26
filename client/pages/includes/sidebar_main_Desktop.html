@@ -3,24 +3,38 @@
         <!-- create listing button -->
         <ul class="create-listing">
             <li>
-                <a class="waves-effect waves-light create">Add a Listing &nbsp; &nbsp;
+                <a href="/listing/new/edit" class="waves-effect waves-light create">Add a Listing &nbsp; &nbsp;
                     <i class="mdi-content-create"></i></a>
             </li>
         </ul>
 
         <!-- Cart Items Dashboard Logout Menu -->
         <ul class="main-sidebar end-ul">
+	  {{#if isInRole 'admin'}}
+          <li>
+            <i class="mdi-action-dashboard"></i>&nbsp;&nbsp;
+            <a href="/admin">{{t "Dashboard"}}</a>
+          </li>
+	  {{/if}}
+          <li>
+            <i class="mdi-hardware-keyboard-return"></i>&nbsp;&nbsp;
+            <a href="/sign-out">{{t "Log Out"}}</a>
+          </li>
+        </ul>
+
+        <!-- Secondary side Menu -->
+        <ul class="main-sidebar end-ul">
             <li>
-                <i class="mdi-action-shopping-cart"></i> &nbsp;&nbsp;
-                <a href="/cart" class="waves-effect waves-light">Cart Item</a>
+                <i class="mdi-action-info"></i> &nbsp;&nbsp;
+                <a href="/about">About</a>
             </li>
             <li>
-                <i class="mdi-action-dashboard"></i>&nbsp;&nbsp;
-                <a href="#">Dashboard</a>
+                <i class="mdi-action-help"></i>&nbsp;&nbsp;
+                <a href="/how-it-works">How It Works</a>
             </li>
             <li>
-                <i class="mdi-hardware-keyboard-return"></i>&nbsp;&nbsp;
-                <a href="#">Log Out</a>
+                <i class="mdi-communication-quick-contacts-mail"></i>&nbsp;&nbsp;
+                <a href="/contact">Contact</a>
             </li>
         </ul>
 
@@ -30,30 +44,13 @@
                 <i class="mdi-action-translate"></i>
             </div>
             <div class="input-field col s10">
-                <select class="mat-select">
-                    <option value="" disabled selected>Choose Language</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                </select>
+                <select class="mat-select" id="languages">
+		  {{#each languages}}
+                  <option value="{{code}}" {{selected}}> {{name}}</option>
+		  {{/each}}
+		</select>
             </div>
         </div>
-
-        <!-- Secondary side Menu -->
-        <ul class="main-sidebar">
-            <li>
-                <i class="mdi-action-info"></i> &nbsp;&nbsp;
-                <a href="#">About</a>
-            </li>
-            <li>
-                <i class="mdi-action-help"></i>&nbsp;&nbsp;
-                <a href="#">How It Works</a>
-            </li>
-            <li>
-                <i class="mdi-communication-quick-contacts-mail"></i>&nbsp;&nbsp;
-                <a href="#">Contact</a>
-            </li>
-        </ul>
 
     </div>
 </template>
