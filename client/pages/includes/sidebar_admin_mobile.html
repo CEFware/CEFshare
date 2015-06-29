@@ -1,77 +1,79 @@
 <template name="sidebar_admin_mobile">
 
-	<div class="sidebar-admin-mobile">
-		<li>
-			<a href="#" class="create_side"><i class="mdi-content-create"></i>Add a Listing</a>
-		</li>
+    <div class="sidebar-admin-mobile">
+        <li>
+            <a href="#" class="create_side"><i class="mdi-content-create"></i>Add a Listing</a>
+        </li>
 
-		<li>
-			<a href="#"><i class="mdi-action-dashboard"></i>Dashboard</a>
-		</li>
-		<li>
-			<a href="#"><i class="mdi-hardware-keyboard-return"></i>Log Out</a>
-		</li>
+        <li>
+            <a href="#"><i class="mdi-action-dashboard"></i>Dashboard</a>
+        </li>
+        {{#if currentUser}}
+            <li>
+                <a href="#"><i class="mdi-hardware-keyboard-return"></i>Log Out</a>
+            </li>
+        {{/if}}
 
-		<h5>General</h5>
+        <h5>General</h5>
 
-		<li>
-			<a href="#"><i class="mdi-action-help"></i>Support</a>
-		</li>
-		
-		<h5>Users &amp; Transaction</h5>
-		<li>
-			<a href="#"><i class="fa fa-users"></i> Manage Users</a>
-		</li>
-		<li>
-			<a href="#"><i class="fa fa-envelope"></i>Send Email to users</a>
-		</li>
-		<li>
-			<a href="#"><i class="fa fa-user-plus"></i>Invite new users</a>
-		</li>
-		<li>
-			<a href="#"><i class="fa fa-bar-chart"></i>View Transactions</a>
-		</li>
+        <li>
+            <a href="#"><i class="mdi-action-help"></i>Support</a>
+        </li>
 
-		<h5>Configuration</h5>
-		<li>
-			<a href="#"><i class="fa fa-bars"></i>Basic Details</a>
-		</li>
-		<li>
-			<a href="#"><i class="fa fa-paint-brush"></i>Design</a>
-		</li>
-		<li>
-			<a href="#"><i class="fa fa-link"></i>Menu Links</a>
-		</li>
-		<li>
-			<a href="#"><i class="fa fa-tags"></i>Listing Categories</a>
-		</li>
+        <h5>Users &amp; Transaction</h5>
+        <li>
+            <a href="#"><i class="fa fa-users"></i> Manage Users</a>
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-envelope"></i>Send Email to users</a>
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-user-plus"></i>Invite new users</a>
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-bar-chart"></i>View Transactions</a>
+        </li>
 
-		<li>
-			<a href="#"><i class="fa fa-list-ul"></i>Listing fields &amp; filters</a>
-		</li>
+        <h5>Configuration</h5>
+        <li>
+            <a href="#"><i class="fa fa-bars"></i>Basic Details</a>
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-paint-brush"></i>Design</a>
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-link"></i>Menu Links</a>
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-tags"></i>Listing Categories</a>
+        </li>
 
-		<li>
-			<a href="#"><i class="fa fa-credit-card"></i>Payments</a>
-		</li>
+        <li>
+            <a href="#"><i class="fa fa-list-ul"></i>Listing fields &amp; filters</a>
+        </li>
 
-		<li>
-			<a href="#"><i class="fa fa-share-alt"></i>Social Media</a>
-		</li>
+        <li>
+            <a href="#"><i class="fa fa-credit-card"></i>Payments</a>
+        </li>
 
-		<li>
-			<a href="#"><i class="fa fa-area-chart"></i>Analytics</a>
-		</li>
+        <li>
+            <a href="#"><i class="fa fa-share-alt"></i>Social Media</a>
+        </li>
 
-		<li>
-			<a href="#"><i class="fa fa-pencil"></i>Instructions Texts</a>
-		</li>
+        <li>
+            <a href="#"><i class="fa fa-area-chart"></i>Analytics</a>
+        </li>
 
-		<li>
-			<a href="#"><i class="fa fa-envelope-o"></i>Emails</a>
-		</li>
+        <li>
+            <a href="#"><i class="fa fa-pencil"></i>Instructions Texts</a>
+        </li>
 
-		<li>
-			<a href="#"><i class="fa fa-cog"></i>Settings</a>
-		</li>
-	</div>
+        <li>
+            <a href="#"><i class="fa fa-envelope-o"></i>Emails</a>
+        </li>
+
+        <li>
+            <a href="#"><i class="fa fa-cog"></i>Settings</a>
+        </li>
+    </div>
 </template>

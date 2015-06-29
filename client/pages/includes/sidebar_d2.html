@@ -15,10 +15,12 @@
 					<i class="mdi-action-dashboard"></i>&nbsp;&nbsp;
 					<a href="/admin">Dashboard</a>
 				</li>
+                {{#if currentUser}}
 				<li>
 					<i class="mdi-hardware-keyboard-return"></i>&nbsp;&nbsp;
 					<a href="#">Log Out</a>
 				</li>
+                {{/if}}
 			</ul>
 
 			<!-- Dashboard Main side Menu -->
