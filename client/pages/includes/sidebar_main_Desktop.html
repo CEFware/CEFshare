@@ -16,10 +16,12 @@
             <a href="/admin">{{t "Dashboard"}}</a>
           </li>
 	  {{/if}}
+         {{#if currentUser}}
           <li>
             <i class="mdi-hardware-keyboard-return"></i>&nbsp;&nbsp;
             <a href="/sign-out">{{t "Log Out"}}</a>
           </li>
+         {{/if}}
         </ul>
 
         <!-- Secondary side Menu -->
