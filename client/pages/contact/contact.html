@@ -1,32 +1,34 @@
 <template name="contact">
-  <div id="content">
-    <div class="container">
-      <div class="box" id="contact">
-	<h1 class="text-center">{{t "Contact us"}}</h1>
-        <p class="lead text-center">{{t "Are you curious about something?"}}</p>
-        <p class="text-center">{{t "contact us text"}}</p>
-      </div>
-      <div class="col-md-12">
-	<div class="col-lg-offset-4 col-lg-4">
-	  {{#autoForm schema=contactFormSchema id="contactForm" type="method" meteormethod="sendEmail"}}
-	  <fieldset>
-	    <div>
-	      {{flash '1'}}
-	    </div>
-	    {{> afQuickField name="email"}}
-	    {{> afQuickField name="message" rows=5}}
-	    {{> afFieldInput type="hidden" name="toEmail" value=mainEmail}}
-	    <div class="text-center">
-	      <button type="submit" class="btn btn-primary">{{t "Submit"}}</button>
-	      <button type="reset" class="btn btn-default">{{t "Reset"}}</button>
-	    </div>
-	  </fieldset>
-	  {{/autoForm}}
-	  <br>  
-	  <br>  
-	  <br>  
-	</div>
-      </div>
+    <div id="content" class="">
+        <div class="row inner-page admin-dashboard">
+            <div class="" id="contact">
+                <h1 class="text-center">{{t "Contact us"}}</h1>
+
+                <p class="lead text-center">{{t "Are you curious about something?"}}</p>
+
+                <p class="text-center">{{t "contact us text"}}</p>
+            </div>
+            <div class="col s12">
+                <div class="">
+                    {{#autoForm schema=contactFormSchema id="contactForm" type="method" meteormethod="sendEmail"}}
+                        <div>
+                            <div>
+                                {{flash '1'}}
+                            </div>
+                            {{> afQuickField name="email"}}
+                            {{> afQuickField name="message" rows=8 class="materialize-textarea"}}
+                            {{> afFieldInput type="hidden" name="toEmail" value=mainEmail}}
+                            <div class="text-center">
+                                <button type="submit" class="waves-effect waves-light btn">{{t "Submit"}}</button>
+                                <button type="reset" class=" deep-orange waves-effect waves-dark btn">{{t "Reset"}}</button>
+                            </div>
+                        </div>
+                    {{/autoForm}}
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
