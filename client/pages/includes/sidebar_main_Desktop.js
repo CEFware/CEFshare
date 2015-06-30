@@ -21,5 +21,8 @@ Template.sidebar_main_Desktop.helpers({
 	    arrR.push({"code":index, "name":value.name, "selected":(TAPi18n.getLanguage()===index ? "selected" : "")});
 	});
 	return arrR;
+    },
+    pages: function () {
+	return Pages.find();
     }
 });

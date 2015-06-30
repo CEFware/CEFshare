@@ -26,14 +26,12 @@
 
         <!-- Secondary side Menu -->
         <ul class="main-sidebar end-ul">
-            <li>
-                <i class="mdi-action-info"></i> &nbsp;&nbsp;
-                <a href="/about">About</a>
-            </li>
-            <li>
-                <i class="mdi-action-help"></i>&nbsp;&nbsp;
-                <a href="/how-it-works">How It Works</a>
-            </li>
+	  {{#each pages}}
+          <li>
+            <i class="mdi-action-info"></i> &nbsp;&nbsp;
+            <a href="/pages/{{uri}}">{{title}}</a>
+          </li>
+	  {{/each}}
             <li>
                 <i class="mdi-communication-quick-contacts-mail"></i>&nbsp;&nbsp;
                 <a href="/contact">Contact</a>

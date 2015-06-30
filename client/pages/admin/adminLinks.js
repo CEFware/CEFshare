@@ -17,6 +17,8 @@ AutoForm.addHooks(['adminLinks'],{
 
 Template.adminLinks.rendered = function () {
     Meteor.subscribe('appSettings');
+    $('.ck-editor').ckeditor();
+    $('.ck-editor').parent().children('label').remove();
 };
 
 Template.afQuickField.onRendered(function(){
