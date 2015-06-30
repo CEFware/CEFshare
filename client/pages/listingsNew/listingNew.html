@@ -2,7 +2,8 @@
     {{#if Template.subscriptionsReady}}
             {{#each listing}}
                 {{> listingData}}
-
+            {{else}}
+    <h5>{{t "No listings here yet"}}</h5>
             {{/each}}
         {{else}}
             {{> loading text='Loading'}}
