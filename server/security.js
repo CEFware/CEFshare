@@ -112,3 +112,38 @@ Design.deny({
     }
 });
 
+Avatars.allow({
+    insert: function(userId, doc){
+	if (userId)
+            return true;
+    },
+    remove: function(userId, doc){
+	if ((userId===doc.author) || Roles.userIsInRole(userId,'admin'))
+            return true;
+    },
+    update: function(userId, doc, fieldNames, modifier){
+	if ((userId===doc.author) || Roles.userIsInRole(userId,'admin'))
+            return true;
+    },
+    download: function(userId, doc){
+        return true;
+    }
+});
+Avatars.deny({
+    insert: function(userId, doc){
+	if (userId)
+            return false;
+    },
+    remove: function(userId, doc){
+	if ((userId===doc.author) || Roles.userIsInRole(userId,'admin'))
+            return false;
+    },
+    update: function(userId, doc, fieldNames, modifier){
+	if ((userId===doc.author) || Roles.userIsInRole(userId,'admin'))
+            return false;
+    },
+    download: function(userId, doc){
+        return false;
+    }
+});
+
