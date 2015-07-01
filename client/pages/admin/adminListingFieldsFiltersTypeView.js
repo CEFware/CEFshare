@@ -4,7 +4,7 @@ Template.adminListingFieldsFiltersTypeView.helpers({
 	if (res) {
 	    var fin=[];
 	    res.listingFields.forEach(function (el) {
-		if (el.listingType===Router.current().params.listingType)
+		if (el.listingType===this.data.type)
 		    el.listingFields.forEach(function (el2) {
 			if (Session.get('showInactive')) {
 			    fin.push(el2);
@@ -30,7 +30,7 @@ Template.adminListingFieldsFiltersTypeView.helpers({
 	};
     },
     currentType: function () {
-        return Router.current().params.listingType;
+        return this.data.type;
     },
     oneListingFieldObj: function () {
 	return oneListingField;
@@ -45,7 +45,7 @@ Template.adminListingFieldsFiltersTypeView.helpers({
 	if (res) {
 	    var fin=0;
 	    res.listingFields.forEach(function (el) {
-		if (el.listingType===Router.current().params.listingType)
+		if (el.listingType===this.data.type)
 		    el.listingFields.forEach(function (el2){
 			if (!el2.active)
 			    fin++;
@@ -92,13 +92,13 @@ Template.adminListingFieldsFiltersTypeView.events({
 	Session.set('showInactive',null);
     },
     'click .fieldDelete': function () {
-	Meteor.call('deleteListingField',this,Router.current().params.listingType, function(e,r) {
+	Meteor.call('deleteListingField',this,this.data.type, function(e,r) {
 	    if (!e)
 		Session.set('restartApp',true);
 	});
     },
     'click .fieldActivate': function () {
-	Meteor.call('deleteListingField',this,Router.current().params.listingType, function(e,r) {
+	Meteor.call('deleteListingField',this,this.data.type, function(e,r) {
 	    if (!e)
 		Session.set('restartApp',true);
 	});
@@ -121,7 +121,7 @@ Template.editFieldName.events({
 	this.optional=t.$('.fieldOptional').is(':checked');
 	this.authorFilable=t.$('.authorFilable').is(':checked');
 	if (this.title.length>0)
-            Meteor.call('updateListingField',this,Router.current().params.listingType,function (e) {
+            Meteor.call('updateListingField',this,this.data.type,function (e) {
 		if (!e)
                     Session.set('editingField',null);
             });
@@ -147,7 +147,7 @@ Template.editFieldName.helpers({
 AutoForm.addHooks(['adminListingTypeNewField'],{
     onSuccess: function (){
         window.scrollTo(0,0);
-        Flash.success(1,TAPi18n.__("Thank you! <b>The app will be reloaded in a minute for changes to take place</b>"),4000);
+        Materialize.toast(TAPi18n.__("Thank you! <b>The app will be reloaded in a minute for changes to take place</b>"),4000);
         Session.set('restartApp',true);
     }
 });
