@@ -771,3 +771,8 @@ table .subject-table {
     margin-top: 15px;
 }
 
+span.badge{
+    position: relative;
+    margin-left: 5px;
+}
+
