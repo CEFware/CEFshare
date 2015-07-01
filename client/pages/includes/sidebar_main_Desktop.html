@@ -27,10 +27,19 @@
         <!-- Secondary side Menu -->
         <ul class="main-sidebar end-ul">
 	  {{#each pages}}
+	  {{#if active}}
+	  {{#if url}}
+          <li>
+            <i class="mdi-action-info"></i> &nbsp;&nbsp;
+            <a href="{{url}}" target="_blank">{{title}}</a>
+          </li>
+	  {{else}}
           <li>
             <i class="mdi-action-info"></i> &nbsp;&nbsp;
             <a href="/pages/{{uri}}">{{title}}</a>
           </li>
+	  {{/if}}
+	  {{/if}}
 	  {{/each}}
             <li>
                 <i class="mdi-communication-quick-contacts-mail"></i>&nbsp;&nbsp;
