@@ -181,7 +181,13 @@ Template.specificListingEdit.helpers({
         return "Listings";
     },
     itemDay: function () {
-	return Session.get('itemName') === 'day';
+	var res= Session.get('itemName') === 'day';
+        if(res){
+            setTimeout(function(){
+                $('.af-checkbox-group').parent().children('label').remove();
+            },500);
+            return res;
+        }
     },
     dateOptions: function() {
         return {
