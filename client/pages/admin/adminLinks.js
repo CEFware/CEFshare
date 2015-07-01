@@ -18,6 +18,7 @@ Template.adminLinks.helpers({
         if (resId) {
             var resPage=Pages.findOne({_id:resId});
             if (resPage) {
+		$('.ck-editor').val(resPage.page);
                 return resPage;
             };
         };
@@ -46,6 +47,10 @@ Template.adminLinks.events({
             Session.set('pageId',null);
         };
         Meteor.call('deletePage',this._id);
+    },
+    'click .makeActive': function (e,t) {
+        e.preventDefault();
+        Meteor.call('makePageActive',this);
     },
     'click .cancel': function (e,t) {
         e.preventDefault();
