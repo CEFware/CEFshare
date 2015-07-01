@@ -9,6 +9,10 @@ Template.listingNew.onCreated(function(){
             return true;
         case 'allListingsActive':
             instance.subscribe(instance.data.publishTemplate);
+            return true;
+        case 'allListingsOnHomepage':
+            instance.subscribe(instance.data.publishTemplate,instance.data.searchContent,instance.data.filter);
+            return true;
         default :
             return null;
     }

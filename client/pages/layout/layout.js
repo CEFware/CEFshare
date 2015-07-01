@@ -39,11 +39,17 @@ Template.layout.helpers({
         if (Session.get('filter'))
             return true;
     }
+
 });
 
 Template.layout.onRendered(function(){
     $('select').material_select();
     $(".button-collapse").sideNav();
+});
+Template.searchOverlay.helpers({
+    isSearching:function(){
+        return Session.get('searching');
+    }
 });
 
 Template.layout.events({
@@ -55,8 +61,12 @@ Template.layout.events({
         });
     },
     'focus #search': function () {
-        $('#search_label').addClass('green-highlight');
-        $('#closeSearch').addClass('green-highlight');
+
+           Session.set('searching',true);
+
+            $('#search_label').addClass('green-highlight');
+            $('#closeSearch').addClass('green-highlight');
+
     },
     'click .button-collapse': function(e){
         Session.set('filter', false);
@@ -78,9 +88,13 @@ Template.searchOverlay.events({
         e.preventDefault();
         $('.overlay-contentscale').removeClass('open');
         $('.content-wrapper').removeClass('open');
+        Session.set('searching',null);
     },
     'click .search-card a':function(e){
         $('.overlay-contentscale').removeClass('open');
         $('.content-wrapper').removeClass('open');
+    },
+    'keyup #search-field':function(e){
+        Session.set('searching',$('#search-field').val());
     }
 });

@@ -2,6 +2,9 @@ Template.home.helpers({
     sliderItems: function () {
 	return allListingsActive();
     },
+    isSearching:function(){
+      return Session.get('searching');
+    },
     listingImg: function (){
         var listing = this;
         if (listing) {
