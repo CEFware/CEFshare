@@ -15,3 +15,12 @@ Meteor.publish('design', function(id){
         return Design.find();
     };
 });
+
+Meteor.publish('avatars', function(id){
+    //publish only needed images - by providing it's list over id array
+    if (id) {
+        return Avatars.find({_id:{$in:id}});
+    } else {
+        return Avatars.find();
+    };
+});

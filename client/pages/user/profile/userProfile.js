@@ -130,6 +130,9 @@ Template.locationMap.helpers({
 
 
 Template.userProfile.onRendered(function(){
-        $('.modal-trigger').leanModal();
-        $('ul.tabs').tabs();
+    $('.modal-trigger').leanModal();
+    $('ul.tabs').tabs();
+    var res=Meteor.users.findOne({username:Router.current().params.username});
+    if (res && res.profile && res.profile.avatar)
+        Meteor.subscribe('avatars',[res.profile.avatar]);
 });
