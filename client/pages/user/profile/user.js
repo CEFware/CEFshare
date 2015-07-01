@@ -4,5 +4,8 @@
 Template.userProfile.helpers({
     autherId:function(){
          return Meteor.userId();
-     }
+     },
+    curUsername: function () {
+	return Router.current().params.username;
+    }
 });

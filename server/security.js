@@ -40,6 +40,9 @@ Orders.permit(['insert','update','remove']).ifLoggedIn().ifHasRole('admin').appl
 //Maillist - only admin may do everything
 Maillist.permit(['insert','update','remove']).ifLoggedIn().ifHasRole('admin').apply();
 
+//Pages - only admin may do everything
+Pages.permit(['insert','update','remove']).ifLoggedIn().ifHasRole('admin').apply();
+
 //Images - only verified user may insert, admin & owner remove, only owner - update
 //SAMPLE CURRENTLY
 Images.allow({
@@ -105,6 +108,41 @@ Design.deny({
     },
     update: function(userId, doc, fieldNames, modifier){
 	if (Roles.userIsInRole(userId,'admin'))
+            return false;
+    },
+    download: function(userId, doc){
+        return false;
+    }
+});
+
+Avatars.allow({
+    insert: function(userId, doc){
+	if (userId)
+            return true;
+    },
+    remove: function(userId, doc){
+	if ((userId===doc.author) || Roles.userIsInRole(userId,'admin'))
+            return true;
+    },
+    update: function(userId, doc, fieldNames, modifier){
+	if ((userId===doc.author) || Roles.userIsInRole(userId,'admin'))
+            return true;
+    },
+    download: function(userId, doc){
+        return true;
+    }
+});
+Avatars.deny({
+    insert: function(userId, doc){
+	if (userId)
+            return false;
+    },
+    remove: function(userId, doc){
+	if ((userId===doc.author) || Roles.userIsInRole(userId,'admin'))
+            return false;
+    },
+    update: function(userId, doc, fieldNames, modifier){
+	if ((userId===doc.author) || Roles.userIsInRole(userId,'admin'))
             return false;
     },
     download: function(userId, doc){

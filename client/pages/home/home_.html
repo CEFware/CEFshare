@@ -77,9 +77,11 @@
             <!-- /.container -->
 
             <!-- *** PROMO BAR *** -->
-        {{> listingNew publishTemplate='allListingsActive'}}
-	   {{> freePromotion}}
+            {{> listingNew publishTemplate='allListingsActive'}}
+<!--	    {{> freePromotion}} -->
+{{#if currentUser}}{{else}}
         {{> newsLetter}}
+{{/if}}
             <!-- *** PROMO BAR END *** -->
         <!-- /#content -->
 </template>

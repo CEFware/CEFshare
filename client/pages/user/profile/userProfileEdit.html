@@ -38,7 +38,7 @@
 	  <fieldset>
             <h2 class="text-center">{{t "Personal details"}}</h2>
             <div class="box clearfix">
-	      <div class="col-md-6">
+ 	      <div class="col-md-6">
 		{{> afQuickField name="profile.firstName"}}
 	      </div>
 	      <div class="col-md-6">
@@ -94,6 +94,9 @@
 		{{> afQuickField name="profile.shipping.country"}}
 	      </div>
             </div>
+	      <div class="col-md-6">
+                {{> afQuickField name='profile.avatar'}}
+	      </div>
 	    {{> afFieldInput type="hidden" name="formatted_address" value=currentUser.formatted_address}}
 	    {{> afFieldInput type="hidden" name="lat" value=currentUser.lat}}
 	    {{> afFieldInput type="hidden" name="lng" value=currentUser.lng}}

@@ -9,6 +9,8 @@ Template.listingNew.onCreated(function(){
             return true;
         case 'allListingsActive':
             instance.subscribe(instance.data.publishTemplate);
+        case 'wishlist':
+            instance.subscribe(instance.data.publishTemplate,instance.data.username);
         default :
             return null;
     }
@@ -20,7 +22,10 @@ Template.listingNew.helpers({
 
         if(this.author && this._id)
             var listing=Listings.find({_id:{$ne:this._id}});
-        else
+        else if (this.username) {
+	    var idArr= _.map(Wishlist.find().fetch(), function (el){ return el.id})
+            var listing= Listings.find({_id: {$in:idArr}});
+	} else 
             var listing= Listings.find();
 
         return listing;
