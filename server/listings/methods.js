@@ -16,8 +16,9 @@ Meteor.methods({
 	    check(doc, Listing);
 
 	    var c=1;
+	    var lastUri=doc.uri;
 	    while (specificListingByURI(doc.uri).fetch().length>0) {
-		doc.uri=convertToSlug(doc.title)+c;
+		doc.uri=lastUri+c;
 		c++;
 	    };
 	    
