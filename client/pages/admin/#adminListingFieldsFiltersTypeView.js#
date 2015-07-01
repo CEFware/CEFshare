@@ -80,7 +80,7 @@ Template.adminListingFieldsFiltersTypeView.helpers({
         if (Router.current().params.field === 'listingType')
             return ListingDefault._schema.listingType.label();
         return _.filter(_.filter(Main.findOne().listingFields,function (el) {
-            return el.listingType=== Router.current().params.listingType})[0].listingFields, function (el2) {return el2.type===Router.current().params.field})[0].title;
+            return el.listingType=== this.data.type})[0].listingFields, function (el2) {return el2.type===Router.current().params.field})[0].title;
     },
     filterObj: function () {
         res=_.filter(Main.findOne().filters, function (el) {return el.fieldName===Router.current().params.field})[0];

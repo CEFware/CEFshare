@@ -33,29 +33,6 @@
     </div>
 
 
-    <!-- Modal Structure to add filters -->
-    <div id="modal2" class="modal">
-      <div class="modal-content add-type">
-
-        <h5><u>{{fieldTitle}}</u> {{t "field filter"}}</h5>
-        {{#autoForm schema=oneFilterObj id="adminFilterUpdate" type="method" meteormethod="saveAdminFilterUpdate" doc=filterObj}}
-        <fieldset>
-
-          {{> afQuickField name="title" placeholder=fieldTitle}}
-          {{> afQuickField name="active"}}
-          {{> afFieldInput type="hidden" name="fieldName" value=fieldName}}
-
-          <div class="text-center">
-            <button type="reset" class="btn-flat modal-close modal-action red-text"><i class="mdi-navigation-close left"></i>{{t "Reset"}}</button>
-            <button type="submit" class="btn modal-close modal-action"><i class="mdi-navigation-check left"></i>{{t "Save"}}</button>
-          </div>
-        </fieldset>
-        {{/autoForm}}
-
-      </div>
-    </div>
-		        
-
     <div class="col s12">
       <ul class="collapsible" data-collapsible="accordion">
 
