@@ -1,4 +1,129 @@
 <template name="adminListingFieldsFiltersTypeView">
+  <div class="container">
+    <br><h5><u>{{currentType}}</u> {{t "listing type fields"}}</h5> <br>
+
+    <table class="bordered">
+      <tr>
+	<td colspan="4" class="right-align">
+	  {{#if showInactive}}
+	  <a href="#" class="inactive"><u>{{t "Hide"}} {{countInactive}} {{t "inactive fields"}}</u></a>
+	  {{else}}
+	  <a href="#" class="inactive"><u>{{t "Show"}} {{countInactive}} {{t "inactive fields"}}</u></a>
+	  {{/if}}
+	</td>
+      </tr>
+
+      {{#each listingFieldsDefault}}
+      <tr>
+	<td><b>{{title}}</b></td>
+	<td><i class="mdi-content-create"></i></td>
+	<td>
+	  {{#if letDefaultFilter}}
+	  <a href="" class="filterEdit"><i class="mdi-content-filter-list"></i></a>
+	  {{else}}
+	  <i class="mdi-content-filter-list"></i>
+	  {{/if}}
+	</td>
+	<td><i class="mdi-action-delete"></i></td>
+      </tr>
+      {{/each}}
+
+
+      {{#each listingFields}}
+      <tr>
+        <td>
+          {{#if editingField name}}
+          {{> editFieldName}}
+          {{else}}
+
+          {{#if active}}
+          <b>{{title}}</b>
+          {{else}}
+          {{title}}
+          {{/if}}
+
+          {{/if}}
+	</td>
+        <td>
+          {{#if editingField name}}
+	  <i class="mdi-content-create"></i>
+          {{else}}
+	  
+          {{#if letEditField}}
+          <a href="#"><i class="mdi-content-create"></i></a>
+          {{else}}
+	  <i class="mdi-content-create"></i>
+          {{/if}}
+
+          {{/if}}
+        </td>
+        <td>
+          <a href="" class="filterEdit"><i class="mdi-content-filter-list"></i></a>
+        </td>
+        <td>
+          {{#if active}}
+
+          {{#if letDelete}}
+          <a href="#" class="fieldDelete"><i class="mdi-action-delete"></i></a>
+          {{else}}
+	  <i class="mdi-action-delete"></i>
+          {{/if}}
+
+          {{else}}
+          <a href="#" class="fieldActivate">
+            <span style="text-transform:uppercase;font-family: Montserrat, Helvetica, Arial, sans-serif;color=rgb(106,174,122)">
+              {{t "ACTIVATE"}}
+            </span>
+          </a>
+          {{/if}}
+        </td>
+      </tr>
+      {{else}}
+      <tr><td class="right-align">
+          <h4>{{t "No listing fields yet."}}</h4>
+      </td></tr>
+      {{/each}}
+    </table> <br>
+  </div>
+  <div class="container">
+    <h5>{{t "Add new field"}}</h5>
+    {{#autoForm schema=oneListingFieldObj id="adminListingTypeNewField" type="method" meteormethod="saveAdminListingTypeNewField"}}
+    <fieldset>
+      {{> afQuickField name="type"}}
+      {{> afQuickField name="optional"}}
+      {{> afQuickField name="authorFilable"}}
+      {{> afQuickField name="title" placeholder=getTitle}}
+      {{> afFieldInput type="hidden" name="name" value=currentType}}
+      {{> afFieldInput type="hidden" name="active" value="true"}}
+      {{> afFieldInput type="hidden" name="letDelete" value="true"}}
+
+      <div class="text-center">
+        <button type="submit" class="btn"><i class="mdi-navigation-check left"></i> {{t "Save"}}</button>
+        <button type="reset" class="btn-flat red-text"><i class="mdi-navigation-close left"></i> {{t "Reset"}}</button>
+       </div>
+    </fieldset>
+    {{/autoForm}}
+  </div>
+  <br> <br>
+</template>
+
+<template name = "editFieldName">
+  <form>
+    <div class="input-group input-group-sm">
+      <input type="text" class="form-control newFieldName" value="{{title}}" id="{{name}}">
+      <div class="input-group-addon">
+	<input class="fieldOptional" type="checkbox" {{ifOptional}}> {{t "Optional"}}
+	<input class="authorFilable" type="checkbox" {{ifAuthorFilable}}> {{t "Seller fills"}}
+      </div>
+      <span class="input-group-btn">
+        <button class="btn btn-primary saveEdit" type="submit">{{t "SAVE"}}</button>
+        <button class="btn btn-danger stopEdit"><span class="glyphicon glyphicon-remove"></span></button>
+      </span>
+    </div>
+  </form>
+</template>
+
+<template name="filtersModal">
     <!-- Modal Structure to add filters -->
     <div id="modal2" class="modal">
       <div class="modal-content add-type">
@@ -20,148 +145,4 @@
 
       </div>
     </div>
-
-    <div id="content">
-      <div class="container">
-	
-        <div class="col-md-12">
-          <div class="box text-center">
-            <div class="row">
-              <div class="col-sm-10 col-sm-offset-1">
-                <h1>{{t "Marketplace admin"}} - {{t "Listing fields & filters"}}</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-
-	  <h3><u>{{currentType}}</u> {{t "listing type fields"}}</h3>
-          <div class="box" id="text-page">
-            <div class="col-md-12 text-right">
-	      {{#if showInactive}}
-	      <a href="#" class="hideInactive"><u>{{t "Hide"}} {{countInactive}} {{t "inactive fields"}}</u></a>
-	      {{else}}
-	      <a href="#" class="showInactive"><u>{{t "Show"}} {{countInactive}} {{t "inactive fields"}}</u></a>
-	      {{/if}}
-	    </div>
-	    <br>
-	    {{#each listingFieldsDefault}}
-	    <div class="row">
-              <div class="col-md-8">
-		<b>{{title}}</b>
-              </div>
-              <div class="col-md-1 text-center">
-		<i class="fa fa-pencil"></i>
-              </div>
-              <div class="col-md-1 text-center">
-		{{#if letDefaultFilter}}
-		<a href="/admin/listingFieldsFilters/{{currentType}}/filter/{{name}}"><i class="fa fa-filter"></i></a>
-		{{else}}
-		<i class="fa fa-filter"></i>
-		{{/if}}
-              </div>
-              <div class="col-md-2 text-center">
-		<i class="fa fa-trash"></i>
-              </div>
-            </div>
- 	    {{/each}}
-	    {{#each listingFields}}
-	    <div class="row">
-              <div class="col-md-8">
-                {{#if editingField name}}
-                {{> editFieldName}}
-                {{else}}
-
-		{{#if active}}
-		<b>{{title}}</b>
-		{{else}}
-		{{title}}
-		{{/if}}
-
-                {{/if}}
-              </div>
-              <div class="col-md-1 text-center">
-                {{#if editingField name}}
-		<i class="fa fa-pencil"></i>
-		{{else}}
-
-		{{#if letEditField}}
-		<a href="#"><i class="fa fa-pencil editField"></i></a>
-		{{else}}
-		<i class="fa fa-pencil"></i>
-		{{/if}}
-
-		{{/if}}
-              </div>
-              <div class="col-md-1 text-center">
-		<a href="/admin/listingFieldsFilters/{{currentType}}/filter/{{name}}"><i class="fa fa-filter"></i></a>
-              </div>
-              <div class="col-md-2 text-center">
-		{{#if active}}
-
-		{{#if letDelete}}
-		<a href="#" class="fieldDelete"><i class="fa fa-trash"></i></a>
-		{{else}}
-		<i class="fa fa-trash"></i>
-		{{/if}}
-
-		{{else}}
-		<a href="#" class="fieldActivate">
-                  <span style="text-transform:uppercase;font-family: Montserrat, Helvetica, Arial, sans-serif;color=rgb(106,174,122)">
-                    {{t "ACTIVATE"}}
-                  </span>
-		</a>
- 		{{/if}}
-              </div>
-            </div>
- 	    {{else}}
-	    <h4 class="text-center">{{t "No listing fields yet."}}</h4>
-	    {{/each}}
-          </div>
-
-          <h3>{{t "Add new field"}}</h3>
-          <div class="box" id="text-page">
-            <div class="row">
-              {{#autoForm schema=oneListingFieldObj id="adminListingTypeNewField" type="method" meteormethod="saveAdminListingTypeNewField"}}
-              <fieldset>
-                <div>
-                  {{flash '1'}}
-                </div>
-                {{> afQuickField name="type"}}
-                {{> afQuickField name="optional"}}
-                {{> afQuickField name="authorFilable"}}
-                {{> afQuickField name="title" placeholder=getTitle}}
-                {{> afFieldInput type="hidden" name="name" value=currentType}}
-                {{> afFieldInput type="hidden" name="active" value="true"}}
-                {{> afFieldInput type="hidden" name="letDelete" value="true"}}
-
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary">{{t "Save"}}</button>
-                  <button type="reset" class="btn btn-default">{{t "Reset"}}</button>
-                </div>
-              </fieldset>
-              {{/autoForm}}
-            </div>
-          </div>
- 
-      </div>
-      <!-- /.container -->
-    </div>
-    <!-- /#content -->
-
-</template>
-
-<template name = "editFieldName">
-  <form>
-    <div class="input-group input-group-sm">
-      <input type="text" class="form-control newFieldName" value="{{title}}" id="{{name}}">
-      <div class="input-group-addon">
-	<input class="fieldOptional" type="checkbox" {{ifOptional}}> {{t "Optional"}}
-	<input class="authorFilable" type="checkbox" {{ifAuthorFilable}}> {{t "Seller fills"}}
-      </div>
-      <span class="input-group-btn">
-        <button class="btn btn-primary saveEdit" type="submit">{{t "SAVE"}}</button>
-        <button class="btn btn-danger stopEdit"><span class="glyphicon glyphicon-remove"></span></button>
-      </span>
-    </div>
-  </form>
 </template>

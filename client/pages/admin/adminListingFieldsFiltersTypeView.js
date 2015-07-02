@@ -3,18 +3,21 @@ Template.adminListingFieldsFiltersTypeView.helpers({
 	var res=Main.findOne();
 	if (res) {
 	    var fin=[];
-	    res.listingFields.forEach(function (el) {
-		if (el.listingType===this.data.type)
-		    el.listingFields.forEach(function (el2) {
-			if (Session.get('showInactive')) {
-			    fin.push(el2);
-			} else {
-			    if (el2.active)
-				fin.push(el2);
-			};
-		    });
+	    var lType=this.type;
+	    fin = _.filter(res.listingFields, function (el) {
+		return (el.listingType===lType)
 	    });
-	    return fin;
+	    if (fin[0]) {
+		fin = _.filter(fin[0].listingFields, function (el) {
+		    var act=Session.get('showInactive');
+		    if (act && act[lType]) {
+			return true;
+		    } else {
+			return (el.active);
+		    };
+		});
+		return fin;
+	    };
 	};
     },
     listingFieldsDefault: function () {
@@ -30,7 +33,7 @@ Template.adminListingFieldsFiltersTypeView.helpers({
 	};
     },
     currentType: function () {
-        return this.data.type;
+        return Template.parentData(1).type;
     },
     oneListingFieldObj: function () {
 	return oneListingField;
@@ -44,8 +47,9 @@ Template.adminListingFieldsFiltersTypeView.helpers({
 	var res=Main.findOne();
 	if (res) {
 	    var fin=0;
+	    var lType=this.type;
 	    res.listingFields.forEach(function (el) {
-		if (el.listingType===this.data.type)
+		if (el.listingType===lType)
 		    el.listingFields.forEach(function (el2){
 			if (!el2.active)
 			    fin++;
@@ -55,7 +59,10 @@ Template.adminListingFieldsFiltersTypeView.helpers({
 	};
     },
     showInactive: function () {
-	return Session.get('showInactive');
+	var res = Session.get('showInactive');
+	if (res)
+	    return res[this.type];
+	return false;
     },
     editingField: function (name) {
         if (Session.get('editingField')===name)
@@ -69,24 +76,6 @@ Template.adminListingFieldsFiltersTypeView.helpers({
      },
     letDefaultFilter: function () {
 	return this.name==='listingType';
-    },
-    fieldName: function () {
-        return Router.current().params.field;
-    },
-    oneFilterObj: function () {
-        return oneFilter;
-    },
-    fieldTitle: function () {
-        if (Router.current().params.field === 'listingType')
-            return ListingDefault._schema.listingType.label();
-        return _.filter(_.filter(Main.findOne().listingFields,function (el) {
-            return el.listingType=== Router.current().params.listingType})[0].listingFields, function (el2) {return el2.type===Router.current().params.field})[0].title;
-    },
-    filterObj: function () {
-        res=_.filter(Main.findOne().filters, function (el) {return el.fieldName===Router.current().params.field})[0];
-        if (res)
-            return res;
-        return {title:'',active:false,fieldName:Router.current().params.field};
     }
 });
 
@@ -103,20 +92,28 @@ Template.adminListingFieldsFiltersTypeView.events({
 	    $("[name=title]").attr("placeholder", TAPi18n.__("Type a Title for new listing field here"));
 	};
     },
-    'click .showInactive': function () {
-	Session.set('showInactive',true);
+    'click .inactive': function (e,t) {
+	var res=Session.get('showInactive');
+	if (res) {
+	    if (typeof res[t.data.type] === 'undefined') {
+		res[t.data.type]=true;
+	    } else {
+		res[t.data.type]=!res[t.data.type];
+	    };
+	} else {
+	    res={};
+	    res[t.data.type]=true;
+	};
+	Session.set('showInactive',res);
     },
-    'click .hideInactive': function () {
-	Session.set('showInactive',null);
-    },
-    'click .fieldDelete': function () {
-	Meteor.call('deleteListingField',this,this.data.type, function(e,r) {
+    'click .fieldDelete': function (e,t) {
+	Meteor.call('deleteListingField',this,t.data.type, function(e,r) {
 	    if (!e)
 		Session.set('restartApp',true);
 	});
     },
-    'click .fieldActivate': function () {
-	Meteor.call('deleteListingField',this,this.data.type, function(e,r) {
+    'click .fieldActivate': function (e,t) {
+	Meteor.call('deleteListingField',this,t.data.type, function(e,r) {
 	    if (!e)
 		Session.set('restartApp',true);
 	});
@@ -124,6 +121,12 @@ Template.adminListingFieldsFiltersTypeView.events({
     'click .editField': function (e,t) {
         e.preventDefault();
         Session.set('editingField',this.name);
+    },
+    'click .filterEdit': function (e,t) {
+        e.preventDefault();
+	$('#renderedId').remove();
+	var x=renderTmp(Template.filtersModal,{title:this.title, name:this.name, type:t.data.type});
+	$('#modal2').openModal();
     }
 });
 
@@ -138,11 +141,12 @@ Template.editFieldName.events({
 	this.title=t.$('#'+this.name).val();
 	this.optional=t.$('.fieldOptional').is(':checked');
 	this.authorFilable=t.$('.authorFilable').is(':checked');
-	if (this.title.length>0)
-            Meteor.call('updateListingField',this,this.data.type,function (e) {
+	if (this.title.length>0) {
+            Meteor.call('updateListingField',this,Template.parentData(1).type,function (e) {
 		if (!e)
                     Session.set('editingField',null);
             });
+};
     }
 });
 
@@ -170,3 +174,23 @@ AutoForm.addHooks(['adminListingTypeNewField'],{
     }
 });
 
+Template.filtersModal.helpers({
+    fieldName: function () {
+        return this.name;
+    },
+    oneFilterObj: function () {
+        return oneFilter;
+    },
+    fieldTitle: function () {
+	if (typeof this.title==='function')
+	    return this.title();
+	return this.title;
+    },
+    filterObj: function () {
+	var fName=this.name;
+        res=_.filter(Main.findOne().filters, function (el) {return el.fieldName===fName})[0];
+        if (res)
+            return res;
+        return {title:'',active:false,fieldName:this.name};
+    }
+});
