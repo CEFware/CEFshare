@@ -48,5 +48,8 @@ Template.sidebar_main_Desktop.helpers({
 	if (res && res.socialAccounts && (res.socialAccounts.fbHandle || res.socialAccounts.twitterHandle || res.socialAccounts.googleHandle))
 	        return true;
 	return false;
+    },
+    currentYear : function(){
+        return new Date().getFullYear();
     }
 });
