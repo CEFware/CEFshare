@@ -22,7 +22,7 @@ Meteor.methods({
     sendMaillist: function (to,subj,msg) {
 
 	var from=Main.findOne().basics;
-	if (from) {
+	if (from && from.marketplaceEmail) {
 	    from=from.marketplaceEmail;
 	} else {
 	    from=Meteor.settings.private.supportEmail;
