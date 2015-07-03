@@ -307,6 +307,7 @@ Meteor.startup(function(){
 	Meteor.settings.public = Meteor.settings.public.development;
 	Meteor.settings.private = Meteor.settings.private.development;
     };
+
     console.log("Using [ " + environment + " ] Meteor.settings");
 
     Accounts.emailTemplates.siteName = Meteor.settings.public.marketplaceName;
@@ -356,6 +357,10 @@ Meteor.startup(function(){
     };
     
     var main=Main.findOne();
+
+    if (main && main.analytics && main.analytics.analyticsId)
+	Meteor.settings.public.ga=main.analytics.analyticsId;
+
     if (main && main.basics && main.basics.marketplaceName) {
 	if (main.basics.marketplaceSlogan) {
 	    var title="<title>"+main.basics.marketplaceName+":: "+main.basics.marketplaceSlogan+"</title>";

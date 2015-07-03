@@ -11,6 +11,7 @@ Template.adminAnalytics.helpers({
 
 AutoForm.addHooks(['adminAnalytics'],{
     onSuccess: function (){
+        Session.set('restartApp',true);
         Materialize.toast(TAPi18n.__("Thank you!"),2000);
     }
 });
