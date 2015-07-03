@@ -47,6 +47,14 @@
             </li>
         </ul>
 
+	{{#if social}}
+        <div class="row end-ul translate-div center-align">
+	  {{#if fb}}<a href="{{fb}}"><i class="fa fa-facebook-square"></i></a>&nbsp;{{/if}}
+          {{#if tw}}<a href="{{tw}}"><i class="fa fa-twitter"></i></a>&nbsp;{{/if}}
+          {{#if google}}<a href="{{google}}"><i class="fa fa-google-plus"></i></a>{{/if}}
+	</div>
+	{{/if}}
+
         <!-- Translate Item -->
         <div class="row end-ul translate-div">
             <div class="col s1">
