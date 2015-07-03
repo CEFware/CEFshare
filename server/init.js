@@ -307,6 +307,7 @@ Meteor.startup(function(){
 	Meteor.settings.public = Meteor.settings.public.development;
 	Meteor.settings.private = Meteor.settings.private.development;
     };
+
     console.log("Using [ " + environment + " ] Meteor.settings");
 
     Accounts.emailTemplates.siteName = Meteor.settings.public.marketplaceName;
@@ -356,10 +357,23 @@ Meteor.startup(function(){
     };
     
     var main=Main.findOne();
+
+    if (main && main.analytics && main.analytics.analyticsId)
+	Meteor.settings.public.ga=main.analytics.analyticsId;
+
     if (main && main.basics && main.basics.marketplaceName) {
-	var title="<title>"+main.basics.marketplaceName+"</title>";
+	if (main.basics.marketplaceSlogan) {
+	    var title="<title>"+main.basics.marketplaceName+":: "+main.basics.marketplaceSlogan+"</title>";
+	} else {
+	    var title="<title>"+main.basics.marketplaceName+"</title>";
+	};
     } else {
 	var title="<title>"+TAPi18n.__('CEF new marketplace')+"</title>";
+    };
+    if (main && main.basics && main.basics.marketplaceDescription) {
+	var description='<meta name="descripton" content="'+main.basics.marketplaceDescription+'">';
+    } else {
+	var description='<meta name="descripton" content="'+TAPi18n.__('Marketplace from CEF to sell anything you want')+'">';
     };
     if (main && main.design && main.design.color) {
 	var style='<link rel="stylesheet" id="theme-stylesheet" type="text/css" href="/css/style.'+main.design.color+'.css">';
@@ -372,16 +386,19 @@ Meteor.startup(function(){
 	res = "/img/CEF_favicon.png";
     };
     var favicon='<link rel="shortcut icon" type="text/css" href="'+res+'">';
-
     if (!Package.appcache)
-	WebApp.connectHandlers.use(function(req, res, next) {
+	WebApp.connectHandlers.use('/',function(req, res, next) {
 	    if(Inject.appUrl(req.url)) {
 		Inject.rawModHtml('myHead', function (html) { 
-		    return html.replace(/<replace>/,title+style+favicon);
+		    return html.replace(/<replace>/,title+description+favicon);
+//		    return html.replace(/<replace>/,title+style+description+favicon);
 		});
 	    }
 	    next();
 	});
+
+    //replaced the default mailURL to our mailgun mail credential
+    process.env.MAIL_URL = 'smtp://postmaster@sandboxd6ac22f092a944dba6889033365ce18d.mailgun.org:0963b1bc2e079b4b918daeacc59e624a@smtp.mailgun.org:587';
 });
 
 Meteor.methods({
@@ -389,10 +406,6 @@ Meteor.methods({
     getEnv : function () {
 	return  (process.env.METEOR_ENV || "development");
     }
-});
-Meteor.startup(function () {
-    //replaced the default mailURL to our mailgun mail credential
-    process.env.MAIL_URL = 'smtp://postmaster@sandboxd6ac22f092a944dba6889033365ce18d.mailgun.org:0963b1bc2e079b4b918daeacc59e624a@smtp.mailgun.org:587';
 });
 
 

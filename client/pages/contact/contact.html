@@ -8,7 +8,7 @@
 
                 <p class="text-center">{{t "contact us text"}}</p>
             </div>
-            <div class="col s12">
+            <div class="col m6 s12">
                 <div class="">
                     {{#autoForm schema=contactFormSchema id="contactForm" type="method" meteormethod="sendEmail"}}
                         <div>
@@ -28,6 +28,19 @@
                     <br>
                     <br>
                 </div>
+            </div>
+            <div class="col m6 s12 right-align">
+              <h4>{{t "Where to find us"}}</h4>
+	      <p>
+                {{#if address 'entityName'}}<strong>{{address 'entityName'}}</strong><br>{{/if}}
+                {{#if address 'firstLine'}}{{address 'firstLine'}}<br>{{/if}}
+                {{#if address 'secondLine'}}{{address 'secondLine'}}<br>{{/if}}
+                {{#if address 'city'}}{{address 'city'}}&nbsp;{{/if}}
+                {{#if address 'zip'}}{{address 'zip'}}&nbsp;{{/if}}
+                {{#if address 'state'}}{{address 'state'}}<br>{{/if}}
+                {{#if address 'country'}}<strong>{{address 'country'}}</strong>{{/if}}
+              </p>
+		
             </div>
         </div>
     </div>

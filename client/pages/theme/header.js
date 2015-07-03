@@ -60,5 +60,12 @@ Template.header.helpers({
     } ,
     restartApp: function () {
 	return Session.get('restartApp');
+    },
+    searchText: function () {
+	var res=Main.findOne();
+	if (res && res.basics && res.basics.searchPlaceholder)
+            return res.basics.searchPlaceholder;
+	return TAPi18n.__('Search from here');
+ 
     }
 });

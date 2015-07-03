@@ -6,6 +6,12 @@ Template.contact.helpers({
 	var res=Main.findOne().basics;
 	if (res)
 	    return res.marketplaceEmail;
+    },
+    address: function (key) {
+    var res=Main.findOne();
+    if (res && res.basics && res.basics.realAddress && res.basics.realAddress[key])
+	    return res.basics.realAddress[key];
+    return false;
     }
 });
 

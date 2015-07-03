@@ -1,8 +1,10 @@
 <template name="newsLetter">
     <div class="row">
         <div class="col s12 newsletter center-align">
-            <h3>Get the News</h3>
-            <p>Start receiving the latest share market news and updates.</p>
+            <h3>{{t "Get the News"}}</h3>
+	    {{#if getNewsText}}
+            <p>{{{getNewsText}}}</p>
+	    {{/if}}
             {{flash '2'}}
             <div class="input-field col s12 m12 l9 offset-m2 offset-l2 ">
                 {{#autoForm collection="Emails" id="Emails" type="insert"}}

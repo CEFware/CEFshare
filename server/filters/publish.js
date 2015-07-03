@@ -3,7 +3,7 @@ Meteor.publish('filtersData',function () {
     if (res && res.filters) {
 	var queryG={};
         res.filters.forEach(function (el){
-            if (el.active) {
+            if (el.active && Listing._schema[el.fieldName]) {
                 var type=Listing._schema[el.fieldName].type.name;
                 switch (type) {
                 case 'String':

@@ -7,12 +7,14 @@
       {{#autoForm schema=instructionsSchemaObj id="adminInstructions" type="method" meteormethod="saveAdminInstructions" doc=mainInstructions}}
       <div>
  
-        {{#each afFieldNames}}
-            <div class="col s12">
-                {{> afQuickField name=this.name options=afOptionsFromSchema}}
-            </div>
+<!--       <div class="col s12">
+          {{> afQuickField name="signupInfo"}}
+        </div>
+-->
+        <div class="col s12">
+          {{> afQuickField name="subscribeInfo" options=afOptionsFromSchema}}
+        </div>
 
-        {{/each}}
 
         <div class="col s12">
             <br><br>
