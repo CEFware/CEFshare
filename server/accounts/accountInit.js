@@ -123,8 +123,6 @@ Accounts.onCreateUser(function(options, user) {
 	    message=TAPi18n.__('Welcome to new CEF marketplace!');
 	};
  
-        Meteor.settings.public.ga=main.analytics.analyticsId;
-
         Meteor.call('sendMaillist',ea, subject, message);
     };
  	
