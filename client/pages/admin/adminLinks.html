@@ -75,5 +75,60 @@
       </div>
       {{/autoForm}}
     </div>
+    <br><br><br>
+    <div class="col s12">
+      <h5>{{t "Current blocks"}}</h5>
+      <table>
+        <thead>
+          <tr>
+            <th>{{t "Block name"}}</th>
+            <th>{{t "Action"}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each blocks}}
+          <tr {{ifEditingBlock}}>
+            <td>{{uri}}</td>
+            <td>
+	      <a href="#" class="btn btn-primary editBlock">{{t "EDIT"}}</a> &nbsp;
+              <a href="#" class="btn waves-effect waves-light red delBlock"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+          {{else}}
+          <tr>
+            <td colspan="5"><h6 class="text-center">{{t "Nothing here yet."}}</h6></td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col s12">
+      {{#if curBlock}}
+      <h5>{{t "Edit block"}}</h5>
+      {{else}}
+      <h5>{{t "Create new block"}}</h5>
+      {{/if}}
+    </div>
+    <div class="col s12">
+      {{#autoForm collection="Blocks" id="adminLinksBlocks" type=bType doc=curBlock}}
+      <div>
+        <div class="col s12">
+          {{> afQuickField name="title" class="txt-subject"}}
+        </div>
+        <div class="col s12">
+          {{> afQuickField name="page" rows=5 class="ck-editor2"}}
+        </div>
+        <div class="col s12 text-center">
+        <br><br>
+          <button type="submit" class="btn"><i class="mdi-navigation-check left"></i> {{t "Save"}}</button>
+          <button type="reset" class="btn-flat red-text"><i class="mdi-navigation-close left"></i> {{t "Reset"}}</button>
+          {{#if curBlock}}
+          <button class="btn red cancelBlock">{{t "Cancel"}}</button>
+          {{/if}}
+        </div>
+      </div>
+      {{/autoForm}}
+    </div>
   </div>
 </template>

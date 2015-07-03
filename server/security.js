@@ -43,6 +43,9 @@ Maillist.permit(['insert','update','remove']).ifLoggedIn().ifHasRole('admin').ap
 //Pages - only admin may do everything
 Pages.permit(['insert','update','remove']).ifLoggedIn().ifHasRole('admin').apply();
 
+//Blocks - only admin may do everything
+Blocks.permit(['insert','update','remove']).ifLoggedIn().ifHasRole('admin').apply();
+
 //Images - only verified user may insert, admin & owner remove, only owner - update
 //SAMPLE CURRENTLY
 Images.allow({
