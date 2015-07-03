@@ -372,7 +372,6 @@ Meteor.startup(function(){
 	res = "/img/CEF_favicon.png";
     };
     var favicon='<link rel="shortcut icon" type="text/css" href="'+res+'">';
-
     if (!Package.appcache)
 	WebApp.connectHandlers.use(function(req, res, next) {
 	    if(Inject.appUrl(req.url)) {

@@ -6,7 +6,7 @@
 
 meteor-platform
 email
-ongoworks:security
+ongoworks:security@1.2.0
 iron:router@1.0.9
 fortawesome:fontawesome
 natestrauser:select2
@@ -14,7 +14,7 @@ aldeed:collection2
 aldeed:autoform
 aldeed:autoform-select2@2.0.2
 naxio:flash@0.2.4
-tap:i18n
+tap:i18n@1.5.0
 accounts-base
 accounts-facebook
 accounts-google
@@ -23,10 +23,10 @@ accounts-twitter
 accounts-ui
 alanning:roles
 bengott:avatar
-jeremy:geocomplete@1.6.5_5
+jeremy:geocomplete@1.6.5_7
 joshowens:accounts-entry
 service-configuration
-splendido:accounts-meld
+splendido:accounts-meld@1.3.1
 cfs:standard-packages@0.5.9
 cfs:filesystem
 cfs:graphicsmagick
@@ -38,7 +38,7 @@ mpowaga:autoform-summernote@0.4.1
 lepozepo:accounting
 aldeed:simple-schema@1.3.3
 dburles:google-maps@1.1.1
-summernote:standalone@0.6.7
+summernote:standalone@0.6.9
 useraccounts:core@1.11.1
 meteorhacks:inject-initial
 gfk:mailgun-api
@@ -48,8 +48,10 @@ aldeed:autoform-bs-datetimepicker
 stripe-connect
 http
 hilios:jquery.countdown
-materialize:materialize
+materialize:materialize@0.97.0
 useraccounts:materialize
 reactive-var
-gildaspk:autoform-materialize
+gildaspk:autoform-materialize@0.0.20
 robertlowe:autoform-pickadate
+meteorspark:util@0.2.0
+webapp
