@@ -266,7 +266,7 @@ Template.specificListingEdit.events({
 
 
 Template.specificListingEdit.onRendered(function () {
-    $('select').material_select();
+   // $('select').material_select();
     $('.ck-editor').ckeditor();
     $('.ck-editor').parent().children('label').remove();
     $('.ck-editor').parent().prepend('<strong>'+TAPi18n.__('Details')+'</strong>');
@@ -303,4 +303,14 @@ Template.specificListingEdit.onRendered(function () {
     } else {
 	Meteor.subscribe('images');
     };
+    this.autorun(function(){
+       var listingCategory= Session.get('listingCategory');
+       // $('select').material_select('destroy');
+        setTimeout(function(){
+            $('#listingCategory').material_select('destroy');
+            $('#listingCategory').material_select();
+
+        },500);
+
+    });
 });
