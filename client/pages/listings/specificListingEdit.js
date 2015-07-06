@@ -18,6 +18,7 @@ var getEarnings = function () {
 };
 
 AutoForm.addHooks(['specificListingEdit'],{
+
 });
 
 AutoForm.addHooks(['specificListingCreate'],{
@@ -49,7 +50,7 @@ AutoForm.addHooks(['specificListingCreate'],{
 		Meteor.call('setListingCategory',curL._id,curCat);
 	    };
 	    if (!e)
-		Router.go('/listing/'+r+'/edit')
+		Router.go('/listing/'+r+'/')
 	}
     }
 });
