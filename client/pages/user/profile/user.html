@@ -33,30 +33,62 @@
         <p>
           <a href="/user/{{currentUser.username}}/edit" class="btn waves-effect waves-light"><i class="mdi-content-create left"></i>{{t "EDIT"}}</a>
 	</p>
+
+        {{else}}
+
+        {{#if following}}
+        <a href="#" class="btn btn-lg btn-default unFollowUser">{{t "UNFOLLOW"}}</a>
+        {{else}}
+        <a href="#" class="btn btn-lg btn-default followUser">{{t "FOLLOW"}}</a>
         {{/if}}
+
+        {{/if}}
+
       </div>
     </div>
     <div class="col m8 l8 s12">
       <div class="row">
           <div class="col s12">
             <ul class="tabs">
-              <li class="tab col s3"><a class="active" href="#oders">ORDERS</a></li>
-              <li class="tab col s3"><a href="#transaction">TRANSACTIONS</a></li>
-              <li class="tab col s3"><a href="#followers">Followers</a></li>
-              <li class="tab col s3"><a href="#test4">Following</a></li>
+              <li class="tab col s3"><a class="active" href="#oders">{{t "ORDERS"}}</a></li>
+              <li class="tab col s3"><a href="#transaction">{{t "SALES"}}</a></li>
+              <li class="tab col s3"><a href="#followers">{{t "Followers"}}</a></li>
+              <li class="tab col s3"><a href="#test4">{{t "Following"}}</a></li>
             </ul>
           </div>
           <div id="oders" class="col s12 tab-wrapper">
-            {{> odersNew}}
+            {{> userOrdersTemplate}}
           </div>
           <div id="transaction" class="col s12">
-            {{> transactionNew}}
+            {{> userTransactionsTemplate}}
           </div>
           <div id="followers" class="col s12" style="display: block">
-            {{> followersNew}}
+	    <ul class="collection tab-collection">
+              {{#each followersList}}
+              <li class="collection-item avatar">
+		<a href="/user/{{this.username}}">
+		{{> avatar userId=this._id shape="cirlce"}}
+		<span class="title">{{this.username}}</span>
+		</a>
+              </li>
+              {{else}}
+              {{t "No followers yet."}}
+              {{/each}}
+	    </ul>
           </div>
           <div id="test4" class="col s12">
-             {{> followingNew}}
+	    <ul class="collection tab-collection">
+              {{#each followingList}}
+              <li class="collection-item avatar">
+		<a href="/user/{{this.username}}">
+		{{> avatar userId=this._id shape="cirlce"}}
+		<span class="title">{{this.username}}</span>
+		</a>
+              </li>
+              {{else}}
+              {{t "Not following anybody yet."}}
+              {{/each}}
+	    </ul>
           </div>
         </div>
     </div>
@@ -68,7 +100,7 @@
 	<!-- Heading and filter button -->
 	<div class="row">
 		<div class="col s6 m9 l9">
-			<h4>Created Listings</h4> 
+			<h4>{{t "Created Listings"}}</h4> 
 		</div>
 	</div>
 
@@ -82,7 +114,7 @@
   	<!-- Heading and filter button -->
   	<div class="row">
   		<div class="col s6 m9 l9">
-  			<h4>Wishlist</h4> 
+  			<h4>{{t "Wishlist"}}</h4> 
   		</div>
   	</div>
 	<!-- Wishlist listings -->
