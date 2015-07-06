@@ -1,6 +1,6 @@
 Template.userTransactionsTemplate.helpers({
     orders: function () {
-	return Orders.find();
+	return Orders.find({'items.product.author':this.userId});
     },
     currency : function (amount) {
         return '$'+(amount/100);
