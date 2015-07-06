@@ -303,14 +303,4 @@ Template.specificListingEdit.onRendered(function () {
     } else {
 	Meteor.subscribe('images');
     };
-    this.autorun(function(){
-       var listingCategory= Session.get('listingCategory');
-       // $('select').material_select('destroy');
-        setTimeout(function(){
-            $('#listingCategory').material_select('destroy');
-            $('#listingCategory').material_select();
-
-        },500);
-
-    });
 });
