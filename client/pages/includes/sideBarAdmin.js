@@ -12,5 +12,9 @@ Template.sidebar_admin_desktop.events({
 });
 Template.sidebar_admin_desktop.onRendered(function(){
    var loc=Iron.Location.get().path;
-    $('a[href^="'+loc+'"]').parent().addClass('active-sidebar');
+    if(loc=='/admin'){
+        $('.dashboard').addClass('active-sidebar');
+    }else{
+        $('a[href^="'+loc+'"]').parent().addClass('active-sidebar');
+    }
 });
