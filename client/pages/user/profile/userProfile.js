@@ -54,6 +54,18 @@ Template.userProfile.helpers({
 
     followingList: function () {
 	return Meteor.users.find({followers:Meteor.users.findOne({username:Router.current().params.username})._id}).fetch();
+    },
+    avatarUrl:function(args){
+        console.log(args.profile.avatar);
+        var subs=Meteor.subscribe('images',[args.profile.avatar]);
+        if(subs.ready()){
+            console.log(Images.find().fetch());
+            var imgs=Images.findOne({_id:args.profile.avatar});
+            console.log(imgs);
+            if (imgs)
+                return imgs.url({store:'avatar'});
+        }
+
     }
 
 });

@@ -1,189 +1,207 @@
 <template name="userProfile-old">
-  <div id="content" class="clearfix">
-    <div class="container">
-      <div class="col-lg-12">
+    <div id="content" class="clearfix">
+        <div class="container">
+            <div class="col-lg-12">
 
-        <div class="box text-center">
-          <div class="row">
-            <div class="col-sm-10 col-sm-offset-1">
-              <h1>
-		{{#if notEmpty user.profile.firstName}}
+                <div class="box text-center">
+                    <div class="row">
+                        <div class="col-sm-10 col-sm-offset-1">
+                            <h1>
+                                {{#if notEmpty user.profile.firstName}}
+                                    {{currentUser.profile.avatar}}
+                                    {{user.profile.firstName}} {{user.profile.lastName}}
 
-		{{user.profile.firstName}} {{user.profile.lastName}}
-		
-		{{else}}
+                                {{else}}
 
-		{{user.username}}
-		
-		{{/if}}
+                                    {{user.username}}
 
-		{{#if isOwner}}
+                                {{/if}}
 
-		{{#if editingProfile}}
-		<a href="" class="btn btn-default cancelEditProfile">&#10006; {{t "EDIT"}}</a>
-		{{else}}
-		<a href="/user/{{currentUser.username}}/edit" class="btn btn-default editProfile">{{t "EDIT"}}</a>
-		{{/if}}
+                                {{#if isOwner}}
 
-		{{/if}}
-	      </h1>
-	      {{#if notEmpty user.profile.bio}}<p class="lead">{{user.profile.bio}}</p>{{/if}}
-	      {{#if notEmpty user.formatted_address}}<p class="text-muted"><i class="fa fa-map-marker"></i>&nbsp;{{user.formatted_address}}</p>{{/if}}
+                                    {{#if editingProfile}}
+                                        <a href="" class="btn btn-default cancelEditProfile">&#10006; {{t "EDIT"}}</a>
+                                    {{else}}
+                                        <a href="/user/{{currentUser.username}}/edit"
+                                           class="btn btn-default editProfile">{{t "EDIT"}}</a>
+                                    {{/if}}
+
+                                {{/if}}
+                            </h1>
+                            {{#if notEmpty user.profile.bio}}<p class="lead">{{user.profile.bio}}</p>{{/if}}
+                            {{#if notEmpty user.formatted_address}}<p class="text-muted"><i
+                                    class="fa fa-map-marker"></i>&nbsp;{{user.formatted_address}}</p>{{/if}}
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>        
-      </div>
-      <div class="col-lg-12">
+            <div class="col-lg-12">
 
-        <div class="col-md-8 clearfix" id="customer-account">
+                <div class="col-md-8 clearfix" id="customer-account">
 
-	  <h2 class="text-center">{{t "Created listings"}}</h2>
-          <div class="box clearfix">
-	    {{> allListings}}
-	  </div>
+                    <h2 class="text-center">{{t "Created listings"}}</h2>
 
-	  <h2 class="text-center">{{t "Wishlist"}}</h2>
-          <div class="box clearfix">
-	    {{> userWishlist}}
-	  </div>
+                    <div class="box clearfix">
+                        {{> allListings}}
+                    </div>
 
-	</div>
+                    <h2 class="text-center">{{t "Wishlist"}}</h2>
 
-	<div class="col-lg-4">
-	  <div class="col-md-12 box">
-	    <div class="col-md-4">
-	      {{> avatar user=user size="large" shape="rounded"}}
-	    </div>
-	    <div class="col-md-8">
-              <b>
+                    <div class="box clearfix">
+                        {{> userWishlist}}
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="col-md-12 box">
+                        <div class="col-md-4">
+
+                            {{#if notEmpty user.profile.avatar}}
+                                <img src="{{avatarUrl user}}">
+                            {{else}}
+                                {{> avatar user=user size="large" shape="rounded"}}
+                            {{/if}}
+                        </div>
+                        <div class="col-md-8">
+                            <b>
 		<span style="text-transform:uppercase;font-family: Montserrat, Helvetica, Arial, sans-serif;color=rgb(106,174,122)">
-		  {{#if notEmpty user.profile.firstName}}
+            {{#if notEmpty user.profile.firstName}}
 
-		  {{user.profile.firstName}} {{user.profile.lastName}}
-		
-		  {{else}}
+                {{user.profile.firstName}} {{user.profile.lastName}}
 
-		  {{user.username}}
-		
-		  {{/if}}
-		</span>
-	      </b>
-	      <br>
-              {{#if user.services.twitter.id}}
-              <a href="https://twitter.com/intent/user?user_id={{user.services.twitter.id}}" class="btn btn-info" target="_blank"><i class="fa fa-twitter"></i></a>
-              {{/if}}
-              {{#if user.services.facebook.id}}
-              <a href="http://www.facebook.com/profile.php?id={{user.services.facebook.id}}" class="btn" style="background:#3B5998;color:#fff" target="_blank"><i class="fa fa-facebook"></i></a>
-              {{/if}}
-              {{#if user.services.google.id}}
-              <a href="http://plus.google.com/{{user.services.google.id}}/posts" class="btn btn-danger" target="_blank"><i class="fa fa-google-plus"></i></a>
-              {{/if}}
-	      <br style="font-size:x-small">
-	      <br style="font-size:x-small">
-	      <a href="/user/{{currentUser.username}}/orders" style="text-transform:uppercase;font-family: Montserrat, Helvetica, Arial, sans-serif;color=rgb(106,174,122);font-size:x-small;">{{t "Orders"}}</a>
-	      &nbsp;|&nbsp;
-	      <a href="/user/{{currentUser.username}}/transactions" style="text-transform:uppercase;font-family: Montserrat, Helvetica, Arial, sans-serif;color=rgb(106,174,122)font-size:x-small;">{{t "Sales"}}</a>
-	    </div>
-	  </div>
+            {{else}}
 
-	  <div class="col-md-12">
-	      {{> locationMap}}
-	  </div>
+                {{user.username}}
 
-	  <p>&nbsp;</p>
+            {{/if}}
+        </span>
+                            </b>
+                            <br>
+                            {{#if user.services.twitter.id}}
+                                <a href="https://twitter.com/intent/user?user_id={{user.services.twitter.id}}"
+                                   class="btn btn-info" target="_blank"><i class="fa fa-twitter"></i></a>
+                            {{/if}}
+                            {{#if user.services.facebook.id}}
+                                <a href="http://www.facebook.com/profile.php?id={{user.services.facebook.id}}"
+                                   class="btn" style="background:#3B5998;color:#fff" target="_blank"><i
+                                        class="fa fa-facebook"></i></a>
+                            {{/if}}
+                            {{#if user.services.google.id}}
+                                <a href="http://plus.google.com/{{user.services.google.id}}/posts"
+                                   class="btn btn-danger" target="_blank"><i class="fa fa-google-plus"></i></a>
+                            {{/if}}
+                            <br style="font-size:x-small">
+                            <br style="font-size:x-small">
+                            <a href="/user/{{currentUser.username}}/orders"
+                               style="text-transform:uppercase;font-family: Montserrat, Helvetica, Arial, sans-serif;color=rgb(106,174,122);font-size:x-small;">{{t "Orders"}}</a>
+                            &nbsp;|&nbsp;
+                            <a href="/user/{{currentUser.username}}/transactions"
+                               style="text-transform:uppercase;font-family: Montserrat, Helvetica, Arial, sans-serif;color=rgb(106,174,122)font-size:x-small;">{{t "Sales"}}</a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        {{> locationMap}}
+                    </div>
+
+                    <p>&nbsp;</p>
 
 
-	  {{#if currentUser}} 
+                    {{#if currentUser}}
 
-	  <!-- and not profile owner -->
-	  {{#if isOwner}}
-	  {{else}}
+                        <!-- and not profile owner -->
+                        {{#if isOwner}}
+                        {{else}}
 
-	  <div class="col-md-12 box text-center">
+                            <div class="col-md-12 box text-center">
 
-	    <!-- follow & unfollow -->
-	    {{#if following}}
-	    <a href="#" class="btn btn-lg btn-default unFollowUser">{{t "UNFOLLOW"}}</a> 
-	    {{else}}
-	    <a href="#" class="btn btn-lg btn-default followUser">{{t "FOLLOW"}}</a> 
-	    {{/if}}
-	    
-	    <!-- show the message window & send / cansel button -->
-	    {{#if isInRole 'verified'}}
-	    
-	    {{#if contactUser}}
-	    <a href="#" class="btn btn-lg btn-default cancelContact">&#10006; {{t "CONTACT"}}</a> 
-	    {{else}}
-	    {{#if userProfileEmail}}
-	    <a href="#" class="btn btn-lg btn-default contactUser">{{t "CONTACT"}}</a> 
-	    {{/if}}
-	    {{/if}}
+                                <!-- follow & unfollow -->
+                                {{#if following}}
+                                    <a href="#" class="btn btn-lg btn-default unFollowUser">{{t "UNFOLLOW"}}</a>
+                                {{else}}
+                                    <a href="#" class="btn btn-lg btn-default followUser">{{t "FOLLOW"}}</a>
+                                {{/if}}
 
-            <div>
-              {{flash 'contactForm'}}
+                                <!-- show the message window & send / cansel button -->
+                                {{#if isInRole 'verified'}}
+
+                                    {{#if contactUser}}
+                                        <a href="#" class="btn btn-lg btn-default cancelContact">
+                                            &#10006; {{t "CONTACT"}}</a>
+                                    {{else}}
+                                        {{#if userProfileEmail}}
+                                            <a href="#" class="btn btn-lg btn-default contactUser">{{t "CONTACT"}}</a>
+                                        {{/if}}
+                                    {{/if}}
+
+                                    <div>
+                                        {{flash 'contactForm'}}
+                                    </div>
+                                    {{#if contactUser}}
+                                        <br>
+                                        {{#autoForm schema=contactFormSchema id="contactForm" type="method" meteormethod="sendEmail"}}
+                                            <fieldset>
+                                                {{> afFieldInput type="hidden" name="email" value=userProfileEmail}}
+                                                <div class="form-group{{#if afFieldIsInvalid name='message'}} has-error{{/if}}">
+                                                    <label class="control-label"><b>{{t "Message"}}</b></label><br>
+                                                    {{> afFieldInput name='message' rows=5}}
+                                                    {{#if afFieldIsInvalid name='message'}}
+                                                        <span class="help-block">{{afFieldMessage name='message'}}</span>
+                                                    {{/if}}
+                                                </div>
+                                                <div class="text-center">
+                                                    <button type="submit"
+                                                            class="btn btn-primary">{{t "Submit"}}</button>
+                                                    <button type="reset" class="btn btn-default">{{t "Reset"}}</button>
+                                                </div>
+                                            </fieldset>
+                                        {{/autoForm}}
+                                    {{/if}}
+
+                                {{else}}
+                                    <a href="#" class="btn btn-lg btn-default disabled"
+                                       disabled="disabled">{{t "CONTACT"}}</a>
+                                    <br>
+                                    <small>{{t "Pls, verify your e-mail to contact this user."}}</small>
+                                {{/if}}
+
+                            </div>
+
+                        {{/if}}
+                    {{/if}}
+
+                    <h2>{{t "Followers"}}</h2>
+                    {{#if followersList}}
+
+                        {{#each followersList}}
+                            <a href="/user/{{usernameById this}}">{{> avatar userId=this shape="rounded"}}</a>
+                        {{/each}}
+
+                    {{else}}
+                        {{t "Nobody follows yet."}}
+                    {{/if}}
+                    <h2>{{t "Following"}}</h2>
+                    {{#if followingList}}
+
+                        {{#each followingList}}
+                            <a href="/user/{{this.username}}">{{> avatar userId=this._id shape="rounded"}}</a>
+                        {{/each}}
+
+                    {{else}}
+                        {{t "Not following anybody yet."}}
+                    {{/if}}
+
+                    <br>
+                    <br>
+                </div>
             </div>
-	    {{#if contactUser}}
-	    <br>
-            {{#autoForm schema=contactFormSchema id="contactForm" type="method" meteormethod="sendEmail"}}
-            <fieldset>
-	      {{> afFieldInput type="hidden" name="email" value=userProfileEmail}}
-              <div class="form-group{{#if afFieldIsInvalid name='message'}} has-error{{/if}}">
-                <label class="control-label"><b>{{t "Message"}}</b></label><br>
-                {{> afFieldInput name='message' rows=5}}
-                {{#if afFieldIsInvalid name='message'}}
-                <span class="help-block">{{afFieldMessage name='message'}}</span>
-                {{/if}}
-              </div>
-              <div class="text-center">
-		<button type="submit" class="btn btn-primary">{{t "Submit"}}</button>
-		<button type="reset" class="btn btn-default">{{t "Reset"}}</button>
-              </div>
-            </fieldset>
-            {{/autoForm}}
-	    {{/if}}
-	    
-	    {{else}}	  
-	    <a href="#" class="btn btn-lg btn-default disabled" disabled="disabled">{{t "CONTACT"}}</a> 
-	    <br>
-	    <small>{{t "Pls, verify your e-mail to contact this user."}}</small>
-	    {{/if}}
-
-	  </div>
-
-	  {{/if}}
-	  {{/if}}
-
-	  <h2>{{t "Followers"}}</h2>
-	  {{#if followersList}}
-
-	  {{#each followersList}}
-          <a href="/user/{{usernameById this}}">{{> avatar userId=this shape="rounded"}}</a>
-	  {{/each}}
-
-	  {{else}}
-	  {{t "Nobody follows yet."}}
-	  {{/if}}
-	  <h2>{{t "Following"}}</h2>
-	  {{#if followingList}}
-
-	  {{#each followingList}}
-          <a href="/user/{{this.username}}">{{> avatar userId=this._id shape="rounded"}}</a>
-	  {{/each}}
-
-	  {{else}}
-	  {{t "Not following anybody yet."}}
-	  {{/if}}
-
-	  <br>
-	  <br>
-	</div>
-      </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <template name="locationMap">
-  <div style="width:310px;height:140px;">
-      {{> googleMap name="exampleMap" options=exampleMapOptions}}
-  </div>
+    <div style="width:310px;height:140px;">
+        {{> googleMap name="exampleMap" options=exampleMapOptions}}
+    </div>
 </template>
