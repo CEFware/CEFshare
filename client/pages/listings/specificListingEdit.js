@@ -275,7 +275,7 @@ Template.specificListingEdit.events({
 
 
 Template.specificListingEdit.onRendered(function () {
-   // $('select').material_select();
+    $('select').material_select();
     $('.ck-editor').ckeditor();
     $('.ck-editor').parent().children('label').remove();
     $('.ck-editor').parent().prepend('<strong>'+TAPi18n.__('Details')+'</strong>');
