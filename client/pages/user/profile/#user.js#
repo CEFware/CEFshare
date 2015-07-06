@@ -20,5 +20,4 @@ Template.userProfile.helpers({
             return true;
         return false;
     }
-
 });
