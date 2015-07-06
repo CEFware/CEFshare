@@ -32,6 +32,7 @@ Template.userTransactionsTemplate.helpers({
 });
 
 Template.userTransactionsTemplate.rendered = function () {
+    Meteor.subscribe('getUserTransactions');
     Tracker.autorun (function (){
         var listing = Orders.find();
         if (listing) {
