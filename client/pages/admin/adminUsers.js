@@ -35,7 +35,7 @@ Template.adminUsers.events({
 	Meteor.call('ban',this);
     },
 
-    'click .makeAdmin':  function (e) {
+    'click .makeAdmin':  function (e,t) {
 	e.preventDefault();
 	Meteor.call('makeAdmin',this);
     },

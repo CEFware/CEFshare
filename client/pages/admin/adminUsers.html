@@ -28,11 +28,11 @@
             <td>
 	      <form action="#">
               {{#if hasAdminRole}}
-              <input type="checkbox" class="makeAdmin" id="{{currentUser.username}}" checked>
-	      <label for="{{currentUser.username}}"></label>
+              <input type="checkbox" class="makeAdmin" id="{{username}}" checked>
+	      <label for="{{username}}"></label>
               {{else}}
-              <input type="checkbox" class="makeAdmin" id="{{currentUser.username}}">
-	      <label for="{{currentUser.username}}"></label>
+              <input type="checkbox" class="makeAdmin" id="{{username}}">
+	      <label for="{{username}}"></label>
               {{/if}}
 	      </form>
             </td>
