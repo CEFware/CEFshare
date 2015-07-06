@@ -775,4 +775,11 @@ span.badge{
     position: relative;
     margin-left: 5px;
 }
+.caret{
+    display: none;
+}
+.select-wrapper .caret{
+    display: inline;
+    visibility: visible !important;
+}
 

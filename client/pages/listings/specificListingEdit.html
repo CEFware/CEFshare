@@ -17,6 +17,7 @@
                     <tr>
                         <td class="subject-table"><strong>{{t "Select listing type"}}</strong></td>
                         <td class="valign-wrapper">
+
                             <div class="input-field col s12 m10 l10">
                                 <select id="listingType" class="form-control input-sm">
                                     {{#each listingTypes}}
@@ -24,47 +25,59 @@
                                     {{/each}}
                                 </select>
                             </div>
+
                         </td>
                     </tr>
-                    {{#if ifCategorySelectedHasSub}}
-                        <tr>
-                            <td class="subject-table"><strong>{{t "Select listing category"}}</strong></td>
-                            <td class="valign-wrapper">
-                                <div class="input-field col s12 m10 l10">
-                                    <select id="listingCategory" class="form-control input-sm">
-                                        <option value="" {{ifCategorySelected}}> {{t "Not selected"}} </option>
-                                        {{#each listingParentCategories}}
-                                            <option value={{name}} {{ifCategorySelected}}> {{name}} </option>
+                    {{#if isCategoryLoaded}}
+                        {{#if ifCategorySelectedHasSub}}
+                            <tr>
+                                <td class="subject-table"><strong>{{t "Select listing category"}}</strong></td>
+                                <td class="valign-wrapper">
+
+                                    <div class="input-field col s12 m10 l10">
+                                        <select id="listingCategory" class="form-control input-sm">
+                                            <option value="" {{ifCategorySelected}}> {{t "Not selected"}} </option>
+                                            {{#each listingParentCategories}}
+                                                <option value={{name}} {{ifCategorySelected}}> {{name}} </option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="subject-table"><strong></strong></td>
+                                <td class="valign-wrapper">
+                                    <select id="listingSubCategory" class="form-control input-sm">
+                                        <option value="" {{ifSubCategorySelected}}> {{t "Not selected"}} </option>
+                                        {{#each listingChildrenCategories}}
+                                            <option value={{name}} {{ifSubCategorySelected}}> {{name}} </option>
                                         {{/each}}
                                     </select>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="subject-table"><strong></strong></td>
-                            <td class="valign-wrapper">
-                                <select id="listingSubCategory" class="form-control input-sm">
-                                    <option value="" {{ifSubCategorySelected}}> {{t "Not selected"}} </option>
-                                    {{#each listingChildrenCategories}}
-                                        <option value={{name}} {{ifSubCategorySelected}}> {{name}} </option>
-                                    {{/each}}
-                                </select>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        {{else}}
+                            <tr>
+                                <td class="subject-table"><strong>{{t "Select listing category"}}</strong></td>
+                                <td class="valign-wrapper">
+                                    <div class="input-field col s12 m10 l10">
+                                        <select id="listingCategory" class="form-control input-sm">
+                                            <option value="" {{ifCategorySelected}}> {{t "Not selected"}} </option>
+                                            {{#each listingParentCategories}}
+                                                <option value={{name}} {{ifCategorySelected}}> {{name}} </option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                        {{/if}}
                     {{else}}
                         <tr>
-                            <td class="subject-table"><strong>{{t "Select listing category"}}</strong></td>
-                            <td class="valign-wrapper">
-                                <div class="input-field col s12 m10 l10">
-                                    <select id="listingCategory" class="form-control input-sm">
-                                        <option value="" {{ifCategorySelected}}> {{t "Not selected"}} </option>
-                                        {{#each listingParentCategories}}
-                                            <option value={{name}} {{ifCategorySelected}}> {{name}} </option>
-                                        {{/each}}
-                                    </select>
-                                </div>
+                            <td colspan="2">
+                                <span class="center-align"> Loading Categories</span>
                             </td>
                         </tr>
+
                     {{/if}}
                     <tr>
                         <td class="subject-table"><strong>Title</strong></td>
@@ -223,19 +236,19 @@
                     {{> afFieldInput type="hidden" name="listingType" value=listingTypeGet}}
                 </div>
             </div>
-        <div class="row">
-            <div class="col s12 listing-image-wrapper">
-                {{> afQuickField name='image'}}
+            <div class="row">
+                <div class="col s12 listing-image-wrapper">
+                    {{> afQuickField name='image'}}
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col s12 center-align form-buttons">
-                <button type="submit" class="waves-effect waves-light btn"><i
-                        class="mdi-navigation-check left"></i> {{t "Save"}}</button>
-                <button class="cancelEditListing deep-orange waves-effect waves-dark btn"><i
-                        class="mdi-navigation-close left"></i> {{t "Cancel & don't save"}}</button>
+            <div class="row">
+                <div class="col s12 center-align form-buttons">
+                    <button type="submit" class="waves-effect waves-light btn"><i
+                            class="mdi-navigation-check left"></i> {{t "Save"}}</button>
+                    <button class="cancelEditListing deep-orange waves-effect waves-dark btn"><i
+                            class="mdi-navigation-close left"></i> {{t "Cancel & don't save"}}</button>
+                </div>
             </div>
-        </div>
 
 
 
