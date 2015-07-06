@@ -60,6 +60,12 @@ Template.specificListingEdit.helpers({
             return null;
   	return specificListingByURI(Router.current().params.uri).fetch().first();
     },
+    isCategoryLoaded: function () {
+        var subs= Meteor.subscribe('categories')
+        console.log(subs.ready());
+        if(subs.ready())
+            return true;
+    },
     newListing: function (){
 	if (Router.current().params.uri==='new')
 	    return true;
@@ -102,10 +108,12 @@ Template.specificListingEdit.helpers({
     },
     ifCategorySelected: function () {
 	var curCat=Session.get('listingCategory');
+
 	if (curCat) {
 	    if (this.name===curCat[0])
 		return 'selected';
 	    return '';
+
 	};
     },
     ifSubCategorySelected: function () {
@@ -270,7 +278,7 @@ Template.specificListingEdit.onRendered(function () {
     $('.ck-editor').ckeditor();
     $('.ck-editor').parent().children('label').remove();
     $('.ck-editor').parent().prepend('<strong>'+TAPi18n.__('Details')+'</strong>');
-    Meteor.subscribe('categories');
+
     var a=getEarnings();
     var res=a.total-a.fee-a.stripeFee;
     $('#earn').text('$'+res.toFixed(2));
@@ -303,4 +311,13 @@ Template.specificListingEdit.onRendered(function () {
     } else {
 	Meteor.subscribe('images');
     };
+
+    this.autorun(function(){
+     var cate=Session.get('listingCategory');
+        setTimeout(function(){
+            $('#listingCategory').material_select();
+            $('#listingSubCategory').material_select();
+        },500);
+
+    })
 });
