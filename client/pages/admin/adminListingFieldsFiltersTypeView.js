@@ -33,7 +33,7 @@ Template.adminListingFieldsFiltersTypeView.helpers({
 	};
     },
     currentType: function () {
-        return Template.parentData(1).type;
+        return this.type;
     },
     oneListingFieldObj: function () {
 	return oneListingField;
