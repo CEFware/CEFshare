@@ -22,6 +22,7 @@ Template.userOrdersTemplate.helpers({
 });
 
 Template.userOrdersTemplate.rendered = function () {
+    Meteor.subscribe('getUserOrders');
     Tracker.autorun (function (){
         var listing = Orders.find();
         if (listing) {
