@@ -782,4 +782,13 @@ span.badge{
     display: inline;
     visibility: visible !important;
 }
+.entry-social button {
+    display: block;
+    width: 280px;
+    margin: auto;
+    margin-bottom: 5px;
+    padding: 0px 5px;
+    border-radius: 5px;
+    font-size: 16px;
+}
 
