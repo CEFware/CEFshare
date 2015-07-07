@@ -21,11 +21,11 @@ Template.listingNew.helpers({
     listing: function () {
 
         if ( this.author && this._id )
-            var listing = Listings.find({_id: {$ne: this._id}});
+            var listing = Listings.find({_id: {$ne: this._id},author:this.author});
         else if ( this.username ) {
                 var idArr = _.map(Wishlist.find().fetch(), function (el) {
                     return el.id
-                })
+                });
                 var listing = Listings.find({_id: {$in: idArr}});
             } else if ( this.listingId ) {
                     var listing = Listings.find({_id: this.listingId});
