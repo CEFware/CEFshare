@@ -2,12 +2,7 @@
   <div class="col s12 user-profile">
     <div class="col m4 l4 s12">
       <div class="col s12">
-
-          {{#if notEmpty user.profile.avatar}}
-              <img src="{{avatarUrl user}}">
-          {{else}}
               {{> avatar user=user size="large" shape="rounded"}}
-          {{/if}}
        </div>
       <div class="col s12">
         <h5>
