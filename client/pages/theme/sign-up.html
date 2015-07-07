@@ -25,7 +25,7 @@
                                 {{#if showOR}}
                                     <strong class="line-thru">{{t9n "OR"}}</strong>
                                 {{/if}}
-                                <a data-toggle="collapse" href="#signUp">
+                                <a id="showForm" class="waves-effect waves-teal btn-flat red-text" href="#">
                                     {{t9n "signUpWithYourEmailAddress"}}
                                 </a>
                             </div>
@@ -37,6 +37,7 @@
                 {{/if}}
                 {{> entryError}}
                 {{#if passwordLoginService}}
+                    {{#if showForm}}
                     <form class="entry-form {{signupClass}}" id='signUp'>
                         {{#if showUsername}}
                             <div class="input-field">
@@ -74,6 +75,7 @@
                         {{> entryExtraSignUpFields}}
                         <button type="submit" class="waves-effect waves-light btn">{{t9n "signUp"}}</button>
                     </form>
+                        {{/if}}
                 {{/if}}
                 {{#if both}}
                     <p class="entry-agreement">{{t9n "clickAgree"}}

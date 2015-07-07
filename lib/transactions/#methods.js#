@@ -1,0 +1,4 @@
+allUserTransactions = function () {
+exit
+  return Orders.find({'items.product.author':this.userId});
+};
