@@ -25,13 +25,13 @@
         <div class="card" id="{{_id}}">
             <div class="card-image center-align">
                 {{#if imageLoaded}}
-                    <a href="/inner"><img src="{{getThumbnail '0'}}"></a>
+                    <a href="/listing/{{uri}}"><img src="{{getThumbnail '0'}}"></a>
                    {{else}}
                         {{> loading text=''}}
                 {{/if}}
             </div>
             <div class="card-content">
-                <h5><a href="/inner">{{title}}</a></h5>
+                <h5><a href="/listing/{{uri}}">{{title}}</a></h5>
             </div>
             <div class="card-action">
                 {{price}}
