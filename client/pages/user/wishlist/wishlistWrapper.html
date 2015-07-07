@@ -1,0 +1,11 @@
+<template name="wishlistWrapper">
+    {{#if Template.subscriptionsReady}}
+        {{#each wishlist}}
+            {{>listingNew publishTemplate="specificListing" listingId=id }}
+            {{else}}
+                <h6 class="center-align">No Wishlist Created</h6>
+        {{/each}}
+        {{else}}
+            {{> loading}}
+    {{/if}}
+</template>
