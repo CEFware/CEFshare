@@ -1,73 +1,80 @@
 <template name="userTransactionsTemplate">
-  <div id="content" class="clearfix">
-    <div class="container">
-      <div class="col-lg-12">
+    <div id="" class="">
+        <div class="">
+            <div class="">
 
-        <div class="box text-center">
-          <div class="row">
-            <div class="col-sm-10 col-sm-offset-1">
-              <h1>{{t "My Sales"}}</h1>
-              <p class="lead">{{t "All your sales on one place."}}</p>
-              <p class="text-muted">{{t "If you have any questions, please feel free to"}} <a href="{{pathFor 'home'}}#contact">{{t "contact us"}}</a>, {{t "our customer service center is working for you 24/7"}}.</p>
- 
+
+
             </div>
-          </div>
+
+            <div class="" id="customer-orders">
+                <div class="">
+
+                    <div class="">
+                        <table class="bordered responsive-table tab-table">
+                            <thead>
+                            <tr>
+                                <th>{{t "#"}}</th>
+                                <th>{{t "Order"}}</th>
+                                <th>{{t "Date"}}</th>
+                                <th>{{t "Items"}}</th>
+                                <th>{{t "Gross"}}</th>
+                                <th>{{t "Market fee"}}</th>
+                                <th>{{t "Stripe fee"}}</th>
+                                <th>{{t "Income"}}</th>
+                                <th>{{t "Status"}}</th>
+                                <th>{{t "Action"}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{#each orders}}
+                                <tr>
+                                    <td>{{orderNum}}</td>
+                                    <td>
+                                        <a href="/user/{{currentUser.username}}/transactions/{{idStripe}}">
+                                            <img src="{{listingImgById items.[0].product.image.[0]}}" width="100px"
+                                                 class="img-rounded">
+                                        </a>
+                                    </td>
+                                    <td>{{orderDate}}</td>
+                                    <td>{{itemsCount}} {{items.[0].product.itemName}}{{t "(s)"}}</td>
+                                    <td>{{currency amount}}</td>
+                                    <td>{{currencyU marketFee}}</td>
+                                    <td>{{currencyU stripeFee}}</td>
+                                    <td>{{currencyU income}}</td>
+                                    <td><span class="label label-info">{{status}}</span>
+                                    </td>
+                                    <td>
+                                        <a href="/user/{{currentUser.username}}/transactions/{{idStripe}}"
+                                           class="btn btn-primary btn-sm">
+                                            {{t "View"}}
+                                        </a>
+                                    </td>
+                                </tr>
+                            {{else}}
+                                <tr>
+                                    <td colspan="10" class="center-align"><h4>{{t "No sales yet."}}</h4></td>
+                                </tr>
+                            {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="">
+                        <div class="">
+                            <div class="">
+                                <h5>{{t "My Sales"}}</h5>
+
+                                <p class="lead">{{t "All your sales on one place."}}</p>
+
+                                <p class="text-muted">{{t "If you have any questions, please feel free to"}} <a
+                                        href="{{pathFor 'home'}}#contact">{{t "contact us"}}</a>, {{t "our customer service center is working for you 24/7"}}
+                                    .</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-      </div>
-
-      <div class="col-md-12 clearfix" id="customer-orders">
-        <div class="box">
-
-          <div class="table-responsive">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>{{t "#"}}</th>
-                  <th>{{t "Order"}}</th>
-                  <th>{{t "Date"}}</th>
-                  <th>{{t "Items"}}</th>
-                  <th>{{t "Gross"}}</th>
-                  <th>{{t "Market fee"}}</th>
-                  <th>{{t "Stripe fee"}}</th>
-                  <th>{{t "Income"}}</th>
-                  <th>{{t "Status"}}</th>
-                  <th>{{t "Action"}}</th>
-                </tr>
-              </thead>
-              <tbody>
-		{{#each orders}}
-                <tr>
-		  <td>{{orderNum}}</td>
-                  <td>
-		    <a href="/user/{{currentUser.username}}/transactions/{{idStripe}}">
-		      <img src="{{listingImgById items.[0].product.image.[0]}}" width="100px" class="img-rounded"> 
-		    </a>
-		  </td>
-                  <td>{{orderDate}}</td>
-		  <td>{{itemsCount}} {{items.[0].product.itemName}}{{t "(s)"}}</td>
-                  <td>{{currency amount}}</td>
-                  <td>{{currencyU marketFee}}</td>
-                  <td>{{currencyU stripeFee}}</td>
-                  <td>{{currencyU income}}</td>
-                  <td><span class="label label-info">{{status}}</span>
-                  </td>
-                  <td>
-		    <a href="/user/{{currentUser.username}}/transactions/{{idStripe}}" class="btn btn-primary btn-sm">
-		      {{t "View"}}
-		    </a>
-                  </td>
-                </tr>
-		{{else}}
-                <tr>
-                  <td colspan="10" class="text-center"><h3>{{t "No sales yet."}}</h3></td>
-                </tr>
-		{{/each}}
-              </tbody>
-	    </table>
-	  </div>
-	</div>
-      </div>
     </div>
-  </div>
 </template>
