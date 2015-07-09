@@ -790,4 +790,6 @@ span.badge{
     border-radius: 5px;
     font-size: 16px;
 }
-
+.designPage .input-field label{
+    position: relative !important;
+}
