@@ -19,5 +19,9 @@ AutoForm.addHooks(['adminDesign'],{
 
 Template.adminDesign.rendered = function () {
     Meteor.subscribe('appSettings');
-    Meteor.subscribe('design');
+    var subs=Meteor.subscribe('design');
+    this.autorun(function(){
+
+    });
+
 };
