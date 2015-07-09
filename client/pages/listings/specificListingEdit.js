@@ -220,11 +220,11 @@ Template.specificListingEdit.events({
 	};
     },
     'change #listingType': function (e,t) {
-	event.preventDefault();
+	e.preventDefault();
         Session.set('listingType',e.currentTarget.value);
     },
     'change #listingCategory': function (e,t) {
-	event.preventDefault();
+	e.preventDefault();
 	var curCat=Session.get('listingCategory');
 	var curL=specificListingByURI(Router.current().params.uri).fetch().first();
 	if (curCat) {
@@ -238,7 +238,7 @@ Template.specificListingEdit.events({
         Session.set('listingCategory',curCat);
     },
     'change #listingSubCategory': function (e,t) {
-	event.preventDefault();
+	e.preventDefault();
 	var curCat=Session.get('listingCategory');
 	var curL=specificListingByURI(Router.current().params.uri).fetch().first();
 	curCat[1]=e.currentTarget.value;
@@ -275,7 +275,9 @@ Template.specificListingEdit.events({
 
 
 Template.specificListingEdit.onRendered(function () {
+
     $('select').material_select();
+
     $('.ck-editor').ckeditor();
     $('.ck-editor').parent().children('label').remove();
     $('.ck-editor').parent().prepend('<strong>'+TAPi18n.__('Details')+'</strong>');

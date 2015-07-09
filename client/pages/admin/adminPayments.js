@@ -1,5 +1,6 @@
 Template.adminPayments.helpers({
     paymentsSchemaObj: function() {
+        alert('hi');
         return paymentsSchema;
     },
     mainPayments: function () {
