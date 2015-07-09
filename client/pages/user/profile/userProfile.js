@@ -32,7 +32,7 @@ Template.userProfile.helpers({
     },
 
     following: function () {
-	var u=Meteor.users.findOne({username:Router.current().params.username,followers:Meteor.users.findOne({username:Router.current().params.username})._id}); 
+	var u=Meteor.users.findOne({username:Router.current().params.username,followers:Meteor.user()._id}); 
 	if (u)
 	    return true;
 	return false;
@@ -49,7 +49,7 @@ Template.userProfile.helpers({
     },
 
     followersList: function () {
-	return Meteor.users.findOne({username:Router.current().params.username}).followers;
+	return Meteor.users.find({_id: {$in:Meteor.users.findOne({username:Router.current().params.username}).followers}});
     },
     followingList: function () {
 	return Meteor.users.find({followers:Meteor.users.findOne({username:Router.current().params.username})._id}).fetch();
@@ -130,8 +130,4 @@ Template.locationMap.helpers({
 Template.userProfile.onRendered(function(){
         $('.modal-trigger').leanModal();
         $('ul.tabs').tabs();
-/*    var res=Meteor.users.findOne({username:Router.current().params.username});
-    if (res && res.profile && res.profile.avatar)
-        Meteor.subscribe('avatars',[res.profile.avatar]);
-*/
 });
