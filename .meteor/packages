@@ -9,10 +9,8 @@ email
 ongoworks:security@1.2.0
 iron:router@1.0.9
 fortawesome:fontawesome
-natestrauser:select2
 aldeed:collection2
 aldeed:autoform
-aldeed:autoform-select2@2.0.2
 naxio:flash@0.2.4
 tap:i18n@1.5.0
 accounts-base
