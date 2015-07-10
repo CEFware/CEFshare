@@ -19,81 +19,73 @@
 		</div>
 
 		<div class="wrapper-instruction">
-		  <h3 class="text-center text-danger" style="margin-bottom:0px;">{{t "Your free testing period ends in"}}</h3><br>
+		  <h3 class="text-center" style="margin-bottom:0px;">{{t "Your free testing period ends in"}}</h3><br>
 		  <div id="timeleft" class="text-center text-danger" style="font-size:50px;font-weight:bold;"></div>
 
 
             <div class="box">
-              <ul class="nav nav-pills nav-justified">
-                {{#if equals curPlan "monthly"}}
-                <li class="active"><a href="" class="monthly"><h3>{{t "Monthly"}}</h3></a></li>
-                <li class="disabled"><a href="" class="halfYear"><h3>{{t "6 month"}}</h3></a></li>
-                <li class="disabled"><a href="" class="yearly"><h3>{{t "Yearly"}}</h3></a></li>
-                {{else}}
-                {{#if equals curPlan "halfYear"}}
-                <li class="disabled"><a href="" class="monthly"><h3>{{t "Monthly"}}</h3></a></li>
-                <li class="active"><a href="" class="halfYear"><h3>{{t "6 month"}}</h3></a></li>
-                <li class="disabled"><a href="" class="yearly"><h3>{{t "Yearly"}}</h3></a></li>
-                {{else}}
-                {{#if equals curPlan "yearly"}}
-                <li class="disabled"><a href="" class="monthly"><h3>{{t "Monthly"}}</h3></a></li>
-                <li class="disabled"><a href="" class="halfYear"><h3>{{t "6 month"}}</h3></a></li>
-                <li class="active"><a href="" class="yearly"><h3>{{t "Yearly"}}</h3></a></li>
-                {{else}}
-                <li class="disabled"><a href="" class="monthly"><h3>{{t "Monthly"}}</h3></a></li>
-                <li class="active"><a href="" class="halfYear"><h3>{{t "6 month"}}</h3></a></li>
-                <li class="disabled"><a href="" class="yearly"><h3>{{t "Yearly"}}</h3></a></li>
-                {{/if}}
-                {{/if}}
-                {{/if}}
-              </ul>
-              <div class="content">
-                {{#if equals curPlan "monthly"}}
+
+    <div class="col s12 m6 l4 card-wrapper">
+
+        <div class="card" id="monthly">
+            <div class="card-content center-align">
+                <h5 class="center-align">Bronze Pro</h5>
                 <div class="row text-center" style="font-size:15px;"><br>
-                  <b>{{t "Monthly Pro plan features"}}:</b><br><br>
+                  <b>{{t "plan features"}}:</b><br><br>
                   {{t "Own domain"}}<br>
                   {{t "Up to 1000 sellers"}}<br>
                   {{t "NO discount!"}}<br><br>
-                  <h3>{{t "$99"}}<small>/{{t "per month"}}</small></h3>
-                  <a href="" class="btn btn-primary">{{t "BUY NOW"}}</a>
-                </div>
-                {{else}}
-                {{#if equals curPlan "halfYear"}}
+                  <h4>{{t "$99"}}<small>/{{t "per month"}}</small></h4>
+                 </div>
+ 
+                <a href="" class="btn btn-primary">{{t "BUY NOW"}}</a>
+		<br><br>
+            </div>
+        </div>
+
+    </div>
+    <div class="col s12 m6 l4 card-wrapper">
+
+        <div class="card" id="monthly">
+            <div class="card-content center-align">
+                <h5 class="center-align">Silver Pro</h5>
                 <div class="row text-center" style="font-size:15px;"><br>
-                  <b>{{t "6 month Pro plan features"}}:</b><br><br>
+                  <b>{{t "plan features"}}:</b><br><br>
                   {{t "Own domain"}}<br>
                   {{t "Up to 1000 sellers"}}<br>
                   {{t "20% discount!"}}<br>
                   {{t "Most popular!!!"}}<br>
-                  <h3>{{t "$79"}}<small>/{{{t "per month <br>when billed each 6 month upfront"}}}</small></h3>
-                  <a href="" class="btn btn-primary">{{t "BUY NOW"}}</a>
-                </div>
-                {{else}}
-                {{#if equals curPlan "yearly"}}
-                <div class="row text-center" style="font-size:15px;"><br><br>
-                  <b>{{t "Yearly Pro plan features"}}:</b><br><br>
+                  <h4>{{t "$79"}}<small>/{{{t "per month <br>when billed each 6 month upfront"}}}</small></h4>
+                 </div>
+ 
+                <a href="" class="btn btn-primary">{{t "BUY NOW"}}</a>
+		<br><br>
+            </div>
+        </div>
+
+    </div>
+    <div class="col s12 m6 l4 card-wrapper">
+
+        <div class="card" id="monthly">
+            <div class="card-content center-align">
+                <h5 class="center-align">Gold Pro</h5>
+                <div class="row text-center" style="font-size:15px;"><br>
+                  <b>{{t "plan features"}}:</b><br><br>
                   {{t "Own domain"}}<br>
                   {{t "Up to 1000 sellers"}}<br>
                   {{t "30% discount!"}}<br>
-                  <h3>{{t "$69"}}<small>{{{t "per month <br>when billed yearly upfront"}}}</small></h3>
-                  <a href="" class="btn btn-primary">{{t "BUY NOW"}}</a>
-                </div>
-                {{else}}
-                <div class="row text-center" style="font-size:15px;"><br>
-                  <b>{{t "6 month Pro plan features"}}:</b><br><br>
-                  {{t "Own domain"}}<br>
-                  {{t "Up to 1000 sellers"}}<br>
-                  {{t "20% discount!"}}<br>
-                  {{t "Most popular!!!"}}<br>
-                  <h3>{{t "$79"}}<small>/{{{t "per month <br>when billed each 6 month upfront"}}}</small></h3>
-                  <a href="" class="btn btn-primary">{{t "BUY NOW"}}</a>
-                </div>
-                {{/if}}
-                {{/if}}
-                {{/if}}
-              </div>
+                  <h4>{{t "$69"}}<small>{{{t "per month <br>when billed yearly upfront"}}}</small></h4>
+                 </div>
+ 
+                <a href="" class="btn btn-primary">{{t "BUY NOW"}}</a>
+		<br><br>
             </div>
+        </div>
 
+    </div>
+
+
+		</div>
 		</div>
  
 		

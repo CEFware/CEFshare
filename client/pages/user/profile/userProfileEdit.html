@@ -71,7 +71,8 @@
             <h2 class="text-center">{{t "Your schedule"}}</h2>
             <div class="box clearfix">
 		{{> afQuickField name="profile.notAvailableDays"}}
-		{{> afQuickField name="profile.notAvailableDates" buttonClasses="glyphicon glyphicon-calendar" pickadateOptions=dateOptions}}
+<!--		{{> afQuickField name="profile.notAvailableDates" buttonClasses="glyphicon glyphicon-calendar" pickadateOptions=dateOptions}} -->
+		{{> afQuickField name="profile.notAvailableDates" buttonClasses="glyphicon glyphicon-calendar" datePickerOptions=dateOptions}}
   	    </div>
             <h2 class="text-center">{{t "Shipping address"}}</h2>
             <div class="box clearfix">
