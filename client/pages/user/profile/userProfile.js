@@ -32,10 +32,12 @@ Template.userProfile.helpers({
     },
 
     following: function () {
-	var u=Meteor.users.findOne({username:Router.current().params.username,followers:Meteor.user()._id}); 
-	if (u)
-	    return true;
-	return false;
+	if (Meteor.user()) {
+	    var u=Meteor.users.findOne({username:Router.current().params.username,followers:Meteor.user()._id}); 
+	    if (u)
+		return true;
+	    return false;
+	};
     },
 
     contactFormSchema: function() {

@@ -23,7 +23,9 @@
         </p>
 	{{/if}}
         {{#if notEmpty user.formatted_address}}<p><i class="fa fa-map-marker"></i>&nbsp;{{user.formatted_address}}</p>{{/if}}
- 
+
+	{{#if currentUser}}
+
         {{#if isOwner}}
         <p>
           <a href="/user/{{currentUser.username}}/edit" class="btn waves-effect waves-light"><i class="mdi-content-create left"></i>{{t "EDIT"}}</a>
@@ -38,6 +40,9 @@
         {{/if}}
 
         {{/if}}
+
+        {{/if}}
+
 
       </div>
     </div>

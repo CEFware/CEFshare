@@ -120,5 +120,6 @@ Template.userProfileEdit.rendered=function () {
     setTimeout(function () {
         if (GoogleMaps.loaded()) $("#geocomplete").geocomplete(options);
     }, 1000);
+    Meteor.subscribe('avatars');
 };
 
