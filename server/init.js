@@ -172,8 +172,6 @@ Meteor.startup(function(){
         }
     };
 
-console.log(process.env);
-
     if (!process.env.METEOR_SETTINGS) {
 	console.log("No METEOR_SETTINGS passed in, using locally defined settings.");
 	Meteor.settings=settings;
