@@ -100,6 +100,32 @@ Accounts.onCreateUser(function(options, user) {
 
     user.username=username;
 
+    var ea="";
+    var subject="";
+    var message="";
+    if (user.emails && user.emails.length)
+        ea=user.emails[0].address;
+    if (user.services && user.services.facebook && user.services.facebook.email)
+        ea=user.services.facebook.email;
+    if (user.services && user.services.google && user.services.google.email)
+        ea=user.services.google.email;
+    if (ea.length) {
+	var main=Main.findOne();
+	if (main && main.basics && main.basics.marketplaceName) {
+		    subject=TAPi18n.__('Welcome to ')+main.basics.marketplaceName;
+		} else {
+			    subject=TAPi18n.__('Welcome to new CEF marketplace!');
+			};
+ 
+	if (main && main.emails && main.emails.welcomeEmail) {
+		    message=main.emails.welcomeEmail;
+		} else {
+			    message=TAPi18n.__('Welcome to new CEF marketplace!');
+			};
+ 
+        Meteor.call('sendMaillist',ea, subject, message);
+    };
+
     return user;
 
 });
