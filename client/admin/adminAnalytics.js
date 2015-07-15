@@ -11,6 +11,7 @@ Template.adminAnalytics.helpers({
 
 AutoForm.addHooks(['adminAnalytics'],{
     onSuccess: function (){
+	Session.set('restartApp',true);
         Flash.success(1,TAPi18n.__("Thank you!"),2000);
     }
 });

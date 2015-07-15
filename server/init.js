@@ -241,6 +241,10 @@ Meteor.startup(function(){
     };
     
     var main=Main.findOne();
+
+    if (main && main.analytics && main.analytics.analyticsId)
+	Meteor.settings.public.ga=main.analytics.analyticsId;
+
     if (main && main.basics && main.basics.marketplaceName) {
 	var title="<title>"+main.basics.marketplaceName+"</title>";
     } else {

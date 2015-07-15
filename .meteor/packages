@@ -56,3 +56,4 @@ stripe-connect
 http
 hilios:jquery.countdown
 our:autoform-bs-datepicker
+reywood:iron-router-ga
