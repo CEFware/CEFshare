@@ -19,9 +19,10 @@
             <div class="navbar-collapse collapse" id="navigation">
 
                 <ul class="nav navbar-nav navbar-left">
-                    <li><a href="{{pathFor 'about'}}">{{t "About"}}</a></li>
-                    <li><a href="{{pathFor 'how-it-works'}}">{{t "How it works"}}</a></li>
-                    <li><a href="{{pathFor 'contact'}}">{{t "Contact"}}</a></li>
+		  {{#each pages}}
+                  <li><a href="/pages/{{uri}}">{{title}}</a></li>
+		  {{/each}}
+                  <li><a href="{{pathFor 'contact'}}">{{t "Contact"}}</a></li>
                 </ul>
 		{{> loginButtonMenu}}
             </div>

@@ -60,5 +60,8 @@ Template.header.helpers({
     } ,
     restartApp: function () {
 	return Session.get('restartApp');
+    },
+    pages: function () {
+	return Pages.find();
     }
 });
