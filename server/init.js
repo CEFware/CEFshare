@@ -229,7 +229,7 @@ Meteor.startup(function(){
 		stillPhotoUse:true
 	    },
 	    listingFields: [{listingType: 'Product', listingFields:defaultFields},
-			    {listingType: 'Service', listingFields:defaultFieldService},
+			    {listingType: 'Service', listingFields:defaultFieldsService},
 			    {listingType: 'Rent', listingFields:defaultFieldsRent}],
 	    defaultListingFields: [{listingType: 'Product', listingFields:defaultFields},
 			    {listingType: 'Service', listingFields:defaultFieldsService},

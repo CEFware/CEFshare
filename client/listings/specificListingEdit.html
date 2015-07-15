@@ -102,16 +102,16 @@
 	      {{populateDates}}
 	      {{/if}}
  	      <div class="row">
+		{{#if showField "shippingFee"}}
 		<div class="col-md-6">
-		  {{#if showField "shippingFee"}}
 		  {{> afQuickField name='shippingFee'}}
-		  {{/if}}
 		</div>
+		{{/if}}
+		{{#if showField "tax"}}
 		<div class="col-md-6">
-		  {{#if showField "tax"}}
 		  {{> afQuickField name='tax'}}
-		  {{/if}}
 		</div>
+		{{/if}}
 	      </div>
 	      {{#if showField "tags"}}
 	      <div class="form-group{{#if afFieldIsInvalid name='tags'}} has-error{{/if}}">
