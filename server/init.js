@@ -127,6 +127,11 @@ defaultFields = [
 	}
     ];
 
+defaultFieldsRent=defaultFields;
+defaultFieldsRent.splice(9,1);
+defaultFieldsService=defaultFields;
+defaultFieldsService.splice(9,1);
+
 var authorNonFilableFieldsTitles=['appStart', 'appEnd', 'appDuration', 'address'];
 
 Meteor.startup(function(){
@@ -224,11 +229,11 @@ Meteor.startup(function(){
 		stillPhotoUse:true
 	    },
 	    listingFields: [{listingType: 'Product', listingFields:defaultFields},
-			    {listingType: 'Service', listingFields:defaultFields},
-			    {listingType: 'Rent', listingFields:defaultFields}],
+			    {listingType: 'Service', listingFields:defaultFieldService,
+			    {listingType: 'Rent', listingFields:defaultFieldsRent}],
 	    defaultListingFields: [{listingType: 'Product', listingFields:defaultFields},
-			    {listingType: 'Service', listingFields:defaultFields},
-			    {listingType: 'Rent', listingFields:defaultFields},
+			    {listingType: 'Service', listingFields:defaultFieldsService},
+			    {listingType: 'Rent', listingFields:defaultFieldsRent},
 			    {listingType: 'DEFAULT', listingFields:defaultFields}],
 	    authorNonFilableFields: authorNonFilableFieldsTitles 
 	};
