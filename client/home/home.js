@@ -39,7 +39,27 @@ Template.home.helpers({
                 return res.url({store:"still"});
         };
         return "/img/CEF_still.jpg";
-     }
+    },
+    basics: function (name) {
+	var res=Main.findOne();
+	if (res && res.basics && res.basics[name])
+	    return res.basics[name]
+	else 
+	    switch (name) {
+	    case "marketplaceName":
+		return TAPi18n.__("our marketplace!");
+		break;
+	    case "marketplaceSlogan":
+		return TAPi18n.__("marketplace description");
+		break;
+	    case "searchPlaceholder":
+		return TAPi18n.__("Search listings here");
+		break;
+	    default:
+		return false;
+		break;
+	    }
+    }
 });
 
 Template.home.events({

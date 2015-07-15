@@ -5,12 +5,12 @@
       <div class="container">
         <div class="row">
           <div class="carousel-caption">
-            <h1 class="text-uppercase">{{t "welcome text"}}</h1>
-	    <h3>{{t "marketplace description"}}</h3>
+            <h1 class="text-uppercase">{{t "Welcome to"}} {{basics 'marketplaceName'}}</h1>
+	    <h3>{{basics 'marketplaceSlogan'}}</h3>
 	    <p>
 	      <form>
 		<div class="input-group col-md-6 col-md-offset-3">
-		  <input type="text" id="search-box" class="form-control" placeholder="{{t 'Search listings here'}}">
+		  <input type="text" id="search-box" class="form-control" placeholder="{{basics 'searchPlaceholder'}}">
 		  <span class="input-group-btn">
 		    <button class="btn btn-primary search-btn" type="submit"><i class="fa fa-search"></i></button>
 		  </span>
@@ -45,13 +45,13 @@
 		    {{#if cover}}
 		    &nbsp;
 		    {{else}}
-                    <h1 class="text-uppercase">{{t "welcome text"}}</h1>
-		    <p>{{t "marketplace description"}}</p>
+                    <h1 class="text-uppercase">{{t "Welcome to"}} {{basics 'marketplaceName'}}</h1>
+		    <p>{{basics 'marketplaceSlogan'}}</p>
 		    <p>
 		      
 		      <form>
 			<div class="input-group col-md-6 col-md-offset-3">
-			  <input type="text" id="search-box" class="form-control" placeholder="{{t 'Search listings here'}}">
+			  <input type="text" id="search-box" class="form-control" placeholder="{{basics 'searchPlaceholder'}}">
 			  <span class="input-group-btn">
 			    <button class="btn btn-primary search-btn" type="submit"><i class="fa fa-search"></i></button>
 			  </span>
