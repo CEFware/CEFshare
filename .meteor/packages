@@ -24,7 +24,6 @@ accounts-password
 accounts-twitter
 accounts-ui
 alanning:roles
-bengott:avatar
 jeremy:geocomplete@1.6.5_5
 joshowens:accounts-entry
 service-configuration
@@ -57,3 +56,4 @@ http
 hilios:jquery.countdown
 our:autoform-bs-datepicker
 reywood:iron-router-ga
+our:avatar

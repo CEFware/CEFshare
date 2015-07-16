@@ -32,7 +32,8 @@ Template.userProfile.helpers({
     },
 
     following: function () {
-	var u=Meteor.users.findOne({username:Router.current().params.username,followers:Meteor.user()._id}); 
+//	var u=Meteor.users.findOne({username:Router.current().params.username,followers:Meteor.user()._id}); 
+	var u=Meteor.users.findOne({username:Router.current().params.username,followers:Meteor.users.findOne({username:Router.current().params.username})._id}); 
 	if (u)
 	    return true;
 	return false;
@@ -49,7 +50,8 @@ Template.userProfile.helpers({
     },
 
     followersList: function () {
-	return Meteor.users.findOne({username:Router.current().params.username}).followers;
+//	return Meteor.users.findOne({username:Router.current().params.username}).followers;
+	return Meteor.users.find({_id: {$in:Meteor.users.findOne({username:Router.current().params.username}).followers}});
     },
 
     followingList: function () {
