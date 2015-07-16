@@ -1,16 +1,25 @@
 <template name="customPage">
-  <div id="content" class="">
-    <div class="row inner-page admin-dashboard">
-      <div class="" id="contact">
-        <h1 class="text-center">{{title}}</h1>
-      </div>
-      <div class="col s12">
-        <div class="">
-	  {{{page}}}
-                    <br>
-                    <br>
+  <div id="content">
+    <div class="container">
+	
+      <div class="col-md-12">
+        <div class="box text-center">
+          <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+              <h1>{{title}}</h1>
+            </div>
+          </div>
         </div>
       </div>
+
+      <div class="col-md-12 clearfix">
+	
+        <div class="box" id="text-page">
+	  {{page}}
+        </div>
+
+      </div>
+
     </div>
   </div>
 </template>

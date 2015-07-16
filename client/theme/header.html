@@ -20,7 +20,13 @@
 
                 <ul class="nav navbar-nav navbar-left">
 		  {{#each pages}}
+		  {{#if active}}
+		  {{#if url}}
+                  <li><a href="{{url}}" target="_blank">{{title}}</a></li>
+		  {{else}}
                   <li><a href="/pages/{{uri}}">{{title}}</a></li>
+		  {{/if}}
+		  {{/if}}
 		  {{/each}}
                   <li><a href="{{pathFor 'contact'}}">{{t "Contact"}}</a></li>
                 </ul>
