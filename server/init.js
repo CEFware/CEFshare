@@ -370,7 +370,7 @@ var authorNonFilableFieldsTitles=['appStart', 'appEnd', 'appDuration', 'address'
 Meteor.startup(function(){
 
     var environment=Meteor.call ('getEnv');
-    var ourUrl="http://alpha4.cefware.com/";
+    var ourUrl="http://alpha5.cefware.com/";
     var settings = {
         "public": {
             "development":
@@ -452,6 +452,15 @@ Meteor.startup(function(){
             email: 'enrique@cefnow.org',
             password: 'Public00ce',
             username: 'enrique',
+	});
+
+	Roles.addUsersToRoles(admin, ['admin','verified'], Roles.GLOBAL_GROUP);
+
+	//Create the user admin with password login
+	var serhiy = Accounts.createUser({
+            email: 'support@kfginternational.com',
+            password: 'aaaaaa1',
+            username: 'support',
 	});
 
 	Roles.addUsersToRoles(admin, ['admin','verified'], Roles.GLOBAL_GROUP);
