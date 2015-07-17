@@ -370,7 +370,7 @@ var authorNonFilableFieldsTitles=['appStart', 'appEnd', 'appDuration', 'address'
 Meteor.startup(function(){
 
     var environment=Meteor.call ('getEnv');
-    var ourUrl="http://alpha3.cefware.com/";
+    var ourUrl="http://alpha4.cefware.com/";
     var settings = {
         "public": {
             "development":
@@ -395,8 +395,9 @@ Meteor.startup(function(){
                 "stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH"
             },
             "color":"green",
-            "stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH"
-        },
+            "stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH",
+            "ga":{"id":"ANALYTICS"}
+         },
         "private": {
             "development":
             {
