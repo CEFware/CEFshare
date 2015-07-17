@@ -370,7 +370,7 @@ var authorNonFilableFieldsTitles=['appStart', 'appEnd', 'appDuration', 'address'
 Meteor.startup(function(){
 
     var environment=Meteor.call ('getEnv');
-    var ourUrl="http://alpha.cefware.com/";
+    var ourUrl="http://alpha2.cefware.com/";
     var settings = {
         "public": {
             "development":
@@ -448,7 +448,7 @@ Meteor.startup(function(){
 
 	//Create the user admin with password login
 	var admin = Accounts.createUser({
-            email: 'enrique@CEFnow.org',
+            email: 'enrique@cefnow.org',
             password: 'Public00ce',
             username: 'enrique',
 	});
