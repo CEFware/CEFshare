@@ -126,11 +126,244 @@ defaultFields = [
 	    letDelete: true
 	}
     ];
-
-defaultFieldsRent=defaultFields;
-defaultFieldsRent.splice(9,1);
-defaultFieldsService=defaultFields;
-defaultFieldsService.splice(9,1);
+defaultFieldsService = [
+	{
+	    name: 'title',
+	    title: 'Title',
+	    type: 'title',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: false
+	},
+	{
+	    name: 'description',
+	    title: 'Description',
+	    type: 'description',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: false
+	},
+	{
+	    name: 'details',
+	    title: 'Details',
+	    type: 'details',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: false
+	},
+	{
+	    name: 'price',
+	    title: 'Price',
+	    type: 'price',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: false
+	},
+	{
+	    name: 'itemName',
+	    title: 'Item name (item, hour, day etc.)',
+	    type: 'itemName',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: false
+	},
+	{
+	    name: 'datePick',
+	    title: 'Pick needed dates:',
+	    type: 'datePick',
+	    optional: true,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: false
+	},
+	{
+	    name: 'daysPick',
+	    title: 'Set unavailable days of week:',
+	    type: 'daysPick',
+	    optional: true,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: false
+	},
+	{
+	    name: 'tags',
+	    title: 'Tags',
+	    type: 'tags',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: true
+	},
+	{
+	    name: 'tax',
+	    title: 'Tax in % (0 - no tax)',
+	    type: 'tax',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: true
+	},
+	{
+	    name: 'isRibbonSale',
+	    title: 'Show ribbon NEW?',
+	    type: 'isRibbonSale',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: true
+	},
+	{
+	    name: 'isRibbonNew',
+	    title: 'Show ribbon TRENDY?',
+	    type: 'isRibbonNew',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: true
+	},
+	{
+	    name: 'isPublic',
+	    title: 'Is this listing public?',
+	    type: 'isPublic',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: false
+	},
+	{
+	    name: 'active',
+	    title: 'Show in slider on homepage?',
+	    type: 'active',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: true
+	}
+    ];
+defaultFieldsRent = [
+	{
+	    name: 'title',
+	    title: 'Title',
+	    type: 'title',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: false
+	},
+	{
+	    name: 'description',
+	    title: 'Description',
+	    type: 'description',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: false
+	},
+	{
+	    name: 'details',
+	    title: 'Details',
+	    type: 'details',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: false
+	},
+	{
+	    name: 'price',
+	    title: 'Price',
+	    type: 'price',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: false
+	},
+	{
+	    name: 'itemName',
+	    title: 'Item name (item, hour, day etc.)',
+	    type: 'itemName',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: false
+	},
+	{
+	    name: 'datePick',
+	    title: 'Pick needed dates:',
+	    type: 'datePick',
+	    optional: true,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: false
+	},
+	{
+	    name: 'daysPick',
+	    title: 'Set unavailable days of week:',
+	    type: 'daysPick',
+	    optional: true,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: false
+	},
+	{
+	    name: 'tags',
+	    title: 'Tags',
+	    type: 'tags',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: true
+	},
+	{
+	    name: 'tax',
+	    title: 'Tax in % (0 - no tax)',
+	    type: 'tax',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: true
+	},
+	{
+	    name: 'isRibbonSale',
+	    title: 'Show ribbon NEW?',
+	    type: 'isRibbonSale',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: true
+	},
+	{
+	    name: 'isRibbonNew',
+	    title: 'Show ribbon TRENDY?',
+	    type: 'isRibbonNew',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: true
+	},
+	{
+	    name: 'isPublic',
+	    title: 'Is this listing public?',
+	    type: 'isPublic',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: false
+	},
+	{
+	    name: 'active',
+	    title: 'Show in slider on homepage?',
+	    type: 'active',
+	    optional: false,
+	    active: true,
+	    authorFilable: true,
+	    letDelete: true
+	}
+    ];
 
 var authorNonFilableFieldsTitles=['appStart', 'appEnd', 'appDuration', 'address'];
 
@@ -177,11 +410,11 @@ Meteor.startup(function(){
         }
     };
 
+
     if (!process.env.METEOR_SETTINGS) {
 	console.log("No METEOR_SETTINGS passed in, using locally defined settings.");
 	Meteor.settings=settings;
     };
-
     if (environment === "production") {
 	Meteor.settings.public = Meteor.settings.public.production;
 	Meteor.settings.private = Meteor.settings.private.production;
@@ -205,9 +438,9 @@ Meteor.startup(function(){
 
 	//Create the user admin with password login
 	var admin = Accounts.createUser({
-            email: 'admin@admin.com',
-            password: 'aaaaaa1',
-            username: 'admin',
+            email: 'enrique@CEFnow.org',
+            password: 'Public00ce',
+            username: 'enrique',
 	});
 
 	Roles.addUsersToRoles(admin, ['admin','verified'], Roles.GLOBAL_GROUP);
