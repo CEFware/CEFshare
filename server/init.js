@@ -370,7 +370,7 @@ var authorNonFilableFieldsTitles=['appStart', 'appEnd', 'appDuration', 'address'
 Meteor.startup(function(){
 
     var environment=Meteor.call ('getEnv');
-    var ourUrl="http://alpha2.cefware.com/";
+    var ourUrl="http://alpha3.cefware.com/";
     var settings = {
         "public": {
             "development":
@@ -486,7 +486,9 @@ Meteor.startup(function(){
     var main=Main.findOne();
 
     if (main && main.analytics && main.analytics.analyticsId)
-	Meteor.settings.public.ga=main.analytics.analyticsId;
+	Meteor.settings.public.ga=main.analytics.analyticsId
+    else 
+	Meteor.settings.public.ga='ANALYTICS';
 
     if (main && main.basics && main.basics.marketplaceName) {
 	var title="<title>"+main.basics.marketplaceName+"</title>";
