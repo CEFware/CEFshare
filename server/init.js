@@ -370,7 +370,7 @@ var authorNonFilableFieldsTitles=['appStart', 'appEnd', 'appDuration', 'address'
 Meteor.startup(function(){
 
     var environment=Meteor.call ('getEnv');
-    var ourUrl="http://alpha5.cefware.com/";
+    var ourUrl="http://45.56.101.68/";
     var settings = {
         "public": {
             "development":
