@@ -41,7 +41,7 @@ if(Meteor.isServer){
 	wrappedStripeTransfer = Meteor.wrapAsync(Stripe.transfers.create, Stripe.transfers);
     }else{
 	console.log('ERROR - stripe secret key not found in settings');
-    }
+    };
 }else{
     if(!Meteor.settings || !Meteor.settings.public || !Meteor.settings.public.stripe_pk) {
 	console.log('ERROR - stripe public key not found in settings');
