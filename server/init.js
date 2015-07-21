@@ -370,7 +370,7 @@ var authorNonFilableFieldsTitles=['appStart', 'appEnd', 'appDuration', 'address'
 Meteor.startup(function(){
 
     var environment=Meteor.call ('getEnv');
-    var ourUrl="http://alpha6.cefware.com/";
+    var ourUrl="http://alpha7.cefware.com/";
     var settings = {
         "public": {
             "development":
@@ -495,6 +495,8 @@ console.log(process.env.METEOR_SETTINGS);
 	Main.insert(query);
     };
     
+    process.env.MAIL_URL = 'smtp://postmaster@sandboxd6ac22f092a944dba6889033365ce18d.mailgun.org:0963b1bc2e079b4b918daeacc59e624a@smtp.mailgun.org:587';
+
     var main=Main.findOne();
 
     if (main && main.analytics && main.analytics.analyticsId)
@@ -536,9 +538,4 @@ Meteor.methods({
 	return  (process.env.METEOR_ENV || "development");
     }
 });
-Meteor.startup(function () {
-    //replaced the default mailURL to our mailgun mail credential
-    process.env.MAIL_URL = 'smtp://postmaster@sandboxd6ac22f092a944dba6889033365ce18d.mailgun.org:0963b1bc2e079b4b918daeacc59e624a@smtp.mailgun.org:587';
-});
-
 

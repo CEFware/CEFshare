@@ -3,21 +3,21 @@
             "development":
             {
                 "marketplaceName": "DEVELOPMENT",
-                "url":"http://alpha6.cefware.com/",
+                "url":"http://alpha7.cefware.com/",
                 "color":"green",
 		"stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH"
             },
             "staging":
             {
                 "marketplaceName": "STAGING",
-                "url":"http://alpha6.cefware.com/",
+                "url":"http://alpha7.cefware.com/",
                 "color":"green",
 		"stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH"
             },
             "production":
             {
                 "marketplaceName": "PRODUCTION",
-                "url":"http://alpha6.cefware.com/",
+                "url":"http://alpha7.cefware.com/",
                 "color":"green",
 		"stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH"
             },
