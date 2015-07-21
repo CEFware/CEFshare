@@ -370,53 +370,21 @@ var authorNonFilableFieldsTitles=['appStart', 'appEnd', 'appDuration', 'address'
 Meteor.startup(function(){
 
     var environment=Meteor.call ('getEnv');
-    var ourUrl="http://alpha7.cefware.com/";
+    var ourUrl="http://alpha8.cefware.com/";
     var settings = {
         "public": {
-            "development":
-            {
-                "marketplaceName": "DEVELOPMENT",
-                "url":ourUrl,
-                "color":"green",
-                "stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH"
-            },
-            "staging":
-            {
-                "marketplaceName": "STAGING",
-                "url":ourUrl,
-                "color":"green",
-                "stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH"
-            },
-            "production":
-            {
-                "marketplaceName": "PRODUCTION",
-                "url":ourUrl,
-                "color":"green",
-                "stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH"
-            },
+            "marketplaceName": "PRODUCTION",
+            "url":ourUrl,
+            "color":"green",
+            "stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH",
             "color":"green",
             "stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH",
             "ga":{"id":"ANALYTICS"}
          },
         "private": {
-            "development":
-            {
-                "path":"/home/shkomg/marketplaces/",
-                "supportEmail":"meteor.test.mailbox@gmail.com",
-                "stripe_sk":"sk_test_HHjUJLDvCWrAsvSp5pF2R2tV"
-            },
-            "staging":
-            {
-                "path":"/root/marketplaces/",
-                "supportEmail":"meteor.test.mailbox@gmail.com",
-                "stripe_sk":"sk_test_HHjUJLDvCWrAsvSp5pF2R2tV"
-            },
-            "production":
-            {
-                "path":"/home/shkomg/marketplaces/",
-                "supportEmail":"meteor.test.mailbox@gmail.com",
-                "stripe_sk":"sk_test_HHjUJLDvCWrAsvSp5pF2R2tV"
-            }
+            "path":"/home/shkomg/marketplaces/",
+            "supportEmail":"meteor.test.mailbox@gmail.com",
+            "stripe_sk":"sk_test_HHjUJLDvCWrAsvSp5pF2R2tV"
         },
     "stripe_sk":"sk_test_HHjUJLDvCWrAsvSp5pF2R2tV",
     "client_id":"ca_6Lxw3hsqjNbYWX8siNn9vU0108EEwbRu"
@@ -428,17 +396,6 @@ console.log(process.env.METEOR_SETTINGS);
 	console.log("No METEOR_SETTINGS passed in, using locally defined settings.");
 	Meteor.settings=settings;
     };
-    if (environment === "production") {
-	Meteor.settings.public = Meteor.settings.public.production;
-	Meteor.settings.private = Meteor.settings.private.production;
-    } else if (environment === "staging") {
-	Meteor.settings.public = Meteor.settings.public.staging;
-	Meteor.settings.private = Meteor.settings.private.staging;
-    } else {
-	Meteor.settings.public = Meteor.settings.public.development;
-	Meteor.settings.private = Meteor.settings.private.development;
-    };
-    console.log("Using [ " + environment + " ] Meteor.settings");
 
     Accounts.emailTemplates.siteName = Meteor.settings.public.marketplaceName;
     Accounts.emailTemplates.from = Meteor.settings.public.marketplaceName+" Support <"+Meteor.settings.private.supportEmail+">";
@@ -531,11 +488,3 @@ console.log(process.env.METEOR_SETTINGS);
 	    next();
 	});
 });
-
-Meteor.methods({
-
-    getEnv : function () {
-	return  (process.env.METEOR_ENV || "development");
-    }
-});
-
