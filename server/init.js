@@ -370,7 +370,7 @@ var authorNonFilableFieldsTitles=['appStart', 'appEnd', 'appDuration', 'address'
 Meteor.startup(function(){
 
     var environment=Meteor.call ('getEnv');
-    var ourUrl="http://45.56.101.68/";
+    var ourUrl="http://alpha2.cefware.com/";
     var settings = {
         "public": {
             "development":
@@ -422,6 +422,8 @@ Meteor.startup(function(){
     "client_id":"ca_6Lxw3hsqjNbYWX8siNn9vU0108EEwbRu"
     };
 
+
+console.log(process.env.METEOR_SETTINGS);
     if (!process.env.METEOR_SETTINGS) {
 	console.log("No METEOR_SETTINGS passed in, using locally defined settings.");
 	Meteor.settings=settings;
