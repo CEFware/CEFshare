@@ -369,7 +369,10 @@ var authorNonFilableFieldsTitles=['appStart', 'appEnd', 'appDuration', 'address'
 
 Meteor.startup(function(){
 
-    var ourUrl="http://alpha9.cefware.com/";
+    process.env.MAIL_URL = 'smtp://postmaster@sandboxd6ac22f092a944dba6889033365ce18d.mailgun.org:0963b1bc2e079b4b918daeacc59e624a@smtp.mailgun.org:587';
+
+    var ourUrl="http://alpha10.cefware.com/";
+
     var settings = {
         "public": {
             "marketplaceName": "PRODUCTION",
@@ -385,12 +388,10 @@ Meteor.startup(function(){
             "supportEmail":"meteor.test.mailbox@gmail.com",
             "stripe_sk":"sk_test_HHjUJLDvCWrAsvSp5pF2R2tV"
         },
-    "stripe_sk":"sk_test_HHjUJLDvCWrAsvSp5pF2R2tV",
-    "client_id":"ca_6Lxw3hsqjNbYWX8siNn9vU0108EEwbRu"
+	"stripe_sk":"sk_test_HHjUJLDvCWrAsvSp5pF2R2tV",
+	"client_id":"ca_6Lxw3hsqjNbYWX8siNn9vU0108EEwbRu"
     };
-
-
-console.log(process.env.METEOR_SETTINGS);
+console.log(Meteor.settings);
     if (!process.env.METEOR_SETTINGS) {
 	console.log("No METEOR_SETTINGS passed in, using locally defined settings.");
 	Meteor.settings=settings;
@@ -407,18 +408,9 @@ console.log(process.env.METEOR_SETTINGS);
 
 	//Create the user admin with password login
 	var admin = Accounts.createUser({
-            email: 'enrique@cefnow.org',
-            password: 'Public00ce',
-            username: 'enrique',
-	});
-
-	Roles.addUsersToRoles(admin, ['admin','verified'], Roles.GLOBAL_GROUP);
-
-	//Create the user admin with password login
-	var serhiy = Accounts.createUser({
-            email: 'support@kfginternational.com',
+            email: 'serhiy.khvashchuk@gmail.com',
             password: 'aaaaaa1',
-            username: 'support',
+            username: 'admin',
 	});
 
 	Roles.addUsersToRoles(admin, ['admin','verified'], Roles.GLOBAL_GROUP);
@@ -449,9 +441,54 @@ console.log(process.env.METEOR_SETTINGS);
 	    authorNonFilableFields: authorNonFilableFieldsTitles 
 	};
 	Main.insert(query);
+
+ServiceConfiguration.configurations.remove({
+        service: 'facebook'
+});
+ServiceConfiguration.configurations.remove({
+        service: 'twitter'
+});
+ServiceConfiguration.configurations.remove({
+        service: 'google'
+});
+ServiceConfiguration.configurations.remove({
+        service: 'stripe'
+});
+
+var resS=Main.findOne();
+if (resS && resS.socialAccounts)
+    resS=resS.socialAccounts;
+
+if (resS && resS.twitterConsumerKey && resS.twitterSecret)
+    ServiceConfiguration.configurations.insert({
+        service: 'twitter',
+        consumerKey: resS.twitterConsumerKey,
+        secret: resS.twitterSecret
+    });
+
+if (resS && resS.fbAppId && resS.fbSecret)
+    ServiceConfiguration.configurations.insert({
+        service: 'facebook',
+        appId:  resS.fbAppId,
+        secret: resS.fbSecret
+    });
+
+if (resS && resS.googleClientId && resS.googleSecret)
+    ServiceConfiguration.configurations.insert({
+        service: 'google',
+        clientId: resS.googleClientId,
+        secret: resS.googleSecret
+    });
+
+//STRIPE
+ServiceConfiguration.configurations.insert({
+    service: 'stripe',
+    appId: Meteor.settings.client_id,
+    secret: Meteor.settings.stripe_sk,
+    scope: 'read_write'
+});
+
     };
-    
-    process.env.MAIL_URL = 'smtp://postmaster@sandboxd6ac22f092a944dba6889033365ce18d.mailgun.org:0963b1bc2e079b4b918daeacc59e624a@smtp.mailgun.org:587';
 
     var main=Main.findOne();
 
