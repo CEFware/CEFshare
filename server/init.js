@@ -369,8 +369,7 @@ var authorNonFilableFieldsTitles=['appStart', 'appEnd', 'appDuration', 'address'
 
 Meteor.startup(function(){
 
-    var environment=Meteor.call ('getEnv');
-    var ourUrl="http://alpha8.cefware.com/";
+    var ourUrl="http://alpha9.cefware.com/";
     var settings = {
         "public": {
             "marketplaceName": "PRODUCTION",
