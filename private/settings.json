@@ -1,18 +1,21 @@
 {
-        "public": {
-                "marketplaceName": "PRODUCTION",
-                "url":"http://alpha10.cefware.com/",
-                "color":"green",
-		"stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH",
-            "color":"green",
-	    "stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH",
-	    "ga":{"id":"ANALYTICS"}
-        },
-        "private": {
-                "path":"/home/shkomg/marketplaces/",
-                "supportEmail":"meteor.test.mailbox@gmail.com",
-		"stripe_sk":"sk_test_HHjUJLDvCWrAsvSp5pF2R2tV"
-        },
+    "public": {
+        "marketplaceName": "PRODUCTION",
+        "url":"http://alpha10.cefware.com/",
+        "color":"green",
+	"stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH",
+        "color":"green",
+	"stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH",
+	"ga": {
+	    "id":"ANALYTICS"
+	}
+    },
+    "private": {
+        "path":"/home/shkomg/marketplaces/",
+        "supportEmail":"meteor.test.mailbox@gmail.com",
+	"stripe_sk":"sk_test_HHjUJLDvCWrAsvSp5pF2R2tV",
+	"email":"serhiy.khvashchuk@gmail.com"
+    },
     "stripe_sk":"sk_test_HHjUJLDvCWrAsvSp5pF2R2tV",
     "client_id":"ca_6Lxw3hsqjNbYWX8siNn9vU0108EEwbRu"
 }

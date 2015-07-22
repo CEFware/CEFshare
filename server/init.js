@@ -391,7 +391,7 @@ Meteor.startup(function(){
 	"stripe_sk":"sk_test_HHjUJLDvCWrAsvSp5pF2R2tV",
 	"client_id":"ca_6Lxw3hsqjNbYWX8siNn9vU0108EEwbRu"
     };
-console.log(Meteor.settings);
+
     if (!process.env.METEOR_SETTINGS) {
 	console.log("No METEOR_SETTINGS passed in, using locally defined settings.");
 	Meteor.settings=settings;
@@ -407,13 +407,55 @@ console.log(Meteor.settings);
 	console.log('We are preparing your application for first run... Please wait several minutes :-) !')
 
 	//Create the user admin with password login
+/*
 	var admin = Accounts.createUser({
             email: 'serhiy.khvashchuk@gmail.com',
             password: 'aaaaaa1',
-            username: 'admin',
+            username: 'shkomg',
 	});
 
-	Roles.addUsersToRoles(admin, ['admin','verified'], Roles.GLOBAL_GROUP);
+	Roles.setUserRoles(admin, ['admin','verified'], Roles.GLOBAL_GROUP);
+
+	var enrique = Accounts.createUser({
+            email: 'enrique@cefnow.org',
+            password: 'Public00ce',
+            username: 'enrique',
+	    });
+
+	Roles.setUserRoles(enrique, ['admin','verified'], Roles.GLOBAL_GROUP);
+*/
+	var madmin = Accounts.createUser({
+            email: 'admin@admin.com',
+            password: 'aaaaaa1',
+            username: 'admin'
+	    });
+
+	Roles.setUserRoles(madmin, ['admin','verified'], Roles.GLOBAL_GROUP);
+
+4
+	var generatePassword = function () {
+	    var length = 8,
+            charset = "abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+            retVal = "";
+	    for (var i = 0, n = charset.length; i < length; ++i) {
+		retVal += charset.charAt(Math.floor(Math.random() * n));
+	    }
+	    return retVal;
+	};
+
+	var newPas=generatePassword();
+	var defaultUser= Accounts.createUser({
+            email: Meteor.settings.private.email,
+            password: newPas
+	    });
+
+	Roles.setUserRoles(defaultUser, ['admin','verified'], Roles.GLOBAL_GROUP);
+
+        var subject=TAPi18n.__('Welcome to new CEF marketplace!');
+	var message=TAPi18n.__('Your login')+': '+Meteor.settings.private.email+TAPi18n.__(' Your password')+': '+newPas;
+
+        Meteor.call('sendMaillist',Meteor.settings.private.email, subject, message);
+ 
 
 	//setup default data to main collection
 	var query={
