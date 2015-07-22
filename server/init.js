@@ -371,7 +371,7 @@ Meteor.startup(function(){
 
     process.env.MAIL_URL = 'smtp://postmaster@sandboxd6ac22f092a944dba6889033365ce18d.mailgun.org:0963b1bc2e079b4b918daeacc59e624a@smtp.mailgun.org:587';
 
-    var ourUrl="http://alpha10.cefware.com/";
+    var ourUrl="http://alpha11.cefware.com/";
 
     var settings = {
         "public": {
