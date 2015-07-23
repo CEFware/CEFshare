@@ -370,7 +370,7 @@ var authorNonFilableFieldsTitles=['appStart', 'appEnd', 'appDuration', 'address'
 Meteor.startup(function(){
 
     process.env.MAIL_URL = 'smtp://postmaster@sandboxd6ac22f092a944dba6889033365ce18d.mailgun.org:0963b1bc2e079b4b918daeacc59e624a@smtp.mailgun.org:587';
-
+/*
     var ourUrl="http://alpha11.cefware.com/";
 
     var settings = {
@@ -384,17 +384,17 @@ Meteor.startup(function(){
             "ga":{"id":"ANALYTICS"}
          },
         "private": {
-            "path":"/home/shkomg/marketplaces/",
             "supportEmail":"meteor.test.mailbox@gmail.com",
+	    "email":"serhiy.khvashchuk@gmail.com",
             "stripe_sk":"sk_test_HHjUJLDvCWrAsvSp5pF2R2tV"
         },
 	"stripe_sk":"sk_test_HHjUJLDvCWrAsvSp5pF2R2tV",
 	"client_id":"ca_6Lxw3hsqjNbYWX8siNn9vU0108EEwbRu"
     };
-
+*/
     if (!process.env.METEOR_SETTINGS) {
 	console.log("No METEOR_SETTINGS passed in, using locally defined settings.");
-	Meteor.settings=settings;
+//	Meteor.settings=settings;
     };
 
     Accounts.emailTemplates.siteName = Meteor.settings.public.marketplaceName;
@@ -432,7 +432,6 @@ Meteor.startup(function(){
 
 	Roles.setUserRoles(madmin, ['admin','verified'], Roles.GLOBAL_GROUP);
 
-4
 	var generatePassword = function () {
 	    var length = 8,
             charset = "abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
