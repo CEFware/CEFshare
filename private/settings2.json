@@ -11,7 +11,7 @@
 	}
     },
     "private": {
-        "supportEmail":"meteor.test.mailbox@gmail.com",
+        "supportEmail":"serhiy.khvashchuk@gmail.com",
 	"stripe_sk":"sk_test_HHjUJLDvCWrAsvSp5pF2R2tV",
 	"email":"serhiy.khvashchuk@gmail.com"
     },

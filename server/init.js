@@ -408,13 +408,6 @@ Meteor.startup(function(){
 
 	//Create the user admin with password login
 /*
-	var admin = Accounts.createUser({
-            email: 'serhiy.khvashchuk@gmail.com',
-            password: 'aaaaaa1',
-            username: 'shkomg',
-	});
-
-	Roles.setUserRoles(admin, ['admin','verified'], Roles.GLOBAL_GROUP);
 
 	var enrique = Accounts.createUser({
             email: 'enrique@cefnow.org',
@@ -431,6 +424,14 @@ Meteor.startup(function(){
 	    });
 
 	Roles.setUserRoles(madmin, ['admin','verified'], Roles.GLOBAL_GROUP);
+
+	var admin = Accounts.createUser({
+            email: 'admin1@admin.com',
+            password: 'aaaaaa1',
+            username: 'admin1',
+	});
+
+	Roles.setUserRoles(admin, ['admin','verified'], Roles.GLOBAL_GROUP);
 
 	var generatePassword = function () {
 	    var length = 8,
@@ -461,8 +462,8 @@ Meteor.startup(function(){
 	    socialAccounts: {
 		fbAppId: "",
 		fbSecret: "",
-		twitterConsumerKey: "ojyyVrU0G11mhMgMDPuPoeWyG",
-		twitterSecret: "bssVKnnXSKzVoaoyhty3IcSeE45aJzf3SGwOaHnVlTgwnK1NvV",
+		twitterConsumerKey: "",
+		twitterSecret: "",
 		googleClientId: "",
 		googleSecret: ""
 	    },
