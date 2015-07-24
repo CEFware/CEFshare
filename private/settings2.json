@@ -3,18 +3,16 @@
         "marketplaceName": "CEF DEVELOPERS",
         "url":"http://jobs.cefshare.com/",
         "color":"green",
-	"stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH",
-        "color":"green",
-	"stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH",
+	"stripe_pk":"pk_test_lDCe9LxyRvFfnSEpkdWAcMp4",
 	"ga": {
 	    "id":"ANALYTICS"
 	}
     },
     "private": {
         "supportEmail":"serhiy.khvashchuk@gmail.com",
-	"stripe_sk":"sk_test_HHjUJLDvCWrAsvSp5pF2R2tV",
+	"stripe_sk":"sk_test_gRKO8Mv7rCcUmojOi4cLE9g8",
 	"email":"serhiy.khvashchuk@gmail.com"
     },
-    "stripe_sk":"sk_test_HHjUJLDvCWrAsvSp5pF2R2tV",
-    "client_id":"ca_6Lxw3hsqjNbYWX8siNn9vU0108EEwbRu"
+    "stripe_sk":"sk_test_gRKO8Mv7rCcUmojOi4cLE9g8",
+    "client_id":"ca_6GJeRQAd65sj2TnRDvcWOc6alpj9XhJj"
 }

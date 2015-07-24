@@ -4,8 +4,6 @@
         "url":"http://cefshare.com/",
         "color":"green",
 	"stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH",
-        "color":"green",
-	"stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH",
 	"ga": {
 	    "id":"ANALYTICS"
 	}
