@@ -183,7 +183,9 @@ Template.specificListingEdit.helpers({
 	if (res === 'day') {
 	    return true;
 	} else if ((res === null) && (Router.current().params.uri!='new')) {
-  	    return specificListingByURI(Router.current().params.uri).fetch().first().itemName === 'day';
+	    var kr=specificListingByURI(Router.current().params.uri).fetch().first();
+	    if (kr && kr.itemName)
+  		return kr.itemName === 'day';
 	} else { 
 	    return false;
 	};
