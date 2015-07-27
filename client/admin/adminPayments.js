@@ -8,7 +8,9 @@ Template.adminPayments.helpers({
 	    return res.payments;
     },
     stripeConnected: function () {
-	return Main.findOne().stripe;
+	var res=Main.findOne();
+	if (res && res.stripe)
+	    return Main.findOne().stripe;
     }
 });
 
@@ -38,6 +40,7 @@ Template.adminPayments.events({
 			});
 		    } else if (err.message.indexOf('Another account registered')>-1) {
 			Flash.danger(1,TAPi18n.__("Another account using the same Stripe account was found!"),2000);
+		    } else if (err.message.indexOf('No matching login attempt found ')>-1) {
 		    } else {
 			console.log('ERROR: ' + err); //error handling
 		    };
