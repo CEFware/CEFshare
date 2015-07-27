@@ -9,7 +9,8 @@ Accounts.onLogin(function() {
     var current=Cookie.get('recentListings');
     if (current) {
         current = current.split(",");
-	if (Meteor.user().profile.recentListings) {
+	var mres=Meteor.user();
+	if (mres && mres.profile && mres.profile.recentListings) {
 	    current= _.union(current, Meteor.user().profile.recentListings);
 	    if (current.length>10) 
 		current=_.rest(current,current.length-10);
@@ -18,7 +19,7 @@ Accounts.onLogin(function() {
 	} else {
 	    Meteor.users.update({_id:Meteor.userId()},{$set:{'profile.recentListings':current}});
 	};
-    } else if (Meteor.user().profile.recentListings) {
+    } else if (Meteor.user() && Meteor.user().profile && Meteor.user().profile.recentListings) {
 	current=Meteor.user().profile.recentListings;
 	if (current.length>10) 
 	    current=_.rest(current,current.length-10);
