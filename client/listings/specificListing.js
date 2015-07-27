@@ -2,7 +2,7 @@ getCustomFields = function (listing) {
     var curType=listing.listingType;
     var custF=[];
     var defF=[];
-    if (curType) {
+    if (curType && Main.findOne()) {
         Main.findOne().listingFields.forEach(function (el) {
             if (el.listingType===curType)
                 custF=el.listingFields;
@@ -163,6 +163,7 @@ Template.specificListing.helpers({
 	return finSchema;
     },
     showField: function (name,type) {
+	if (Main.findOne()) {
         var pre=_.filter(Main.findOne().listingFields,function (el) {return el.listingType===type});
         if (pre.length>0) {
             var res = _.filter(pre[0].listingFields, function (el2) {return el2.name===name});
@@ -170,6 +171,7 @@ Template.specificListing.helpers({
                 return res[0].active;
         };
         return false;
+	};
     },
     showQtyToBuy: function (itemName) {
 	if ((itemName==='item') || (itemName==='hour'))
@@ -333,7 +335,7 @@ Template.specificListing.rendered = function () {
  
 				var curm=Main.findOne();
 				var fee=0;
-				if (curm.payments) {
+				if (curm && curm.payments) {
 				    switch (curm.payments.feeOrPercentage) {
 				    case "fee":
 					fee=curm.payments.fee;

@@ -7,7 +7,7 @@ Meteor.methods({
 
         var text = "From e-mail: " + doc.email + "\n\n\n\n"+ doc.message;
 
-	var to=Meteor.settings.private.supportEmail;console.log(to);
+	var to=Meteor.settings.private.supportEmail;
 	if (doc.toEmail)
 	    to=doc.toEmail;
 
