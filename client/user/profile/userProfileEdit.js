@@ -110,6 +110,7 @@ Template.userProfileEdit.events({
 
 Template.userProfileEdit.rendered=function () {
     var loc=Meteor.user().formatted_address;
+    Meteor.subscribe('avatars');
     if (loc) {
 	var options={map:".map-canvas", location: loc, details: "form", types: ["geocode","establishment"]};
     } else {

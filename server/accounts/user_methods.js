@@ -1,44 +1,55 @@
 Meteor.methods({
     editUserProfile: function (doc) {
 	if (Meteor.userId()) {
-
 	    check(doc, User.User)
 
+	    var querySet={};
+	    var queryUnset={};
+	    var keys=['profile','formatted_address','lat','lng'];
+	    keys.forEach(function (val) {
+		if (doc[val]) {
+		    querySet[val]=doc[val]
+		} else {
+		    queryUnset[val]="";
+		};
+	    });
+
 	    if (Meteor.user().emails[0].address===doc.emails[0].address) {
-		Meteor.users.update(Meteor.userId(), {
-		    $set: {
-			profile: doc.profile,
-			formatted_address: doc.formatted_address,
-			lat:doc.lat,
-			lng:doc.lng,
-			notAvailableDates:doc.notAvailableDates, 
-			notAvailableDays:doc.notAvailableDays 
-		    }
-		});
-		
+
+		if (Object.keys(querySet).length>0)
+		    Meteor.users.update(Meteor.userId(), {
+			$set: querySet
+		    });
+
+		if (Object.keys(queryUnset).length>0)
+		    Meteor.users.update(Meteor.userId(), {
+			$unset: queryUnset
+		    });
+
 	    } else if (!Meteor.users.find({"emails.0.address":doc.emails[0].address}).fetch().length>0) {
 		
 		if (Roles.userIsInRole(Meteor.user()._id, 'verified')) 
 		    Roles.removeUsersFromRoles(Meteor.user()._id,['verified'],Roles.GLOBAL_GROUP);
+
 		Roles.addUsersToRoles(Meteor.user()._id,['unverified'],Roles.GLOBAL_GROUP);
+
+		querySet['emails']=[{address:doc.emails[0].address,verified:false}];
  		
-		Meteor.users.update(Meteor.userId(), {
-		    $set: {
-			profile: doc.profile,
-			emails : [{address:doc.emails[0].address,verified:false}],
-			formatted_address: doc.formatted_address,
-			lat:doc.lat,
-			lng:doc.lng,
-			notAvailableDates:doc.notAvailableDates, 
-			notAvailableDays:doc.notAvailableDays 
-		    }
-		});
+		if (Object.keys(querySet).length>0)
+		    Meteor.users.update(Meteor.userId(), {
+			$set: querySet
+		    });
+
+		if (Object.keys(queryUnset).length>0)
+		    Meteor.users.update(Meteor.userId(), {
+			$unset: queryUnset
+		    });
 
 		Meteor.call('sendVerEmail');
 
-	} else {
-	    throw new Meteor.Error(403,"Another user has this e-mail"); 
-	};
+	    } else {
+		throw new Meteor.Error(403,"Another user has this e-mail"); 
+	    };
 	
 	} else {
 	    throw new Meteor.Error("security-check-fail", "You must be a user to edit profile.");

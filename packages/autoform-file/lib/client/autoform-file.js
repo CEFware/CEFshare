@@ -182,13 +182,13 @@ Template.afFileUpload.helpers({
 		}).url({
 		    store: 'favicon'
 		});
-	        } else if (this.name==='profile.avatar') {
+	    } else if (this.name==='profile.avatar') {
 		src = collection.findOne({
 		    _id: file
 		}).url({
 		    store: 'avatar'
 		});
-		} else {
+	    } else {
 		src = collection.findOne({
 		    _id: file
 		}).url({

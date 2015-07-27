@@ -9,7 +9,7 @@ Accounts.onLogin(function() {
     var current=Cookie.get('recentListings');
     if (current) {
         current = current.split(",");
-	if (Meteor.user().profile.rrecentListings) {
+	if (Meteor.user().profile.recentListings) {
 	    current= _.union(current, Meteor.user().profile.recentListings);
 	    if (current.length>10) 
 		current=_.rest(current,current.length-10);
