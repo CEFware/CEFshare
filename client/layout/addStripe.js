@@ -1,5 +1,7 @@
 Template.addStripe.helpers({
     mainStripe: function () {
-	return Main.findOne().stripe;
+	var res=Main.findOne();
+	if (res && res.stripe)
+	    return res.stripe;
     }
 });
