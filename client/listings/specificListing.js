@@ -217,15 +217,19 @@ Template.specificListing.helpers({
 	return false;
     },
     dateTimeOptions: function () {
-	return {minDate: new Date(), 
+	var res=Meteor.user();
+	var fin={minDate: new Date(), 
 		useCurrent: true, 
 		inline:true, 
 		sideBySide:true, 
 		todayHighlight: true, 
-		showTodayButton:true,
-		disabledDates: Meteor.user().profile.notAvailableDates.split(','),
-		daysOfWeekDisabled: Meteor.user().profile.notAvailableDays
-	       }
+		showTodayButton:true
+	       };
+	if (res && res.profile && res.profile.notAvailableDates)
+	    fin['disabledDates']=res.profile.notAvailableDates.split(',');
+	if (res && res.profile && res.profile.notAvailableDays)
+	    fin['daysOfWeekDisabled']=res.profile.notAvailableDays;
+	return fin;
     },
     listingUri: function () {
 	return Router.current().params.uri;
