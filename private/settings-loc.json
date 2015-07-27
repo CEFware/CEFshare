@@ -1,0 +1,18 @@
+{
+    "public": {
+        "marketplaceName": "METEOR LOCALHOST",
+        "url":"http://localhost:3000/",
+        "color":"green",
+	"stripe_pk":"pk_test_9nLoW5j7Cj5qMdjdVPjSEpWS",
+	"ga": {
+	    "id":"ANALYTICS"
+	}
+    },
+    "private": {
+        "supportEmail":"serhiy.khvashchuk@gmail.com",
+	"stripe_sk":"sk_test_EVNeewPm6fQjYxS3Crn60YYT",
+	"email":"serhiy.khvashchuk@gmail.com"
+    },
+    "stripe_sk":"sk_test_EVNeewPm6fQjYxS3Crn60YYT",
+    "client_id":"ca_6gUI1UOcjqpvviXB3fgs2ZKNljTSGUDP"
+}
