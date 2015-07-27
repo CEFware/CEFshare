@@ -179,7 +179,14 @@ Template.specificListingEdit.helpers({
         return "Listings";
     },
     itemDay: function () {
-	return Session.get('itemName') === 'day';
+	var res=Session.get('itemName');
+	if (res === 'day') {
+	    return true;
+	} else if ((res === null) && (Router.current().params.uri!='new')) {
+  	    return specificListingByURI(Router.current().params.uri).fetch().first().itemName === 'day';
+	} else { 
+	    return false;
+	};
     },
     dateOptions: function() {
         return {startDate: new Date(),
