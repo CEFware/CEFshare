@@ -81,10 +81,14 @@ Template.specificListingEdit.helpers({
 	var res=Session.get('listingType');
 	if (res)
 	    return res;
-	return Main.findOne().listingFields[0].listingType;
+	var resM=Main.findOne();
+	if (resM)
+	    return resM.listingFields[0].listingType;
     },
     listingTypes: function () {
-	return Main.findOne().listingFields;
+	var res=Main.findOne();
+	if (res)
+	    return res.listingFields;
     },
     ifSelected: function () {
 	var curType=Session.get('listingType');
@@ -137,7 +141,7 @@ Template.specificListingEdit.helpers({
 	var curType=Session.get('listingType');
 	var custF=[];
 	var defF=[];
-	if (curType) {
+	if (curType && Main.findOne()) {
 	    Main.findOne().listingFields.forEach(function (el) {
 		if (el.listingType===curType)
 		    custF=el.listingFields;
@@ -182,7 +186,7 @@ Template.specificListingEdit.helpers({
 	var res=Session.get('itemName');
 	if (res === 'day') {
 	    return true;
-	} else if ((res === null) && (Router.current().params.uri!='new')) {
+	} else if (((res === null) || (res === undefined)) && (Router.current().params.uri!='new')) {
 	    var kr=specificListingByURI(Router.current().params.uri).fetch().first();
 	    if (kr && kr.itemName)
   		return kr.itemName === 'day';
@@ -193,7 +197,6 @@ Template.specificListingEdit.helpers({
     dateOptions: function() {
         return {startDate: new Date(),
                 todayBtn: "linked",
-                autoclose:true,
                 todayHighlight: true,
 		multidate:true
                }
