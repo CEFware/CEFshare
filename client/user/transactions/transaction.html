@@ -48,16 +48,13 @@
                     {{#if this.clientData.dateTime}}
                     <b>{{t "Appointment starts:"}}</b> &nbsp; {{orderDateTime this.clientData.dateTime}} &nbsp; | &nbsp;
                     {{/if}}
-                    {{#if this.clientData.dateStart}}
-                    <b>{{t "From:"}}</b> &nbsp; {{orderDate this.clientData.dateStart}} &nbsp; | &nbsp;
+                    {{#if this.clientData.datePick}}
+                    <b>{{t "Days booked:"}}</b> &nbsp; {{this.clientData.datePick}} &nbsp; | &nbsp;
                     {{/if}}
-                    {{#if this.clientData.dateEnd}}
-                    <b>{{t "Till:"}}</b> &nbsp; {{orderDate this.clientData.dateEnd}} &nbsp; | &nbsp;
-                    {{/if}}
- 		    {{#each clientData}}
+  		    {{#each clientData}}
 		    <b>{{title}}</b> &nbsp; {{exactData ../clientData}} &nbsp; | &nbsp;
 		    {{else}}
-                    {{#if this.clientData.dateStart}}{{else}}
+                    {{#if this.clientData.datePick}}{{else}}
 		    {{t "No notes from client"}}
 		    {{/if}}
 		    {{/each}}
