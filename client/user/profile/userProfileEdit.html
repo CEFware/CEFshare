@@ -115,7 +115,13 @@
           <div class="box clearfix text-center">
  	    <div>{{flash 'stripeMsg'}}{{stripeRes}}</div>
             {{#if currentUser.services.stripe}}
+
+            {{#if currentUser.services.stripe.id}}
             <a href="" class="btn btn-danger stripe-disconnect">{{t "Disconnect your Stripe account"}}</a>
+            {{else}}
+	    {{> stripeConnect}}
+            {{/if}}
+
             {{else}}
             <a href="" class="btn btn-primary stripe-connect">{{t "Connect your Stripe account"}}</a>
             {{/if}}
@@ -152,4 +158,8 @@
      </div>
     </div>
   </div>
+</template>
+
+<template name="stripeConnect">
+  <i class="fa fa-spinner fa-spin"></i>  
 </template>

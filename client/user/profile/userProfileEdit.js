@@ -38,6 +38,9 @@ Template.userProfileEdit.helpers({
 	    case "sameAsMarket":
 	    Flash.danger('stripeMsg',TAPi18n.__("You may not use the same Stripe account as marketplace owner!"),10000);
 	    break;
+	    case "sameAs":
+	    Flash.danger('stripeMsg',TAPi18n.__("Another account using the same Stripe account was found!"),10000);
+	    break;
 	    case "success":
             Flash.success('stripeMsg',TAPi18n.__("Thank you!"),2000);
 	    break;
@@ -78,25 +81,7 @@ Template.userProfileEdit.events({
 	if (Roles.userIsInRole(Meteor.userId(),'verified')) {
             Meteor.loginWithStripe({
 		stripe_landing: 'login' // or register
-            }, function (err) {
-                if (err){
-                    if (err.message.indexOf('correctly added')>-1) {
-			if (Meteor.user().services.stripe.id === Main.findOne().stripe.id) {
-			    Meteor.call('disconnectStripe', function (e) {
-				if (!e) 
-				    Session.set('stripeRes','sameAsMarket');
-			    });
-			} else {
-			    Session.set('stripeRes','success');
-			};
-                    } else if (err.message.indexOf('Another account registered')>-1) {
-                        Flash.danger('stripeMsg',TAPi18n.__("Another account using the same Stripe account was found!"),4000);
-                    } else {
-                        Flash.danger('stripeMsg',TAPi18n.__("Error")+err,4000);
-                    };
-                } else {
-                };
-            });
+            }, function () {});
 	} else {
             Flash.danger('stripeMsg',TAPi18n.__("Please, verify you e-mail first!"),4000);
 	};
@@ -121,3 +106,21 @@ Template.userProfileEdit.rendered=function () {
     }, 1000);
 };
 
+Template.stripeConnect.rendered=function () {
+    Meteor.call('stripeConnectCheck',Meteor.user().services.stripe.process,function (err) {
+	if (!err) {
+	    if (Meteor.user().services.stripe.id === Main.findOne().stripe.id) {
+		Meteor.call('disconnectStripe', function (e) {
+		    if (!e) 
+			Session.set('stripeRes','sameAsMarket');
+		});
+	    } else {
+		Session.set('stripeRes','success');
+	    };
+	} else if (err.error==='duplicate-found') {
+	    Session.set('stripeRes','sameAs');
+	} else {
+	    console.log(err);
+	};
+    });
+};

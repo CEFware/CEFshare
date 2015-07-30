@@ -103,5 +103,14 @@ Meteor.methods({
 		Roles.addUsersToRoles(userObj,'admin',Roles.GLOBAL_GROUP);
             };
 	};
-    }
+    },
+
+    stripeConnectCheck: function (serviceData) {
+	if (Meteor.users.findOne({"services.stripe.id":serviceData.id})) {
+	    Meteor.users.update({_id:Meteor.userId()},{$unset:{'services.stripe':""}});
+	    throw new Meteor.Error("duplicate-found", "Another account using the same Stripe account was found!");
+	} else {
+	    Meteor.users.update({_id:Meteor.userId()},{$set:{'services.stripe':serviceData}});
+	};
+    }  
 });

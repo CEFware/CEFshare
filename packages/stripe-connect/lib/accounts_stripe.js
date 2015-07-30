@@ -8,8 +8,9 @@ if (Meteor.isClient) {
             options = null;
         }
 
-        var credentialRequestCompleteCallback = Accounts.oauth.credentialRequestCompleteHandler(callback);
-        Stripe.requestCredential(options, credentialRequestCompleteCallback);
+//        var credentialRequestCompleteCallback = Accounts.oauth.credentialRequestCompleteHandler(callback);
+//        Stripe.requestCredential(options, credentialRequestCompleteCallback);
+        Stripe.requestCredential(options, function (){});
     };
 } else {
     Accounts.addAutopublishFields({
