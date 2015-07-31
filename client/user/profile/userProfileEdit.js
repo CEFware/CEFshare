@@ -53,6 +53,12 @@ Template.userProfileEdit.helpers({
     },
     dateOptions: function () {
 	return {multidate: true, todayBtn: "linked", todayHighlight: true}
+    },
+    letStripe: function () {
+	var res=Main.findOne();
+	if (res)
+	    return res.stripe;
+	return false;
     }
 });
 

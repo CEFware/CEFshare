@@ -114,6 +114,7 @@
           <h2 class="text-center">{{t "Payments"}}</h2>
           <div class="box clearfix text-center">
  	    <div>{{flash 'stripeMsg'}}{{stripeRes}}</div>
+
             {{#if currentUser.services.stripe}}
 
             {{#if currentUser.services.stripe.id}}
@@ -123,8 +124,21 @@
             {{/if}}
 
             {{else}}
+
+	    {{#if letStripe}}
             <a href="" class="btn btn-primary stripe-connect">{{t "Connect your Stripe account"}}</a>
+	    {{else}}
+	    
+	    {{#if isInRole 'admin'}}
+	    <a href="/admin/payments" style="text-transform:uppercase; font-family: Montserrat, Helvetica, Arial, sans-serif;">{{t "SET MARKETPLACE STRIPE 1st"}}</a>
+	    {{else}}
+	    <span style="text-transform:uppercase; font-family: Montserrat, Helvetica, Arial, sans-serif;">{{t "MARKETPLACE STRIPE NOT YET SET"}}</span>
+	    {{/if}}
+
+	    {{/if}}
+
             {{/if}}
+
   	  </div>
           <h2 class="text-center">{{t "Login credentials"}}</h2>
           <div class="box clearfix">

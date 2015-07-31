@@ -294,28 +294,31 @@ Meteor.methods({
     },
     addStripeToMain: function (doc) {
 	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
-	    //add to Main
-	    var cur=Main.findOne();
-	    Main.update({_id:cur._id}, {$set:{stripe:doc}});
-	};	
+	    if (Meteor.users.findOne({"services.stripe.id":doc.id})) {
+		Meteor.setTimeout(
+                    Meteor.users.update({_id:Meteor.userId()},{$unset:{'services.stripe':""}}), 10000);
+		throw new Meteor.Error("duplicate-found", "Another account using the same Stripe account was found!");
+            } else {
+		//add to Main
+		var cur=Main.findOne();
+		Main.update({_id:cur._id}, {$set:{stripe:doc}});
+		Users.update({_id:Meteor.userId()}, {$unset:{'services.stripe':"1"}});
+	    };
+	}; 	
     },
     disconnectStripeAdmin: function () {
 	if (Roles.userIsInRole(Meteor.userId(),'admin')) {
-	    //disconnect on Stipe side
-	    if (Meteor.user().services.stripe) {
-		HTTP.post('https://connect.stripe.com/oauth/deauthorize',{params:{client_secret:Meteor.settings.stripe_sk, client_id:Meteor.settings.client_id, stripe_user_id:Main.findOne().stripe.id}}, function (e){
-		    if (!e) {
-			//remove from Main
-			var cur=Main.findOne();
-			Main.update({_id:cur._id}, {$unset:{stripe:""}});
-			//remove from Users
-			Users.update({_id:Meteor.userId()}, {$unset:{'services.stripe':"1"}});
-		    };
-		});
-	    } else {
-		//remove from Main
-		var cur=Main.findOne();
-		Main.update({_id:cur._id}, {$unset:{stripe:""}});
+	    var cur=Main.findOne();
+	    if (cur && cur.stripe) {
+		cur=cur.stripe;
+		//disconnect on Stipe side
+		HTTP.post('https://connect.stripe.com/oauth/deauthorize',{params:{client_secret:Meteor.settings.stripe_sk, client_id:Meteor.settings.client_id, stripe_user_id:cur.id}},
+			  function (e){
+			      if (!e) {
+			      var cur=Main.findOne();
+			      Main.update({_id:cur._id}, {$unset:{stripe:""}});
+			      };
+			  });
 	    };
 	};	
     },

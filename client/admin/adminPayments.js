@@ -11,6 +11,21 @@ Template.adminPayments.helpers({
 	var res=Main.findOne();
 	if (res && res.stripe)
 	    return Main.findOne().stripe;
+    },
+    stripeRes: function () {
+        var res=Session.get('stripeRes');
+        switch (res) {
+            case "sameAs":
+            Flash.danger('stripeAdmMsg',TAPi18n.__("Another account using the same Stripe account was found!"),10000);
+            Session.set('stripeRes',null);
+            break;
+            case "success":
+            Flash.success('stripeAdmMsg',TAPi18n.__("Thank you!"),2000);
+            Session.set('stripeRes',null);
+            break;
+            default:
+            break;
+        };
     }
 });
 
@@ -55,3 +70,16 @@ Template.adminPayments.events({
 	    Meteor.call('disconnectStripeAdmin');
     }
 });
+
+Template.stripeMarket.rendered=function () {
+    Meteor.call('addStripeToMain',Meteor.user().services.stripe.process, function (e) {
+	if (!e) { 
+            Session.set('stripeRes','success');
+        } else if (e.error==='duplicate-found') {
+            Session.set('stripeRes','sameAs');
+        } else {
+            console.log(err);
+        };
+    });
+};
+

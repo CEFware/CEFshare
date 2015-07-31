@@ -33,10 +33,17 @@
 
 	  <h3>{{t "Attach your payment accout"}}</h3>
           <div class="box" id="text-page">
+            <div>{{flash 'stripeAdmMsg'}}{{stripeRes}}</div>
 	    {{#if stripeConnected}}
 	    <a href="" class="btn btn-danger stripe-disconnect">{{t "Disconnect your Stripe account"}}</a>
 	    {{else}}
-	    <a href="" class="btn btn-primary stripe-connect">{{t "Connect your Stripe account"}}</a>
+
+            {{#if currentUser.services.stripe.process}}
+            {{> stripeMarket}}
+            {{else}}
+ 	    <a href="" class="btn btn-primary stripe-connect">{{t "Connect your Stripe account"}}</a>
+            {{/if}}
+
 	    {{/if}}
           </div>
 
@@ -71,3 +78,6 @@
 
 </template>
 
+<template name="stripeMarket">
+  <i class="fa fa-spinner fa-spin"></i>
+</template>
