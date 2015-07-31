@@ -107,7 +107,8 @@ Meteor.methods({
 
     stripeConnectCheck: function (serviceData) {
 	if (Meteor.users.findOne({"services.stripe.id":serviceData.id})) {
-	    Meteor.users.update({_id:Meteor.userId()},{$unset:{'services.stripe':""}});
+	    Meteor.setTimeout(
+		Meteor.users.update({_id:Meteor.userId()},{$unset:{'services.stripe':""}}), 10000);
 	    throw new Meteor.Error("duplicate-found", "Another account using the same Stripe account was found!");
 	} else {
 	    Meteor.users.update({_id:Meteor.userId()},{$set:{'services.stripe':serviceData}});

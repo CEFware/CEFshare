@@ -37,12 +37,15 @@ Template.userProfileEdit.helpers({
 	switch (res) {
 	    case "sameAsMarket":
 	    Flash.danger('stripeMsg',TAPi18n.__("You may not use the same Stripe account as marketplace owner!"),10000);
+	    Session.set('stripeRes',null);
 	    break;
 	    case "sameAs":
 	    Flash.danger('stripeMsg',TAPi18n.__("Another account using the same Stripe account was found!"),10000);
+	    Session.set('stripeRes',null);
 	    break;
 	    case "success":
             Flash.success('stripeMsg',TAPi18n.__("Thank you!"),2000);
+	    Session.set('stripeRes',null);
 	    break;
 	    default:
 	    break;
