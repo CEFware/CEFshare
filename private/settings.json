@@ -3,16 +3,16 @@
         "marketplaceName": "CEF MARKETPLACE",
         "url":"http://cefshare.com/",
         "color":"green",
-	"stripe_pk":"pk_test_TFpUZNcfgsDyj1NUeEeVmfOH",
+	"stripe_pk":"pk_live_glkUXMT4zHTHanBfLvEStaYk",
 	"ga": {
 	    "id":"ANALYTICS"
 	}
     },
     "private": {
         "supportEmail":"serhiy.khvashchuk@gmail.com",
-	"stripe_sk":"sk_test_HHjUJLDvCWrAsvSp5pF2R2tV",
+	"stripe_sk":"sk_live_Rr8quTr4yV6tCwcMh5BZlXXM",
 	"email":"serhiy.khvashchuk@gmail.com"
     },
-    "stripe_sk":"sk_test_HHjUJLDvCWrAsvSp5pF2R2tV",
-    "client_id":"ca_6Lxw3hsqjNbYWX8siNn9vU0108EEwbRu"
+    "stripe_sk":"sk_live_Rr8quTr4yV6tCwcMh5BZlXXM",
+    "client_id":"ca_6Lxwk8ZmkERp3OYPtrXEl9R3IZWDgBwm"
 }

@@ -112,9 +112,9 @@ Accounts.onCreateUser(function(options, user) {
     if (ea.length) {
 	var main=Main.findOne();
 	if (main && main.basics && main.basics.marketplaceName) {
-		    subject=TAPi18n.__('Welcome to ')+main.basics.marketplaceName;
+		    subject=TAPi18n.__('Welcome to ')+main.basics.marketplaceName+TAPi18n.__(' at ')+Meteor.absoluteUrl();
 		} else {
-			    subject=TAPi18n.__('Welcome to new CEF marketplace!');
+			    subject=TAPi18n.__('Welcome to new CEF marketplace at ')+Meteor.absoluteUrl()+' !';
 			};
  
 	if (main && main.emails && main.emails.welcomeEmail) {
