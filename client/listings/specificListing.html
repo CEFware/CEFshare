@@ -179,6 +179,17 @@
 		  </div>
 		  <small>({{t "Tax"}} {{listing.tax}} {{t "%, Shipping & handling fee "}} {{currency listing.shippingFee}})</small>
 
+		  {{#if isListingOwner}}
+		  <br><br>
+		  <div class="input-group">
+		    <span class="input-group-btn">
+		      <button type="submit" class="btn btn-primary invoice">{{t "Send as invoice to e-mail:"}}</button>
+		    </span>
+		    <input type="text" class="form-control" placeholder={{t "name@example.com"}} id="invoice-email">
+		  </div>
+		  {{/if}}
+
+
                 </p>
 
 	      </fieldset>
