@@ -22,6 +22,13 @@ getCustomFields = function (listing) {
     };
 };
 
+var checkIfOwner = function () { 
+    var listing = specificListingByURI(Router.current().params.uri).fetch().first();
+    if (listing && (listing.author===Meteor.userId()))
+	return true;
+    return false;
+};
+
 Template.specificListing.helpers({
     listingImg: function (){
 	var listing = specificListingByURI(Router.current().params.uri).fetch().first();
@@ -96,10 +103,7 @@ Template.specificListing.helpers({
 	return false;
     },
     isListingOwner: function () {
-	var listing = specificListingByURI(Router.current().params.uri).fetch().first();
-	if (listing && (listing.author===Meteor.userId()))
-	    return true;
-	return false;
+	return checkIfOwner();
     },
     currency: function (amount) {
 	return accounting.formatMoney(amount);
@@ -150,6 +154,11 @@ Template.specificListing.helpers({
             obj.push({uri:ListingMain._schema.uri});
 	    break;
 	};
+
+	//if it's checked by listing owner - add required payeeEmail field for the invoice to be sent
+	if (checkIfOwner) 
+            obj.push({payeeEmail:ListingMain._schema.payeeEmail});
+
 
         var finSchema=new SimpleSchema(obj);
         var objL={};

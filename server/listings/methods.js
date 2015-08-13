@@ -42,8 +42,12 @@ Meteor.methods({
     },
 
     clientFields: function (doc) {
-	//generate schema to check the doc
+console.log('buy now');
+console.log(doc);
 
+//if called by listing owner - add payee e-mail to the schema & check if it exists & create invoice instead of order
+
+	//generate schema to check the doc
 	var getCustomFields = function (listing) {
 	    var curType=listing.listingType;
 	    var custF=[];
