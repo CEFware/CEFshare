@@ -37,6 +37,11 @@ Orders.permit(['insert']).ifLoggedIn().apply();
 Orders.permit(['update']).ifLoggedIn().ifOwner().apply();
 Orders.permit(['insert','update','remove']).ifLoggedIn().ifHasRole('admin').apply();
 
+//Invoices - user may insert, owner & admin may update, admin may delete
+Invoices.permit(['insert']).ifLoggedIn().apply();
+Invoices.permit(['update']).ifLoggedIn().ifOwner().apply();
+Invoices.permit(['insert','update','remove']).ifLoggedIn().ifHasRole('admin').apply();
+
 //Maillist - only admin may do everything
 Maillist.permit(['insert','update','remove']).ifLoggedIn().ifHasRole('admin').apply();
 
