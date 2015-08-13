@@ -394,6 +394,7 @@ AutoForm.addHooks(['clientFields'],{
 
 		//create invoice document in Invoices collection
 		//send out invoice to the payeeEmail
+		//redirect to the invoice page
 			
 		Flash.success(1,TAPi18n.__("Thank you! Invoice went out to ")+result.payeeEmail,2000);
 	    };
