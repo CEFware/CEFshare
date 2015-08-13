@@ -451,8 +451,8 @@ Meteor.startup(function(){
 
 	Roles.setUserRoles(defaultUser, ['admin','verified'], Roles.GLOBAL_GROUP);
 
-        var subject=TAPi18n.__('Welcome to new CEF marketplace!');
-	var message=TAPi18n.__('Your login')+': '+Meteor.settings.private.email+TAPi18n.__(' Your password')+': '+newPas;
+        var subject=TAPi18n.__('Welcome to new CEF marketplace at ')+Meteor.absoluteUrl()+' !';
+ 	var message=TAPi18n.__('Your login')+': '+Meteor.settings.private.email+TAPi18n.__(' Your password')+': '+newPas;
 
         Meteor.call('sendMaillist',Meteor.settings.private.email, subject, message);
  
