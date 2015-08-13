@@ -1,12 +1,12 @@
 Template.userInvoicesTemplate.helpers({
-    orders: function () {
-	return Orders.find();
+    invoices: function () {
+	return Invoices.find();
     },
     currency : function (amount) {
         return '$'+(amount/100);
     },
     itemsCount: function () {
-	return Orders.findOne({_id:this._id}).items.length;
+	return Invoices.findOne({_id:this._id}).items.length;
     },
     listingImgById: function (image){
         if (image) {
@@ -15,7 +15,7 @@ Template.userInvoicesTemplate.helpers({
                 return imgs.url({store:'thumbs'});
         };
     },
-    orderDate: function () {
+    invoiceDate: function () {
 	var res=new Date(this.addedOn);
 	return res.toISOString().slice(0,10);
     } 
@@ -23,7 +23,7 @@ Template.userInvoicesTemplate.helpers({
 
 Template.userInvoicesTemplate.rendered = function () {
     Tracker.autorun (function (){
-        var listing = Orders.find();
+        var listing = Invoices.find();
         if (listing) {
             var imgA=[];
             listing.forEach(function(el){
