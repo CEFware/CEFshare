@@ -61,8 +61,7 @@ Meteor.methods({
 	if(Meteor.isServer){
 	    var total = 0;
 	    var shippingFee=0;
-//make tax data driven
-	    var tax=total*0.00; 
+	    var tax=0;
 	    items.forEach(function(item){
 		total += Number(item.price)*Number(item.qty);
 		shippingFee += item.product.shippingFee;
