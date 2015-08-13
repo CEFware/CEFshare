@@ -22,13 +22,6 @@ getCustomFields = function (listing) {
     };
 };
 
-var checkIfOwner = function () { 
-    var listing = specificListingByURI(Router.current().params.uri).fetch().first();
-    if (listing && (listing.author===Meteor.userId()))
-	return true;
-    return false;
-};
-
 Template.specificListing.helpers({
     listingImg: function (){
 	var listing = specificListingByURI(Router.current().params.uri).fetch().first();
@@ -376,39 +369,72 @@ Template.specificListing.rendered = function () {
 
 AutoForm.addHooks(['clientFields'],{
     onSuccess: function (formType,result){
-        var res = Meteor.user();
-        if (res) {
-            if (res.profile && res.profile.firstName && res.profile.shipping && res.profile.shipping.firstLine && res.profile.shipping.city && res.profile.shipping.zip && res.profile.shipping.country) {
+	if (checkIfOwner()) {
+	    //if called by listing owner - add payee e-mail to the schema & check if it exists & create invoice instead of order
+	    //invoice creator don't need the shipping address
+	    if (result) {
+		var item = {};
+		var listing = specificListingByURI(Router.current().params.uri).fetch()[0];
+		if (listing) {
+		    item.qty=result.qtyToBuy;
+		    item.product=listing;
+		    item.price=listing.price;
+		    item.clientData=result;
+		    Session.set('curBuyItem',[item]);
+		    var total=item.qty*listing.price+listing.shippingFee;
+		    total=total+total*listing.tax/100;
+		    total=Number(total.toFixed(2));
+		    //here we need to charge
+/*		    StripeCheckoutHandler.open({
+			description: 'Buy '+item.qty+' "'+listing.title + '" for $' + total,
+			amount: Math.floor(total * 100),
+			bitcoin:true
+		    });
+*/		};
 
-	if (result) {
-            var item = {};
-            var listing = specificListingByURI(Router.current().params.uri).fetch()[0];
-            if (listing) {
-		item.qty=result.qtyToBuy;
-		item.product=listing;
-		item.price=listing.price;
-		item.clientData=result;
-		Session.set('curBuyItem',[item]);
-		var total=item.qty*listing.price+listing.shippingFee;
-		total=total+total*listing.tax/100;
-		total=Number(total.toFixed(2));
-		//here we need to charge
-                StripeCheckoutHandler.open({
-                    description: 'Buy '+item.qty+' "'+listing.title + '" for $' + total,
-                    amount: Math.floor(total * 100),
-                    bitcoin:true
-                });
-            };
-	    
-            Flash.success(1,TAPi18n.__("Thank you!"),2000);
-	};
+		//create invoice document in Invoices collection
+		//send out invoice to the payeeEmail
+			
+		Flash.success(1,TAPi18n.__("Thank you! Invoice went out to ")+result.payeeEmail,2000);
+	    };
 
+	} else {
+
+            var res = Meteor.user();
+            if (res) {
+		if (res.profile && res.profile.firstName && res.profile.shipping && res.profile.shipping.firstLine && res.profile.shipping.city && res.profile.shipping.zip && res.profile.shipping.country) {
+
+		    if (result) {
+			var item = {};
+			var listing = specificListingByURI(Router.current().params.uri).fetch()[0];
+			if (listing) {
+			    item.qty=result.qtyToBuy;
+			    item.product=listing;
+			    item.price=listing.price;
+			    item.clientData=result;
+			    Session.set('curBuyItem',[item]);
+			    var total=item.qty*listing.price+listing.shippingFee;
+			    total=total+total*listing.tax/100;
+			    total=Number(total.toFixed(2));
+			    //here we need to charge
+			    StripeCheckoutHandler.open({
+				description: 'Buy '+item.qty+' "'+listing.title + '" for $' + total,
+				amount: Math.floor(total * 100),
+				bitcoin:true
+			    });
+			};
+			
+			Flash.success(1,TAPi18n.__("Thank you!"),2000);
+		    };
+
+		} else {
+                    alert(TAPi18n.__("Please, state your shipping address in PROFILE"));
+		};
             } else {
-                alert(TAPi18n.__("Please, state your shipping address in PROFILE"));
+		Router.go('entrySignIn');
             };
-        } else {
-            Router.go('entrySignIn');
-        };
+
+	};
  
     }
 });

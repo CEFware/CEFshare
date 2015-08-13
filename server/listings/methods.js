@@ -42,10 +42,6 @@ Meteor.methods({
     },
 
     clientFields: function (doc) {
-console.log('buy now');
-console.log(doc);
-
-//if called by listing owner - add payee e-mail to the schema & check if it exists & create invoice instead of order
 
 	//generate schema to check the doc
 	var getCustomFields = function (listing) {
@@ -110,6 +106,10 @@ console.log(doc);
             obj.push({uri:ListingMain._schema.uri});
             break;
         };
+
+        //if it's checked by listing owner - add required payeeEmail field for the invoice to be sent
+        if (checkIfOwner)
+            obj.push({payeeEmail:ListingMain._schema.payeeEmail});
 
         var finSchema=new SimpleSchema(obj);
         var objL={};
