@@ -16,7 +16,8 @@
 
       </div>
 
-      <div class="col-md-12 clearfix" id="customer-invoices">
+      <div class="col-md-6 clearfix" id="customer-invoices">
+	<h2 class="text-center">{{t "SENT"}}</h2>
         <div class="box">
 
           <div class="table-responsive">
@@ -25,24 +26,22 @@
                 <tr>
                   <th>{{t "#"}}</th>
                   <th>{{t "Order"}}</th>
-                  <th>{{t "Date"}}</th>
-                  <th>{{t "Items"}}</th>
                   <th>{{t "Total"}}</th>
                   <th>{{t "Status"}}</th>
                   <th>{{t "Action"}}</th>
                 </tr>
               </thead>
               <tbody>
-		{{#each invoices}}
+		{{#each invoicesSent}}
                 <tr>
-		  <td>{{invoiceNum}}</td>
+		  <td>{{invoiceNum}} <br>from {{invoiceDate}}</td>
                   <td>
 		    <a href="/user/{{currentUser.username}}/invoices/{{invoiceNum}}">
 		      <img src="{{listingImgById items.[0].product.image.[0]}}" width="100px" class="img-rounded"> 
 		    </a>
+		    <br>
+		    {{itemsCount}} {{t "item(s)"}}
 		  </td>
-                  <td>{{invoiceDate}}</td>
-		  <td>{{itemsCount}}</td>
                   <td>{{currency amount}}</td>
                   <td><span class="label label-info">{{status}}</span>
                   </td>
@@ -54,7 +53,53 @@
                 </tr>
 		{{else}}
                 <tr>
-                  <td colspan="7" class="text-center"><h3>{{t "No invoices"}}</h3></td>
+                  <td colspan="5" class="text-center"><h3>{{t "No invoices"}}</h3></td>
+                </tr>
+		{{/each}}
+              </tbody>
+	    </table>
+	  </div>
+	</div>
+      </div>
+
+      <div class="col-md-6 clearfix" id="customer-invoices">
+	<h2 class="text-center">{{t "RECEIVED"}}</h2>
+        <div class="box">
+
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>{{t "#"}}</th>
+                  <th>{{t "Order"}}</th>
+                  <th>{{t "Total"}}</th>
+                  <th>{{t "Status"}}</th>
+                  <th>{{t "Action"}}</th>
+                </tr>
+              </thead>
+              <tbody>
+		{{#each invoicesReceived}}
+                <tr>
+		  <td>{{invoiceNum}} <br>from {{invoiceDate}}</td>
+                  <td>
+		    <a href="/user/{{currentUser.username}}/invoices/{{invoiceNum}}">
+		      <img src="{{listingImgById items.[0].product.image.[0]}}" width="100px" class="img-rounded"> 
+		    </a>
+		    <br>
+		    {{itemsCount}} {{t "item(s)"}}
+		  </td>
+                  <td>{{currency amount}}</td>
+                  <td><span class="label label-info">{{status}}</span>
+                  </td>
+                  <td>
+		    <a href="/user/{{currentUser.username}}/invoices/{{invoiceNum}}" class="btn btn-primary btn-sm">
+		      {{t "View"}}
+		    </a>
+                  </td>
+                </tr>
+		{{else}}
+                <tr>
+                  <td colspan="5" class="text-center"><h3>{{t "No invoices to be paid by you"}}</h3></td>
                 </tr>
 		{{/each}}
               </tbody>

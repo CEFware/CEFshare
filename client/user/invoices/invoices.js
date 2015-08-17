@@ -1,6 +1,14 @@
 Template.userInvoicesTemplate.helpers({
-    invoices: function () {
-	return Invoices.find();
+    invoicesSent: function () {
+	    return Invoices.find({owner:Meteor.userId()});
+    },
+    invoicesReceived: function () {
+	var userEmails=[];
+	for (var i=0; i<Meteor.user().emails.length; i++) {
+	    userEmails.push(Meteor.user().emails[i].address)
+	};
+	console.log(userEmails);
+	return Invoices.find({payeeEmail:{$in:userEmails}});
     },
     currency : function (amount) {
         return '$'+(amount/100);

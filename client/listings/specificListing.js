@@ -380,22 +380,59 @@ AutoForm.addHooks(['clientFields'],{
 		    item.product=listing;
 		    item.price=listing.price;
 		    item.clientData=result;
-		    Session.set('curBuyItem',[item]);
-		    var total=item.qty*listing.price+listing.shippingFee;
-		    total=total+total*listing.tax/100;
-		    total=Number(total.toFixed(2));
-		    //here we need to charge
-/*		    StripeCheckoutHandler.open({
-			description: 'Buy '+item.qty+' "'+listing.title + '" for $' + total,
-			amount: Math.floor(total * 100),
-			bitcoin:true
-		    });
-*/		};
+		};
+
+		var total = 0;
+		var shippingFee=0;
+		var tax=0;
+		var items=[item];
+		items.forEach(function(item){
+                    total += Number(item.price)*Number(item.qty);
+                    shippingFee += item.product.shippingFee;
+                    tax += (item.price*item.qty + item.product.shippingFee)*(item.product.tax/100);
+		});
+
+		//shipping
+		shippingFee=Number(shippingFee.toFixed(2));
+		total=total+shippingFee;
+
+		//tax
+		tax=Number(tax.toFixed(2));
+		total=total+tax;
+
+		total=Number(total.toFixed(2));
+
+		var curm=Main.findOne().payments;
+		var fee=0;
+		if (curm) {
+                    switch (curm.feeOrPercentage) {
+                    case "fee":
+			fee=curm.fee;
+			break;
+                    case "percentage":
+			fee=total*Number(curm.percentage)/100;
+			fee=Number(fee.toFixed(2));
+			break;
+                    };
+		};
 
 		//create invoice document in Invoices collection
+                Invoices.insert({items:items, 
+				 currency: "USD", 
+				 amount:Math.floor(total*100), 
+				 shippingFee: shippingFee, 
+				 tax: tax, 
+				 marketFee: fee, 
+				 payeeEmail: result.payeeEmail, 
+				 status: "sent"});
+
 		//send out invoice to the payeeEmail
 		//redirect to the invoice page
 			
+		//refresh the form
+		$('[name=qtyToBuy]').val(1);
+		$('[name=dateTime]').val(moment().format('MM/DD/YYYY h:mm A'));
+
 		Flash.success(1,TAPi18n.__("Thank you! Invoice went out to ")+result.payeeEmail,2000);
 	    };
 
