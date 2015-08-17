@@ -49,6 +49,9 @@ Template.home.helpers({
 	    case "marketplaceName":
 		return TAPi18n.__("our marketplace!");
 		break;
+	    case "marketplaceWelcome":
+		return TAPi18n.__("Welcome to ");
+		break;
 	    case "marketplaceSlogan":
 		return TAPi18n.__("marketplace description");
 		break;
