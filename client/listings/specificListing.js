@@ -425,9 +425,11 @@ AutoForm.addHooks(['clientFields'],{
 				 marketFee: fee, 
 				 payeeEmail: result.payeeEmail, 
 				 status: "sent"});
-
+		
 		//send out invoice to the payeeEmail
-		//redirect to the invoice page
+		var subj=TAPi18n.__('New invoice from ')+Meteor.user().username+TAPi18n.__(' at ')+Meteor.absoluteUrl();
+		var msgtxt=Meteor.user().username+TAPi18n.__(' just invoices you for ')+'$'+total+'USD.'+TAPi18n.__(' You may check this invoice & pay it here: ')+Meteor.absoluteUrl();
+		Meteor.call('sendMaillist',result.payeeEmail,subj,msgtxt);
 			
 		//refresh the form
 		$('[name=qtyToBuy]').val(1);
