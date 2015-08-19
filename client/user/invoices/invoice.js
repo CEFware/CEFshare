@@ -1,6 +1,6 @@
 Template.userInvoiceTemplate.helpers({
     items: function () {
-	return Orders.findOne({idStripe:Router.current().params.id}).items;
+	return Invoices.findOne({invoiceNum:Number(Router.current().params.id)}).items;
     },
     currency : function (amount) {
 	if (amount)
@@ -29,7 +29,7 @@ Template.userInvoiceTemplate.helpers({
         };
     },
     order: function () {
-	return Orders.findOne();
+	return Invoices.findOne();
     },
     orderSubtotal: function (){
 	var res=0;
@@ -65,7 +65,7 @@ Template.userInvoiceTemplate.helpers({
 
 Template.userInvoiceTemplate.rendered = function () {
     Tracker.autorun (function (){
-        var listing = Orders.findOne({idStripe:Router.current().params.id});
+        var listing = Invoices.findOne({invoiceNum:Number(Router.current().params.id)});
         if (listing && listing.items) {
 	    var imgA=[];
 	    listing.items.forEach(function(el){

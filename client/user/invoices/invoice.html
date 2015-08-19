@@ -7,8 +7,8 @@
           <div class="row">
             <div class="col-sm-10 col-sm-offset-1">
 	      {{#with order}}
-              <h1>{{t "Order"}} #{{orderNum}}</h1>
-              <p class="lead">{{t "Order"}} #{{orderNum}} {{t "was placed on"}} <b>{{orderDate}}</b> {{t "and is currently"}} <b>{{status}}</b>.</p>
+              <h1>{{t "Invoice"}} #{{invoiceNum}}</h1>
+              <p class="lead">{{t "Invoice"}} #{{invoiceNum}} {{t "was placed on"}} <b>{{orderDateTime}}</b> {{t "and is currently"}} <b>{{status}}</b>.</p>
               <p class="text-muted">{{t "If you have any questions, please feel free to"}} <a href="{{pathFor 'home'}}#contact">{{t "contact us"}}</a>, {{t "our customer service center is working for you 24/7"}}.</p>
 	      {{/with}}
             </div>
@@ -100,18 +100,9 @@
 
           <div class="row addresses">
             <div class="col-sm-6">
-              <h2 class="text-right">{{t "Payment data"}}</h2>
-	      {{#with order.stripeResult.source}}
-	      {{#if card}}
-              <p class="text-right">{{name}}
-		<br><b>{{brand}}</b>: XXXX-XXXX-XXXX-{{last4}}
-	      </p>
-	      {{else}}
-              <p class="text-right">{{email}}
-		<br><b>BTC address</b>: {{inbound_address}}
-	      </p>
-	      {{/if}}
-	      {{/with}}
+              <h2 class="text-right">{{t "Pay it"}}:</h2>
+              <button type="submit" class="btn btn-primary add-item">{{t "Pay now"}}</button>
+ 
             </div>
             <div class="col-sm-6">
               <h2 class="text-right">{{t "Shipping address"}}</h2>
