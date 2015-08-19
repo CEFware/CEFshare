@@ -125,8 +125,9 @@ Meteor.methods({
     },
 
     setInvoiceOrderNum: function (invoiceNum, orderId) {
-        return Invoices.update({invoiceNum:invoiceNum}, {$set:{orderNum:Orders.findOne({_id:orderId}).orderNum,status:"paid"}});
+        return Invoices.update({invoiceNum:Number(invoiceNum)}, {$set:{orderNum:Orders.findOne({_id:orderId}).orderNum,status:"paid"}});
     },
+
     getInvoiceNum: function (id) {
         return Invoices.findOne({_id:id}).invoiceNum;
     }

@@ -1,6 +1,8 @@
 Template.userInvoiceTemplate.helpers({
     items: function () {
-	return Invoices.findOne({invoiceNum:Number(Router.current().params.id)}).items;
+	var res = Invoices.findOne({invoiceNum:Number(Router.current().params.id)});
+	if (res & res.items)
+	    return res.items;
     },
     currency : function (amount) {
 	if (amount)
@@ -60,6 +62,9 @@ Template.userInvoiceTemplate.helpers({
 	if (this.object==="card")
 	    return true;
 	return false;
+    },
+    isInvoiceOwner: function () {
+        return (Meteor.userId() === Invoices.findOne({invoiceNum:Number(Router.current().params.id)}).owner);
     }
 });
 

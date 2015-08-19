@@ -93,10 +93,13 @@
                   <th colspan="4" class="text-right">{{t "Total"}}</th>
                   <th>{{currency orderTotal}}</th>
                 </tr>
+                {{#if isInvoiceOwner}}
+		{{else}}
                 <tr>
                   <th colspan="4" class="text-right"></th>
                   <th><button class="btn btn-primary payInvoice">{{t "Pay now"}}</button></th>
                 </tr>
+		{{/if}}
               </tfoot>
 	      {{/with}}
  	    </table>
