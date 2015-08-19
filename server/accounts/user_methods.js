@@ -113,5 +113,21 @@ Meteor.methods({
 	} else {
 	    Meteor.users.update({_id:Meteor.userId()},{$set:{'services.stripe':serviceData}});
 	};
-    }  
+    },
+
+    getStripeKey: function (id) {
+        var key=Meteor.users.findOne({_id:id})
+        if (key && key.services.stripe && key.services.stripe.stripe_publishable_key) {
+	    return key.services.stripe.stripe_publishable_key;
+	} else {
+            throw new Meteor.Error("no-stripe-key-found", "Somehow invoice author does not possess Stripe key");
+	};
+    },
+
+    setInvoiceOrderNum: function (invoiceNum, orderId) {
+        return Invoices.update({invoiceNum:invoiceNum}, {$set:{orderNum:Orders.findOne({_id:orderId}).orderNum,status:"paid"}});
+    },
+    getInvoiceNum: function (id) {
+        return Invoices.findOne({_id:id}).invoiceNum;
+    }
 });

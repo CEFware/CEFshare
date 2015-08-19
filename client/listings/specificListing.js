@@ -149,7 +149,7 @@ Template.specificListing.helpers({
 	};
 
 	//if it's checked by listing owner - add required payeeEmail field for the invoice to be sent
-	if (checkIfOwner) 
+	if (Meteor.user() && checkIfOwner) 
             obj.push({payeeEmail:ListingMain._schema.payeeEmail});
 
 
@@ -162,6 +162,7 @@ Template.specificListing.helpers({
 	
 	var msg=TAPi18n.__("Start date can't be after End date.");
  	finSchema.messages({"wrongStartDate":msg});
+
 	return finSchema;
     },
     showField: function (name,type) {
@@ -369,80 +370,85 @@ Template.specificListing.rendered = function () {
 
 AutoForm.addHooks(['clientFields'],{
     onSuccess: function (formType,result){
-	if (checkIfOwner()) {
-	    //if called by listing owner - add payee e-mail to the schema & check if it exists & create invoice instead of order
-	    //invoice creator don't need the shipping address
-	    if (result) {
-		var item = {};
-		var listing = specificListingByURI(Router.current().params.uri).fetch()[0];
-		if (listing) {
-		    item.qty=result.qtyToBuy;
-		    item.product=listing;
-		    item.price=listing.price;
-		    item.clientData=result;
-		};
+        var res = Meteor.user();
+        if (res) {
+	    if (checkIfOwner()) {
+		//if called by listing owner - add payee e-mail to the schema & check if it exists & create invoice instead of order
+		//invoice creator don't need the shipping address
+		if (result) {
+		    var item = {};
+		    var listing = specificListingByURI(Router.current().params.uri).fetch()[0];
+		    if (listing) {
+			item.qty=result.qtyToBuy;
+			item.product=listing;
+			item.price=listing.price;
+			item.clientData=result;
+		    };
 
-		var total = 0;
-		var shippingFee=0;
-		var tax=0;
-		var items=[item];
-		items.forEach(function(item){
-                    total += Number(item.price)*Number(item.qty);
-                    shippingFee += item.product.shippingFee;
-                    tax += (item.price*item.qty + item.product.shippingFee)*(item.product.tax/100);
-		});
+		    var total = 0;
+		    var shippingFee=0;
+		    var tax=0;
+		    var items=[item];
+		    items.forEach(function(item){
+			total += Number(item.price)*Number(item.qty);
+			shippingFee += item.product.shippingFee;
+			tax += (item.price*item.qty + item.product.shippingFee)*(item.product.tax/100);
+		    });
+		    
+		    //shipping
+		    shippingFee=Number(shippingFee.toFixed(2));
+		    total=total+shippingFee;
+		    
+		    //tax
+		    tax=Number(tax.toFixed(2));
+		    total=total+tax;
 
-		//shipping
-		shippingFee=Number(shippingFee.toFixed(2));
-		total=total+shippingFee;
+		    total=Number(total.toFixed(2));
 
-		//tax
-		tax=Number(tax.toFixed(2));
-		total=total+tax;
+		    var curm=Main.findOne().payments;
+		    var fee=0;
+		    if (curm) {
+			switch (curm.feeOrPercentage) {
+			case "fee":
+			    fee=curm.fee;
+			    break;
+			case "percentage":
+			    fee=total*Number(curm.percentage)/100;
+			    fee=Number(fee.toFixed(2));
+			    break;
+			};
+		    };
 
-		total=Number(total.toFixed(2));
-
-		var curm=Main.findOne().payments;
-		var fee=0;
-		if (curm) {
-                    switch (curm.feeOrPercentage) {
-                    case "fee":
-			fee=curm.fee;
-			break;
-                    case "percentage":
-			fee=total*Number(curm.percentage)/100;
-			fee=Number(fee.toFixed(2));
-			break;
-                    };
-		};
-
-		//create invoice document in Invoices collection
-                var invoiceId = Invoices.insert({items:items, 
-				 currency: "USD", 
-				 amount:Math.floor(total*100), 
-				 shippingFee: shippingFee, 
-				 tax: tax, 
-				 marketFee: fee, 
-				 payeeEmail: result.payeeEmail, 
-				 status: "sent"});
+		    //create invoice document in Invoices collection
+                    var invoiceId = Invoices.insert({items:items, 
+						     currency: "USD", 
+						     amount:Math.floor(total*100), 
+						     shippingFee: shippingFee, 
+						     tax: tax, 
+						     marketFee: fee, 
+						     payeeEmail: result.payeeEmail, 
+						     status: "sent"});
 		
-		//send out invoice to the payeeEmail
-		var subj=TAPi18n.__('New invoice from ')+Meteor.user().username+TAPi18n.__(' at ')+Meteor.absoluteUrl();
-		var invoiceLink=Meteor.absoluteUrl()+"user/invoices/"+Invoices.findOne({_id:invoiceId}).invoiceNum;
-		var msgtxt=Meteor.user().username+TAPi18n.__(' just invoices you for ')+'$'+total+'USD.'+TAPi18n.__(' You may check this invoice & pay it here: ')+invoiceLink;
-		Meteor.call('sendMaillist',result.payeeEmail,subj,msgtxt);
-			
-		//refresh the form
-		$('[name=qtyToBuy]').val(1);
-		$('[name=dateTime]').val(moment().format('MM/DD/YYYY h:mm A'));
+		    //send out invoice to the payeeEmail
+		    Meteor.call('getInvoiceNum',invoiceId, function (e,num) {
+			if (!e) {
+			    var subj=TAPi18n.__('New invoice from ')+Meteor.user().username+TAPi18n.__(' at ')+Meteor.absoluteUrl();
+			    var invoiceLink=Meteor.absoluteUrl()+"user/invoices/"+num;
+console.log(invoiceLink);
+			    var msgtxt=Meteor.user().username+TAPi18n.__(' just invoices you for ')+'$'+total+'USD.'+TAPi18n.__(' You may check this invoice & pay it here')+': '+invoiceLink;
+			    Meteor.call('sendMaillist',result.payeeEmail,subj,msgtxt);
+			}
+		    });
+		    
+		    //refresh the form
+		    $('[name=qtyToBuy]').val(1);
+		    $('[name=dateTime]').val(moment().format('MM/DD/YYYY h:mm A'));
 
-		Flash.success(1,TAPi18n.__("Thank you! Invoice went out to ")+result.payeeEmail,2000);
-	    };
+		    Flash.success(1,TAPi18n.__("Thank you! Invoice went out to ")+result.payeeEmail,2000);
+		};
 
-	} else {
+	    } else {
 
-            var res = Meteor.user();
-            if (res) {
 		if (res.profile && res.profile.firstName && res.profile.shipping && res.profile.shipping.firstLine && res.profile.shipping.city && res.profile.shipping.zip && res.profile.shipping.country) {
 
 		    if (result) {
@@ -471,11 +477,10 @@ AutoForm.addHooks(['clientFields'],{
 		} else {
                     alert(TAPi18n.__("Please, state your shipping address in PROFILE"));
 		};
-            } else {
-		Router.go('entrySignIn');
-            };
 
-	};
- 
+	    };
+        } else {
+	    Router.go('entrySignIn');
+        };
     }
 });

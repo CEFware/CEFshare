@@ -78,14 +78,14 @@ Meteor.methods({
 
 	    total=Number(total.toFixed(2));
 	    
-	    if (Meteor.user().profile.shipping) {
+	    if (Meteor.user() && Meteor.user().profile && Meteor.user().profile.shipping) {
 		var shipping = Meteor.user().profile.shipping;
 	    } else {
 		var shipping = {};
 	    };
-	    if (Meteor.user().profile.firstName)
+	    if (Meteor.user() && Meteor.user().profile && Meteor.user().profile.firstName)
 		shipping.firstName=Meteor.user().profile.firstName;
-	    if (Meteor.user().profile.lastName)
+	    if (Meteor.user() && Meteor.user().profile && Meteor.user().profile.lastName)
 		shipping.lastName=Meteor.user().profile.lastName;
 
 	    var curm=Main.findOne().payments;

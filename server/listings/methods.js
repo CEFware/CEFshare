@@ -42,7 +42,6 @@ Meteor.methods({
     },
 
     clientFields: function (doc) {
-
 	//generate schema to check the doc
 	var getCustomFields = function (listing) {
 	    var curType=listing.listingType;
@@ -108,7 +107,7 @@ Meteor.methods({
         };
 
         //if it's checked by listing owner - add required payeeEmail field for the invoice to be sent
-        if (checkIfOwner)
+        if (Meteor.user() && checkIfOwner)
             obj.push({payeeEmail:ListingMain._schema.payeeEmail});
 
         var finSchema=new SimpleSchema(obj);

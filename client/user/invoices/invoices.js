@@ -7,7 +7,6 @@ Template.userInvoicesTemplate.helpers({
 	for (var i=0; i<Meteor.user().emails.length; i++) {
 	    userEmails.push(Meteor.user().emails[i].address)
 	};
-	console.log(userEmails);
 	return Invoices.find({payeeEmail:{$in:userEmails}});
     },
     currency : function (amount) {
