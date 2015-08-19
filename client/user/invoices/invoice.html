@@ -93,30 +93,27 @@
                   <th colspan="4" class="text-right">{{t "Total"}}</th>
                   <th>{{currency orderTotal}}</th>
                 </tr>
+                <tr>
+                  <th colspan="4" class="text-right"></th>
+                  <th><button type="submit" class="btn btn-primary add-item">{{t "Pay now"}}</button></th>
+                </tr>
               </tfoot>
 	      {{/with}}
  	    </table>
 	  </div>
 
           <div class="row addresses">
-            <div class="col-sm-6">
-              <h2 class="text-right">{{t "Pay it"}}:</h2>
-              <button type="submit" class="btn btn-primary add-item">{{t "Pay now"}}</button>
- 
-            </div>
-            <div class="col-sm-6">
-              <h2 class="text-right">{{t "Shipping address"}}</h2>
-	      {{#with order}}
-              <p class="text-right">{{shipping.firstName}} {{shipping.lastName}}
-                <br>{{shipping.firstLine}}
-                <br>{{shipping.secondLine}}
-                <br>{{shipping.city}}&nbsp;
-                {{shipping.zip}}&nbsp;
-                {{shipping.state}}
-                <br>{{shipping.country}}
-	      </p>
-	      {{/with}}
-            </div>
+            <h2 class="text-left">{{t "Shipping address"}}</h2>
+	    {{#with order}}
+            <p class="text-left">{{shipping.firstName}} {{shipping.lastName}}
+              <br>{{shipping.firstLine}}
+              <br>{{shipping.secondLine}}
+              <br>{{shipping.city}}&nbsp;
+              {{shipping.zip}}&nbsp;
+              {{shipping.state}}
+              <br>{{shipping.country}}
+	    </p>
+	    {{/with}}
           </div>
 	</div>
       </div>

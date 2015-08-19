@@ -417,7 +417,7 @@ AutoForm.addHooks(['clientFields'],{
 		};
 
 		//create invoice document in Invoices collection
-                Invoices.insert({items:items, 
+                var invoiceId = Invoices.insert({items:items, 
 				 currency: "USD", 
 				 amount:Math.floor(total*100), 
 				 shippingFee: shippingFee, 
@@ -428,7 +428,8 @@ AutoForm.addHooks(['clientFields'],{
 		
 		//send out invoice to the payeeEmail
 		var subj=TAPi18n.__('New invoice from ')+Meteor.user().username+TAPi18n.__(' at ')+Meteor.absoluteUrl();
-		var msgtxt=Meteor.user().username+TAPi18n.__(' just invoices you for ')+'$'+total+'USD.'+TAPi18n.__(' You may check this invoice & pay it here: ')+Meteor.absoluteUrl();
+		var invoiceLink=Meteor.absoluteUrl()+"user/invoices/"+Invoices.findOne({_id:invoiceId}).invoiceNum;
+		var msgtxt=Meteor.user().username+TAPi18n.__(' just invoices you for ')+'$'+total+'USD.'+TAPi18n.__(' You may check this invoice & pay it here: ')+invoiceLink;
 		Meteor.call('sendMaillist',result.payeeEmail,subj,msgtxt);
 			
 		//refresh the form
