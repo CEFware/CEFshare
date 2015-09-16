@@ -315,8 +315,10 @@ Meteor.methods({
 		HTTP.post('https://connect.stripe.com/oauth/deauthorize',{params:{client_secret:Meteor.settings.stripe_sk, client_id:Meteor.settings.client_id, stripe_user_id:cur.id}},
 			  function (e){
 			      if (!e) {
-			      var cur=Main.findOne();
-			      Main.update({_id:cur._id}, {$unset:{stripe:""}});
+				  var cur=Main.findOne();
+				  Main.update({_id:cur._id}, {$unset:{stripe:""}});
+			      } else {
+				  console.log(e);
 			      };
 			  });
 	    };
@@ -325,8 +327,11 @@ Meteor.methods({
     disconnectStripe: function () {
 	//disconnect on Stripe side
 	HTTP.post('https://connect.stripe.com/oauth/deauthorize',{params:{client_secret:Meteor.settings.stripe_sk, client_id:Meteor.settings.client_id, stripe_user_id:Meteor.user().services.stripe.stripe_user_id}}, function (e){
-	    if (!e)
+	    if (!e) {
 		Users.update({_id:Meteor.userId()}, {$unset:{'services.stripe':"1"}});
+	    } else {
+		console.log(e);
+	    };
 	});
     },
     saveAdminPayments: function (doc) {
