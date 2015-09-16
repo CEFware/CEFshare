@@ -314,11 +314,16 @@ Meteor.methods({
 		//disconnect on Stipe side
 		HTTP.post('https://connect.stripe.com/oauth/deauthorize',{params:{client_secret:Meteor.settings.stripe_sk, client_id:Meteor.settings.client_id, stripe_user_id:cur.id}},
 			  function (e){
-			      if (!e) {
+		console.log(e);
+		console.log(data.e.error);
+		console.log(data.e.error_description);
+			      if ((!e) || (e.data.error_description.indexOf('is not connected to stripe account')>-1)) {
 				  var cur=Main.findOne();
 				  Main.update({_id:cur._id}, {$unset:{stripe:""}});
 			      } else {
-				  console.log(e);
+		console.log(e);
+		console.log(data.e.error);
+		console.log(data.e.error_description);
 			      };
 			  });
 	    };
@@ -327,10 +332,15 @@ Meteor.methods({
     disconnectStripe: function () {
 	//disconnect on Stripe side
 	HTTP.post('https://connect.stripe.com/oauth/deauthorize',{params:{client_secret:Meteor.settings.stripe_sk, client_id:Meteor.settings.client_id, stripe_user_id:Meteor.user().services.stripe.stripe_user_id}}, function (e){
-	    if (!e) {
+		console.log(e);
+		console.log(data.e.error);
+		console.log(data.e.error_description);
+	    if ((!e) || (e.data.error_description.indexOf('is not connected to stripe account')>-1)) {
 		Users.update({_id:Meteor.userId()}, {$unset:{'services.stripe':"1"}});
 	    } else {
 		console.log(e);
+		console.log(data.e.error);
+		console.log(data.e.error_description);
 	    };
 	});
     },
