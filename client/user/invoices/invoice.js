@@ -1,8 +1,6 @@
 Template.userInvoiceTemplate.helpers({
     items: function () {
-	var res = Invoices.findOne({invoiceNum:Number(Router.current().params.id)});
-	if (res & res.items)
-	    return res.items;
+	return Invoices.findOne({invoiceNum:Number(Router.current().params.id)}).items;
     },
     currency : function (amount) {
 	if (amount)
