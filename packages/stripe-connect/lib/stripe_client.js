@@ -35,7 +35,8 @@ Stripe.requestCredential = function (options, credentialRequestCompleteCallback)
             '&client_id=' + config.appId +
             '&scope=' + config.scope +
 //            '&redirect_uri=' + Meteor.absoluteUrl('_oauth/stripe?close') +
-            '&state=' + OAuth._stateParam(loginStyle, credentialToken) +'/'+Meteor.userId()+ Meteor.absoluteUrl('stripetoken')+
+//            '&state=' + OAuth._stateParam(loginStyle, credentialToken) +'/'+Meteor.userId()+ Meteor.absoluteUrl('stripetoken')+ //<--last workign variant
+            '&state=' + OAuth._stateParam(loginStyle, credentialToken) +'/'+Meteor.userId()+ window.location.origin+'/stripetoken'+ //<-- client side only
             '&stripe_landing=' + options.stripe_landing +
             prefill;
 
