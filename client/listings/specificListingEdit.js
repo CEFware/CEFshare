@@ -197,7 +197,7 @@ Template.specificListingEdit.helpers({
     dateOptions: function() {
         return {startDate: new Date(),
                 todayBtn: "linked",
-                todayHighlight: true,
+//                todayHighlight: true,
 		multidate:true
                }
     }

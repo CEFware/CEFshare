@@ -204,7 +204,7 @@ Template.specificListing.helpers({
 	};
 	return {startDate: new Date(), 
 		todayBtn: "linked", 
-		todayHighlight: true, 
+//		todayHighlight: true, 
 		multidate: true,
 		datesDisabled: dates,
 		daysOfWeekDisabled: days
@@ -227,7 +227,7 @@ Template.specificListing.helpers({
 		useCurrent: true, 
 		inline:true, 
 		sideBySide:true, 
-		todayHighlight: true, 
+//		todayHighlight: true, 
 		showTodayButton:true
 	       };
 	if (res && res.profile && res.profile.notAvailableDates)

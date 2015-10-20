@@ -52,7 +52,9 @@ Template.userProfileEdit.helpers({
 	};
     },
     dateOptions: function () {
-	return {multidate: true, todayBtn: "linked", todayHighlight: true}
+	return {multidate: true, 
+//		todayHighlight: true,
+		todayBtn: "linked"}
     },
     letStripe: function () {
 	var res=Main.findOne();
